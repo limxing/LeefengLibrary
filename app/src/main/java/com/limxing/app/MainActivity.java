@@ -2,8 +2,10 @@ package com.limxing.app;
 
 import android.os.Bundle;
 
-import com.limxing.NoTitleBar.SystemBarTintManager;
-import com.limxing.SwipeBack.SwipeBackActivity;
+import com.limxing.library.SwipeBack.SwipeBackActivity;
+
+import com.limxing.library.NoTitleBar.SystemBarTintManager;
+
 
 public class MainActivity extends SwipeBackActivity {
 
