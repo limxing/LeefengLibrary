@@ -1,6 +1,5 @@
-package com.limxing.SwipeBack;
+package com.limxing.library.SwipeBack;
 
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +7,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
-import com.limxing.app.R;
+import com.limxing.library.R;
+
 
 /**
  * Created by Eric on 15/3/3.

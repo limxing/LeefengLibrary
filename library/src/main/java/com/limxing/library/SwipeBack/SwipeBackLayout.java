@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.limxing.SwipeBack;
+package com.limxing.library.SwipeBack;
 
 import android.app.Activity;
 import android.content.Context;
