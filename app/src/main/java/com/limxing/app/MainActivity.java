@@ -1,19 +1,18 @@
 package com.limxing.app;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.limxing.utils.SystemBarTintManager;
+import com.limxing.NoTitleBar.SystemBarTintManager;
+import com.limxing.SwipeBack.SwipeBackActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends SwipeBackActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SystemBarTintManager.initSystemBar(this,R.color.colorAccent);
-
+        SystemBarTintManager.initSystemBar(this, R.color.transparent);
 
 
     }

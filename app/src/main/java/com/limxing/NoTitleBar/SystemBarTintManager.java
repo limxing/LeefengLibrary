@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.limxing.utils;
+package com.limxing.NoTitleBar;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
