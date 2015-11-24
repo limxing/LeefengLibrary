@@ -1,0 +1,11 @@
+<resources>
+    <!-- Example customization of dimensions originally defined in res/values/dimens.xml
+         (such as screen margins) for screens with more than 820dp of available width. This
+         would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively). -->
+
+
+    <!--对于去掉状态栏之后,写的所有的title都会顶到上面,因此需要设定SDK19的时候一个paddingTop的值为状态栏的高度
+        而在普通的19一下的设备下设置为0,此设置为我们有title的应用,把title的paddingTop的值设为这个,没有title的
+        应用用的背景图片什么的不需要设置此值-->
+    <dimen name="padingTop">20dp</dimen>
+</resources>

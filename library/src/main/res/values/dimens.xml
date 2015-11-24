@@ -1,0 +1,10 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--对于去掉状态栏之后,写的所有的title都会顶到上面,因此需要设定SDK19的时候一个paddingTop的值为状态栏的高度
+       而在普通的19一下的设备下设置为0,此设置为我们有title的应用,把title的paddingTop的值设为这个,没有title的
+       应用用的背景图片什么的不需要设置此值-->
+    <dimen name="padingTop">0dp</dimen>
+</resources>
