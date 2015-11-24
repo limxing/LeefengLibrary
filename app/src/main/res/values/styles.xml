@@ -1,15 +1,15 @@
 <resources>
 
-    <!-- Base application theme. -->
+    <!-- Base application theme.
+     在这里我们是NoActionBar的主题而不是系统开始给我们的Theme.AppCompat.Light.DarkActionBar-->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-
     </style>
-
+<!--这个是右滑退出的主题,在继承优化推出界面的主题使用这个-->
     <style name="Theme.Swipe.Back" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
