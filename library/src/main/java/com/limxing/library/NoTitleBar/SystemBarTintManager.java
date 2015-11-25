@@ -1,4 +1,5 @@
-package com.limxing.library.NoTitleBar;/*
+package com.limxing.library.NoTitleBar;
+/*
  * Copyright (C) 2013 readyState Software Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,6 +35,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout.LayoutParams;
+
+import com.limxing.library.R;
 
 import java.lang.reflect.Method;
 
@@ -568,7 +571,7 @@ public class SystemBarTintManager {
      *
      * @autor Limxing
      * @param activity activity
-     * @param color 颜色
+     * @param color titlebar的颜色
      */
     public static void initSystemBar(Activity activity,int color) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
