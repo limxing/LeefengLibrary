@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="15dp"
+    android:paddingBottom="10dp"
+     >
+     <LinearLayout 
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:id="@+id/tips"
+         android:orientation="vertical"
+         android:layout_centerInParent="true"
+         android:gravity="center"
+         >
+         
+        <TextView
+	        android:id="@+id/pull_to_refresh_loadmore_text"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="14sp"
+	        android:gravity="center"
+	        android:text="加载中..."
+	        android:textColor="@android:color/darker_gray"
+	        android:textStyle="bold" />
+        <!-- <TextView
+	        android:id="@+id/pull_to_refresh_time"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="14sp"
+	        android:visibility="gone"
+	        android:gravity="center"
+	        android:text="2013-12-08"
+	        android:textColor="@android:color/darker_gray"
+	        android:textStyle="bold" /> -->
+     </LinearLayout>
+     
+    <ProgressBar
+        android:id="@+id/pull_to_refresh_load_progress"
+        style="@android:style/Widget.ProgressBar.Small.Inverse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:layout_marginRight="20dp"
+        android:layout_centerInParent="true"
+        android:layout_toLeftOf="@id/tips"
+        />
+
+    
+    
+</RelativeLayout>
