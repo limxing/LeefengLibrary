@@ -43,6 +43,24 @@ import com.limxing.library.utils.DisplayUtil;
 
 
 /**
+ *
+ * <com.limxing.library.PullToRefresh.SwipeRefreshLayout
+ android:id="@+id/main_fresh"
+ android:layout_width="match_parent"
+ android:layout_height="match_parent"
+ android:layout_below="@+id/main_title"
+ swiperefresh:srlAnimationStyle="rotate"
+ swiperefresh:srlTextSize="16sp" >
+
+ <ListView
+ android:id="@+id/main_listview"
+ android:layout_width="match_parent"
+ android:layout_height="match_parent"
+ android:background="#ffffff"
+ android:dividerHeight="1dp" >
+ </ListView>
+ </com.limxing.library.PullToRefresh.SwipeRefreshLayout>
+
  * The SwipeRefreshLayout should be used whenever the user can refresh the
  * contents of a view via a vertical swipe gesture. The activity that
  * instantiates this view should add an OnRefreshListener to be notified
@@ -504,7 +522,9 @@ public class SwipeRefreshLayout extends ViewGroup {
 		}
 		final DisplayMetrics metrics = getResources().getDisplayMetrics();
 		if (headerHeight == -1) {
-			headerHeight = (int) (DisplayUtil.getFontHeight(textSize) * 2 + 5 * metrics.density * 4);
+//设置上拉加载和下拉刷新头的高度的
+			headerHeight = (int) (DisplayUtil.getFontHeight(textSize) * 2 + 5 * metrics.density * 4)
+					+DisplayUtil.dip2px(getContext(),10);
 		}
 
 		if (isRefreshing()) {
