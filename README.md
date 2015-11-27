@@ -29,7 +29,7 @@ Android开发中遇到了一些特殊需求，在此罗列自己收集总结到�
 ####四、下拉刷新上拉加载  
    PullToRefresh包:
     
-   ######1,布局文件
+######1,布局文件
     
         <com.limxing.library.PullToRefresh.SwipeRefreshLayout
          android:id="@+id/main_fresh"
@@ -47,15 +47,16 @@ Android开发中遇到了一些特殊需求，在此罗列自己收集总结到�
          android:dividerHeight="1dp" >
          </ListView>
          </com.limxing.library.PullToRefresh.SwipeRefreshLayout>
-   ######2,在activity中获取到两个控件,SwipeRefreshLayout控件需要设置监听:     
+######2,在activity中获取到两个控件,SwipeRefreshLayout控件需要设置监听:     
         
-        main_fresh.setOnRefreshListener(this);
+         main_fresh.setOnRefreshListener(this);
          main_fresh.setOnLoadListener(this);
-         在监听方法中实现响应的操作
-   ######3,调用方法刷新加载完成恢复:     
-        1,在请求网络后结果中发送message
+         在监听方法中实现响应的操作      
+######3,调用方法刷新加载完成恢复:        
+        
+         1,在请求网络后结果中发送message
             handler.sendEmptyMessageDelayed(what,time=2000);    
-        2,在handler 处理中调用  
+         2,在handler 处理中调用  
             main_fresh.setRefreshing(false);   main_refresh.setLoading(false);
         
   
