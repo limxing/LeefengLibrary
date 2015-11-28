@@ -129,7 +129,7 @@ public class FileUtils {
 	/** 判断文件是否可写 */
 	public static boolean isWriteable(String path) {
 		try {
-			if (StringUtil.isEmpty(path)) {
+			if (StringUtils.isEmpty(path)) {
 				return false;
 			}
 			File f = new File(path);
@@ -239,7 +239,7 @@ public class FileUtils {
 	 * @param comment  该键值对的注释
 	 */
 	public static void writeProperties(String filePath, String key, String value, String comment) {
-		if (StringUtil.isEmpty(key) || StringUtil.isEmpty(filePath)) {
+		if (StringUtils.isEmpty(key) || StringUtils.isEmpty(filePath)) {
 			return;
 		}
 		FileInputStream fis = null;
@@ -265,7 +265,7 @@ public class FileUtils {
 
 	/** 根据值读取 */
 	public static String readProperties(String filePath, String key, String defaultValue) {
-		if (StringUtil.isEmpty(key) || StringUtil.isEmpty(filePath)) {
+		if (StringUtils.isEmpty(key) || StringUtils.isEmpty(filePath)) {
 			return null;
 		}
 		String value = null;
@@ -289,7 +289,7 @@ public class FileUtils {
 
 	/** 把字符串键值对的map写入文件 */
 	public static void writeMap(String filePath, Map<String, String> map, boolean append, String comment) {
-		if (map == null || map.size() == 0 || StringUtil.isEmpty(filePath)) {
+		if (map == null || map.size() == 0 || StringUtils.isEmpty(filePath)) {
 			return;
 		}
 		FileInputStream fis = null;
@@ -318,7 +318,7 @@ public class FileUtils {
 	/** 把字符串键值对的文件读入map */
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static Map<String, String> readMap(String filePath, String defaultValue) {
-		if (StringUtil.isEmpty(filePath)) {
+		if (StringUtils.isEmpty(filePath)) {
 			return null;
 		}
 		Map<String, String> map = null;

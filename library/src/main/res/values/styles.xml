@@ -12,46 +12,4 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-<!--四种方式-->
-    <style name="wrap_wrap">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="match_match">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-    </style>
-
-    <style name="wrap_match">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">match_parent</item>
-    </style>
-
-    <style name="match_wrap">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-    <!-- linearLayout vertical 添加bottomView的时候添加 <<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
-    <style name="ll_vertical_wrap_wrap" parent="wrap_wrap">
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:orientation">vertical</item>
-    </style>
-
-    <style name="ll_vertical_match_match" parent="match_match">
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:orientation">vertical</item>
-    </style>
-
-    <style name="ll_vertical_wrap_match" parent="wrap_match">
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:orientation">vertical</item>
-    </style>
-
-    <style name="ll_vertical_match_wrap" parent="match_wrap">
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:orientation">vertical</item>
-    </style>
-
-
 </resources>
