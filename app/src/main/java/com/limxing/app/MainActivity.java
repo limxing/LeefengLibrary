@@ -1,7 +1,9 @@
 package com.limxing.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
 
 import com.limxing.library.PullToRefresh.SwipeRefreshLayout;
 import com.limxing.library.SwipeBack.SwipeBackActivity;
@@ -21,6 +23,12 @@ public class MainActivity extends SwipeBackActivity implements SwipeRefreshLayou
         setContentView(R.layout.activity_main);
         SystemBarTintManager.initSystemBar(this, R.color.transparent);
         main_fresh=(com.limxing.library.PullToRefresh.SwipeRefreshLayout)findViewById(R.id.main_fresh);
+        findViewById(R.id.btn_bottom).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         main_fresh.setOnRefreshListener(this);
         main_fresh.setOnLoadListener(this);
     }
