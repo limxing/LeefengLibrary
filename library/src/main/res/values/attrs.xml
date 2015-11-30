@@ -1,27 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?> 
-<resources> 
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
     <!-- 拖动刷新加载 -->
-    <declare-styleable name="swiperefresh"> 
-        <attr name="srlbg" format="color"/>
+    <declare-styleable name="swiperefresh">
+        <attr name="srlbg" format="color" />
         <attr name="srlTextSize" format="dimension" />
         <attr name="srlTextColor" format="color" />
-        <attr name="roateImage" format="reference"/>
-        <attr name="flipImage" format="reference"/>
-        <attr name="finishedImage" format="reference"/>
-        <attr name="ptr" format="boolean"/>
-        <attr name="ptl" format="boolean"/>
+        <attr name="roateImage" format="reference" />
+        <attr name="flipImage" format="reference" />
+        <attr name="finishedImage" format="reference" />
+        <attr name="ptr" format="boolean" />
+        <attr name="ptl" format="boolean" />
         <!-- 下拉 -->
-        <attr name="pullDownLabel" format="string"/>
-        <attr name="refreshingLabel" format="string"/>
-        <attr name="releaseDownLabel" format="string"/>
+        <attr name="pullDownLabel" format="string" />
+        <attr name="refreshingLabel" format="string" />
+        <attr name="releaseDownLabel" format="string" />
         <!-- 上拉 -->
-        <attr name="pullUpLabel" format="string"/>
-        <attr name="loadingLabel" format="string"/>
-        <attr name="releaseUpLabel" format="string"/>
-        
+        <attr name="pullUpLabel" format="string" />
+        <attr name="loadingLabel" format="string" />
+        <attr name="releaseUpLabel" format="string" />
+
         <attr name="srlAnimationStyle">
             <flag name="rotate" value="0x0" />
             <flag name="flip" value="0x1" />
         </attr>
-    </declare-styleable> 
+    </declare-styleable>
+
+    <!-- Declare custom theme attributes that allow changing which styles are
+         used for button bars depending on the API level.
+         ?android:attr/buttonBarStyle is new as of API 11 so this is
+         necessary to support previous API levels. -->
+    <declare-styleable name="ButtonBarContainerTheme">
+        <attr name="metaButtonBarStyle" format="reference" />
+        <attr name="metaButtonBarButtonStyle" format="reference" />
+    </declare-styleable>
 </resources>  
