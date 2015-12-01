@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android">
 	<translate android:fromXDelta="100%p" android:toXDelta="0"
-		android:duration="500" />
+		android:duration="400" />
 	<alpha android:fromAlpha="1.0" android:toAlpha="1.0"
-		android:duration="500" />
+		android:duration="400" />
 </set>
+
+	<!--// 切换界面动画开启一个Activiyty-->
+	<!--public void startActivityWithAnim(Intent intent) {-->
+	<!--startActivity(intent);-->
+	<!--overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);-->
+	<!--}-->
+
+	<!--// 切换界面动画关闭一个Activiyty-->
+	<!--public void finishActivity() {-->
+	<!--finish();-->
+	<!--overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);-->
+	<!--}-->
