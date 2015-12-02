@@ -582,6 +582,23 @@ public class SystemBarTintManager {
         tintManager.setStatusBarTintResource(color);
     }
 
+    /**
+     * @name: 初始化系统状态栏颜色,默认是透明的titleBar
+     *
+     *
+     * @autor Limxing
+     * @param activity activity
+     *
+     */
+    public static void initSystemBar(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            setTranslucentStatus(activity, true);
+        }
+        SystemBarTintManager tintManager = new SystemBarTintManager(activity);
+        tintManager.setStatusBarTintEnabled(true);
+        tintManager.setStatusBarTintResource(R.color.transparent);
+    }
+
 
     @TargetApi(19)
     private static void setTranslucentStatus(Activity activity, boolean on) {

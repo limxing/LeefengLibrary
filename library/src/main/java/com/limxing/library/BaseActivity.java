@@ -15,7 +15,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SystemBarTintManager.initSystemBar(this, R.color.transparent);
+        SystemBarTintManager.initSystemBar(this);
         initView();
         init();
     }
