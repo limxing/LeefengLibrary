@@ -6,19 +6,19 @@ import android.graphics.Paint.FontMetrics;
 
 /**
  *
- * 
+ *
  * 作者： limxing
- * 
+ *
  * 时间： 2015-10-30 上午10:51:16
- * 
+ *
  * 描述：屏幕像素pxps dp之间的转换
- * 
+ *
  */
 public class DisplayUtil {
 
 	/**
 	 * 将px值转换为dip或dp值，保证尺寸大小不变
-	 * 
+	 *
 	 * @param pxValue
 	 *
 	 *            （DisplayMetrics类中属性density）
@@ -31,7 +31,7 @@ public class DisplayUtil {
 
 	/**
 	 * 将dip或dp值转换为px值，保证尺寸大小不变
-	 * 
+	 *
 	 * @param dipValue
 	 *
 	 *            （DisplayMetrics类中属性density）
@@ -44,7 +44,7 @@ public class DisplayUtil {
 
 	/**
 	 * 将px值转换为sp值，保证文字大小不变
-	 * 
+	 *
 	 * @param pxValue
 	 *
 	 *            （DisplayMetrics类中属性scaledDensity）
@@ -57,7 +57,7 @@ public class DisplayUtil {
 
 	/**
 	 * 将sp值转换为px值，保证文字大小不变
-	 * 
+	 *
 	 * @param spValue
 	 *
 	 *            （DisplayMetrics类中属性scaledDensity）
