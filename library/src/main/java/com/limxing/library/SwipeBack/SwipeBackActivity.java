@@ -50,4 +50,6 @@ public class SwipeBackActivity extends AppCompatActivity implements SwipeBackLay
         ivShadow.setAlpha(1 - fractionScreen);
     }
 
+
+
 }

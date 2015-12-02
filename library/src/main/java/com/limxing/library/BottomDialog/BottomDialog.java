@@ -4,6 +4,7 @@ package com.limxing.library.BottomDialog;
 import android.app.Activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -24,6 +25,9 @@ public class BottomDialog extends Activity implements View.OnClickListener {
         findViewById(R.id.bottom_bac).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent=new Intent();
+                intent.putExtra("name","lisi");
+                setResult(1,intent);
                 finish();
             }
         });
