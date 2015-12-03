@@ -1,6 +1,6 @@
 常见Android开发控件
 ===================================
-Android开发中遇到了一些特殊需求，在此罗列自己收集总结到的控件或者方法，在此分享！
+Android开发中遇到了一些特殊需求，在此罗列自己收集总结到的控件或者方法！
 -------------------------------------------------------------------------
 使用方法是:把library作为库引入
 
@@ -25,6 +25,7 @@ Android开发中遇到了一些特殊需求，在此罗列自己收集总结到�
   UIUtils关于UI界面的操作类
   ToastUtils是吐丝的单例操作        
   DisplayUtil是dppxsp之间的相互转换工具类
+  Encryptutil是MD5和base64位加密(依赖文件Base64)
    
 ####四、下拉刷新上拉加载  
    PullToRefresh包:
@@ -58,7 +59,10 @@ Android开发中遇到了一些特殊需求，在此罗列自己收集总结到�
             handler.sendEmptyMessageDelayed(what,time=2000);    
          2,在handler 处理中调用  
             main_fresh.setRefreshing(false);   main_refresh.setLoading(false);
-        
+####五、进栈出栈左右滑动效果
+    使用方式:继承BaseActivity,startActivityWithAnim(Intent intent)进栈和finishActivity()出栈.
+
+      
   
 
 
