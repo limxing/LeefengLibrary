@@ -3,6 +3,8 @@ package com.limxing.library;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.limxing.library.NoTitleBar.SystemBarTintManager;
 
@@ -40,5 +42,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void finishActivity() {
         finish();
         overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+    }
+    //屏幕全屏
+    protected  void fullScreen(){
+        requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏标题栏
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);//隐藏状态栏
     }
 }
