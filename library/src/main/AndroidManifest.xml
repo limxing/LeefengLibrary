@@ -6,7 +6,7 @@
         <activity
             android:name=".BottomDialog.BottomDialog"
             android:label="@string/title_activity_main"
-            android:theme="@style/myTransparent"></activity>
+            android:theme="@style/bottomDialog"></activity>
     </application>
 
 </manifest>
