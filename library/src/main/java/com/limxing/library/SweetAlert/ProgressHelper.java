@@ -2,7 +2,9 @@ package com.limxing.library.SweetAlert;
 
 import android.content.Context;
 
+import com.limxing.library.R;
 import com.pnikosis.materialishprogress.ProgressWheel;
+
 
 public class ProgressHelper {
     private ProgressWheel mProgressWheel;

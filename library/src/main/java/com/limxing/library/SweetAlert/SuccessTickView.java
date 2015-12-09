@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
+import com.limxing.library.R;
+
 public class SuccessTickView extends View {
     private float mDensity = -1;
     private Paint mPaint;
