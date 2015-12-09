@@ -9,4 +9,8 @@
     <dimen name="padingTop">0dp</dimen>
     <dimen name="title_height">48dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+<!--SweetDialog-->
+    <dimen name="alert_width">290dp</dimen>
+    <dimen name="common_circle_width">3dp</dimen>
+    <dimen name="progress_circle_radius">34dp</dimen>
 </resources>
