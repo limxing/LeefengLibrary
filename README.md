@@ -68,6 +68,10 @@ Android开发中遇到了一些特殊需求，在此罗列自己收集总结到�
     https://github.com/limxing/Android-Universal-Image-Loader
     全局初始化对象
 ####八、SweetDialog的引入以及使用
+    1、创建SweetDialog对象,参数Context和窗口类型;
+    2、设置标题内容,按钮的点击事件等
+    3、调用show方法展示
+    4、调用dismiss关闭窗口
       
   
 
