@@ -3,26 +3,20 @@ package com.limxing.library.BottomDialog;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.text.TextPaint;
 import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-
-import com.limxing.library.R;
 import com.limxing.library.utils.DisplayUtil;
+import com.limxing.library.utils.LogUtils;
 
 import java.util.ArrayList;
-
 import static com.limxing.library.R.*;
 
 
@@ -83,8 +77,6 @@ public abstract class AlertDialog implements View.OnClickListener {
             lm_top.addView(view);
         }
 
-
-
         pop= new PopupWindow(bview,
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         pop.setAnimationStyle(style.myBottom);
@@ -103,6 +95,7 @@ public abstract class AlertDialog implements View.OnClickListener {
             }
         });
         pop.showAtLocation(view1, Gravity.BOTTOM, 0, 0);
+
     }
 
     public abstract void closed();
@@ -112,33 +105,7 @@ public abstract class AlertDialog implements View.OnClickListener {
     }
     public void setSelections(String[] selections){
         this.selections=selections;
-//        lm_top.setAdapter(new BaseAdapter() {
-//            @Override
-//            public int getCount() {
-//                return viewList.size();
-//            }
-//
-//            @Override
-//            public Object getItem(int i) {
-//                return viewList.get(i);
-//            }
-//
-//            @Override
-//            public long getItemId(int i) {
-//                return i;
-//            }
-//
-//            @Override
-//            public View getView(int i, View view, ViewGroup viewGroup) {
-//                return viewList.get(i);
-//            }
-//        });
-//        lm_top.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                onClick(view);
-//            }
-//        });
+
     }
 
     /**
@@ -154,15 +121,17 @@ public abstract class AlertDialog implements View.OnClickListener {
     protected abstract void selectionClick(int tag);
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public void setDescribtion(String describtion){
+    public void setDescription(String describtion){
         TextView view=new TextView(context);
         view.setText(describtion);
         view.setTextSize(16);
         view.setGravity(Gravity.CENTER);
         view.setBackground(context.getResources().getDrawable(drawable.button_selector_top));
         view.setClickable(false);
-        view.setHeight(height);
+        view.setPadding(0, DisplayUtil.dip2px(context, 15), 0, DisplayUtil.dip2px(context,15));
         flag=false;
         lm_top.addView(view, 0);
     }
+
+
 }
