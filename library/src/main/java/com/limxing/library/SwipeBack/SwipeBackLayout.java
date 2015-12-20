@@ -45,6 +45,7 @@ import android.widget.ScrollView;
 public class SwipeBackLayout extends ViewGroup {
 
     private static final String TAG = "SwipeBackLayout";
+    private boolean flag;
 
     public enum DragEdge {
         LEFT,
@@ -249,13 +250,31 @@ public class SwipeBackLayout extends ViewGroup {
         } else {
             viewDragHelper.cancel();
         }
-        return !handled ? super.onInterceptTouchEvent(ev) : handled;
+
+        if(dragEdge==DragEdge.LEFT){
+            switch (ev.getAction()){
+                case MotionEvent.ACTION_DOWN:
+                    if(ev.getX()<100) {
+                        flag=true;
+                    }else{
+                        flag=false;
+                    }
+                    break;
+
+            }
+
+            return flag;
+        }else{
+            return !handled ? super.onInterceptTouchEvent(ev) : handled;
+        }
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        viewDragHelper.processTouchEvent(event);
-        return true;
+
+            viewDragHelper.processTouchEvent(event);
+            return true;
+
     }
 
     @Override

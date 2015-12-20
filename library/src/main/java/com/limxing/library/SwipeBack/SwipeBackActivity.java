@@ -12,6 +12,7 @@ import com.limxing.library.R;
 
 /**
  * Created by Eric on 15/3/3.
+ * 不要使用继承的方式,还是使用在布局文件中使用layout
  */
 public class SwipeBackActivity extends AppCompatActivity implements SwipeBackLayout.SwipeBackListener {
 
