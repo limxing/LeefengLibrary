@@ -12,7 +12,11 @@ Android开发中遇到了一些特殊需求，在此罗列自己收集总结到�
 ####二、右滑退出
   1、需要右滑退出的activity集成SwipeBackActivity,默认右滑退出;      
   2、可以设置setDragEdge(TOP,...)的方法,设置其他方向退出
-  
+
+  3、推荐使用布局文件最外层的包裹为SwipeBackLayout,然后在activity中声明初始化这个:
+     SwipeBackLayout swipeBackLayout = (SwipeBackLayout) findViewById(R.id.swipeBackLayout);
+            swipeBackLayout.setDragEdge(SwipeBackLayout.DragEdge.LEFT);
+本人修复(在原始框架中修改):修正了右滑退出时,只能在最侧右滑,其他地方不响应,解决与listView的冲突
 ####三、工具类方法介绍
   FileUtils文件相关操作类:
      writeFile(InputStream is, String path, boolean recreate) 把流写入文件;       
