@@ -134,4 +134,7 @@ public abstract class AlertDialog implements View.OnClickListener {
     }
 
 
+    public void dismiss() {
+        pop.dismiss();
+    }
 }
