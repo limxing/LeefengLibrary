@@ -82,7 +82,33 @@ Android开发中遇到了一些特殊需求，在此罗列自己收集总结到�
     3、调用show方法展示
     4、调用dismiss关闭窗口
       
-  
+####九、底部弹窗窗口
+    1、创建窗口对象,
+        AlertDialog dialog = new AlertDialog(MainActivity.this, findViewById(R.id.swipeBackLayout)) {
+            @Override
+            public void closed() {
+
+            }
+
+            @Override
+            protected void selectionClick(int tag) {
+                switch (tag) {
+                    case 0:
+                      ToastUtils.showLong(MainActivity.this, "第一个");
+                    break;
+                    case 1:
+                     ToastUtils.showLong(MainActivity.this, "第二个");
+                    break;
+                }
+             }
+        };
+    2、选择性的设置提示文字
+    3、设置选项的内容
+        dialog.setSelections(new String[]{"你妹", "你好", ""});
+    4、设置取消按钮的文字
+        dialog.setDescribtion("这是我精心准备的");
+    5、显示窗口
+        dialog.show();
 
 
 
