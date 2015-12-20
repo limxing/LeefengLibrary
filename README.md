@@ -63,11 +63,16 @@ Android开发中遇到了一些特殊需求，在此罗列自己收集总结到�
             handler.sendEmptyMessageDelayed(what,time=2000);    
          2,在handler 处理中调用  
             main_fresh.setRefreshing(false);   main_refresh.setLoading(false);
+
 ####五、进栈出栈左右滑动效果
     使用方式:继承BaseActivity,startActivityWithAnim(Intent intent)进栈和finishActivity()出栈.
+
 ####六、点击实现从底部弹出的对话框
     实现方式是使用继承的Activity的方式,开启式需要使用startAvtivityForResult(int)的方式,
     再实现onActivityResult的方法用于接收来自对话框的点击事件.对话框是一个特殊的activity因此可以自定义使用.
+
+    2、使用popwindow的方式实现:
+
 ####七、图片加载工具
     https://github.com/limxing/Android-Universal-Image-Loader
     全局初始化对象
