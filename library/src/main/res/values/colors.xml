@@ -8,7 +8,14 @@
     <color name="transparent">#0000</color>
 
     <color name="black_overlay">#66000000</color>
+    <color name="lm_bottomdialog">#50000000</color>
+    <color name="holo_blue_light">#ff33b5e5</color>
+
+    <!--底部弹出选择框-->
+    <color name="button_normal">#ffffff</color>
+    <color name="button_presseed">#cccccc</color>
 <!--SweetDialog-->
+
     <color name="float_transparent">#00000000</color>
     <color name="sweet_dialog_bg_color">#FFFFFF</color>
     <color name="button_text_color">#FFFFFF</color>

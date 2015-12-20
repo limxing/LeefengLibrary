@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <solid android:color="#ffffff" />
+    <solid android:color="@color/button_normal" />
 
     <stroke
         android:width="1px"
-        android:color="#cccccc" />
+        android:color="@color/button_presseed" />
     <corners
         android:bottomLeftRadius="10px"
         android:bottomRightRadius="10px"/>

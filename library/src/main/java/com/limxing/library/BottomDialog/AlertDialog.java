@@ -1,45 +1,99 @@
 package com.limxing.library.BottomDialog;
 
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
+import android.text.TextPaint;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.limxing.library.R;
+import com.limxing.library.utils.DisplayUtil;
+
+import java.util.ArrayList;
+
+import static com.limxing.library.R.*;
+
 
 /**
  * Created by limxing on 15/12/20.
  */
-public abstract class AlertDialog  {
+public abstract class AlertDialog implements View.OnClickListener {
 
+    private final View bview;
+    private final TextView bottom_cancle;
+    private final LinearLayout lm_top;
+    private final int height;
     private PopupWindow pop;
     private final View view;
     private  Context context;
+    private ArrayList<View> viewList;
+    private String describtion;
+    private boolean flag=true;
+    private String[] selections;
 
     public AlertDialog(Context context,View view){
         this.context=context;
         this.view=view;
-
+         bview=View.inflate(context, layout.lmbottomselecter,null);
+        bottom_cancle=(TextView)bview.findViewById(id.bottom_cancle);
+        lm_top=(LinearLayout)bview.findViewById(id.lm_top);
+        bottom_cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pop.dismiss();
+            }
+        });
+       height= DisplayUtil.dip2px(context,50);
 
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void show(){
-        View bview=View.inflate(context, R.layout.lmbottomselecter,null);
+        for (int i=0;i<selections.length;i++){
+            TextView view= new TextView(context);
+            view.setText(selections[i]);
+            view.setClickable(true);
+            view.setTag(i);
+            view.setOnClickListener(this);
+            view.setTextSize(22);
+            TextPaint tp = view.getPaint();
+            tp.setFakeBoldText(true);
+            view.setGravity(Gravity.CENTER);
+            view.setHeight(height);
+            if(flag){
+                view.setBackground(context.getResources().getDrawable(drawable.button_selector_top));
+            }else if(i==selections.length-1){
+                view.setBackground(context.getResources().getDrawable(drawable.button_selector_bottom));
+            }else{
+                view.setBackground(context.getResources().getDrawable(drawable.button_selector_middle));
+            }
+            view.setTextColor(context.getResources().getColor(color.holo_blue_light));
+            lm_top.addView(view);
+        }
+
+
 
         pop= new PopupWindow(bview,
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-
-        pop.setAnimationStyle(R.style.myBottom);
+        pop.setAnimationStyle(style.myBottom);
         pop.setBackgroundDrawable(new BitmapDrawable());
         View view1=new View(context);
-        view1.setBackgroundColor(context.getResources().getColor(R.color.lm_bottomdialog));
+        view1.setBackgroundColor(context.getResources().getColor(color.lm_bottomdialog));
         final PopupWindow pop1=new PopupWindow(view1,
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
-        pop1.setBackgroundDrawable(new BitmapDrawable());
+
         pop1.showAtLocation(view, Gravity.CENTER, 0, 0);
         pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
@@ -48,13 +102,62 @@ public abstract class AlertDialog  {
                 closed();
             }
         });
-
-
         pop.showAtLocation(view1, Gravity.BOTTOM, 0, 0);
-
-//        pop.showAsDropDown(view);
     }
 
     public abstract void closed();
 
+    public void setCancleButtonTitle(String cancle){
+        bottom_cancle.setText(cancle);
+    }
+    public void setSelections(String[] selections){
+        this.selections=selections;
+//        lm_top.setAdapter(new BaseAdapter() {
+//            @Override
+//            public int getCount() {
+//                return viewList.size();
+//            }
+//
+//            @Override
+//            public Object getItem(int i) {
+//                return viewList.get(i);
+//            }
+//
+//            @Override
+//            public long getItemId(int i) {
+//                return i;
+//            }
+//
+//            @Override
+//            public View getView(int i, View view, ViewGroup viewGroup) {
+//                return viewList.get(i);
+//            }
+//        });
+//        lm_top.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                onClick(view);
+//            }
+//        });
+    }
+
+    /**
+     * 其中的tag就是辨别哪一个按钮的点击事件的
+     * @param view
+     */
+    @Override
+    public abstract void onClick(View view);
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    public void setDescribtion(String describtion){
+        TextView view=new TextView(context);
+        view.setText(describtion);
+        view.setTextSize(16);
+        view.setGravity(Gravity.CENTER);
+        view.setBackground(context.getResources().getDrawable(drawable.button_selector_top));
+        view.setClickable(false);
+        view.setHeight(height);
+        flag=false;
+        lm_top.addView(view, 0);
+    }
 }
