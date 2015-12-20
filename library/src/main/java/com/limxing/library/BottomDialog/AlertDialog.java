@@ -146,7 +146,12 @@ public abstract class AlertDialog implements View.OnClickListener {
      * @param view
      */
     @Override
-    public abstract void onClick(View view);
+    public  void onClick(View view){
+        pop.dismiss();
+        selectionClick((int)view.getTag());
+    }
+
+    protected abstract void selectionClick(int tag);
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void setDescribtion(String describtion){
