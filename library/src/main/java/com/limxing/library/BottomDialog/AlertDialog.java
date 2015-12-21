@@ -37,10 +37,13 @@ public abstract class AlertDialog implements View.OnClickListener {
     private String describtion;
     private boolean flag=true;
     private String[] selections;
+    private int textColor;
+    private int cancleTextColor;
 
     public AlertDialog(Context context,View view){
         this.context=context;
         this.view=view;
+        cancleTextColor=textColor=context.getResources().getColor(color.holo_blue_light);
          bview=View.inflate(context, layout.lmbottomselecter,null);
         bottom_cancle=(TextView)bview.findViewById(id.bottom_cancle);
         lm_top=(LinearLayout)bview.findViewById(id.lm_top);
@@ -51,6 +54,7 @@ public abstract class AlertDialog implements View.OnClickListener {
             }
         });
         bottom_cancle.setTextSize(DisplayUtil.px2sp(context, 50));
+        bottom_cancle.setTextColor(cancleTextColor);
        height= DisplayUtil.dip2px(context, 50);
 
     }
@@ -75,7 +79,7 @@ public abstract class AlertDialog implements View.OnClickListener {
             }else{
                 view.setBackground(context.getResources().getDrawable(drawable.button_selector_middle));
             }
-            view.setTextColor(context.getResources().getColor(color.holo_blue_light));
+            view.setTextColor(textColor);
             lm_top.addView(view);
         }
 
@@ -145,6 +149,12 @@ public abstract class AlertDialog implements View.OnClickListener {
     public boolean isShowing(){
         return pop.isShowing();
     }
+    public void setTextColor(int color){
 
+        this.textColor=color;
+    }
+    public void setCancleTextColor(int color){
+        this.cancleTextColor=color;
+    }
 
 }
