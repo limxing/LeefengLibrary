@@ -50,7 +50,8 @@ public abstract class AlertDialog implements View.OnClickListener {
                 pop.dismiss();
             }
         });
-       height= DisplayUtil.dip2px(context,50);
+        bottom_cancle.setTextSize(DisplayUtil.px2sp(context, 50));
+       height= DisplayUtil.dip2px(context, 50);
 
     }
 
@@ -62,7 +63,7 @@ public abstract class AlertDialog implements View.OnClickListener {
             view.setClickable(true);
             view.setTag(i);
             view.setOnClickListener(this);
-            view.setTextSize(22);
+            view.setTextSize(DisplayUtil.px2sp(context, 50));
             TextPaint tp = view.getPaint();
             tp.setFakeBoldText(true);
             view.setGravity(Gravity.CENTER);
@@ -126,11 +127,12 @@ public abstract class AlertDialog implements View.OnClickListener {
     public void setDescription(String describtion){
         TextView view=new TextView(context);
         view.setText(describtion);
-        view.setTextSize(16);
+        view.setTextSize(DisplayUtil.px2sp(context, 30));
         view.setGravity(Gravity.CENTER);
         view.setBackground(context.getResources().getDrawable(drawable.button_selector_top));
         view.setClickable(false);
-        view.setPadding(0, DisplayUtil.dip2px(context, 15), 0, DisplayUtil.dip2px(context,15));
+        int pad=DisplayUtil.dip2px(context, 15);
+        view.setPadding(pad, pad, pad, pad);
         flag=false;
         lm_top.addView(view, 0);
     }
@@ -143,4 +145,6 @@ public abstract class AlertDialog implements View.OnClickListener {
     public boolean isShowing(){
         return pop.isShowing();
     }
+
+
 }
