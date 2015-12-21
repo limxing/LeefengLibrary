@@ -83,8 +83,8 @@ Android开发中遇到了一些特殊需求，在此罗列自己收集总结到�
     4、调用dismiss关闭窗口
       
 ####九、底部弹窗窗口
-    效果图
-    ![image](https://github.com/limxing/BottomDialog/blob/master/screenshot.png)
+效果图
+![image](https://github.com/limxing/app/blob/master/screenshot.png)
 
     1、创建窗口对象,
         AlertDialog dialog = new AlertDialog(MainActivity.this, findViewById(R.id.swipeBackLayout)) {
