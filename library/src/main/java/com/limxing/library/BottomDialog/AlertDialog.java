@@ -5,16 +5,17 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
-import android.preference.PreferenceManager;
+
 import android.text.TextPaint;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import com.limxing.library.utils.DisplayUtil;
-import com.limxing.library.utils.LogUtils;
+
 
 import java.util.ArrayList;
 import static com.limxing.library.R.*;
@@ -86,7 +87,7 @@ public abstract class AlertDialog implements View.OnClickListener {
         final PopupWindow pop1=new PopupWindow(view1,
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
 
-        pop1.showAtLocation(view, Gravity.CENTER, 0, 0);
+        pop1.showAtLocation(view, Gravity.TOP, 0, 0);
         pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
@@ -94,6 +95,7 @@ public abstract class AlertDialog implements View.OnClickListener {
                 closed();
             }
         });
+        pop.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         pop.showAtLocation(view1, Gravity.BOTTOM, 0, 0);
 
     }
@@ -136,5 +138,9 @@ public abstract class AlertDialog implements View.OnClickListener {
 
     public void dismiss() {
         pop.dismiss();
+    }
+
+    public boolean isShowing(){
+        return pop.isShowing();
     }
 }
