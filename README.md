@@ -83,6 +83,9 @@ Android开发中遇到了一些特殊需求，在此罗列自己收集总结到�
     4、调用dismiss关闭窗口
       
 ####九、底部弹窗窗口
+    效果图
+    ![image](https://github.com/limxing/BottomDialog/blob/master/screenshot.png)
+
     1、创建窗口对象,
         AlertDialog dialog = new AlertDialog(MainActivity.this, findViewById(R.id.swipeBackLayout)) {
             @Override
@@ -102,13 +105,24 @@ Android开发中遇到了一些特殊需求，在此罗列自己收集总结到�
                 }
              }
         };
-    2、选择性的设置提示文字
-    3、设置选项的内容
-        dialog.setSelections(new String[]{"你妹", "你好", ""});
-    4、设置取消按钮的文字
-        dialog.setDescribtion("这是我精心准备的");
-    5、显示窗口
-        dialog.show();
+
+
+
+     dialog.setCancleButtonTitle("取消");//设置取消信息
+     dialog.setDescription("这是我精心准备的底部弹窗");//设置顶部描述信息
+     dialog.setSelections(new String[]{"第一个","第二个","第三个"});//设置选择项,是数组的形式
+     dialog.show();//把选择框show出来
+
+    需要在onPause中调用
+
+      @Override
+         protected void onPause() {
+             if (dialog!=null&&dialog.isShowing()) {
+                 dialog.dismiss();
+             }
+             super.onPause();
+         }
+
 
 
 
