@@ -6,12 +6,17 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
+import android.support.v7.app.AppCompatActivity;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.limxing.library.BottomDialog.AlertDialog;
+import com.limxing.library.BottomDialog.LMBottomSelecter;
 import com.limxing.library.PullToRefresh.SwipeRefreshLayout;
 
 import com.limxing.library.SweetAlert.SweetAlertDialog;
@@ -19,17 +24,20 @@ import com.limxing.library.SwipeBack.SwipeBackActivity;
 
 import com.limxing.library.NoTitleBar.SystemBarTintManager;
 
+import com.limxing.library.SwipeBack.SwipeBackLayout;
 import com.limxing.library.utils.EncryptUtil;
 import com.limxing.library.utils.LogUtils;
+import com.limxing.library.utils.ToastUtils;
 
 import java.math.MathContext;
 
 
-public class MainActivity extends SwipeBackActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
 
 
     private SwipeRefreshLayout main_fresh;
     private ListView main_listview;
+    private AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +45,12 @@ public class MainActivity extends SwipeBackActivity implements SwipeRefreshLayou
         setContentView(R.layout.activity_main);
         SystemBarTintManager.initSystemBar(this, R.color.transparent);
         main_fresh = (com.limxing.library.PullToRefresh.SwipeRefreshLayout) findViewById(R.id.main_fresh);
-        main_listview=(ListView)findViewById(R.id.main_listview);
+
+        SwipeBackLayout swipeBackLayout = (SwipeBackLayout) findViewById(R.id.swipeBackLayout);
+        swipeBackLayout.setDragEdge(SwipeBackLayout.DragEdge.LEFT);
+
+
+        main_listview = (ListView) findViewById(R.id.main_listview);
         main_listview.setAdapter(new BaseAdapter() {
             @Override
             public int getCount() {
@@ -56,7 +69,7 @@ public class MainActivity extends SwipeBackActivity implements SwipeRefreshLayou
 
             @Override
             public View getView(int i, View view, ViewGroup viewGroup) {
-                TextView textView=new TextView(MainActivity.this);
+                TextView textView = new TextView(MainActivity.this);
                 textView.setText("你是谁");
                 textView.setHeight(200);
                 return textView;
@@ -106,10 +119,39 @@ public class MainActivity extends SwipeBackActivity implements SwipeRefreshLayou
 //                        }).show();
 
 
+//                LMBottomSelecter selecter=new LMBottomSelecter(getApplicationContext(),new String[]{},"haha");
+//                selecter.show(findViewById(R.id.swipeBackLayout));
 
 
-//                LMBottomSelecter selecter=new LMBottomSelecter(MainActivity.this,new String[]{},"haha");
-//                selecter.show(findViewById(R.id.main));
+                dialog = new AlertDialog(MainActivity.this, findViewById(R.id.swipeBackLayout)) {
+
+
+                    @Override
+                    public void closed() {
+
+                    }
+
+                    @Override
+                    protected void selectionClick(int tag) {
+                        switch (tag) {
+                            case 0:
+                                ToastUtils.showLong(MainActivity.this, "第一个");
+                                break;
+                            case 1:
+                                ToastUtils.showLong(MainActivity.this, "第二个");
+                                break;
+                        }
+                    }
+                };
+//                WindowManager.LayoutParams lp = getWindow().getAttributes();
+////                getWindow().setBackgroundDrawable();
+//                lp.alpha = 0.5f; //0.0-1.0
+//                getWindow().setAttributes(lp);
+
+                dialog.setSelections(new String[]{"你好", "你好", "你好"});
+                dialog.setDescription("这是我精心准备的底部弹窗,这是我精心准备的底部弹窗,这是我精心准备的底部弹窗");
+
+                dialog.show();
 //                Intent intent = new Intent(MainActivity.this, BottomDialog.class);
 //                startActivityForResult(intent, 0);
 //                AlertDialog dialog= new AlertDialog.Builder(MainActivity.this).setView(R.layout.bottomdialog).create();
@@ -154,5 +196,13 @@ public class MainActivity extends SwipeBackActivity implements SwipeRefreshLayou
                 break;
         }
 
+    }
+
+    @Override
+    protected void onPause() {
+        if (dialog!=null&&dialog.isShowing()) {
+            dialog.dismiss();
+        }
+        super.onPause();
     }
 }
