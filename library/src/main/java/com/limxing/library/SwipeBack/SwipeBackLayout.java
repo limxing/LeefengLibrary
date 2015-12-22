@@ -29,6 +29,8 @@ import android.webkit.WebView;
 import android.widget.AbsListView;
 import android.widget.ScrollView;
 
+import com.limxing.library.utils.DisplayUtil;
+
 /**
  * Swipe or Pull to finish a Activity.
  * <p/>
@@ -254,7 +256,7 @@ public class SwipeBackLayout extends ViewGroup {
         if(dragEdge==DragEdge.LEFT){
             switch (ev.getAction()){
                 case MotionEvent.ACTION_DOWN:
-                    if(ev.getX()<100) {
+                    if(ev.getX()<100&&ev.getY()> 300) {
                         flag=true;
                     }else{
                         flag=false;

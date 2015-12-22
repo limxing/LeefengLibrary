@@ -44,6 +44,13 @@
         //退出时的动画
     </style>
 
+    <style name="myBottomBac" parent="android:Animation">
+        <item name="@android:windowEnterAnimation">@anim/toast_enter</item>
+        //进入时的动画
+        <item name="@android:windowExitAnimation">@anim/toast_exit</item>
+    </style>
+
+
 <!--AweetDialog-->
     <style name="alert_dialog" parent="android:Theme.Dialog">
         <item name="android:windowIsFloating">true</item>

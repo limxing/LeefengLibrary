@@ -33,8 +33,6 @@ public abstract class AlertDialog implements View.OnClickListener {
     private PopupWindow pop;
     private final View view;
     private  Context context;
-    private ArrayList<View> viewList;
-    private String describtion;
     private boolean flag=true;
     private String[] selections;
     private int textColor;
@@ -86,12 +84,12 @@ public abstract class AlertDialog implements View.OnClickListener {
         pop= new PopupWindow(bview,
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         pop.setAnimationStyle(style.myBottom);
-        pop.setBackgroundDrawable(new BitmapDrawable());
+//        pop.setBackgroundDrawable(new BitmapDrawable());
         View view1=new View(context);
         view1.setBackgroundColor(context.getResources().getColor(color.lm_bottomdialog));
         final PopupWindow pop1=new PopupWindow(view1,
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
-
+        pop1.setAnimationStyle(style.myBottomBac);
         pop1.showAtLocation(view, Gravity.TOP, 0, 0);
         pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
@@ -100,6 +98,7 @@ public abstract class AlertDialog implements View.OnClickListener {
                 closed();
             }
         });
+
         pop.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         pop.showAtLocation(view1, Gravity.BOTTOM, 0, 0);
 

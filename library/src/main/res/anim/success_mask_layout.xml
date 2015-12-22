@@ -17,4 +17,5 @@
         android:duration="0"
         android:fillAfter="true">
     </rotate>
+
 </set>
