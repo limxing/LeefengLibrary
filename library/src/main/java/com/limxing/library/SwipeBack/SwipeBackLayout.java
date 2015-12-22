@@ -243,6 +243,9 @@ public class SwipeBackLayout extends ViewGroup {
         }
     }
 
+//    int downX = 0;
+//    int downY;
+
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         boolean handled = false;
@@ -253,20 +256,30 @@ public class SwipeBackLayout extends ViewGroup {
             viewDragHelper.cancel();
         }
 
-        if(dragEdge==DragEdge.LEFT){
-            switch (ev.getAction()){
+        if (dragEdge == DragEdge.LEFT) {
+
+            switch (ev.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    if(ev.getX()<100&&ev.getY()> 300) {
-                        flag=true;
-                    }else{
-                        flag=false;
+//                    downX = (int) ev.getX();
+//                    downY = (int) ev.getY();
+                    if (ev.getX() < 100 && ev.getY() > 300) {
+                        flag = true;
+                    } else {
+                        flag = false;
                     }
                     break;
-
+//                case MotionEvent.ACTION_MOVE:
+//                    if ((ev.getX() - downX) > 200) {
+//                        flag = true;
+//                    } else {
+//                        flag = false;
+//                    }
+//
+//                    break;
             }
 
             return flag;
-        }else{
+        } else {
             return !handled ? super.onInterceptTouchEvent(ev) : handled;
         }
     }
@@ -274,8 +287,8 @@ public class SwipeBackLayout extends ViewGroup {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-            viewDragHelper.processTouchEvent(event);
-            return true;
+        viewDragHelper.processTouchEvent(event);
+        return true;
 
     }
 
