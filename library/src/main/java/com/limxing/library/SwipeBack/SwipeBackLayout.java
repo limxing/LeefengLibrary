@@ -30,6 +30,7 @@ import android.widget.AbsListView;
 import android.widget.ScrollView;
 
 import com.limxing.library.utils.DisplayUtil;
+import com.limxing.library.utils.LogUtils;
 
 /**
  * Swipe or Pull to finish a Activity.
@@ -48,6 +49,7 @@ public class SwipeBackLayout extends ViewGroup {
 
     private static final String TAG = "SwipeBackLayout";
     private boolean flag;
+    private int titleHeight;
 
     public enum DragEdge {
         LEFT,
@@ -63,6 +65,7 @@ public class SwipeBackLayout extends ViewGroup {
 
     public void setDragEdge(DragEdge dragEdge) {
         this.dragEdge = dragEdge;
+//       titleHeight= DisplayUtil.dip2px(context,100f);
     }
 
 
@@ -262,7 +265,8 @@ public class SwipeBackLayout extends ViewGroup {
                 case MotionEvent.ACTION_DOWN:
 //                    downX = (int) ev.getX();
 //                    downY = (int) ev.getY();
-                    if (ev.getX() < 100 && ev.getY() > 300) {
+
+                    if (ev.getX() < 100) {
                         flag = true;
                     } else {
                         flag = false;
