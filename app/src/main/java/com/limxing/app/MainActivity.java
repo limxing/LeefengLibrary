@@ -2,6 +2,7 @@ package com.limxing.app;
 
 import android.annotation.TargetApi;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.limxing.library.BottomDialog.AlertDialog;
+import com.limxing.library.BottomDialog.BottomDialog;
 import com.limxing.library.BottomDialog.LMBottomSelecter;
 import com.limxing.library.PullToRefresh.SwipeRefreshLayout;
 
@@ -80,6 +82,18 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
+                BottomDialog.showAlert(MainActivity.this, "哈哈哈", new String[]{"你好", "你不好"},
+                        new BottomDialog.OnClickListener() {
+                            @Override
+                            public void onClick(int which) {
+                                ToastUtils.showLong(MainActivity.this, which + "个");
+                            }
+                        }, new DialogInterface.OnCancelListener() {
+                            @Override
+                            public void onCancel(DialogInterface dialogInterface) {
+                                ToastUtils.showLong(MainActivity.this,"已关闭");
+                            }
+                        });
 
                 //错误的提示框
 //               new SweetAlertDialog(MainActivity.this,SweetAlertDialog.ERROR_TYPE)
@@ -124,35 +138,38 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 //                selecter.show(findViewById(R.id.swipeBackLayout));
 
 
-                dialog = new AlertDialog(MainActivity.this, findViewById(R.id.swipeBackLayout)) {
+//                dialog = new AlertDialog(MainActivity.this, findViewById(R.id.swipeBackLayout)) {
+//
+//
+//                    @Override
+//                    public void closed() {
+//
+//                    }
+//
+//                    @Override
+//                    protected void selectionClick(int tag) {
+//                        switch (tag) {
+//                            case 0:
+//                                ToastUtils.showLong(MainActivity.this, "第一个");
+//                                break;
+//                            case 1:
+//                                ToastUtils.showLong(MainActivity.this, "第二个");
+//                                break;
+//                        }
+//                    }
+//                };
+//                dialog.setSelections(new String[]{"你好", "你好", "你好"});
+//                dialog.setDescription("这是我精心准备的底部弹窗,这是我精心准备的底部弹窗,这是我精心准备的底部弹窗");
+//
+//                dialog.show();
 
 
-                    @Override
-                    public void closed() {
-
-                    }
-
-                    @Override
-                    protected void selectionClick(int tag) {
-                        switch (tag) {
-                            case 0:
-                                ToastUtils.showLong(MainActivity.this, "第一个");
-                                break;
-                            case 1:
-                                ToastUtils.showLong(MainActivity.this, "第二个");
-                                break;
-                        }
-                    }
-                };
 //                WindowManager.LayoutParams lp = getWindow().getAttributes();
 ////                getWindow().setBackgroundDrawable();
 //                lp.alpha = 0.5f; //0.0-1.0
 //                getWindow().setAttributes(lp);
 
-                dialog.setSelections(new String[]{"你好", "你好", "你好"});
-                dialog.setDescription("这是我精心准备的底部弹窗,这是我精心准备的底部弹窗,这是我精心准备的底部弹窗");
 
-                dialog.show();
 //                Intent intent = new Intent(MainActivity.this, BottomDialog.class);
 //                startActivityForResult(intent, 0);
 //                AlertDialog dialog= new AlertDialog.Builder(MainActivity.this).setView(R.layout.bottomdialog).create();
