@@ -82,7 +82,7 @@ Android开发中遇到了一些特殊需求，在此罗列自己收集总结到�
     3、调用show方法展示
     4、调用dismiss关闭窗口
       
-####九、底部弹窗窗口
+####九、底部弹窗窗口(不是很好用,使用十的)
 效果图
 ![image](https://github.com/limxing/app/blob/master/screenshot.png)
 
@@ -122,6 +122,20 @@ Android开发中遇到了一些特殊需求，在此罗列自己收集总结到�
              }
              super.onPause();
          }
+####十、底部弹窗窗口(最优化)
+调用方法:
+     BottomDialog.showAlert(MainActivity.this, "哈哈哈", new String[]{"你好", "你不好"},
+         new BottomDialog.OnClickListener() {
+         @Override
+          public void onClick(int which) {
+             ToastUtils.showLong(MainActivity.this, which + "个");
+           }
+         }, new DialogInterface.OnCancelListener() {
+         @Override
+         public void onCancel(DialogInterface dialogInterface) {
+             ToastUtils.showLong(MainActivity.this,"已关闭");
+         }
+     });
 
 
 
