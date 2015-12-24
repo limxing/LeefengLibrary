@@ -266,7 +266,7 @@ public class SwipeBackLayout extends ViewGroup {
 //                    downX = (int) ev.getX();
 //                    downY = (int) ev.getY();
 
-                    if (ev.getX() < 100) {
+                    if (ev.getX() < 50) {
                         flag = true;
                     } else {
                         flag = false;
