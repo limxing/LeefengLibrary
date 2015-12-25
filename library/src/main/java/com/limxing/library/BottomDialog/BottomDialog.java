@@ -4,7 +4,6 @@ package com.limxing.library.BottomDialog;
 import android.annotation.TargetApi;
 
 
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,7 +20,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
-
 import com.limxing.library.R;
 import com.limxing.library.utils.DisplayUtil;
 
@@ -36,16 +34,17 @@ public class BottomDialog {
 
     /**
      * 静态的从底部弹出的对话框
-     * @param context 上下文
-     * @param describtion 描述
-     * @param selections 选项内容
-     * @param listener 选中监听
+     *
+     * @param context        上下文
+     * @param describtion    描述
+     * @param selections     选项内容
+     * @param listener       选中监听
      * @param cancelListener 取消的监听
      * @return
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public static Dialog showAlert(Context context, String describtion, String[] selections,
-                                    final BottomDialog.OnClickListener listener,DialogInterface.OnCancelListener cancelListener) {
+                                   final BottomDialog.OnClickListener listener, DialogInterface.OnCancelListener cancelListener) {
 //        String cancel = context.getString(R.string.app_cancel);
 
         final Dialog dlg = new Dialog(context, R.style.MMTheme_DataSheet);
@@ -84,7 +83,8 @@ public class BottomDialog {
                     listener.onClick((int) view.getTag());
                 }
             });
-            view.setTextSize(DisplayUtil.px2sp(context, 40));
+            view.setTextSize(DisplayUtil.px2sp(context, context.getResources()
+                    .getDimension(R.dimen.bottomdialog_title_size)));
             TextPaint tp = view.getPaint();
             tp.setFakeBoldText(true);
             view.setGravity(Gravity.CENTER);
