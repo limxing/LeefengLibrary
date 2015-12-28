@@ -1,14 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:swiperefresh="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_ll"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ffffff"
-    tools:context="com.limxing.app.MainActivity">
-    <TextView
-        android:paddingTop="@dimen/padingTop"
-        android:layout_width="wrap_content"
-        android:background="#ff2222"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-</RelativeLayout>
+    android:layout_height="wrap_content"
+    android:background="@color/black_overlay"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="@color/holo_blue_light">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="@dimen/padingTop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="我是标题"
+                android:textColor="#ffffff"
+                android:textSize="20sp"></TextView>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <com.limxing.library.SwipeBack.SwipeBackLayout
+        android:id="@+id/swipeBackLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#ff2222"
+                android:text="Hello World!" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" />
+            <ProgressBar
+                android:id="@+id/login_progress"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+
+                android:indeterminate="true"
+                android:indeterminateDrawable="@drawable/loading_progress"
+                 />
+
+            <Button
+                android:id="@+id/btn_bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="弹窗" />
+
+            <com.limxing.library.PullToRefresh.SwipeRefreshLayout
+                android:id="@+id/main_fresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/main_ll"
+                swiperefresh:srlAnimationStyle="rotate"
+                swiperefresh:srlTextSize="16sp">
+
+                <ListView
+                    android:id="@+id/main_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:dividerHeight="1dp"></ListView>
+            </com.limxing.library.PullToRefresh.SwipeRefreshLayout>
+        </LinearLayout>
+    </com.limxing.library.SwipeBack.SwipeBackLayout>
+</LinearLayout>
