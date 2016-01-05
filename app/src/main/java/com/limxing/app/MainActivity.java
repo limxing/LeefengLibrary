@@ -21,6 +21,7 @@ import com.limxing.library.BottomDialog.BottomDialog;
 import com.limxing.library.BottomDialog.LMBottomSelecter;
 import com.limxing.library.PullToRefresh.SwipeRefreshLayout;
 
+import com.limxing.library.SVProgressHUD.SVProgressHUD;
 import com.limxing.library.SweetAlert.SweetAlertDialog;
 import com.limxing.library.SwipeBack.SwipeBackActivity;
 
@@ -82,18 +83,20 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
-                BottomDialog.showAlert(MainActivity.this, "哈哈哈", new String[]{"你好", "你不好"},
-                        new BottomDialog.OnClickListener() {
-                            @Override
-                            public void onClick(int which) {
-                                ToastUtils.showLong(MainActivity.this, which + "个");
-                            }
-                        }, new DialogInterface.OnCancelListener() {
-                            @Override
-                            public void onCancel(DialogInterface dialogInterface) {
-                                ToastUtils.showLong(MainActivity.this,"已关闭");
-                            }
-                        });
+
+                new SVProgressHUD(MainActivity.this).showSuccessWithStatus("成功");
+//                BottomDialog.showAlert(MainActivity.this, "哈哈哈", new String[]{"你好", "你不好"},
+//                        new BottomDialog.OnClickListener() {
+//                            @Override
+//                            public void onClick(int which) {
+//                                ToastUtils.showLong(MainActivity.this, which + "个");
+//                            }
+//                        }, new DialogInterface.OnCancelListener() {
+//                            @Override
+//                            public void onCancel(DialogInterface dialogInterface) {
+//                                ToastUtils.showLong(MainActivity.this,"已关闭");
+//                            }
+//                        });
 
                 //错误的提示框
 //               new SweetAlertDialog(MainActivity.this,SweetAlertDialog.ERROR_TYPE)
