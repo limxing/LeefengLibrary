@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -196,6 +198,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         String username = "woaini";
 
         LogUtils.i("加密MD5.woaini:" + EncryptUtil.MD5Encode(username));
+
+        ImageView loading = (ImageView) findViewById(R.id.loading);
+        loading.setImageResource(R.drawable.loading);
+        AnimationDrawable animationDrawable = (AnimationDrawable) loading.getDrawable();
+        animationDrawable.start();
     }
 
     @Override
