@@ -136,8 +136,12 @@ Android开发中遇到了一些特殊需求，在此罗列自己收集总结到�
              ToastUtils.showLong(MainActivity.this,"已关闭");
          }
      });
-
-
+####十一、仿IOS的加载
+         <com.limxing.library.IOSLoading.LoadingView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+####十二、环形的下载加载的progressbar
+       
 
 
 
