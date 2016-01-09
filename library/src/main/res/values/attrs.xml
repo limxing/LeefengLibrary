@@ -59,6 +59,11 @@
             <enum name="FILL" value="1"></enum>
         </attr>
     </declare-styleable>
-
-
+<!--环形下载框的-->
+    <declare-styleable name="TasksCompletedView">
+        <attr name="radius" format="dimension"/>
+        <attr name="strokeWidth" format="dimension"/>
+        <attr name="circleColor" format="color"/>
+        <attr name="ringColor" format="color"/>
+    </declare-styleable>
 </resources>  
