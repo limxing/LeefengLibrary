@@ -45,5 +45,10 @@
     <color name="textColor_svprogresshuddefault_msg">#000000</color>
     <color name="roundColor_svprogresshuddefault">#e5e5e5</color>
     <color name="roundProgressColor_svprogresshuddefault">@android:color/black</color>
-
+<!--环形下载-->
+    <color name="white">#ffffff</color>
+    <color name="header_bg_common">#323a45</color>
+    <color name="title_txt_color">#f1f1f3</color>
+    <color name="circle_color">#323a45</color>
+    <color name="ring_color">#14b9d6</color>
 </resources>

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.limxing.library.IOSLoading.LoadingView;
 import com.limxing.library.R;
 
 /**
@@ -21,7 +22,8 @@ public class SVProgressDefaultView extends LinearLayout {
     private int resInfo = R.drawable.ic_svstatus_info;
     private int resSuccess = R.drawable.ic_svstatus_success;
     private int resError = R.drawable.ic_svstatus_error;
-    private ImageView ivBigLoading, ivSmallLoading;
+    private ImageView ivBigLoading;
+            private LoadingView ivSmallLoading;
     private SVCircleProgressBar circleProgressBar;
     private TextView tvMsg;
 
@@ -36,7 +38,7 @@ public class SVProgressDefaultView extends LinearLayout {
     private void initViews() {
         LayoutInflater.from(getContext()).inflate(R.layout.view_svprogressdefault, this, true);
         ivBigLoading = (ImageView) findViewById(R.id.ivBigLoading);
-        ivSmallLoading = (ImageView) findViewById(R.id.ivSmallLoading);
+        ivSmallLoading = (LoadingView) findViewById(R.id.ivSmallLoading);
         circleProgressBar = (SVCircleProgressBar) findViewById(R.id.circleProgressBar);
         tvMsg = (TextView) findViewById(R.id.tvMsg);
     }
@@ -53,8 +55,8 @@ public class SVProgressDefaultView extends LinearLayout {
     public void show() {
         clearAnimations();
         ivBigLoading.setImageResource(resBigLoading);
-        ivBigLoading.setVisibility(View.VISIBLE);
-        ivSmallLoading.setVisibility(View.GONE);
+        ivBigLoading.setVisibility(View.GONE);
+        ivSmallLoading.setVisibility(View.VISIBLE);
         circleProgressBar.setVisibility(View.GONE);
         tvMsg.setVisibility(View.GONE);
         //开启旋转动画
