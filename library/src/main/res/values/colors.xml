@@ -42,7 +42,7 @@
     <!--窗口背景颜色-->
     <color name="bgColor_svprogressdefaultview">@android:color/white</color>
     <!--标题颜色-->
-    <color name="textColor_svprogresshuddefault_msg">#000000</color>
+    <color name="textColor_svprogresshuddefault_msg">#ffffff</color>
     <color name="roundColor_svprogresshuddefault">#e5e5e5</color>
     <color name="roundProgressColor_svprogresshuddefault">@android:color/black</color>
 <!--环形下载-->

@@ -72,6 +72,13 @@ public class SVProgressDefaultView extends LinearLayout {
         //开启旋转动画
         ivSmallLoading.startAnimation(mRotateAnimation);
     }
+    public void showLmWithStatus(String string) {
+        if (string == null) {
+            show();
+            return;
+        }
+        showLmBaseStatus(string);
+    }
 
     public void showInfoWithStatus(String string) {
         showBaseStatus(resInfo, string);
@@ -108,6 +115,15 @@ public class SVProgressDefaultView extends LinearLayout {
     public void showBaseStatus(int res, String string) {
         clearAnimations();
         ivSmallLoading.setImageResource(res);
+        tvMsg.setText(string);
+        ivBigLoading.setVisibility(View.GONE);
+        circleProgressBar.setVisibility(View.GONE);
+        ivSmallLoading.setVisibility(View.VISIBLE);
+        tvMsg.setVisibility(View.VISIBLE);
+    }
+
+    public void showLmBaseStatus(String string) {
+        clearAnimations();
         tvMsg.setText(string);
         ivBigLoading.setVisibility(View.GONE);
         circleProgressBar.setVisibility(View.GONE);

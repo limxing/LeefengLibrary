@@ -117,9 +117,26 @@ public class SVProgressHUD {
         svShow();
     }
 
+    /**
+     * 开启等待,系统默认
+     * @param string
+     * @param maskType
+     */
     public void showWithStatus(String string, SVProgressHUDMaskType maskType) {
         setMaskType(maskType);
         mSharedView.showWithStatus(string);
+        svShow();
+    }
+
+    /**
+     * 开启等待旋转,仿ios
+     * @param string
+     * @param maskType
+     */
+
+    public void showLmWithStatus(String string, SVProgressHUDMaskType maskType) {
+        setMaskType(maskType);
+        mSharedView.showLmWithStatus(string);
         svShow();
     }
 
