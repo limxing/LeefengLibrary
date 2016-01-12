@@ -21,6 +21,8 @@ import android.widget.TextView;
 import com.limxing.library.BottomDialog.AlertDialog;
 import com.limxing.library.BottomDialog.BottomDialog;
 import com.limxing.library.BottomDialog.LMBottomSelecter;
+import com.limxing.library.CirculProgressBar.TasksCompletedView;
+import com.limxing.library.DragList.DragListView;
 import com.limxing.library.PullToRefresh.SwipeRefreshLayout;
 
 import com.limxing.library.SVProgressHUD.SVProgressHUD;
@@ -86,7 +88,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             @Override
             public void onClick(View view) {
 
-                new SVProgressHUD(MainActivity.this).showSuccessWithStatus("成功");
+                new SVProgressHUD(MainActivity.this).showLmWithStatus("加载中...", SVProgressHUD.SVProgressHUDMaskType.Clear);
+                ;
 //                BottomDialog.showAlert(MainActivity.this, "哈哈哈", new String[]{"你好", "你不好"},
 //                        new BottomDialog.OnClickListener() {
 //                            @Override
@@ -203,6 +206,40 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         loading.setImageResource(R.drawable.loading);
         AnimationDrawable animationDrawable = (AnimationDrawable) loading.getDrawable();
         animationDrawable.start();
+
+
+        mTasksView=(TasksCompletedView)findViewById(R.id.tasks_view);
+        mTotalProgress = 100;
+        mCurrentProgress = 0;
+        new Thread(new ProgressRunable()).start();
+
+        findViewById(R.id.btn_drag).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this, DragListViewActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+    private TasksCompletedView mTasksView;
+
+    private int mTotalProgress;
+    private int mCurrentProgress;
+    class ProgressRunable implements Runnable {
+
+        @Override
+        public void run() {
+            while (mCurrentProgress < mTotalProgress) {
+                mCurrentProgress += 1;
+                mTasksView.setProgress(mCurrentProgress);
+                try {
+                    Thread.sleep(100);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
 
     @Override

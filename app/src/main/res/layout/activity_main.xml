@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:swiperefresh="http://schemas.android.com/apk/res-auto"
+    xmlns:tc="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_ll"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -33,9 +34,9 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:background="#ffffff"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#ffffff"
             android:orientation="vertical">
 
             <TextView
@@ -51,29 +52,49 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true" />
+
             <ProgressBar
                 android:id="@+id/login_progress"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-
                 android:indeterminate="true"
-                android:indeterminateDrawable="@drawable/loading_progress"
-                 />
+                android:indeterminateDrawable="@drawable/loading_progress" />
+
             <ImageView
                 android:id="@+id/loading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                />
+                android:layout_margin="5dp" />
+
             <com.limxing.library.IOSLoading.LoadingView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <Button
+            <com.limxing.library.CirculProgressBar.TasksCompletedView
+                android:id="@+id/tasks_view"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                tc:circleColor="@color/circle_color"
+                tc:radius="20dip"
+                tc:ringColor="@color/ring_color"
+                tc:strokeWidth="5dip" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
                 android:id="@+id/btn_bottom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="弹窗" />
+                <Button
+                    android:id="@+id/btn_drag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DragList" />
+            </LinearLayout>
 
             <com.limxing.library.PullToRefresh.SwipeRefreshLayout
                 android:id="@+id/main_fresh"
