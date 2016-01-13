@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
                 new SVProgressHUD(MainActivity.this).showLmWithStatus("加载中...", SVProgressHUD.SVProgressHUDMaskType.Clear);
                 ;
+
 //                BottomDialog.showAlert(MainActivity.this, "哈哈哈", new String[]{"你好", "你不好"},
 //                        new BottomDialog.OnClickListener() {
 //                            @Override
