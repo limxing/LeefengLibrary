@@ -146,5 +146,9 @@ Android开发中遇到了一些特殊需求，在此罗列自己收集总结到�
 ####十三、SVProgressbar,类似IOS上的对话框
          new SVProgressHUD(MainActivity.this).showLmWithStatus("加载中...", SVProgressHUD.SVProgressHUDMaskType.Clear);
 ####十四、可以拖动的ListView
+        DragListView dragListView = (DragListView) findViewById(R.id.other_drag_list);
+        mAdapter = new DragListAdapter(this, mData);默认data是String类型可自定义bean,以及Item
+        dragListView.setAdapter(mAdapter);
+                
 
 
