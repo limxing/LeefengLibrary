@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
 <activity android:name=".DragListViewActivity"/>
+<activity android:name=".MyViewpagerActivity"/>
     </application>
 
 </manifest>

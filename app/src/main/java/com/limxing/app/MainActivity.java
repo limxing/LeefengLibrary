@@ -56,8 +56,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         SwipeBackLayout swipeBackLayout = (SwipeBackLayout) findViewById(R.id.swipeBackLayout);
         swipeBackLayout.setDragEdge(SwipeBackLayout.DragEdge.LEFT);
-
-
         main_listview = (ListView) findViewById(R.id.main_listview);
         main_listview.setAdapter(new BaseAdapter() {
             @Override
@@ -87,10 +85,19 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
+//                自定义Viewpager
+                Intent intent=new Intent(MainActivity.this,MyViewpagerActivity.class);
+                startActivity(intent);
 
-                new SVProgressHUD(MainActivity.this).showLmWithStatus("加载中...", SVProgressHUD.SVProgressHUDMaskType.Clear);
+
+
+//弹出加载中仿IOS的框
+//                new SVProgressHUD(MainActivity.this).showLmWithStatus("加载中...", SVProgressHUD.SVProgressHUDMaskType.Clear);
                 ;
 
+
+
+//弹出底部选择框
 //                BottomDialog.showAlert(MainActivity.this, "哈哈哈", new String[]{"你好", "你不好"},
 //                        new BottomDialog.OnClickListener() {
 //                            @Override
@@ -104,6 +111,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 //                            }
 //                        });
 
+
+
+//                SweetAlertDialog的用法
                 //错误的提示框
 //               new SweetAlertDialog(MainActivity.this,SweetAlertDialog.ERROR_TYPE)
 //                       .setTitleText("网络错误")
@@ -142,11 +152,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 //                            }
 //                        }).show();
 
-
+//自定义的底部选择框(已弃用)
 //                LMBottomSelecter selecter=new LMBottomSelecter(getApplicationContext(),new String[]{},"haha");
 //                selecter.show(findViewById(R.id.swipeBackLayout));
 
-
+//自定义的底部选择框(已弃用)
 //                dialog = new AlertDialog(MainActivity.this, findViewById(R.id.swipeBackLayout)) {
 //
 //
@@ -178,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 //                lp.alpha = 0.5f; //0.0-1.0
 //                getWindow().setAttributes(lp);
 
-
+//自定义的底部选择框(已弃用)
 //                Intent intent = new Intent(MainActivity.this, BottomDialog.class);
 //                startActivityForResult(intent, 0);
 //                AlertDialog dialog= new AlertDialog.Builder(MainActivity.this).setView(R.layout.bottomdialog).create();
