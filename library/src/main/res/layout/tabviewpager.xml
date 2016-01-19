@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <com.limxing.library.MyView.LLFViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RadioGroup
+            android:id="@+id/viewpager_rg"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="#ffffff"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/rb_0"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:text="矢量地图"
+                android:textColor="@color/colorselector"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/rb_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+
+                android:gravity="center"
+                android:text="对比地图"
+                android:textColor="@color/colorselector"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/rb_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:text="卫星地图"
+                android:textColor="@color/colorselector"
+                android:textSize="15sp" />
+        </RadioGroup>
+
+        <View
+            android:id="@+id/viewpager_image"
+            android:layout_width="70dp"
+            android:layout_height="3dp"
+            android:background="#03a9f4"
+            />
+
+
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/viewpager_rg"
+            android:background="#cccccc" />
+
+        <View
+            android:id="@+id/view_line2"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_below="@+id/view_line"
+            android:background="#eeeeee" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/view_line2" />
+    </com.limxing.library.MyView.LLFViewPager>
+</RelativeLayout>
