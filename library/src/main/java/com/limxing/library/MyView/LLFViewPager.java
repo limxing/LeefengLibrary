@@ -49,7 +49,7 @@ public class LLFViewPager extends RelativeLayout {
 
 		final MarginLayoutParams mlp = new MarginLayoutParams(
 				viewpager_image.getLayoutParams());
-		mlp.setMargins(widthPad, (int) (45 * density - 8), 0, 0);
+		mlp.setMargins(widthPad, (int) (42 * density), 0, 0);
 
 		ViewGroup.LayoutParams lp = new LayoutParams(mlp);
 		viewpager_image.setLayoutParams(lp);
