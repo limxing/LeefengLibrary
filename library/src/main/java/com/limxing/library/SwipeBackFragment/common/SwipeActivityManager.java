@@ -1,6 +1,6 @@
 package com.limxing.library.SwipeBackFragment.common;
 
-import com.yuntongxun.ecdemo.common.utils.LogUtil;
+
 
 import java.lang.ref.WeakReference;
 import java.util.Iterator;
@@ -18,27 +18,27 @@ public class SwipeActivityManager {
 
     public static void notifySwipe(float scrollParent) {
         if(mLinkedList.size() <= 0) {
-            LogUtil.w(TAG , "notifySwipe callback stack empty!, scrollParent:" + scrollParent);
+//            LogUtil.w(TAG , "notifySwipe callback stack empty!, scrollParent:" + scrollParent);
             return ;
         }
         SwipeListener swipeListener = mLinkedList.get(0).get();
         if(swipeListener == null) {
-            LogUtil.w(TAG , "notifySwipe null, scrollParent " + scrollParent) ;
+//            LogUtil.w(TAG , "notifySwipe null, scrollParent " + scrollParent) ;
             return ;
         }
         swipeListener.onScrollParent(scrollParent);
-        LogUtil.v(TAG , "notifySwipe scrollParent: " + scrollParent + ", callback: " + swipeListener);
+//        LogUtil.v(TAG , "notifySwipe scrollParent: " + scrollParent + ", callback: " + swipeListener);
     }
 
     public static void pushCallback(SwipeListener listener) {
-        LogUtil.d(TAG, "pushCallback size " + mLinkedList.size() + " , " + listener);
+//        LogUtil.d(TAG, "pushCallback size " + mLinkedList.size() + " , " + listener);
         WeakReference<SwipeListener> swipeListenerWeakReference = new WeakReference<SwipeListener>(listener);
         mLinkedList.add(0, swipeListenerWeakReference);
     }
 
     public static boolean popCallback(SwipeListener listener) {
         int size = mLinkedList.size();
-        LogUtil.d(TAG , "popCallback size " + size + " , " + listener);
+//        LogUtil.d(TAG , "popCallback size " + size + " , " + listener);
         if(listener == null) {
             return true;
         }
@@ -48,10 +48,10 @@ public class SwipeActivityManager {
                 list.add(0 , Integer.valueOf(i));
             } else {
                 mLinkedList.remove(i);
-                LogUtil.d(TAG , "popCallback directly, index " + i);
+//                LogUtil.d(TAG , "popCallback directly, index " + i);
             }
             if(!listener.isEnableGesture() || list.size() == i) {
-                LogUtil.d(TAG , "popCallback Fail! Maybe Top Activity");
+//                LogUtil.d(TAG , "popCallback Fail! Maybe Top Activity");
                 return  false;
             }
         }
@@ -60,7 +60,7 @@ public class SwipeActivityManager {
         while (iterator.hasNext()) {
             Integer next = iterator.next();
             WeakReference<SwipeListener> remove = mLinkedList.remove(next.intValue());
-            LogUtil.d(TAG , "popCallback, popup " + (remove != null ? remove : "NULL-CALLBACK"));
+//            LogUtil.d(TAG , "popCallback, popup " + (remove != null ? remove : "NULL-CALLBACK"));
         }
         return list.isEmpty();
     }
@@ -68,16 +68,16 @@ public class SwipeActivityManager {
 
     public static void notifySettle(boolean open , int speed) {
         if(mLinkedList.size() <= 0) {
-            LogUtil.w(TAG , "notifySettle callback stack empty!, open: " + open + ", speed:" + speed);
+//            LogUtil.w(TAG , "notifySettle callback stack empty!, open: " + open + ", speed:" + speed);
             return ;
         }
         SwipeListener swipeListener = mLinkedList.get(0).get();
         if(swipeListener == null) {
-            LogUtil.w(TAG , "notifySettle null, open: " + open + ", speed:" + speed);
+//            LogUtil.w(TAG , "notifySettle null, open: " + open + ", speed:" + speed);
             return ;
         }
         swipeListener.notifySettle(open , speed);
-        LogUtil.v(TAG , "notifySettle, open:" + open + " speed: " + speed + " callback:" + swipeListener);
+//        LogUtil.v(TAG , "notifySettle, open:" + open + " speed: " + speed + " callback:" + swipeListener);
     }
 
 
