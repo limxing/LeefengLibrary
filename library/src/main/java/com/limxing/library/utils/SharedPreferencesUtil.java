@@ -10,7 +10,7 @@ import android.content.SharedPreferences;
  * 修正: 设置了保存文件的标识，能够多用户登录时 方便使用
  */
 public class SharedPreferencesUtil {
-private static String info="info";
+private static String info="limxing.data";
     private static SharedPreferences sharedPreferences;
 
     public static void saveBooleanData(Context context, String key,

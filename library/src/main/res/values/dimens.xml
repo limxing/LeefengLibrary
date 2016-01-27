@@ -7,7 +7,7 @@
        而在普通的19一下的设备下设置为0,此设置为我们有title的应用,把title的paddingTop的值设为这个,没有title的
        应用用的背景图片什么的不需要设置此值-->
     <dimen name="padingTop">0dp</dimen>
-    <dimen name="title_height">48dp</dimen>
+    <dimen name="title_height">68dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <!--SweetDialog-->
     <dimen name="alert_width">200dp</dimen>
