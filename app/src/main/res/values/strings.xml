@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">app</string>
+    <string name="app_name">aTalk</string>
+    <string name="app_key">23302065</string>
+    <string name="umeng_appkey">56a5b044e0f55a021b0003ec</string>
 </resources>

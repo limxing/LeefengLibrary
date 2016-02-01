@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.limxing.library.SwipeBack.SwipeBackLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipeBackLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/title"
+            layout="@layout/title" />
+
+        <FrameLayout
+            android:id="@+id/limxing_chatting_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/title">
+
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true">
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</com.limxing.library.SwipeBack.SwipeBackLayout>
