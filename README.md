@@ -149,6 +149,6 @@ Android开发中遇到了一些特殊需求，在此罗列自己收集总结到�
         DragListView dragListView = (DragListView) findViewById(R.id.other_drag_list);
         mAdapter = new DragListAdapter(this, mData);默认data是String类型可自定义bean,以及Item
         dragListView.setAdapter(mAdapter);
-                
+                 
 
 
