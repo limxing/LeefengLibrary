@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.limxing.app.SweepActivitys.FirstActivity;
 import com.limxing.library.BottomDialog.AlertDialog;
 import com.limxing.library.BottomDialog.BottomDialog;
 import com.limxing.library.BottomDialog.LMBottomSelecter;
@@ -39,7 +40,8 @@ import com.limxing.library.utils.ToastUtils;
 import java.math.MathContext;
 
 
-public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener,
+        SwipeRefreshLayout.OnLoadListener {
 
 
     private SwipeRefreshLayout main_fresh;
@@ -54,8 +56,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         main_fresh = (com.limxing.library.PullToRefresh.SwipeRefreshLayout) findViewById(R.id.main_fresh);
 //设置滑动返回
-        SwipeBackLayout swipeBackLayout = (SwipeBackLayout) findViewById(R.id.swipeBackLayout);
-        swipeBackLayout.setDragEdge(SwipeBackLayout.DragEdge.LEFT);
+//        SwipeBackLayout swipeBackLayout = (SwipeBackLayout) findViewById(R.id.swipeBackLayout);
+//        swipeBackLayout.setDragEdge(SwipeBackLayout.DragEdge.LEFT);
 
         main_listview = (ListView) findViewById(R.id.main_listview);
         main_listview.setAdapter(new BaseAdapter() {
@@ -87,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             @Override
             public void onClick(View view) {
 //                自定义Viewpager
-                Intent intent=new Intent(MainActivity.this,MyViewpagerActivity.class);
+                Intent intent=new Intent(MainActivity.this,FirstActivity.class);
                 startActivity(intent);
 
 

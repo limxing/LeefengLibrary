@@ -12,7 +12,11 @@
         android:theme="@style/Theme.Swipe.Back"
         tools:replace="android:icon">
         <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".DragListViewActivity" />
         <activity android:name=".MyViewpagerActivity" />
@@ -21,13 +25,11 @@
         </activity>
         <activity android:name=".activity.AllConversationActivity" />
         <activity android:name=".activity.WelcomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.ChattingActivity" />
+        <activity android:name=".SweepActivitys.FirstActivity" />
+        <activity android:name=".SweepActivitys.FTwoActivity" />
 
         <meta-data
             android:name="UMENG_APPKEY"

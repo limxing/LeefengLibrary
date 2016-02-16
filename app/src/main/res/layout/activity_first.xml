@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:swiperefresh="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffff44"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Activity 1" />
+    <Button
+        android:text="NEXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="next"/>
+
+    <com.limxing.library.PullToRefresh.SwipeRefreshLayout
+        android:id="@+id/main_fresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        swiperefresh:srlAnimationStyle="rotate"
+        swiperefresh:srlTextSize="16sp">
+
+        <ListView
+            android:id="@+id/main_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:dividerHeight="1dp"></ListView>
+    </com.limxing.library.PullToRefresh.SwipeRefreshLayout>
+
+</LinearLayout>
