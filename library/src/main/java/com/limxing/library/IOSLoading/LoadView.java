@@ -51,7 +51,7 @@ public class LoadView extends ImageView {
 
     private void init() {
         setScaleType(ScaleType.MATRIX);
-        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.loading_00);
+        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.loading);
         setImageBitmap(bitmap);
         max = new Matrix();
 
