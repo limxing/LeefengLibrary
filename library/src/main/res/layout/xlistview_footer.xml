@@ -1,20 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:id="@+id/xlistview_footer_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp" >
+        android:padding="10dp">
 
-        <ProgressBar
+        <!--<ProgressBar-->
+        <!--android:id="@+id/xlistview_footer_progressbar"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:visibility="invisible" />-->
+        <LinearLayout
             android:id="@+id/xlistview_footer_progressbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:visibility="invisible" />
+            android:orientation="horizontal"
+            android:visibility="invisible">
+
+            <com.limxing.library.IOSLoading.LoadingView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="正在加载..." />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/xlistview_footer_hint_textview"

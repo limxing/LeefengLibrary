@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.limxing.library.IOSLoading.LoadingView;
 import com.limxing.library.R;
 
 public class XListViewFooter extends LinearLayout {

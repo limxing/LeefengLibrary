@@ -262,6 +262,9 @@ public class XListView extends ListView implements OnScrollListener {
 	}
 
 	private void startLoadMore() {
+		if(mPullRefreshing||mPullLoading){
+			return;
+		}
 		mPullLoading = true;
 		mFooterView.setState(XListViewFooter.STATE_LOADING);
 		if (mListViewListener != null) {
