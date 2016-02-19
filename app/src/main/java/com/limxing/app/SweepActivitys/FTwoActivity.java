@@ -24,7 +24,7 @@ public class FTwoActivity extends SwipeBackActivity implements XListView.IXListV
         setContentView(R.layout.activity_two);
         SystemBarTintManager.initSystemBar(this, R.color.transparent);
         xlist = (XListView) findViewById(R.id.xlist);
-//        xlist.setPullLoadEnable(true);
+        xlist.setPullLoadEnable(true);
         xlist.setXListViewListener(this);
         xlist.setAdapter(new BaseAdapter() {
             @Override
