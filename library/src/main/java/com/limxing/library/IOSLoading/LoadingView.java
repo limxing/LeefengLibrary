@@ -27,7 +27,7 @@ public class LoadingView extends ImageView {
     }
 
     private void init() {
-        setImageResource(R.drawable.loading_white);
+        setImageResource(R.drawable.loading_gray);
         AnimationDrawable animationDrawable = (AnimationDrawable)getDrawable();
         animationDrawable.start();
     }

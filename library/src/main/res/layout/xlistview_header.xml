@@ -60,8 +60,8 @@
             <!--android:visibility="invisible" />-->
         <com.limxing.library.IOSLoading.LoadingView
             android:id="@+id/xlistview_header_progressbar"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignLeft="@id/xlistview_header_text"
             android:layout_centerVertical="true"
             android:layout_marginLeft="-40dp"
