@@ -110,6 +110,8 @@ public class XListView extends ListView implements OnScrollListener {
                                 .removeGlobalOnLayoutListener(this);
                     }
                 });
+
+        setPullLoadEnable(false);//初始化不支持上啦加载
     }
 
     @Override
