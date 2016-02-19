@@ -10,6 +10,7 @@ package com.limxing.library.XListView;
 
 
 import android.content.Context;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,6 +25,9 @@ import android.widget.Scroller;
 import android.widget.TextView;
 
 import com.limxing.library.R;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class XListView extends ListView implements OnScrollListener {
 
@@ -112,6 +116,14 @@ public class XListView extends ListView implements OnScrollListener {
                 });
 
         setPullLoadEnable(false);//初始化不支持上啦加载
+        mFooterView.findViewById(R.id.xlistview_footer_hint_textview).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPullLoading = true;
+                mFooterView.setState(XListViewFooter.STATE_LOADING);
+                startLoadMore();
+            }
+        });
     }
 
     @Override
@@ -171,8 +183,15 @@ public class XListView extends ListView implements OnScrollListener {
      */
     public void stopRefresh() {
         if (mPullRefreshing) {
-            mPullRefreshing = false;
-            resetHeaderHeight();
+            mHeaderView.setState(XListViewHeader.STATE_SUCCESS);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mPullRefreshing = false;
+                    resetHeaderHeight();
+                }
+            },500);
+
         }
     }
 
@@ -181,6 +200,7 @@ public class XListView extends ListView implements OnScrollListener {
      */
     public void stopLoadMore() {
         if (mPullLoading) {
+
             mPullLoading = false;
             mFooterView.setState(XListViewFooter.STATE_NORMAL);
 //            resetFooterHeight();

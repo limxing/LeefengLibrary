@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.graphics.drawable.AnimationDrawable;
+
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
@@ -19,7 +19,7 @@ import java.util.TimerTask;
  * Created by limxing on 16/1/7.
  */
 public class LoadView extends ImageView {
-    private int[] degrees = {0};
+    private float degrees = 0f;
     private Matrix max;
     private int width;
     private int height;
@@ -43,9 +43,12 @@ public class LoadView extends ImageView {
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            degrees[0] += 30;
-            max.setRotate(degrees[0], width, height);
+            degrees += 30f;
+            max.setRotate(degrees, width, height);
             setImageMatrix(max);
+            if(degrees==360){
+                degrees=0;
+            }
         }
     };
 
