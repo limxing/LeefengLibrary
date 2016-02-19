@@ -1,6 +1,6 @@
 /**
  * @file XListView.java
- * @package me.maxwin.view
+ * @package com.limxing.library.XListView
  * @create Mar 18, 2012 6:28:41 PM
  * @author Maxwin
  * @description An ListView support (a) Pull down to refresh, (b) Pull up to load more.
@@ -303,6 +303,7 @@ public class XListView extends ListView implements OnScrollListener {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mLastY = ev.getRawY();
+
                 break;
             case MotionEvent.ACTION_MOVE:
                 final float deltaY = ev.getRawY() - mLastY;

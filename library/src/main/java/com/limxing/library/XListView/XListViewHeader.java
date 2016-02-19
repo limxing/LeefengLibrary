@@ -80,12 +80,12 @@ public class XListViewHeader extends LinearLayout {
                 0.5f);
         mRotateDownAnim.setDuration(ROTATE_ANIM_DURATION);
         mRotateDownAnim.setFillAfter(true);
-        refreshUpdatedAtValue();
+
     }
 
     public void setState(int state) {
+        refreshUpdatedAtValue();
         if (state == mState) return;
-
         if (state == STATE_REFRESHING) {    // 显示进度
             mArrowImageView.clearAnimation();
             mArrowImageView.setVisibility(View.INVISIBLE);
@@ -97,7 +97,6 @@ public class XListViewHeader extends LinearLayout {
 
         switch (state) {
             case STATE_NORMAL:
-                refreshUpdatedAtValue();
                 mArrowImageView.setImageResource(R.drawable.default_ptr_flip);
                 if (mState == STATE_READY) {
                     mArrowImageView.startAnimation(mRotateDownAnim);
@@ -106,6 +105,7 @@ public class XListViewHeader extends LinearLayout {
                     mArrowImageView.clearAnimation();
                 }
                 mHintTextView.setText(R.string.xlistview_header_hint_normal);
+
                 break;
             case STATE_READY:
                 if (mState != STATE_READY) {
