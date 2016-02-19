@@ -217,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         LogUtils.i("加密MD5.woaini:" + EncryptUtil.MD5Encode(username));
 
         ImageView loading = (ImageView) findViewById(R.id.loading);
-        loading.setImageResource(R.drawable.loading);
+        loading.setImageResource(R.drawable.loading_gray);
         AnimationDrawable animationDrawable = (AnimationDrawable) loading.getDrawable();
         animationDrawable.start();
 
