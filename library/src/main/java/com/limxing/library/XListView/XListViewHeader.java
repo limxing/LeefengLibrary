@@ -126,8 +126,6 @@ public class XListViewHeader extends LinearLayout {
                 break;
             default:
         }
-
-
         mState = state;
     }
 
