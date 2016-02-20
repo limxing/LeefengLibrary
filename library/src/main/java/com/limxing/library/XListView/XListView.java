@@ -25,6 +25,7 @@ import android.widget.Scroller;
 import android.widget.TextView;
 
 import com.limxing.library.R;
+import com.limxing.library.utils.LogUtils;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -190,7 +191,7 @@ public class XListView extends ListView implements OnScrollListener {
                     mPullRefreshing = false;
                     resetHeaderHeight();
                 }
-            },500);
+            }, 500);
 
         }
     }
@@ -242,6 +243,7 @@ public class XListView extends ListView implements OnScrollListener {
      */
     private void resetHeaderHeight() {
         int height = mHeaderView.getVisiableHeight();
+        LogUtils.i("mHeaderView:"+height+"==mPullRefreshing:"+mPullRefreshing+"==mHeaderViewHeight:"+mHeaderViewHeight);
         if (height == 0) // not visible.
             return;
         // refreshing and header isn't shown fully. do nothing.
@@ -253,6 +255,7 @@ public class XListView extends ListView implements OnScrollListener {
         if (mPullRefreshing && height > mHeaderViewHeight) {
             finalHeight = mHeaderViewHeight;
         }
+
         mScrollBack = SCROLLBACK_HEADER;
         mScroller.startScroll(0, height, 0, finalHeight - height,
                 SCROLL_DURATION);
@@ -303,7 +306,9 @@ public class XListView extends ListView implements OnScrollListener {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mLastY = ev.getRawY();
-
+                if (!mPullRefreshing && getFirstVisiblePosition() == 0) {
+                    mHeaderView.refreshUpdatedAtValue();
+                }
                 break;
             case MotionEvent.ACTION_MOVE:
                 final float deltaY = ev.getRawY() - mLastY;
@@ -345,10 +350,12 @@ public class XListView extends ListView implements OnScrollListener {
                     }
 
                 }
-                if (mHeaderView.getVisiableHeight() > 0) {
-                    resetHeaderHeight();
-                }
+//                if (mHeaderView.getVisiableHeight() > 0) {
+//                    LogUtils.i("mHeaderView,Up:"+mHeaderView.getVisiableHeight());
+
+//                }
                 resetFooterHeight();
+                resetHeaderHeight();
 
 
                 break;

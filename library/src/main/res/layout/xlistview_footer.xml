@@ -17,9 +17,9 @@
             android:orientation="horizontal"
             android:visibility="invisible">
 
-            <com.limxing.library.IOSLoading.LoadingView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+            <com.limxing.library.IOSLoading.LoadView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 />
 
             <TextView

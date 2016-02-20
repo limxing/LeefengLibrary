@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.limxing.library.IOSLoading.LoadView;
 import com.limxing.library.R;
+import com.limxing.library.utils.LogUtils;
 
 public class XListViewHeader extends LinearLayout {
     private LinearLayout mContainer;
@@ -84,7 +85,8 @@ public class XListViewHeader extends LinearLayout {
     }
 
     public void setState(int state) {
-        refreshUpdatedAtValue();
+//        LogUtils.i("setState:"+state);
+//        refreshUpdatedAtValue();
         if (state == mState) return;
         if (state == STATE_REFRESHING) {    // 显示进度
             mArrowImageView.clearAnimation();
@@ -187,7 +189,8 @@ public class XListViewHeader extends LinearLayout {
     /**
      * 刷新下拉头中上次更新时间的文字描述。
      */
-    private void refreshUpdatedAtValue() {
+    public void refreshUpdatedAtValue() {
+        LogUtils.i("更新标头");
         lastUpdateTime = preferences.getLong(UPDATED_AT + mId, -1);
         long currentTime = System.currentTimeMillis();
         long timePassed = currentTime - lastUpdateTime;
