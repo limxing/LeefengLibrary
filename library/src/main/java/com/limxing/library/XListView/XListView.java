@@ -2,7 +2,7 @@
  * @file XListView.java
  * @package com.limxing.library.XListView
  * @create Mar 18, 2012 6:28:41 PM
- * @author Maxwin
+ * @author Limxing
  * @description An ListView support (a) Pull down to refresh, (b) Pull up to load more.
  * Implement IXListViewListener, and see stopRefresh() / stopLoadMore().
  */
@@ -25,10 +25,7 @@ import android.widget.Scroller;
 import android.widget.TextView;
 
 import com.limxing.library.R;
-import com.limxing.library.utils.LogUtils;
 
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class XListView extends ListView implements OnScrollListener {
 
@@ -243,7 +240,7 @@ public class XListView extends ListView implements OnScrollListener {
      */
     private void resetHeaderHeight() {
         int height = mHeaderView.getVisiableHeight();
-        LogUtils.i("mHeaderView:"+height+"==mPullRefreshing:"+mPullRefreshing+"==mHeaderViewHeight:"+mHeaderViewHeight);
+//        LogUtils.i("mHeaderView:"+height+"==mPullRefreshing:"+mPullRefreshing+"==mHeaderViewHeight:"+mHeaderViewHeight);
         if (height == 0) // not visible.
             return;
         // refreshing and header isn't shown fully. do nothing.

@@ -1,7 +1,7 @@
 /**
  * @file XListViewHeader.java
  * @create Apr 18, 2012 5:22:27 PM
- * @author Maxwin
+ * @author Limxing
  * @description XListView's header
  */
 package com.limxing.library.XListView;
@@ -22,7 +22,6 @@ import android.widget.TextView;
 
 import com.limxing.library.IOSLoading.LoadView;
 import com.limxing.library.R;
-import com.limxing.library.utils.LogUtils;
 
 public class XListViewHeader extends LinearLayout {
     private LinearLayout mContainer;
@@ -190,7 +189,7 @@ public class XListViewHeader extends LinearLayout {
      * 刷新下拉头中上次更新时间的文字描述。
      */
     public void refreshUpdatedAtValue() {
-        LogUtils.i("更新标头");
+
         lastUpdateTime = preferences.getLong(UPDATED_AT + mId, -1);
         long currentTime = System.currentTimeMillis();
         long timePassed = currentTime - lastUpdateTime;
