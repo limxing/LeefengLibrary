@@ -45,7 +45,7 @@ public class FTwoActivity extends SwipeBackActivity implements XListView.IXListV
             @Override
             public View getView(int i, View view, ViewGroup viewGroup) {
                 TextView view1 = new TextView(FTwoActivity.this);
-                view1.setText("hahaha" + i);
+                view1.setText("limxing" + i);
                 view1.setHeight(100);
                 return view1;
             }
