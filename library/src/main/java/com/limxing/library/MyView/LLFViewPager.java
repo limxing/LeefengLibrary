@@ -1,5 +1,7 @@
 package com.limxing.library.MyView;
-
+/**
+ * 这是一个滑动的,有标题的滑动
+ */
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
