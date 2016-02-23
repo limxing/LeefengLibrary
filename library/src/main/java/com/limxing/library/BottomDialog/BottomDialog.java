@@ -25,12 +25,12 @@ import com.limxing.library.utils.DisplayUtil;
 
 /**
  * @author limxing
+ * 这是一个底部弹出的对话选择框
  */
 
 
 public class BottomDialog {
 
-    private static boolean flag=true;
 
     /**
      * 静态的从底部弹出的对话框
@@ -66,7 +66,6 @@ public class BottomDialog {
             view.setClickable(false);
             int pad = DisplayUtil.dip2px(context, 15);
             view.setPadding(pad, pad, pad, pad);
-            flag = false;
             lm_top.addView(view, 0);
         }
         int height = DisplayUtil.dip2px(context, 50);
@@ -89,9 +88,9 @@ public class BottomDialog {
             tp.setFakeBoldText(true);
             view.setGravity(Gravity.CENTER);
             view.setHeight(height);
-            if (flag) {
+            if (describtion == null&&i==0) {
                 view.setBackground(context.getResources().getDrawable(R.drawable.button_selector_top));
-                flag=false;
+
             } else if (i == selections.length - 1) {
                 view.setBackground(context.getResources().getDrawable(R.drawable.button_selector_bottom));
             } else {
