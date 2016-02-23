@@ -30,7 +30,7 @@ import com.limxing.library.utils.DisplayUtil;
 
 public class BottomDialog {
 
-    private static boolean flag;
+    private static boolean flag=true;
 
     /**
      * 静态的从底部弹出的对话框
@@ -91,6 +91,7 @@ public class BottomDialog {
             view.setHeight(height);
             if (flag) {
                 view.setBackground(context.getResources().getDrawable(R.drawable.button_selector_top));
+                flag=false;
             } else if (i == selections.length - 1) {
                 view.setBackground(context.getResources().getDrawable(R.drawable.button_selector_bottom));
             } else {
