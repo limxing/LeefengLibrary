@@ -13,7 +13,7 @@
 
     <!--底部弹出选择框-->
     <color name="button_normal">#ffffff</color>
-    <color name="button_presseed">#cccccc</color>
+    <color name="button_presseed">#eeeeee</color>
 <!--SweetDialog-->
 
     <color name="float_transparent">#00000000</color>

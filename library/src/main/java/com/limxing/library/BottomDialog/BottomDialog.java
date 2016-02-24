@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.os.Build;
 
 import android.text.TextPaint;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,8 +85,8 @@ public class BottomDialog {
             });
             view.setTextSize(DisplayUtil.px2sp(context, context.getResources()
                     .getDimension(R.dimen.bottomdialog_title_size)));
-            TextPaint tp = view.getPaint();
-            tp.setFakeBoldText(true);
+//            TextPaint tp = view.getPaint();
+//            tp.setFakeBoldText(true);
             view.setGravity(Gravity.CENTER);
             view.setHeight(height);
             if (describtion == null&&i==0) {
@@ -115,6 +116,9 @@ public class BottomDialog {
         }
         dlg.setContentView(layout);
         dlg.show();
+
+        lp.width = DisplayUtil.getScreenWith(context); //设置宽度
+        dlg.getWindow().setAttributes(lp);
         return dlg;
     }
 

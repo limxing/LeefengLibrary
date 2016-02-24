@@ -3,6 +3,8 @@ package com.limxing.library.utils;
 import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetrics;
+import android.view.WindowManager;
+
 
 /**
  *
@@ -73,5 +75,16 @@ public class DisplayUtil {
 		paint.setTextSize(fontSize);
 		FontMetrics fm = paint.getFontMetrics();
 		return (int) Math.ceil(fm.descent - fm.ascent);
+	}
+
+	/**
+	 * 获取屏幕宽度的方法
+	 * @param context
+	 * @return
+	 */
+	public static int getScreenWith(Context context){
+		WindowManager wm = (WindowManager) context
+				.getSystemService(Context.WINDOW_SERVICE);
+		return wm.getDefaultDisplay().getWidth();
 	}
 }
