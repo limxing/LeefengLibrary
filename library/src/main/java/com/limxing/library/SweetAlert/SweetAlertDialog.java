@@ -221,6 +221,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
                 case PROGRESS_TYPE:
                     mProgressFrame.setVisibility(View.VISIBLE);
                     mConfirmButton.setVisibility(View.GONE);
+                    mCancelButton.setVisibility(View.GONE);
                     break;
             }
             if (!fromCreate) {
