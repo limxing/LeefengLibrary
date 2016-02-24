@@ -87,4 +87,14 @@ public class DisplayUtil {
 				.getSystemService(Context.WINDOW_SERVICE);
 		return wm.getDefaultDisplay().getWidth();
 	}
+	/**
+	 * 获取屏幕高度的方法
+	 * @param context
+	 * @return
+	 */
+	public static int getScreenHeight(Context context){
+		WindowManager wm = (WindowManager) context
+				.getSystemService(Context.WINDOW_SERVICE);
+		return wm.getDefaultDisplay().getHeight();
+	}
 }
