@@ -38,6 +38,7 @@
 
 <!--切换动画-->
     <style name="myBottom" parent="android:Animation">
+        <!--<item name="@android:windowEnterAnimation">@anim/activity_totop</item>-->
         <item name="@android:windowEnterAnimation">@anim/activity_totop</item>
         //进入时的动画
         <item name="@android:windowExitAnimation">@anim/activity_tobottom</item>
