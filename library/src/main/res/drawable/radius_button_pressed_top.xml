@@ -6,6 +6,6 @@
         android:width="1px"
         android:color="@color/button_presseed" />
     <corners
-        android:topLeftRadius="10px"
-        android:topRightRadius="10px" />
+        android:topLeftRadius="30px"
+        android:topRightRadius="30px" />
 </shape>

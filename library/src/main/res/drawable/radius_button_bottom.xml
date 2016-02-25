@@ -7,7 +7,7 @@
         android:width="1px"
         android:color="@color/button_presseed" />
     <corners
-        android:bottomLeftRadius="10px"
-        android:bottomRightRadius="10px"/>
+        android:bottomLeftRadius="30px"
+        android:bottomRightRadius="30px"/>
 
 </shape>
