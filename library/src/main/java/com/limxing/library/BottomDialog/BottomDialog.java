@@ -26,7 +26,7 @@ import com.limxing.library.utils.DisplayUtil;
 
 /**
  * @author limxing
- * 这是一个底部弹出的对话选择框
+ *         这是一个底部弹出的对话选择框
  */
 
 
@@ -89,7 +89,12 @@ public class BottomDialog {
 //            tp.setFakeBoldText(true);
             view.setGravity(Gravity.CENTER);
             view.setHeight(height);
-            if (describtion == null&&i==0) {
+            if (describtion == null && i == 0) {
+                if (selections.length > 1) {
+                    view.setBackground(context.getResources().getDrawable(R.drawable.button_selector_top));
+                } else {
+                    view.setBackground(context.getResources().getDrawable(R.drawable.button_selector));
+                }
                 view.setBackground(context.getResources().getDrawable(R.drawable.button_selector_top));
 
             } else if (i == selections.length - 1) {
