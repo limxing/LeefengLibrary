@@ -69,7 +69,7 @@ public class BottomDialog {
             view.setPadding(pad, pad, pad, pad);
             lm_top.addView(view, 0);
         }
-        int height = DisplayUtil.dip2px(context, 50);
+        int height = DisplayUtil.dip2px(context, 55);
         for (int i = 0; i < selections.length; i++) {
             TextView view = new TextView(context);
             view.setText(selections[i]);

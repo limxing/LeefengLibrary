@@ -12,8 +12,8 @@
     <color name="holo_blue_light">#ff33b5e5</color>
 
     <!--底部弹出选择框-->
-    <color name="button_normal">#ffffff</color>
-    <color name="button_presseed">#eeeeee</color>
+    <color name="button_normal">#eeeeee</color>
+    <color name="button_presseed">#dddddd</color>
 <!--SweetDialog-->
 
     <color name="float_transparent">#00000000</color>

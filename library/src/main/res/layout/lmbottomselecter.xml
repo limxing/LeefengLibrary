@@ -22,7 +22,7 @@
     <TextView
         android:id="@+id/bottom_cancle"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:layout_below="@+id/lm_top"
         android:layout_margin="10dp"
         android:background="@drawable/button_selector"
