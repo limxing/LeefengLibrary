@@ -5,7 +5,7 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="black_p50">#7f000000</color>
-    <color name="transparent">#0000</color>
+    <color name="transparent">#00000000</color>
 
     <color name="black_overlay">#66000000</color>
     <color name="lm_bottomdialog">#60000000</color>

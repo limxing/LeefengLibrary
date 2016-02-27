@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottom_bac"
+    android:padding="0dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#00000000"
+    android:splitMotionEvents="false">
+
+    <LinearLayout
+        android:id="@+id/lm_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:splitMotionEvents="false">
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/bottom_cancle"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/lm_top"
+        android:background="@drawable/button_selector_for_bottomselect"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>
