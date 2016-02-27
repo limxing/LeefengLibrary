@@ -16,13 +16,11 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="48dp"
-
             android:layout_marginTop="@dimen/padingTop">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_centerInParent="true"
                 android:text="我是标题"
                 android:textColor="#ffffff"

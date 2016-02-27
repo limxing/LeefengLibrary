@@ -1,6 +1,6 @@
 package com.limxing.app.SweepActivitys;
 
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -10,6 +10,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.limxing.app.R;
+import com.limxing.library.BottomDialog.BottomDialog;
+import com.limxing.library.BottomDialog.BottomSelect;
 import com.limxing.library.NoTitleBar.SystemBarTintManager;
 import com.limxing.library.PullToRefresh.SwipeRefreshLayout;
 import com.limxing.library.SwipeBack.SwipeBackActivity;
@@ -58,8 +60,19 @@ public class FirstActivity extends SwipeBackActivity implements SwipeRefreshLayo
     }
 
     public void next(View view) {
-        Intent intent = new Intent(FirstActivity.this, FTwoActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(FirstActivity.this, FTwoActivity.class);
+//        startActivity(intent);
+        BottomSelect.showAlert(FirstActivity.this, null, new String[]{"diyige", "dierge"}, new BottomSelect.OnClickListener() {
+            @Override
+            public void onClick(int which) {
+
+            }
+        }, new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+
+            }
+        });
 
     }
 
