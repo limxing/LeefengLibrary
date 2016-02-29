@@ -56,7 +56,7 @@ public class BottomSelect {
             view.setText(describtion);
             view.setTextSize(DisplayUtil.px2sp(context, 30));
             view.setGravity(Gravity.CENTER);
-            view.setBackground(context.getResources().getDrawable(R.drawable.button_selector_top));
+            view.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.button_selector_for_bottomselect));
             view.setClickable(false);
             int pad = DisplayUtil.dip2px(context, 15);
             view.setPadding(pad, pad, pad, pad);
@@ -82,29 +82,38 @@ public class BottomSelect {
 //            tp.setFakeBoldText(true);
             view.setGravity(Gravity.CENTER);
             view.setHeight(height);
-            view.setBackground(context.getResources().getDrawable(R.drawable.button_selector_for_bottomselect));
+            view.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.button_selector_for_bottomselect));
             view.setTextColor(context.getResources().getColor(R.color.holo_blue_light));
             lm_top.addView(view);
         }
-        final int cFullFillWidth = 10000;
-        layout.setMinimumWidth(cFullFillWidth);
-        // set a large value put it in bottom
-        Window w = dlg.getWindow();
-        WindowManager.LayoutParams lp = w.getAttributes();
-        lp.x = 0;
-        final int cMakeBottom = -1000;
-        lp.y = cMakeBottom;
-        lp.gravity = Gravity.BOTTOM;
-        dlg.onWindowAttributesChanged(lp);
+//        final int cFullFillWidth = 10000;
+//        layout.setMinimumWidth(cFullFillWidth);
+
         dlg.setCanceledOnTouchOutside(true);
         if (cancelListener != null) {
+
             dlg.setOnCancelListener(cancelListener);
         }
-        dlg.setContentView(layout);
-        dlg.show();
+        dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
 
+            }
+        });
+        dlg.setContentView(layout);
+        // set a large value put it in bottom
+        Window w=dlg.getWindow();
+        WindowManager.LayoutParams lp = w.getAttributes();
+        lp.dimAmount=0.4f;
+//        lp.x = 0;
+//        final int cMakeBottom = -1000;
+//        lp.y = cMakeBottom;
+        lp.gravity = Gravity.BOTTOM;
+//        dlg.onWindowAttributesChanged(lp);
         lp.width = DisplayUtil.getScreenWith(context); //设置宽度
-        dlg.getWindow().setAttributes(lp);
+        w.setAttributes(lp);
+//        w.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        dlg.show();
         return dlg;
     }
 

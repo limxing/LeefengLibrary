@@ -14,6 +14,8 @@
     <dimen name="common_circle_width">3dp</dimen>
     <dimen name="progress_circle_radius">34dp</dimen>
 
+    <!--bottomdialog-->
+    <dimen name="bottomdialog_title_size">20dp</dimen>
 
 <!--SVProgressHUD-->
     <!--padding-->

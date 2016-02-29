@@ -105,25 +105,25 @@ public class BottomDialog {
             view.setTextColor(context.getResources().getColor(R.color.holo_blue_light));
             lm_top.addView(view);
         }
-        final int cFullFillWidth = 10000;
-        layout.setMinimumWidth(cFullFillWidth);
-        // set a large value put it in bottom
-        Window w = dlg.getWindow();
-        WindowManager.LayoutParams lp = w.getAttributes();
-        lp.x = 0;
-        final int cMakeBottom = -1000;
-        lp.y = cMakeBottom;
-        lp.gravity = Gravity.BOTTOM;
-        dlg.onWindowAttributesChanged(lp);
+//        final int cFullFillWidth = 10000;
+//        layout.setMinimumWidth(cFullFillWidth);
         dlg.setCanceledOnTouchOutside(true);
         if (cancelListener != null) {
             dlg.setOnCancelListener(cancelListener);
         }
         dlg.setContentView(layout);
-        dlg.show();
-
+        // set a large value put it in bottom
+        Window w = dlg.getWindow();
+        WindowManager.LayoutParams lp = w.getAttributes();
+        lp.dimAmount=0.4f;
+//        lp.x = 0;
+//        final int cMakeBottom = -1000;
+//        lp.y = cMakeBottom;
+        lp.gravity = Gravity.BOTTOM;
+//        dlg.onWindowAttributesChanged(lp);
         lp.width = DisplayUtil.getScreenWith(context); //设置宽度
-        dlg.getWindow().setAttributes(lp);
+        w.setAttributes(lp);
+        dlg.show();
         return dlg;
     }
 
