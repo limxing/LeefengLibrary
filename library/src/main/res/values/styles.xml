@@ -52,7 +52,7 @@
     </style>
 
 <style name="mySelect" parent="@android:style/Animation.Dialog">
-    <!--<item name="@android:windowEnterAnimation">@anim/activity_totop</item>-->
+    <item name="@android:windowEnterAnimation">@anim/activity_totop</item>
     //进入时的动画
     <item name="@android:windowExitAnimation">@anim/activity_tobottom</item>
     //退出时的动画

@@ -10,7 +10,7 @@
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:windowAnimationStyle">@style/mySelect</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
+        <!--<item name="android:windowDrawsSystemBarBackgrounds">false</item>-->
 
     </style>
 </resources>
