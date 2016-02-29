@@ -1,0 +1,8 @@
+<resources>
+<!--SweetDialog-->
+    <dimen name="alert_width">200dp</dimen>
+    <dimen name="common_circle_width">3dp</dimen>
+    <dimen name="progress_circle_radius">34dp</dimen>
+
+    <dimen name="bottomdialog_title_size">20dp</dimen>
+</resources>

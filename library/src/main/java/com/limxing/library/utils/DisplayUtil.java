@@ -1,6 +1,7 @@
 package com.limxing.library.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetrics;
 import android.view.WindowManager;
@@ -96,5 +97,19 @@ public class DisplayUtil {
 		WindowManager wm = (WindowManager) context
 				.getSystemService(Context.WINDOW_SERVICE);
 		return wm.getDefaultDisplay().getHeight();
+	}
+
+	/**
+	 * 获取 NavigationBar 的高度
+	 * @param context
+	 * @return
+	 */
+	public static int getNavigationBarHeight(Context context) {
+		Resources resources = context.getResources();
+		int resourceId = resources.getIdentifier("navigation_bar_height",
+				"dimen", "android");
+		//获取NavigationBar的高度
+		int height = resources.getDimensionPixelSize(resourceId);
+		return height;
 	}
 }

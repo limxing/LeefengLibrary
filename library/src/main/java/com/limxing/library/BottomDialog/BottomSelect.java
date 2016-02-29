@@ -11,11 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Interpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.limxing.library.R;
 import com.limxing.library.utils.DisplayUtil;
+import com.limxing.library.utils.LogUtils;
 
 /**
  * @author limxing
@@ -114,6 +117,12 @@ public class BottomSelect {
         w.setAttributes(lp);
 //        w.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         dlg.show();
+        int screenheight=DisplayUtil.getScreenHeight(context);
+        LogUtils.i("=screenhei="+screenheight);
+        TranslateAnimation ta=new TranslateAnimation(0,0,500,200);
+
+        ta.setDuration(3000);
+        layout.startAnimation(ta);
         return dlg;
     }
 
