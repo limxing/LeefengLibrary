@@ -33,8 +33,10 @@ import com.limxing.library.SwipeBack.SwipeBackActivity;
 import com.limxing.library.NoTitleBar.SystemBarTintManager;
 
 import com.limxing.library.SwipeBack.SwipeBackLayout;
+import com.limxing.library.utils.DisplayUtil;
 import com.limxing.library.utils.EncryptUtil;
 import com.limxing.library.utils.LogUtils;
+import com.limxing.library.utils.PhoneInfo;
 import com.limxing.library.utils.ToastUtils;
 
 import java.math.MathContext;
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SystemBarTintManager.initSystemBar(this, R.color.transparent);
-
+        PhoneInfo.show(MainActivity.this);
         main_fresh = (com.limxing.library.PullToRefresh.SwipeRefreshLayout) findViewById(R.id.main_fresh);
 //设置滑动返回
 //        SwipeBackLayout swipeBackLayout = (SwipeBackLayout) findViewById(R.id.swipeBackLayout);
@@ -89,15 +91,13 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             @Override
             public void onClick(View view) {
 //                自定义Viewpager
-                Intent intent=new Intent(MainActivity.this,FirstActivity.class);
+                Intent intent = new Intent(MainActivity.this, FirstActivity.class);
                 startActivity(intent);
-
 
 
 //弹出加载中仿IOS的框
 //                new SVProgressHUD(MainActivity.this).showLmWithStatus("加载中...", SVProgressHUD.SVProgressHUDMaskType.Clear);
                 ;
-
 
 
 //弹出底部选择框
@@ -113,7 +113,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 //                                ToastUtils.showLong(MainActivity.this,"已关闭");
 //                            }
 //                        });
-
 
 
 //                SweetAlertDialog的用法
@@ -222,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         animationDrawable.start();
 
 
-        mTasksView=(TasksCompletedView)findViewById(R.id.tasks_view);
+        mTasksView = (TasksCompletedView) findViewById(R.id.tasks_view);
         mTotalProgress = 100;
         mCurrentProgress = 0;
         new Thread(new ProgressRunable()).start();
@@ -230,15 +229,17 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         findViewById(R.id.btn_drag).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this, DragListViewActivity.class);
+                Intent intent = new Intent(MainActivity.this, DragListViewActivity.class);
                 startActivity(intent);
             }
         });
     }
+
     private TasksCompletedView mTasksView;
 
     private int mTotalProgress;
     private int mCurrentProgress;
+
     class ProgressRunable implements Runnable {
 
         @Override
@@ -279,7 +280,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     @Override
     protected void onPause() {
-        if (dialog!=null&&dialog.isShowing()) {
+        if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
         }
         super.onPause();

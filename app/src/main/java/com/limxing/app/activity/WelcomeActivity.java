@@ -2,9 +2,9 @@ package com.limxing.app.activity;
 
 import android.content.Intent;
 
-import com.alibaba.mobileim.IYWLoginService;
-import com.alibaba.mobileim.YWLoginParam;
-import com.alibaba.mobileim.channel.event.IWxCallback;
+//import com.alibaba.mobileim.IYWLoginService;
+//import com.alibaba.mobileim.YWLoginParam;
+//import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.limxing.app.BaseActivity;
 import com.limxing.app.R;
 import com.limxing.app.application.MyApplication;
@@ -35,30 +35,30 @@ public class WelcomeActivity extends BaseActivity {
                         startActivityWithAnim(intent);
                         finish();
                     } else {
-                        IYWLoginService loginService = MyApplication.mIMKit.getLoginService();
-                        YWLoginParam loginParam = YWLoginParam.createLoginParam(username
-                                , username);
-                        loginService.login(loginParam, new IWxCallback() {
-
-                            @Override
-                            public void onSuccess(Object... arg0) {
-                                Intent intent =new Intent(WelcomeActivity.this,AllConversationActivity.class);
-                                startActivityWithAnim(intent);
-                                finish();
-                            }
-
-                            @Override
-                            public void onProgress(int arg0) {
-                                // TODO Auto-generated method stub
-                            }
-
-                            @Override
-                            public void onError(int errCode, String description) {
-                                Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
-                                startActivityWithAnim(intent);
-                                finish();
-                            }
-                        });
+//                        IYWLoginService loginService = MyApplication.mIMKit.getLoginService();
+//                        YWLoginParam loginParam = YWLoginParam.createLoginParam(username
+//                                , username);
+//                        loginService.login(loginParam, new IWxCallback() {
+//
+//                            @Override
+//                            public void onSuccess(Object... arg0) {
+//                                Intent intent =new Intent(WelcomeActivity.this,AllConversationActivity.class);
+//                                startActivityWithAnim(intent);
+//                                finish();
+//                            }
+//
+//                            @Override
+//                            public void onProgress(int arg0) {
+//                                // TODO Auto-generated method stub
+//                            }
+//
+//                            @Override
+//                            public void onError(int errCode, String description) {
+//                                Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
+//                                startActivityWithAnim(intent);
+//                                finish();
+//                            }
+//                        });
                     }
 
 

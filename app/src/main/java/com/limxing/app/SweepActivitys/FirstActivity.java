@@ -1,6 +1,7 @@
 package com.limxing.app.SweepActivitys;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -62,7 +63,7 @@ public class FirstActivity extends SwipeBackActivity implements SwipeRefreshLayo
     public void next(View view) {
 //        Intent intent = new Intent(FirstActivity.this, FTwoActivity.class);
 //        startActivity(intent);
-        BottomSelect.showAlert(FirstActivity.this, null, new String[]{"diyige", "dierge"}, new BottomSelect.OnClickListener() {
+        BottomSelect.showAlert(FirstActivity.this, "请选择添加图片方式", new String[]{"相机", "相册"}, new BottomSelect.OnClickListener() {
             @Override
             public void onClick(int which) {
 
