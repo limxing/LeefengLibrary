@@ -16,9 +16,11 @@ public class PhoneInfo {
         int heightPixels= dm.heightPixels;
         float density = dm.density;
         int densityDpi = dm.densityDpi;
-        int screenWidth = (int) (widthPixels * density);
-        int screenHeight = (int) (heightPixels * density);
-        LogUtils.i("screenWidth:"+screenWidth+"screenHeight:"+screenHeight+"densityDpi:"+densityDpi
-                +"densityDpi:"+density);
+//        int screenWidth = (int) (widthPixels * density);
+//        int screenHeight = (int) (heightPixels * density);
+        LogUtils.i("screenWidth:"+widthPixels);
+        LogUtils.i("screenHeight:"+heightPixels);
+        LogUtils.i("densityDpi:"+densityDpi);
+        LogUtils.i("densityDpi:"+density);
     }
 }

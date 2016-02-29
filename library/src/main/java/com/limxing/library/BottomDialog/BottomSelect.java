@@ -117,12 +117,12 @@ public class BottomSelect {
         w.setAttributes(lp);
 //        w.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         dlg.show();
-        int screenheight=DisplayUtil.getScreenHeight(context);
-        LogUtils.i("=screenhei="+screenheight);
-        TranslateAnimation ta=new TranslateAnimation(0,0,500,200);
-
-        ta.setDuration(3000);
-        layout.startAnimation(ta);
+//        int screenheight=DisplayUtil.getScreenHeight(context);
+//
+//        TranslateAnimation ta=new TranslateAnimation(0,0,600,100);
+//
+//        ta.setDuration(300);
+//        layout.startAnimation(ta);
         return dlg;
     }
 
