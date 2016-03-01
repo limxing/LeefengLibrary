@@ -1,15 +1,9 @@
 package com.limxing.library.utils;
 
 /**
- * 版权：
- * <p/>
  * 作者：李利锋
- * <p/>
  * 创建日期：2016/2/26 22:57
- * <p/>
  * 描述：bitmap处理,图片文件路径缩小后保存,纠正图片的方向
- * <p/>
- * 修改历史：
  */
 
 import java.io.ByteArrayOutputStream;
@@ -31,7 +25,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
-import android.util.Log;
+
 
 /**
  * A class for helping deal the bitmap,

@@ -45,15 +45,17 @@ public class BottomSelect {
 //        String cancel = context.getString(R.string.app_cancel);
 
         final Dialog dlg = new Dialog(context, R.style.MMTheme_DataSheet);
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View layout = inflater.inflate(R.layout.bottomselecter, null);
-        LinearLayout lm_top = (LinearLayout) layout.findViewById(R.id.lm_top);
-        layout.findViewById(R.id.bottom_cancle).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dlg.dismiss();
-            }
-        });
+//        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        View layout = inflater.inflate(R.layout.bottomselecter, null);
+//        LinearLayout lm_top = (LinearLayout) layout.findViewById(R.id.lm_top);
+//        layout.findViewById(R.id.bottom_cancle).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dlg.dismiss();
+//            }
+//        });
+        LinearLayout lm_top=new LinearLayout(context);
+        lm_top.setOrientation(LinearLayout.VERTICAL);
         if (describtion != null) {
             TextView view = new TextView(context);
             view.setText(describtion);
@@ -81,6 +83,7 @@ public class BottomSelect {
             });
             view.setTextSize(DisplayUtil.px2sp(context, context.getResources()
                     .getDimension(R.dimen.bottomdialog_title_size)));
+            //设置字体位粗体
 //            TextPaint tp = view.getPaint();
 //            tp.setFakeBoldText(true);
             view.setGravity(Gravity.CENTER);
@@ -103,7 +106,7 @@ public class BottomSelect {
 
             }
         });
-        dlg.setContentView(layout);
+        dlg.setContentView(lm_top);
         // set a large value put it in bottom
         Window w=dlg.getWindow();
         WindowManager.LayoutParams lp = w.getAttributes();
