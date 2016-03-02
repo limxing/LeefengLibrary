@@ -129,7 +129,7 @@ public class BitmapHelper {
 //    }
 
     /**
-     * 压缩指定路径的图片，并得到图片对象,根据图片的方向进行计算缩放比例
+     * 根据需要压缩到某尺寸压缩指定路径的图片，并得到图片对象
      *
      * @param path
      * @param rqsW
@@ -154,20 +154,18 @@ public class BitmapHelper {
      */
     public static String compressBitmap(Context context, String srcPath, int rqsW, int rqsH, boolean isDelSrc) {
         int degree = getDegress(srcPath);
-        Bitmap bitmap = compressBitmap(srcPath, rqsW, rqsH);//根据方向
+        Bitmap bitmap = compressBitmap(srcPath, rqsW, rqsH);//根据长宽以及图片的长宽得到缩放图片
         File srcFile = new File(srcPath);
         String desPath = getImageCacheDir(context) + srcFile.getName();
         try {
             if (degree != 0) bitmap = rotateBitmap(bitmap, degree);
             File file = new File(desPath);
             FileOutputStream fos = new FileOutputStream(file);
-            bitmap.compress(CompressFormat.JPEG, 80, fos);
+            bitmap.compress(CompressFormat.JPEG, 80, fos);//80是图片质量
             fos.close();
             if (isDelSrc) srcFile.deleteOnExit();
 
         } catch (Exception e) {
-            // TODO: handle exception
-//            Log.e("BitmapHelper-->compressBitmap", e.getMessage() + "");
         }
 
         bitmap.recycle();
