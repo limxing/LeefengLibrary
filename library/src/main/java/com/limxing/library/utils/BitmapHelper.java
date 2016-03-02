@@ -31,10 +31,7 @@ import android.media.ExifInterface;
  * A class for helping deal the bitmap,
  * like: get the orientation of the bitmap, compress bitmap etc.
  *
- * @author wangcccong
- * @version 1.140122
- *          crated at: 2014-03-22
- *          update at: 2014-06-26
+ * @author limxing
  */
 public class BitmapHelper {
 
@@ -44,7 +41,7 @@ public class BitmapHelper {
      * @param path
      * @return
      */
-    public final static int getDegress(String path) {
+    public static int getDegress(String path) {
         int degree = 0;
         try {
             ExifInterface exifInterface = new ExifInterface(path);
@@ -80,7 +77,6 @@ public class BitmapHelper {
             Matrix m = new Matrix();
             m.postRotate(degress);
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), m, true);
-
             return bitmap;
         }
         return bitmap;
@@ -92,32 +88,57 @@ public class BitmapHelper {
      * @param
      * @return
      */
-    public final static int caculateInSampleSize(Options options, int rqsW, int rqsH) {
-        final int height = options.outHeight;
-        final int width = options.outWidth;
+    public static int caculateInSampleSize(Options options, int rqsW, int rqsH) {
+        int height = options.outHeight;
+        int width = options.outWidth;
+        if (width > height) {
+            int temp = width;
+            width = height;
+            height = temp;
+        }
+        if (rqsW > rqsH) {
+            int rqsT = rqsH;
+            rqsH = rqsW;
+            rqsW = rqsT;
+        }
+
         int inSampleSize = 1;
         if (rqsW == 0 || rqsH == 0) return 1;
         if (height > rqsH || width > rqsW) {
-            final int heightRatio = Math.round((float) height / (float) rqsH);
-            final int widthRatio = Math.round((float) width / (float) rqsW);
+            int heightRatio = Math.round((float) height / (float) rqsH);
+            int widthRatio = Math.round((float) width / (float) rqsW);
             inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
         }
         return inSampleSize;
     }
 
-    /**
-     * 压缩指定路径的图片，并得到图片对象
-     *
-     * @param path bitmap source path
-     * @return Bitmap {@link Bitmap}
-     */
-    public final static Bitmap compressBitmap(String path, int rqsW, int rqsH) {
-        final Options options = new Options();
+//    /**
+//     * 压缩指定路径的图片，并得到图片对象
+//     *
+//     * @param path bitmap source path
+//     * @return Bitmap {@link Bitmap}
+//     */
+//    public static Bitmap compressBitmap(String path, int rqsW, int rqsH) {
+//        Options options = new Options();
 //        options.inJustDecodeBounds = true;
-        options.inSampleSize=2;
+////        options.inSampleSize = 2;
 //        BitmapFactory.decodeFile(path, options);
 //        options.inSampleSize = caculateInSampleSize(options, rqsW, rqsH);
-        options.inJustDecodeBounds = false;
+//        options.inJustDecodeBounds = false;
+//        return BitmapFactory.decodeFile(path, options);
+//    }
+
+    /**
+     * 压缩指定路径的图片，并得到图片对象,根据图片的方向进行计算缩放比例
+     *
+     * @param path
+     * @param rqsW
+     * @param rqsH
+     * @return
+     */
+    public static Bitmap compressBitmap(String path, int rqsW, int rqsH) {
+        Options options = getBitmapOptions(path);
+        options.inSampleSize = caculateInSampleSize(options, rqsW, rqsH);
         return BitmapFactory.decodeFile(path, options);
     }
 
@@ -131,11 +152,11 @@ public class BitmapHelper {
      * @param isDelSrc
      * @return
      */
-    public final static String compressBitmap(Context context, String srcPath, int rqsW, int rqsH, boolean isDelSrc) {
-        Bitmap bitmap = compressBitmap(srcPath, rqsW, rqsH);
+    public static String compressBitmap(Context context, String srcPath, int rqsW, int rqsH, boolean isDelSrc) {
+        int degree = getDegress(srcPath);
+        Bitmap bitmap = compressBitmap(srcPath, rqsW, rqsH);//根据方向
         File srcFile = new File(srcPath);
         String desPath = getImageCacheDir(context) + srcFile.getName();
-        int degree = getDegress(srcPath);
         try {
             if (degree != 0) bitmap = rotateBitmap(bitmap, degree);
             File file = new File(desPath);
@@ -165,7 +186,7 @@ public class BitmapHelper {
      * @return
      */
     @Deprecated
-    public final static Bitmap compressBitmap(InputStream is, int reqsW, int reqsH, boolean isAdjust) {
+    public static Bitmap compressBitmap(InputStream is, int reqsW, int reqsH, boolean isAdjust) {
         Bitmap bitmap = BitmapFactory.decodeStream(is);
         return compressBitmap(bitmap, reqsW, reqsH, isAdjust);
     }
@@ -175,7 +196,7 @@ public class BitmapHelper {
      *
      * @return Bitmap {@link Bitmap}
      */
-    public final static Bitmap compressBitmap(InputStream is, int reqsW, int reqsH) {
+    public static Bitmap compressBitmap(InputStream is, int reqsW, int reqsH) {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ReadableByteChannel channel = Channels.newChannel(is);
@@ -206,8 +227,8 @@ public class BitmapHelper {
      * @param reqsH
      * @return
      */
-    public final static Bitmap compressBitmap(byte[] bts, int reqsW, int reqsH) {
-        final Options options = new Options();
+    public static Bitmap compressBitmap(byte[] bts, int reqsW, int reqsH) {
+        Options options = new Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeByteArray(bts, 0, bts.length, options);
         options.inSampleSize = caculateInSampleSize(options, reqsW, reqsH);
@@ -224,7 +245,7 @@ public class BitmapHelper {
      * @return
      */
     @Deprecated
-    public final static Bitmap compressBitmap(Bitmap bitmap, int reqsW, int reqsH, boolean isAdjust) {
+    public static Bitmap compressBitmap(Bitmap bitmap, int reqsW, int reqsH, boolean isAdjust) {
         if (bitmap == null || reqsW == 0 || reqsH == 0) return bitmap;
         if (bitmap.getWidth() > reqsW || bitmap.getHeight() > reqsH) {
             float scaleX = new BigDecimal(reqsW).divide(new BigDecimal(bitmap.getWidth()), 4, RoundingMode.DOWN).floatValue();
@@ -248,7 +269,7 @@ public class BitmapHelper {
      * @param reqsH
      * @return
      */
-    public final static Bitmap compressBitmap(Bitmap bitmap, int reqsW, int reqsH) {
+    public static Bitmap compressBitmap(Bitmap bitmap, int reqsW, int reqsH) {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(CompressFormat.PNG, 100, baos);
@@ -274,7 +295,7 @@ public class BitmapHelper {
      * @return
      */
     @Deprecated
-    public final static Bitmap compressBitmap(Resources res, int resID, int reqsW, int reqsH, boolean isAdjust) {
+    public static Bitmap compressBitmap(Resources res, int resID, int reqsW, int reqsH, boolean isAdjust) {
         Bitmap bitmap = BitmapFactory.decodeResource(res, resID);
         return compressBitmap(bitmap, reqsW, reqsH, isAdjust);
     }
@@ -288,8 +309,8 @@ public class BitmapHelper {
      * @param reqsH
      * @return
      */
-    public final static Bitmap compressBitmap(Resources res, int resID, int reqsW, int reqsH) {
-        final Options options = new Options();
+    public static Bitmap compressBitmap(Resources res, int resID, int reqsW, int reqsH) {
+        Options options = new Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeResource(res, resID, options);
         options.inSampleSize = caculateInSampleSize(options, reqsW, reqsH);
@@ -305,7 +326,7 @@ public class BitmapHelper {
      * @param maxBytes 压缩后的图像最大大小 单位为byte
      * @return
      */
-    public final static Bitmap compressBitmap(Bitmap bitmap, long maxBytes) {
+    public static Bitmap compressBitmap(Bitmap bitmap, long maxBytes) {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(CompressFormat.PNG, 100, baos);
@@ -326,7 +347,7 @@ public class BitmapHelper {
         }
     }
 
-//  public final static Bitmap compressBitmap(InputStream is, long maxBytes) {
+//  public  static Bitmap compressBitmap(InputStream is, long maxBytes) {
 //      try {
 //          ByteArrayOutputStream baos = new ByteArrayOutputStream();
 //          byte[] bts = new byte[1024];
@@ -347,10 +368,11 @@ public class BitmapHelper {
      * @param srcPath
      * @return Options {@link Options}
      */
-    public final static Options getBitmapOptions(String srcPath) {
+    public static Options getBitmapOptions(String srcPath) {
         Options options = new Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(srcPath, options);
+        options.inJustDecodeBounds = false;
         return options;
     }
 
