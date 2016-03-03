@@ -1,11 +1,16 @@
 package com.limxing.app.SweepActivitys;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -74,6 +79,19 @@ public class FirstActivity extends SwipeBackActivity implements SwipeRefreshLayo
 
             }
         });
+//        AlertDialog.Builder builder = new AlertDialog.Builder(FirstActivity.this);
+//        builder.setItems(new String[]{"第一个", "第二个", "第三个"}, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//
+//            }
+//        });
+//        AlertDialog dialog = builder.create();
+//        Window w = dialog.getWindow();
+////       WindowManager.LayoutParams lp= w.getAttributes();
+//        w.setGravity(Gravity.BOTTOM);
+//        w.setWindowAnimations(R.style.myBottom);
+//        dialog.show();
 
     }
 

@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.limxing.app.SweepActivitys.FirstActivity;
+import com.limxing.app.activity.CameraActivity;
 import com.limxing.library.BottomDialog.AlertDialog;
 import com.limxing.library.BottomDialog.BottomDialog;
 import com.limxing.library.BottomDialog.LMBottomSelecter;
@@ -229,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         findViewById(R.id.btn_drag).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, DragListViewActivity.class);
+                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
                 startActivity(intent);
             }
         });
