@@ -380,7 +380,7 @@ public class BitmapHelper {
      * @param context
      * @return
      */
-    private static String getImageCacheDir(Context context) {
+    public static String getImageCacheDir(Context context) {
 //        String dir = FileHelper.getCacheDir(context) + "Image" + File.separator;
         String dir = FileUtils.getCacheDir() + "Image" + File.separator;
         File file = new File(dir);
