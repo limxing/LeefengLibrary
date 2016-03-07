@@ -1,35 +1,36 @@
 package com.limxing.app.activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
-import com.limxing.app.MainActivity;
 import com.limxing.app.R;
 import com.limxing.library.utils.BitmapHelper;
 import com.limxing.library.utils.DisplayUtil;
+import com.limxing.library.utils.FileUtils;
 
 import net.bither.util.NativeUtil;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by limxing on 16/3/3.
  */
 public class CameraActivity extends AppCompatActivity {
     private static final int CAMERA = 0;
+    private static final int CAMERA_RESULT = 2;
     private Uri photoUri;
+    private File mPhotoFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,16 +39,43 @@ public class CameraActivity extends AppCompatActivity {
         findViewById(R.id.text).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                ContentValues values = new ContentValues();
-                photoUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-                intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, photoUri);
-                startActivityForResult(intent, CAMERA);
 
+                //小米2不支持
+//                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                ContentValues values = new ContentValues();
+//                photoUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+//                intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, photoUri);
+//                startActivityForResult(intent, CAMERA);
+                String state = Environment.getExternalStorageState();
+                if (state.equals(Environment.MEDIA_MOUNTED)) {
+                    mPhotoFile = new File(FileUtils.getCacheDir(), System.currentTimeMillis() + ".jpg");
+
+                    if (!mPhotoFile.exists()) {
+                        try {
+                            mPhotoFile.createNewFile();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getApplication(), "照片创建失败!",
+                                    Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                    }
+                    Intent intent = new Intent(
+                            "android.media.action.IMAGE_CAPTURE");
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT,
+                            Uri.fromFile(mPhotoFile));
+                    startActivityForResult(intent, CAMERA_RESULT);
+                } else {
+                    Toast.makeText(getApplication(), "sdcard无效或没有插入!",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
+
+
         });
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == CAMERA) {
@@ -69,26 +97,39 @@ public class CameraActivity extends AppCompatActivity {
             cursor.moveToFirst();
             String q1 = cursor.getString(1); // 图片文件路径
             cursor.close();
-            Log.i("limxing", q1);
+
+
             File qq = new File(q1);
 
             //尺寸剪切后,
             String path = BitmapHelper.compressBitmap(CameraActivity.this, q1, DisplayUtil.getScreenWith(CameraActivity.this),
                     DisplayUtil.getScreenHeight(CameraActivity.this), false);
-            Log.i("limxing", path);
+
             //质量压缩
             File file = new File(BitmapHelper.getImageCacheDir(CameraActivity.this));
             String s = file.toString() + "/NativeUtil_" + qq.getName();
-            NativeUtil.compressBitmap(BitmapFactory.decodeFile(path),80, s, true);//剪切后质量压缩
+            NativeUtil.compressBitmap(path, 50, s, true, true);//剪切后质量压缩,最后一个参数是否删除原文件
 
 
-//            String ss = s + ".jpg";
-//            BitmapHelper.compressBitmap(MainActivity.this, ss, screenWidth, screenHeigh, );
+
+        }
+
+        if (resultCode == Activity.RESULT_OK && requestCode == CAMERA_RESULT) {
+
+            //尺寸剪切后,
+            String path = BitmapHelper.compressBitmap(CameraActivity.this, mPhotoFile.getAbsolutePath(),
+                    DisplayUtil.getScreenWith(CameraActivity.this),
+                    DisplayUtil.getScreenHeight(CameraActivity.this), false);
+
+            //质量压缩
+            File file = new File(BitmapHelper.getImageCacheDir(CameraActivity.this));
+            String s = file.toString() + "/NativeUtil_" + mPhotoFile.getName();
+            NativeUtil.compressBitmap(path, 50, s, true, true);//剪切后质量压缩,最后一个参数是否删除原文件
+
 
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
-
 
 
 }
