@@ -29,6 +29,7 @@ import java.io.IOException;
 public class CameraActivity extends AppCompatActivity {
     private static final int CAMERA = 0;
     private static final int CAMERA_RESULT = 2;
+    private static final int RESULT_LOAD_IMAGE = 3;
     private Uri photoUri;
     private File mPhotoFile;
 
@@ -40,35 +41,43 @@ public class CameraActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+/**
+ * 图片选择
+ */
+                Intent i = new Intent(
+                        Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, RESULT_LOAD_IMAGE);
+
                 //小米2不支持
 //                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 //                ContentValues values = new ContentValues();
 //                photoUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
 //                intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, photoUri);
 //                startActivityForResult(intent, CAMERA);
-                String state = Environment.getExternalStorageState();
-                if (state.equals(Environment.MEDIA_MOUNTED)) {
-                    mPhotoFile = new File(FileUtils.getCacheDir(), System.currentTimeMillis() + ".jpg");
-
-                    if (!mPhotoFile.exists()) {
-                        try {
-                            mPhotoFile.createNewFile();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            Toast.makeText(getApplication(), "照片创建失败!",
-                                    Toast.LENGTH_LONG).show();
-                            return;
-                        }
-                    }
-                    Intent intent = new Intent(
-                            "android.media.action.IMAGE_CAPTURE");
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT,
-                            Uri.fromFile(mPhotoFile));
-                    startActivityForResult(intent, CAMERA_RESULT);
-                } else {
-                    Toast.makeText(getApplication(), "sdcard无效或没有插入!",
-                            Toast.LENGTH_SHORT).show();
-                }
+//                String state = Environment.getExternalStorageState();
+//                if (state.equals(Environment.MEDIA_MOUNTED)) {
+//                    mPhotoFile = new File(FileUtils.getCacheDir(), System.currentTimeMillis() + ".jpg");
+//
+//                    if (!mPhotoFile.exists()) {
+//                        try {
+//                            mPhotoFile.createNewFile();
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                            Toast.makeText(getApplication(), "照片创建失败!",
+//                                    Toast.LENGTH_LONG).show();
+//                            return;
+//                        }
+//                    }
+//                    Intent intent = new Intent(
+//                            "android.media.action.IMAGE_CAPTURE");
+//                    intent.putExtra(MediaStore.EXTRA_OUTPUT,
+//                            Uri.fromFile(mPhotoFile));
+//                    startActivityForResult(intent, CAMERA_RESULT);
+//                } else {
+//                    Toast.makeText(getApplication(), "sdcard无效或没有插入!",
+//                            Toast.LENGTH_SHORT).show();
+//                }
             }
 
 
@@ -111,7 +120,6 @@ public class CameraActivity extends AppCompatActivity {
             NativeUtil.compressBitmap(path, 50, s, true, true);//剪切后质量压缩,最后一个参数是否删除原文件
 
 
-
         }
 
         if (resultCode == Activity.RESULT_OK && requestCode == CAMERA_RESULT) {
@@ -125,6 +133,21 @@ public class CameraActivity extends AppCompatActivity {
             File file = new File(BitmapHelper.getImageCacheDir(CameraActivity.this));
             String s = file.toString() + "/NativeUtil_" + mPhotoFile.getName();
             NativeUtil.compressBitmap(path, 50, s, true, true);//剪切后质量压缩,最后一个参数是否删除原文件
+
+
+        }
+
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK
+                && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
 
 
         }
