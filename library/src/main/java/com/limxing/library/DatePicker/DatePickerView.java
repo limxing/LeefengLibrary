@@ -21,6 +21,8 @@ public class DatePickerView  {
 	private Context mContext;
 	private DatePickerListener mListener;
 	private Dialog dialog;
+	private int fromYear=1950;
+	private int toYear;
 
 	public   DatePickerView(Context context,DatePickerListener listener){
 		mContext=context;
@@ -42,6 +44,16 @@ public class DatePickerView  {
 		dialog.show();
 	}
 
+	/**
+	 * 设置开始结束的年
+	 * @param fromYear
+	 * @param toYear
+	 */
+	public void setFromYearAndToYear(int fromYear,int toYear){
+		this.fromYear=fromYear;
+		this.toYear=toYear;
+	}
+
 
 	private View getDataPick() {
 		Calendar c = Calendar.getInstance();
@@ -49,7 +61,7 @@ public class DatePickerView  {
 		int curMonth = c.get(Calendar.MONTH) + 1;// ͨ��Calendar���������Ҫ+1
 		int curDate = c.get(Calendar.DATE);
 
-
+		toYear=norYear;
 		View view = View.inflate(mContext,R.layout.wheel_date_picker, null);
 		view.findViewById(R.id.finish).setOnClickListener(new View.OnClickListener() {
 			
@@ -65,7 +77,7 @@ public class DatePickerView  {
 		year = (WheelView) view.findViewById(R.id.year);
 
 		NumericWheelAdapter numericWheelAdapter1 = new NumericWheelAdapter(
-				mContext, 1950, norYear);
+				mContext, fromYear, toYear);
 		numericWheelAdapter1.setLabel("年");
 		numericWheelAdapter1.setTextGravity(Gravity.RIGHT);
 		year.setViewAdapter(numericWheelAdapter1);
