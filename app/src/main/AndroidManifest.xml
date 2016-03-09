@@ -35,8 +35,13 @@
         <activity android:name=".SweepActivitys.FirstActivity" />
         <activity android:name=".SweepActivitys.FTwoActivity" />
         <activity
+            android:theme="@style/AppTheme"
             android:name=".activity.CameraActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+
+
+
+        </activity>
 
         <meta-data
             android:name="UMENG_APPKEY"

@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
 
-    <TextView
+    <Button
         android:id="@+id/text"
         android:padding="@dimen/padingTop"
         android:layout_width="match_parent"

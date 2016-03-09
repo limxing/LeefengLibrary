@@ -1,26 +1,22 @@
 package com.limxing.app.SweepActivitys;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.inputmethodservice.Keyboard;
+import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
 import android.os.Handler;
 
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.limxing.app.R;
-import com.limxing.library.BottomDialog.BottomDialog;
-import com.limxing.library.BottomDialog.BottomSelect;
+import com.limxing.library.DatePicker.DatePickerView;
 import com.limxing.library.NoTitleBar.SystemBarTintManager;
 import com.limxing.library.PullToRefresh.SwipeRefreshLayout;
 import com.limxing.library.SwipeBack.SwipeBackActivity;
+import com.limxing.library.utils.LogUtils;
 
 /**
  * Created by limxing on 16/2/16.
@@ -66,19 +62,33 @@ public class FirstActivity extends SwipeBackActivity implements SwipeRefreshLayo
     }
 
     public void next(View view) {
-//        Intent intent = new Intent(FirstActivity.this, FTwoActivity.class);
-//        startActivity(intent);
-        BottomSelect.showAlert(FirstActivity.this, "请选择添加图片方式", new String[]{"相机", "相册"}, new BottomSelect.OnClickListener() {
+
+        DatePickerView view1 = new DatePickerView(FirstActivity.this, new DatePickerView.DatePickerListener() {
             @Override
-            public void onClick(int which) {
+            public void dateChange(String string) {
+                LogUtils.i(string);
 
             }
-        }, new DialogInterface.OnCancelListener() {
+
             @Override
-            public void onCancel(DialogInterface dialogInterface) {
+            public void finish() {
 
             }
         });
+        view1.show();
+//        Intent intent = new Intent(FirstActivity.this, FTwoActivity.class);
+//        startActivity(intent);
+//        BottomSelect.showAlert(FirstActivity.this, "请选择添加图片方式", new String[]{"相机", "相册"}, new BottomSelect.OnClickListener() {
+//            @Override
+//            public void onClick(int which) {
+//
+//            }
+//        }, new DialogInterface.OnCancelListener() {
+//            @Override
+//            public void onCancel(DialogInterface dialogInterface) {
+//
+//            }
+//        });
 //        AlertDialog.Builder builder = new AlertDialog.Builder(FirstActivity.this);
 //        builder.setItems(new String[]{"第一个", "第二个", "第三个"}, new DialogInterface.OnClickListener() {
 //            @Override
@@ -122,4 +132,5 @@ public class FirstActivity extends SwipeBackActivity implements SwipeRefreshLayo
 
         }, 3000);
     }
+
 }
