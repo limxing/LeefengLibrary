@@ -13,7 +13,13 @@ import com.limxing.library.DatePicker.adapter.NumericWheelAdapter;
 import com.limxing.library.R;
 import com.limxing.library.utils.DisplayUtil;
 
+/**
+ * created by Limxing 2016-3-9
+ */
 public class DatePickerView  {
+	private  int mYear;
+	private  int mMonth;
+	private  int mDate;
 	private WheelView year;
 	private WheelView month;
 	private WheelView day;
@@ -25,10 +31,32 @@ public class DatePickerView  {
 	private int toYear;
 
 	public   DatePickerView(Context context,DatePickerListener listener){
+		Calendar c = Calendar.getInstance();
 		mContext=context;
 		mListener=listener;
+		int curYear = c.get(Calendar.YEAR);
+		int curMonth = c.get(Calendar.MONTH) + 1;//
+		int curDate = c.get(Calendar.DATE);
+		toYear=mYear=curYear;
+		mMonth=curMonth;
+		mDate=curDate;
 	}
 
+	/**
+	 * 初始化选择器的日期
+	 * @param year
+	 * @param month
+	 * @param day
+	 */
+	public void initDate(int year,int month,int day){
+		mYear=year;
+		mMonth=month;
+		mDate=day;
+	}
+
+	/**
+	 * 展示对话框
+	 */
 	public void show(){
 		 dialog = new Dialog(mContext, R.style.MMTheme_DatePicker);
 		dialog.setCancelable(false);
@@ -56,20 +84,17 @@ public class DatePickerView  {
 
 
 	private View getDataPick() {
-		Calendar c = Calendar.getInstance();
-		int norYear = c.get(Calendar.YEAR);
-		int curMonth = c.get(Calendar.MONTH) + 1;// ͨ��Calendar���������Ҫ+1
-		int curDate = c.get(Calendar.DATE);
 
-		toYear=norYear;
 		View view = View.inflate(mContext,R.layout.wheel_date_picker, null);
 		view.findViewById(R.id.finish).setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-
 				dialog.dismiss();
-				mListener.finish();
+				int n_year = year.getCurrentItem() + 1950;//
+				int n_month = month.getCurrentItem() + 1;//
+				int n_day = day.getCurrentItem() + 1;//
+				mListener.finish(n_year+"-"+n_month+"-"+n_day);
 			}
 		});
 
@@ -81,7 +106,7 @@ public class DatePickerView  {
 		numericWheelAdapter1.setLabel("年");
 		numericWheelAdapter1.setTextGravity(Gravity.RIGHT);
 		year.setViewAdapter(numericWheelAdapter1);
-		year.setCyclic(true);// �Ƿ��ѭ������
+		year.setCyclic(true);//
 		year.addScrollingListener(scrollListener);
 
 		NumericWheelAdapter numericWheelAdapter2 = new NumericWheelAdapter(
@@ -92,17 +117,18 @@ public class DatePickerView  {
 		month.addScrollingListener(scrollListener);
 
 		day = (WheelView) view.findViewById(R.id.day);
-		initDay(norYear, curMonth);
+
+		initDay(mYear, mMonth);
 		day.setCyclic(true);
 		day.addScrollingListener(scrollListener);
 
-		year.setVisibleItems(5);// ������ʾ����
+		year.setVisibleItems(5);//
 		month.setVisibleItems(5);
 		day.setVisibleItems(5);
 
-		year.setCurrentItem(norYear - 1950);
-		month.setCurrentItem(curMonth - 1);
-		day.setCurrentItem(curDate - 1);
+		year.setCurrentItem(mYear - 1950);
+		month.setCurrentItem(mMonth - 1);
+		day.setCurrentItem(mDate - 1);
 
 		return view;
 	}
@@ -153,7 +179,7 @@ public class DatePickerView  {
 		return day;
 	}
 	/**
-	 * ������������
+	 *
 	 */
 	OnWheelScrollListener scrollListener = new OnWheelScrollListener() {
 		@Override
@@ -180,8 +206,8 @@ public class DatePickerView  {
 	}
 	
 	public interface DatePickerListener{
-		public void dateChange(String string);
-		public void finish();
+		 void dateChange(String string);
+		 void finish(String string);
 	}
 
 }
