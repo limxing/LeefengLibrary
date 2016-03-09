@@ -1,6 +1,8 @@
 package com.limxing.library.MyView;
 /**
  * 这是一个滑动的,有标题的滑动
+ *
+ * 实际操作可能需要把viewpager单独在activity中操作
  */
 import java.util.ArrayList;
 

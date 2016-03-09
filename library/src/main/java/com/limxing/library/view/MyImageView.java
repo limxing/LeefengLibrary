@@ -5,7 +5,8 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 /**
- * 这是一个自定义的ImageView,宽度等于高度的图片,一般用语GrideView展示图片
+ * 这是一个自定义的ImageView,宽度等于高度的图片,一般用于GrideView展示图片
+ *
  */
 public class MyImageView extends ImageView {
 
