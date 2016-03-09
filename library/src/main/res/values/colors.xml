@@ -51,4 +51,7 @@
     <color name="title_txt_color">#f1f1f3</color>
     <color name="circle_color">#323a45</color>
     <color name="ring_color">#14b9d6</color>
+
+<!--日期选择器-->
+    <color name="province_line_border">#D0D0D0</color>
 </resources>
