@@ -97,7 +97,7 @@ public class FileUtils {
 	 */
 	public static boolean creatFile(String filePath){
 		File file=new File(filePath);
-		File f=file.getAbsoluteFile();
+		File f=file.getParentFile();
 		if(!f.exists()){
 			f.mkdirs();
 		}
