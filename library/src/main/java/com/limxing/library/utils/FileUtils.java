@@ -90,6 +90,28 @@ public class FileUtils {
 		return true;
 	}
 
+	/**
+	 * 创建文件
+	 * @param filePath
+	 * @return
+	 */
+	public static boolean creatFile(String filePath){
+		File file=new File(filePath);
+		File f=file.getAbsoluteFile();
+		if(!f.exists()){
+			f.mkdirs();
+		}
+		if(!file.exists()){
+			try {
+				 file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return true;
+	}
+
 	/** 复制文件，可以选择是否删除源文件 */
 	public static boolean copyFile(String srcPath, String destPath, boolean deleteSrc) {
 		File srcFile = new File(srcPath);
