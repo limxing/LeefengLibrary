@@ -37,10 +37,13 @@ import com.limxing.library.SwipeBack.SwipeBackLayout;
 import com.limxing.library.utils.DisplayUtil;
 import com.limxing.library.utils.EncryptUtil;
 import com.limxing.library.utils.LogUtils;
+import com.limxing.library.utils.MyThreadPool;
 import com.limxing.library.utils.PhoneInfo;
 import com.limxing.library.utils.ToastUtils;
 
 import java.math.MathContext;
+
+import note.aboutnet.Net;
 
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener,
@@ -55,6 +58,20 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MyThreadPool.excuteCachedTask(new Runnable() {
+            @Override
+            public void run() {
+                Net.requestNet("http://p.gdown.baidu.com/f29f27f966ac7b50f4fdedd65c5b1d9e34715de9b6a3b98f" +
+                        "6db8560d94582cf487c0bbd4357af9680fc8c9f7a498a0e0f0d61293f65d316b88b279bfc257ba3" +
+                        "83592a64162d4f72352923f1145ddb1e458224fc809bcdc412cea2d229f513ef2fcbc374db7f570" +
+                        "a613319dfc26719a8acba2e70005a5fdf589a871b7a567c52829da093e4130e0fe4fda4521ff185" +
+                        "ca67c88cd52a523629642a9987241523be4acf92e0fdec5c6bfe87a8fba48f4c346dd4c3969deca" +
+                        "53e3f8c382969586bae42093102d7e6c0d3e9c2392277acd05d36b15ca32db8522cd8635deb88fd" +
+                        "01893aa47d9a457f8c30d1774366012a2f9de1607e9ae8f050802777bf2a32bf98d0092d257acee" +
+                        "faf81edaf3df116071027b9200de49dc6471fe");//下载蜻蜓
+            }
+        });
+
         SystemBarTintManager.initSystemBar(this, R.color.transparent);
         PhoneInfo.show(MainActivity.this);
         main_fresh = (com.limxing.library.PullToRefresh.SwipeRefreshLayout) findViewById(R.id.main_fresh);

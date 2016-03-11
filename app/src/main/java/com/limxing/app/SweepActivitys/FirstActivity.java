@@ -1,7 +1,5 @@
 package com.limxing.app.SweepActivitys;
 
-import android.inputmethodservice.Keyboard;
-import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -71,10 +69,12 @@ public class FirstActivity extends SwipeBackActivity implements SwipeRefreshLayo
             }
 
             @Override
-            public void finish() {
-
+            public void finish(String s) {
+                LogUtils.i(s);
             }
         });
+        view1.setFromYearAndToYear(1990,2100);
+        view1.initDate(2000,1,1);
         view1.show();
 //        Intent intent = new Intent(FirstActivity.this, FTwoActivity.class);
 //        startActivity(intent);
