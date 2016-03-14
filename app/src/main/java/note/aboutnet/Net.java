@@ -6,6 +6,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -19,7 +20,7 @@ import java.net.URL;
  *
  */
 public class Net {
-    public static void requestNet(String path) {
+    public static void requestNet(long fromlen,String path) {
 
         HttpURLConnection conn = null;
         URL url = null;
@@ -28,12 +29,16 @@ public class Net {
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setConnectTimeout(5000);
-            int fileLength = conn.getContentLength();
+//            conn.setRequestProperty("User-Agent","NetFox");
+//            conn.setRequestProperty("RANGE","bytes="+fromlen);//从哪开始下载
+            long fileLength = conn.getContentLength();
             LogUtils.i("总大小:" + fileLength);
             if (conn.getResponseCode() == 200) {//是否请求成功,页面是200
                 InputStream s = conn.getInputStream();//获取页面上的流
 
-                readStreamToFile(s, fileLength);
+//                readStreamContinueToFile(s, fromlen, fileLength);//继续下载
+
+
                 s.close();
                 conn.disconnect();
                 LogUtils.i("下载完毕");
@@ -76,7 +81,7 @@ public class Net {
      *
      * @param is
      */
-    public static void readStreamToFile(InputStream is, int fileLength) {
+    public static void readStreamToFile(InputStream is, long fileLength) {
         try {
 
             String url = FileUtils.getCacheDir() + "蜻蜓FM.apk";
@@ -92,6 +97,37 @@ public class Net {
             }
 
             fileOutputStream.close();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    /**
+     * 解析流继续写成文件
+     *
+     * @param is
+     */
+    public static void readStreamContinueToFile(InputStream is,long fromLen, long fileLength) {
+        try {
+            String url = FileUtils.getCacheDir() + "蜻蜓FM.apk";
+            FileUtils.creatFile(url);
+            RandomAccessFile randomAccessFile=new RandomAccessFile(url,"rw");
+            randomAccessFile.seek(8421071);
+
+            int curlen = 0;
+            byte[] buffer = new byte[1024];
+            int len = -1;
+            while ((len = is.read(buffer)) != -1) {
+                curlen += len;
+//                if(curlen>fileLength) {
+                    LogUtils.i(curlen + "/" + fileLength);//
+                    randomAccessFile.write(buffer, 0, len);
+//                }
+            }
+            randomAccessFile.close();
 
 
         } catch (IOException e) {
