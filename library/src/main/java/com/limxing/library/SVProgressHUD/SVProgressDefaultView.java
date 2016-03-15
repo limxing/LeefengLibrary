@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.limxing.library.IOSLoading.LoadingView;
+import com.limxing.library.IOSLoading.LoadView;
 import com.limxing.library.R;
 
 /**
@@ -23,7 +23,7 @@ public class SVProgressDefaultView extends LinearLayout {
     private int resSuccess = R.drawable.ic_svstatus_success;
     private int resError = R.drawable.ic_svstatus_error;
     private ImageView ivBigLoading;
-            private LoadingView ivSmallLoading;
+            private LoadView ivSmallLoading;
     private SVCircleProgressBar circleProgressBar;
     private TextView tvMsg;
 
@@ -38,7 +38,7 @@ public class SVProgressDefaultView extends LinearLayout {
     private void initViews() {
         LayoutInflater.from(getContext()).inflate(R.layout.view_svprogressdefault, this, true);
         ivBigLoading = (ImageView) findViewById(R.id.ivBigLoading);
-        ivSmallLoading = (LoadingView) findViewById(R.id.ivSmallLoading);
+        ivSmallLoading = (LoadView) findViewById(R.id.ivSmallLoading);
         circleProgressBar = (SVCircleProgressBar) findViewById(R.id.circleProgressBar);
         tvMsg = (TextView) findViewById(R.id.tvMsg);
     }
