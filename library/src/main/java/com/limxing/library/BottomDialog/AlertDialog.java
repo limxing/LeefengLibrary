@@ -32,7 +32,7 @@ import static com.limxing.library.R.*;
 /**
  * Created by limxing on 15/12/20.
  */
-public abstract class AlertDialog implements View.OnClickListener {
+public  class AlertDialog implements View.OnClickListener {
 
     private final View bview;
     private final TextView bottom_cancle;
@@ -45,7 +45,13 @@ public abstract class AlertDialog implements View.OnClickListener {
     private String[] selections;
     private int textColor;
     private int cancleTextColor;
+    private ClickListener listener;
 
+    /**
+     *
+     * @param context 上下文
+     * @param view 展示在那个view上
+     */
     public AlertDialog(Context context,View view){
         this.context=context;
         this.view=view;
@@ -103,7 +109,7 @@ public abstract class AlertDialog implements View.OnClickListener {
             @Override
             public void onDismiss() {
                 pop1.dismiss();
-                closed();
+
             }
         });
 
@@ -111,8 +117,9 @@ public abstract class AlertDialog implements View.OnClickListener {
         pop.showAtLocation(view1, Gravity.BOTTOM, 0, 0);
 
     }
-
-    public abstract void closed();
+    public void setClickListener(ClickListener listener){
+        this.listener=listener;
+    }
 
     public void setCancleButtonTitle(String cancle){
         bottom_cancle.setText(cancle);
@@ -129,10 +136,14 @@ public abstract class AlertDialog implements View.OnClickListener {
     @Override
     public  void onClick(View view){
         pop.dismiss();
-        selectionClick((int)view.getTag());
+        if(listener!=null) {
+            listener.selectionClick((int) view.getTag());
+        }
+    }
+    public abstract class  ClickListener{
+        public abstract void selectionClick(int i);
     }
 
-    protected abstract void selectionClick(int tag);
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void setDescription(String describtion){

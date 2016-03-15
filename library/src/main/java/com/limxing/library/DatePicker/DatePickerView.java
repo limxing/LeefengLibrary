@@ -68,6 +68,9 @@ public class DatePickerView {
         Window w = dialog.getWindow();
         WindowManager.LayoutParams lp = w.getAttributes();
 //		lp.dimAmount=0.4f;
+         int cMakeBottom = -1000;
+        lp.x=0;
+        lp.y = cMakeBottom;
         lp.gravity = Gravity.BOTTOM;
         lp.width = DisplayUtil.getScreenWith(mContext); //设置宽度
         w.setAttributes(lp);
