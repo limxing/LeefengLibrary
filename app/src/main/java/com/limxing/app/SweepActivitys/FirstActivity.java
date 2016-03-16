@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.limxing.app.R;
+import com.limxing.library.BottomDialog.AlertDialog;
 import com.limxing.library.DatePicker.DatePickerView;
 import com.limxing.library.NoTitleBar.SystemBarTintManager;
 import com.limxing.library.PullToRefresh.SwipeRefreshLayout;
@@ -60,6 +61,9 @@ public class FirstActivity extends SwipeBackActivity implements SwipeRefreshLayo
     }
 
     public void next(View view) {
+//        AlertDialog dialog=new AlertDialog(FirstActivity.this,view);
+//        dialog.setSelections(new String[]{"你好","你好好","你好好好"});
+//        dialog.show();
 
         DatePickerView view1 = new DatePickerView(FirstActivity.this, new DatePickerView.DatePickerListener() {
             @Override
