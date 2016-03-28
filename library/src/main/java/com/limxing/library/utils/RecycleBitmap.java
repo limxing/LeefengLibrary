@@ -132,7 +132,7 @@ public class RecycleBitmap {
             if (drawable instanceof BitmapDrawable) {
                 Bitmap bmp = ((BitmapDrawable) drawable).getBitmap();
                 if (bmp != null && !bmp.isRecycled()) {
-                    ((ImageView) view).setImageBitmap(null);
+//                    ((ImageView) view).setImageBitmap(null);
                     bmp.recycle();
                     bmp = null;
                 }

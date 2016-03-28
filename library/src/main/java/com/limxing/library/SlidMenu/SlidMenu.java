@@ -3,6 +3,7 @@ package com.limxing.library.SlidMenu;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import com.limxing.library.utils.LogUtils;
 /**
  * Created by limxing on 16/3/27.
  */
-public class SlidMenu extends ViewGroup {
+public class SlidMenu extends ViewGroup implements MyGestureActionListener{
     private View mContent;
     private int mContentWidth;
     private int mScreenWidth;
@@ -27,6 +28,7 @@ public class SlidMenu extends ViewGroup {
     private boolean isOpen;
     private int mLastXIntercept;
     private int mLastYIntercept;
+    private GestureDetector listener;
 
     public SlidMenu(Context context) {
         super(context);
@@ -43,6 +45,9 @@ public class SlidMenu extends ViewGroup {
         mScreenHeight = metrics.heightPixels;
 
         mScroller = new Scroller(context);
+        MyGestureListener gestureListener= new MyGestureListener();
+        gestureListener.setListener(this);
+        listener = new GestureDetector(context,gestureListener);
 
     }
 
@@ -51,7 +56,7 @@ public class SlidMenu extends ViewGroup {
         LogUtils.i("onMeasure");
         mMenu = getChildAt(0);
         measureChild(mMenu, widthMeasureSpec, heightMeasureSpec);
-        mMenuWidth = mMenu.getLayoutParams().width ;
+        mMenuWidth = mMenu.getLayoutParams().width =mScreenWidth;
         mContent = getChildAt(1);
         mContentWidth = mContent.getLayoutParams().width = mScreenWidth;
         measureChild(mContent, widthMeasureSpec, heightMeasureSpec);
@@ -111,7 +116,8 @@ public class SlidMenu extends ViewGroup {
 //处理touch事件
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        LogUtils.i("onTouchEvent");
+//        LogUtils.i("onTouchEvent");
+
         int action = event.getAction();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
@@ -154,7 +160,8 @@ public class SlidMenu extends ViewGroup {
                 }
                 mLastX = currentX;
                 mLastY = currentY;
-                mMenu.setTranslationX(2*(mMenuWidth+getScrollX())/3);//位移差的滑动
+                mMenu.setTranslationX(2 * (mMenuWidth + getScrollX()) / 3);//位移差的滑动
+
                 break;
             case MotionEvent.ACTION_UP:
                 if (getScrollX() < -mMenuWidth / 2){//打开Menu
@@ -175,6 +182,7 @@ public class SlidMenu extends ViewGroup {
                 break;
 
         }
+        listener.onTouchEvent(event);
         return true;
     }
 
@@ -218,4 +226,16 @@ public class SlidMenu extends ViewGroup {
         isOpen = true;
     }
 
+
+    @Override
+    public void actionRight() {
+        LogUtils.i("向右手势");
+        openMenu();
+    }
+
+    @Override
+    public void actionLeft() {
+        LogUtils.i("向左手势");
+        closeMenu();
+    }
 }
