@@ -265,8 +265,10 @@ public class XListView extends ListView implements OnScrollListener {
         if (mEnablePullLoad && !mPullLoading) {
             if (height > PULL_LOAD_MORE_DELTA) { // height enough to invoke load
                 // more.
+                mPullLoading = true;
                 mFooterView.setState(XListViewFooter.STATE_READY);
             } else {
+                mPullLoading = false;
                 mFooterView.setState(XListViewFooter.STATE_NORMAL);
             }
         }
@@ -342,7 +344,7 @@ public class XListView extends ListView implements OnScrollListener {
                     if (mEnablePullLoad
                             && mFooterView.getBottomMargin() > PULL_LOAD_MORE_DELTA
                             && !mPullLoading) {
-                        mPullLoading = true;
+
                         mFooterView.setState(XListViewFooter.STATE_LOADING);
                         startLoadMore();
                     }
