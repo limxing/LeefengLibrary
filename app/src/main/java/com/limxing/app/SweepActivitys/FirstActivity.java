@@ -29,7 +29,8 @@ public class FirstActivity extends SwipeBackActivity implements SwipeRefreshLayo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
-        SystemBarTintManager.initSystemBar(this, R.color.transparent);
+        SystemBarTintManager.initSystemBar(this);
+
         main_fresh = (com.limxing.library.PullToRefresh.SwipeRefreshLayout) findViewById(R.id.main_fresh);
         main_listview = (ListView) findViewById(R.id.main_listview);
         main_listview.setAdapter(new BaseAdapter() {

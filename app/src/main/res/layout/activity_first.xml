@@ -3,6 +3,7 @@
     xmlns:swiperefresh="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="@dimen/padingTop"
     android:background="#ffff44"
     android:orientation="vertical">
 
