@@ -1,5 +1,6 @@
 package com.limxing.library.utils;
 
+import android.content.Context;
 import android.os.Environment;
 
 import java.io.*;
@@ -391,5 +392,13 @@ public class FileUtils {
 			file.delete();
 		}
 		return true;
+	}
+	/**
+	 * 获取沙盒File目录
+	 * @param context
+	 * @return
+	 */
+	public static String getFiles(Context context){
+		return context.getFilesDir().toString()+"/";
 	}
 }
