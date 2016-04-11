@@ -23,11 +23,12 @@ public class SVProgressDefaultView extends LinearLayout {
     private int resSuccess = R.drawable.ic_svstatus_success;
     private int resError = R.drawable.ic_svstatus_error;
     private ImageView ivBigLoading;
-            private LoadView ivSmallLoading;
+            private ImageView ivSmallLoading;
     private SVCircleProgressBar circleProgressBar;
     private TextView tvMsg;
 
     private RotateAnimation mRotateAnimation;
+    private SVPLoadView loadView;//添加自定义的加载旋转的空间
 
     public SVProgressDefaultView(Context context) {
         super(context);
@@ -38,7 +39,8 @@ public class SVProgressDefaultView extends LinearLayout {
     private void initViews() {
         LayoutInflater.from(getContext()).inflate(R.layout.view_svprogressdefault, this, true);
         ivBigLoading = (ImageView) findViewById(R.id.ivBigLoading);
-        ivSmallLoading = (LoadView) findViewById(R.id.ivSmallLoading);
+        ivSmallLoading = (ImageView) findViewById(R.id.ivSmallLoading);
+        loadView=(SVPLoadView)findViewById(R.id.loadView);
         circleProgressBar = (SVCircleProgressBar) findViewById(R.id.circleProgressBar);
         tvMsg = (TextView) findViewById(R.id.tvMsg);
     }
@@ -140,4 +142,14 @@ public class SVProgressDefaultView extends LinearLayout {
         ivSmallLoading.clearAnimation();
     }
 
+
+    public void showLoading(String string) {
+        clearAnimations();
+        tvMsg.setText(string);
+        ivBigLoading.setVisibility(View.GONE);
+        circleProgressBar.setVisibility(View.GONE);
+        ivSmallLoading.setVisibility(View.GONE);
+        loadView.setVisibility(View.VISIBLE);
+        tvMsg.setVisibility(View.VISIBLE);
+    }
 }

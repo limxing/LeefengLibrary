@@ -22,15 +22,16 @@
             android:scaleType="fitCenter"
             android:visibility="gone" />
 
-        <!--<ImageView-->
-            <!--android:id="@+id/ivSmallLoading"-->
-            <!--android:layout_width="@dimen/size_image_smallloading"-->
-            <!--android:layout_height="@dimen/size_image_smallloading"-->
-            <!--android:scaleType="centerInside"-->
-            <!--android:visibility="gone" />-->
-
-        <com.limxing.library.IOSLoading.LoadView
+        <ImageView
             android:id="@+id/ivSmallLoading"
+            android:layout_width="@dimen/size_image_smallloading"
+            android:layout_height="@dimen/size_image_smallloading"
+            android:scaleType="centerInside"
+            android:visibility="gone" />
+
+        <com.limxing.library.SVProgressHUD.SVPLoadView
+            android:id="@+id/loadView"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="centerInside"

@@ -133,6 +133,11 @@ public class SVProgressHUD {
      * @param string
      * @param maskType
      */
+    public void showLoading(String string, SVProgressHUDMaskType maskType) {
+        setMaskType(maskType);
+        mSharedView.showLoading(string);
+        svShow();
+    }
 
     public void showLmWithStatus(String string, SVProgressHUDMaskType maskType) {
         setMaskType(maskType);
@@ -155,7 +160,7 @@ public class SVProgressHUD {
     }
 
     public void showSuccessWithStatus(String string) {
-        setMaskType(SVProgressHUDMaskType.Black);
+        setMaskType(SVProgressHUDMaskType.Clear);
         mSharedView.showSuccessWithStatus(string);
         svShow();
         scheduleDismiss();
