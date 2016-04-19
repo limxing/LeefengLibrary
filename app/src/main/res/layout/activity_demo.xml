@@ -1,24 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:toggle="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#5e5e5e"
-    android:orientation="vertical">
+   >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingTop="@dimen/padingTop">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:background="@color/material_deep_teal_20"
-            android:layout_height="wrap_content"
-            android:text="我是标题"
-            android:textColor="#ffffff"
-            android:textSize="18sp" />
-    </RelativeLayout>
 
     <com.limxing.app.view.SlidMenu
         android:id="@+id/slidMenu"
@@ -45,4 +33,28 @@
         <!--<include layout="@layout/activity_main" />-->
 
     </com.limxing.app.view.SlidMenu>
-</LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="@dimen/padingTop">
+
+        <TextView
+            android:id="@+id/ttile"
+            android:layout_width="wrap_content"
+            android:background="@color/material_deep_teal_20"
+            android:layout_height="wrap_content"
+            android:text="我是标题"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+        <ImageView
+           android:layout_toRightOf="@+id/ttile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/lan"/>
+        <com.limxing.library.ToggleButton.ToggleButton
+            android:layout_width="54dp"
+            android:layout_height="30dp" >
+        </com.limxing.library.ToggleButton.ToggleButton>
+    </RelativeLayout>
+</RelativeLayout>

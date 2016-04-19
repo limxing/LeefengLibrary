@@ -300,6 +300,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     protected void onPause() {
         if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
+
+
         }
         super.onPause();
     }

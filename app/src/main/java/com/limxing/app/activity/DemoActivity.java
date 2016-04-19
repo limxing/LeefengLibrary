@@ -18,6 +18,7 @@ import com.limxing.app.fragment.MyFragment;
 
 import com.limxing.library.NoTitleBar.SystemBarTintManager;
 import com.limxing.app.view.SlidMenu;
+import com.limxing.library.SVProgressHUD.SVProgressHUD;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class DemoActivity extends AppCompatActivity {
          slidMenu=(SlidMenu) findViewById(R.id.slidMenu);
 
 
-        final MyFragment mf = new MyFragment("第一个", Color.RED);
+        final MyFragment mf = new MyFragment("第一个", Color.WHITE);
 
         final FragmentManager fm = getFragmentManager();
         FragmentTransaction fr =fm.beginTransaction();
@@ -81,5 +82,8 @@ public class DemoActivity extends AppCompatActivity {
                 return t;
             }
         });
+//        SVProgressHUD svProgressHUD=new SVProgressHUD(this);
+//        svProgressHUD.showLoading("dasda", SVProgressHUD.SVProgressHUDMaskType.Clear);
+
     }
 }
