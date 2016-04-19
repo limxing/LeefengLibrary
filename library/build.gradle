@@ -26,7 +26,6 @@ dependencies {
     compile 'com.android.support:support-v4:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'com.pnikosis:materialish-progress:1.0'
-
 }
 def makeJar(String target,String classDir){
     exec{
