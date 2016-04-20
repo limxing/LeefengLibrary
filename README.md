@@ -5,15 +5,17 @@ Android开发中遇到了一些特殊需求，在此罗列自己收集总结到�
 使用方法是:把library作为库引入
 
 ####一、沉浸式状态栏
-  1、布局文件中的title控件中添加android:clipToPadding="true" android:fitsSystemWindows="true"       
-  2、在布局文件中的title种添加paddingTop="paddingTop",SDK19以上padding20dp,19一下为0dp      
+  1、布局文件中的title控件中添加android:clipToPadding="true" android:fitsSystemWindows="true"(顶部是图片的话就不需要)       
+  2、在布局文件中的title种添加paddingTop="paddingTop",SDK19以上padding20dp,19一下为0dp (设不设置还是看采用那种方式)     
   2、在onCreat中调用：SystemBarTintManager.initSystemBar(this,R.color.colorAccent);
+  
+  4,内容最好用scrollView 否则editText会把所有顶出去
 
 ####二、右滑退出
   1、需要右滑退出的activity集成SwipeBackActivity,默认右滑退出;      
   2、可以设置setDragEdge(TOP,...)的方法,设置其他方向退出
 
-  3、推荐使用布局文件最外层的包裹为SwipeBackLayout,然后在activity中声明初始化这个:
+  3、(不能用,哈哈)推荐使用布局文件最外层的包裹为SwipeBackLayout,然后在activity中声明初始化这个:
      SwipeBackLayout swipeBackLayout = (SwipeBackLayout) findViewById(R.id.swipeBackLayout);
             swipeBackLayout.setDragEdge(SwipeBackLayout.DragEdge.LEFT);
 本人修复(在原始框架中修改):修正了右滑退出时,只能在最侧右滑,其他地方不响应,解决与listView的冲突
@@ -149,6 +151,9 @@ Android开发中遇到了一些特殊需求，在此罗列自己收集总结到�
         DragListView dragListView = (DragListView) findViewById(R.id.other_drag_list);
         mAdapter = new DragListAdapter(this, mData);默认data是String类型可自定义bean,以及Item
         dragListView.setAdapter(mAdapter); 
+        \
+      
+#### 十五:添加弹性ScrollView
                  
 
 
