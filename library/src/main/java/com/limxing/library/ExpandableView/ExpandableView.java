@@ -31,7 +31,6 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.ImageButton;
@@ -45,27 +44,16 @@ import com.limxing.library.utils.DisplayUtil;
 
 public class ExpandableView extends LinearLayout implements View.OnClickListener {
     private Context mContext;
-
-
     private static final int DEFAULT_ANIM_DURATION = 300;
-
     private static final float DEFAULT_ANIM_ALPHA_START = 0f;
     private static final boolean DEFAULT_SHOW = true;
-//    protected LinearLayout mTv;
     protected ImageButton mButton; // Button to expand/collapse
     private boolean mCollapsed = true; // Show short version as default.
-
     private Drawable mExpandDrawable;
-
     private Drawable mCollapseDrawable;
-
     private int mAnimationDuration;
-
     private float mAnimAlphaStart;
-
     private boolean mAnimating;
-
-    /* Listener for callback */
     private OnExpandStateChangeListener mListener;
     private int mHeight;//需要改变的高度
     private int mMinHeight;//最小距离
