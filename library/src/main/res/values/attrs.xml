@@ -85,4 +85,17 @@
         <attr name="isDefaultOn" format="reference|boolean">
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="ExpandableView">
+        <attr name="viewTitle" format="string" />
+        <attr name="viewTitleShow" format="boolean" />
+        <attr name="viewTitleColor" format="color" />
+        <attr name="viewTitleSize" format="dimension" />
+        <attr name="viewTitleLineColor" format="color" />
+        <attr name="viewTitleBacColor" format="color" />
+        <attr name="animDuration" format="integer" />
+        <attr name="animAlphaStart" format="float" />
+        <attr name="expandDrawable" format="reference" />
+        <attr name="collapseDrawable" format="reference" />
+    </declare-styleable>
 </resources>
