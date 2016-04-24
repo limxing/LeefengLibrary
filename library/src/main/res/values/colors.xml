@@ -54,4 +54,7 @@
 
 <!--日期选择器-->
     <color name="province_line_border">#D0D0D0</color>
+
+    <color name="color_bbbbbb">#bbbbbb</color>
+    <color name="color_909090">#909090</color>
 </resources>

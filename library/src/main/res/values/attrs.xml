@@ -93,6 +93,7 @@
         <attr name="viewTitleSize" format="dimension" />
         <attr name="viewTitleLineColor" format="color" />
         <attr name="viewTitleBacColor" format="color" />
+        <attr name="viewTitleImage" format="reference" />
         <attr name="animDuration" format="integer" />
         <attr name="animAlphaStart" format="float" />
         <attr name="expandDrawable" format="reference" />
