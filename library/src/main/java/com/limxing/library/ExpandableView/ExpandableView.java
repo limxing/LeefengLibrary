@@ -1,6 +1,17 @@
 
 
 package com.limxing.library.ExpandableView;
+/**
+
+ <com.limxing.library.ExpandableView.ExpandableView
+ android:id="@+id/expand_text_view"
+ android:layout_marginTop="5dp"
+ android:layout_width="match_parent"
+ android:layout_height="wrap_content"
+ expandableView:viewTitleColor="#909090"
+ expandableView:viewTitleLineColor="#cccccc"
+ expandableView:viewTitleSize="10sp"></com.limxing.library.ExpandableView.ExpandableView>
+ */
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -59,6 +70,8 @@ public class ExpandableView extends LinearLayout implements View.OnClickListener
     private float title_size;
     private int title_color;
     private int line_color;
+    private boolean addFlag=false;
+    private int childHeight;
 
     public ExpandableView(Context context) {
         this(context, null);
@@ -129,11 +142,40 @@ public class ExpandableView extends LinearLayout implements View.OnClickListener
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        if (mCollapsed && addFlag) {
+            super.onMeasure(widthMeasureSpec, mHeight);
+            return;
+        }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         //如果展开
-        if (mCollapsed)
+        if (mCollapsed) {
             mHeight = getMeasuredHeight();
+        }
     }
+
+    /**
+     *
+     * @param child 子view
+     * @param index 添加位置
+     * @param b 是否自主添加
+     */
+    public void addView(View child, int index, boolean b) {
+        if (b) {
+            addFlag = true;
+            child.measure(0, 0);
+            childHeight = child.getMeasuredHeight();
+            mHeight = mHeight + childHeight;
+        }
+        super.addView(child, index);
+    }
+
+    @Override
+    public void removeViewAt(int index) {
+        addFlag = true;
+        mHeight = mHeight - childHeight;
+        super.removeViewAt(index);
+    }
+
 
     public void setOnExpandStateChangeListener(@Nullable OnExpandStateChangeListener listener) {
         mListener = listener;
