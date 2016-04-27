@@ -110,6 +110,7 @@ public class SVProgressDefaultView extends LinearLayout {
         tvMsg.setText(string);
         ivBigLoading.setVisibility(View.GONE);
         ivSmallLoading.setVisibility(View.GONE);
+        loadView.setVisibility(View.GONE);
         circleProgressBar.setVisibility(View.VISIBLE);
         tvMsg.setVisibility(View.VISIBLE);
     }
@@ -119,6 +120,7 @@ public class SVProgressDefaultView extends LinearLayout {
         ivSmallLoading.setImageResource(res);
         tvMsg.setText(string);
         ivBigLoading.setVisibility(View.GONE);
+        loadView.setVisibility(View.GONE);
         circleProgressBar.setVisibility(View.GONE);
         ivSmallLoading.setVisibility(View.VISIBLE);
         tvMsg.setVisibility(View.VISIBLE);
@@ -129,6 +131,7 @@ public class SVProgressDefaultView extends LinearLayout {
         tvMsg.setText(string);
         ivBigLoading.setVisibility(View.GONE);
         circleProgressBar.setVisibility(View.GONE);
+        loadView.setVisibility(View.GONE);
         ivSmallLoading.setVisibility(View.VISIBLE);
         tvMsg.setVisibility(View.VISIBLE);
     }
@@ -140,6 +143,7 @@ public class SVProgressDefaultView extends LinearLayout {
     private void clearAnimations() {
         ivBigLoading.clearAnimation();
         ivSmallLoading.clearAnimation();
+        loadView.clearAnimation();
     }
 
 

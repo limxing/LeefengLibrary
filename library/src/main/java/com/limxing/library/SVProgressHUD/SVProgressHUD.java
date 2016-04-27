@@ -45,8 +45,8 @@ public class SVProgressHUD {
     private Animation inAnim;
     private int gravity = Gravity.CENTER;
 
-    
-    public SVProgressHUD(Context context){
+
+    public SVProgressHUD(Context context) {
         this.context = context;
         gravity = Gravity.CENTER;
         initViews();
@@ -62,16 +62,17 @@ public class SVProgressHUD {
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
         ));
     }
-    protected void initDefaultView(){
+
+    protected void initDefaultView() {
         mSharedView = new SVProgressDefaultView(context);
         params.gravity = gravity;
         mSharedView.setLayoutParams(params);
     }
 
     protected void initAnimation() {
-        if(inAnim == null)
+        if (inAnim == null)
             inAnim = getInAnimation();
-        if(outAnim == null)
+        if (outAnim == null)
             outAnim = getOutAnimation();
     }
 
@@ -80,7 +81,8 @@ public class SVProgressHUD {
      */
     private void onAttached() {
         decorView.addView(rootView);
-        if(mSharedView.getParent()!=null)((ViewGroup)mSharedView.getParent()).removeView(mSharedView);
+        if (mSharedView.getParent() != null)
+            ((ViewGroup) mSharedView.getParent()).removeView(mSharedView);
         rootView.addView(mSharedView);
     }
 
@@ -119,6 +121,7 @@ public class SVProgressHUD {
 
     /**
      * 开启等待,系统默认
+     *
      * @param string
      * @param maskType
      */
@@ -130,11 +133,18 @@ public class SVProgressHUD {
 
     /**
      * 开启等待旋转,仿ios
+     *
      * @param string
      * @param maskType
      */
     public void showLoading(String string, SVProgressHUDMaskType maskType) {
         setMaskType(maskType);
+        mSharedView.showLoading(string);
+        svShow();
+    }
+
+    public void showLoading(String string) {
+        setMaskType(SVProgressHUDMaskType.Black);
         mSharedView.showLoading(string);
         svShow();
     }
@@ -193,10 +203,11 @@ public class SVProgressHUD {
         svShow();
     }
 
-    public SVCircleProgressBar getProgressBar(){
+    public SVCircleProgressBar getProgressBar() {
         return mSharedView.getCircleProgressBar();
     }
-    public void setText(String string){
+
+    public void setText(String string) {
         mSharedView.setText(string);
     }
 
