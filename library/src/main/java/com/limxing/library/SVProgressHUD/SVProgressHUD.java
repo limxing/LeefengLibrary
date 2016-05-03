@@ -20,7 +20,7 @@ import com.limxing.library.R;
  */
 public class SVProgressHUD {
     private Context context;
-    private static final long DISMISSDELAYED = 1000;
+    private static final long DISMISSDELAYED = 2000;
     private SVProgressHUDMaskType mSVProgressHUDMaskType;
 
     public enum SVProgressHUDMaskType {
@@ -101,7 +101,7 @@ public class SVProgressHUD {
     }
 
     public void show() {
-        setMaskType(SVProgressHUDMaskType.Black);
+        setMaskType(SVProgressHUDMaskType.Clear);
         mSharedView.show();
         svShow();
     }
@@ -114,7 +114,7 @@ public class SVProgressHUD {
     }
 
     public void showWithStatus(String string) {
-        setMaskType(SVProgressHUDMaskType.Black);
+        setMaskType(SVProgressHUDMaskType.Clear);
         mSharedView.showWithStatus(string);
         svShow();
     }
@@ -144,7 +144,7 @@ public class SVProgressHUD {
     }
 
     public void showLoading(String string) {
-        setMaskType(SVProgressHUDMaskType.Black);
+        setMaskType(SVProgressHUDMaskType.Clear);
         mSharedView.showLoading(string);
         svShow();
     }
@@ -156,7 +156,7 @@ public class SVProgressHUD {
     }
 
     public void showInfoWithStatus(String string) {
-        setMaskType(SVProgressHUDMaskType.Black);
+        setMaskType(SVProgressHUDMaskType.None);
         mSharedView.showInfoWithStatus(string);
         svShow();
         scheduleDismiss();
@@ -170,7 +170,7 @@ public class SVProgressHUD {
     }
 
     public void showSuccessWithStatus(String string) {
-        setMaskType(SVProgressHUDMaskType.Clear);
+        setMaskType(SVProgressHUDMaskType.None);
         mSharedView.showSuccessWithStatus(string);
         svShow();
         scheduleDismiss();
@@ -184,7 +184,7 @@ public class SVProgressHUD {
     }
 
     public void showErrorWithStatus(String string) {
-        setMaskType(SVProgressHUDMaskType.Black);
+        setMaskType(SVProgressHUDMaskType.None);
         mSharedView.showErrorWithStatus(string);
         svShow();
         scheduleDismiss();

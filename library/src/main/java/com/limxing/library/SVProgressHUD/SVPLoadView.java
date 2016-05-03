@@ -13,6 +13,7 @@ import com.limxing.library.R;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by limxing on 16/1/7.
@@ -45,8 +46,8 @@ public class SVPLoadView extends ImageView {
             degrees += 30f;
             max.setRotate(degrees, width, height);
             setImageMatrix(max);
-            if(degrees==360){
-                degrees=0;
+            if (degrees == 360) {
+                degrees = 0;
             }
         }
     };
@@ -59,13 +60,18 @@ public class SVPLoadView extends ImageView {
 
         width = bitmap.getWidth() / 2;
         height = bitmap.getHeight() / 2;
-        Timer time=new Timer();
+        Timer time = new Timer();
         time.schedule(new TimerTask() {
             @Override
             public void run() {
-                handler.sendEmptyMessage(0);
+                try {
+                    handler.sendEmptyMessage(0);
+                } catch (Exception e) {
+
+                }
+
             }
-        },0,80);
+        }, 0, 80);
     }
 
 
