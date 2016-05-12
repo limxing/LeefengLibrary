@@ -36,7 +36,7 @@ import com.limxing.library.utils.ToastUtils;
  * 修改历史：
  */
 public class CellView extends RelativeLayout implements TextWatcher, View.OnClickListener {
-    private static final float DEFALT_TEXT_SIZE = 10;
+    private static final float DEFALT_TEXT_SIZE = 30;
     private boolean topLine;
     private boolean isSendType;//设置edittext的按钮
     private int length;
