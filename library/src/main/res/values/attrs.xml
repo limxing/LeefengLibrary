@@ -99,4 +99,22 @@
         <attr name="expandDrawable" format="reference" />
         <attr name="collapseDrawable" format="reference" />
     </declare-styleable>
+
+    <!--每一个cellView的界面-->
+    <declare-styleable name="CellView">
+        <attr name="titleText" format="string"></attr>
+        <attr name="titleStyle" format="integer"></attr>
+        <attr name="length" format="integer"></attr>
+        <attr name="hintText" format="string"></attr>
+        <attr name="netName" format="string"></attr>
+        <attr name="mSelect" format="string"></attr>
+        <attr name="hiddenLine" format="boolean"></attr>
+        <attr name="showRightPic" format="boolean"></attr>
+        <attr name="clickAble" format="boolean"></attr>
+        <attr name="isPassword" format="boolean"></attr>
+        <attr name="setSendType" format="boolean"></attr>
+        <attr name="topLine" format="boolean"></attr>
+        <attr name="drawable" format="reference"></attr>
+    </declare-styleable>
+
 </resources>

@@ -57,4 +57,10 @@
 
     <color name="color_bbbbbb">#bbbbbb</color>
     <color name="color_909090">#909090</color>
+<!--CellView-->
+    <color name="cellview_color">#222222</color>
+    <color name="tucengcellview_color">#444444</color>
+    <color name="cell_line_color">#cccccc</color>
+    <color name="cellview_edite_textcolor">#888888</color>
+    <color name="cellview_edite_texthintcolor">#c9c9c9</color>
 </resources>
