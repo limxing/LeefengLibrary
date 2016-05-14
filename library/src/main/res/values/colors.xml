@@ -37,7 +37,7 @@
     <color name="material_deep_teal_50">#ff009688</color>
 <!--SVProgressHUD-->
     <!--覆盖颜色-->
-    <color name="bgColor_overlay">#60000000</color>
+    <color name="bgColor_overlay">#90000000</color>
     <color name="bgColor_overlay_black">#95000000</color>
     <!--窗口背景颜色-->
     <color name="bgColor_svprogressdefaultview">@android:color/white</color>
