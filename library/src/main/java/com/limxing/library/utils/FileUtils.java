@@ -1,6 +1,7 @@
 package com.limxing.library.utils;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.os.Environment;
 
 import java.io.*;
@@ -393,12 +394,74 @@ public class FileUtils {
 		}
 		return true;
 	}
+
 	/**
 	 * 获取沙盒File目录
 	 * @param context
 	 * @return
-	 */
+     */
 	public static String getFiles(Context context){
 		return context.getFilesDir().toString()+"/";
+	}
+
+
+	/**
+	 * 复制asset目录文件到data中
+	 * @param context
+	 * @param dirname
+	 * @throws IOException
+	 */
+	public static void copyAssetDirToSD(Context context, String dirname)
+			throws IOException {
+		File dir = new File(Environment.getExternalStorageDirectory() + "/" + dirname);
+		LogUtils.i("存放路径:"+Environment.getExternalStorageDirectory()+ "/" + dirname);
+		dir.mkdir();
+
+		AssetManager assetManager = context.getAssets();
+		String[] children = assetManager.list(dirname);
+		for (String child : children) {
+			child = dirname + '/' + child;
+			String[] grandChildren = assetManager.list(child);
+			if (0 == grandChildren.length)
+				copyAssetFileToFiles(context, child,Environment.getExternalStorageDirectory());
+			else
+				copyAssetDirToSD(context, child);
+		}
+	}
+	/**
+	 * 复制asset目录文件到data中
+	 * @param context
+	 * @param dirname
+	 * @throws IOException
+     */
+	public static void copyAssetDirToFiles(Context context, String dirname)
+			throws IOException {
+		File dir = new File(context.getFilesDir() + "/" + dirname);
+		LogUtils.i("存放路径:"+context.getFilesDir() + "/" + dirname);
+		dir.mkdir();
+
+		AssetManager assetManager = context.getAssets();
+		String[] children = assetManager.list(dirname);
+		for (String child : children) {
+			child = dirname + '/' + child;
+			String[] grandChildren = assetManager.list(child);
+			if (0 == grandChildren.length)
+				copyAssetFileToFiles(context, child,context.getFilesDir());
+			else
+				copyAssetDirToFiles(context, child);
+		}
+	}
+	private static void copyAssetFileToFiles(Context context, String filename,File where)
+			throws IOException {
+		InputStream is = context.getAssets().open(filename);
+		byte[] buffer = new byte[is.available()];
+		is.read(buffer);
+		is.close();
+
+		File of = new File(where + "/" + filename);
+		of.createNewFile();
+		FileOutputStream os = new FileOutputStream(of);
+		os.write(buffer);
+		os.close();
 	}
 }
