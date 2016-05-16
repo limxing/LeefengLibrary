@@ -411,33 +411,33 @@ public class FileUtils {
 	 * @param dirname
 	 * @throws IOException
 	 */
-	public static void copyAssetDirToSD(Context context, String dirname)
-			throws IOException {
-		File dir = new File(Environment.getExternalStorageDirectory() + "/" + dirname);
-		LogUtils.i("存放路径:"+Environment.getExternalStorageDirectory()+ "/" + dirname);
-		dir.mkdir();
-
-		AssetManager assetManager = context.getAssets();
-		String[] children = assetManager.list(dirname);
-		for (String child : children) {
-			child = dirname + '/' + child;
-			String[] grandChildren = assetManager.list(child);
-			if (0 == grandChildren.length)
-				copyAssetFileToFiles(context, child,Environment.getExternalStorageDirectory());
-			else
-				copyAssetDirToSD(context, child);
-		}
-	}
+//	public static void copyAssetDirToSD(Context context, String dirname)
+//			throws IOException {
+//		File dir = new File(Environment.getExternalStorageDirectory() + "/" + dirname);
+//		LogUtils.i("存放路径:"+Environment.getExternalStorageDirectory()+ "/" + dirname);
+//		dir.mkdir();
+//
+//		AssetManager assetManager = context.getAssets();
+//		String[] children = assetManager.list(dirname);
+//		for (String child : children) {
+//			child = dirname + '/' + child;
+//			String[] grandChildren = assetManager.list(child);
+//			if (0 == grandChildren.length)
+//				copyAssetFileToFiles(context, child,Environment.getExternalStorageDirectory());
+//			else
+//				copyAssetDirToSD(context, child);
+//		}
+//	}
 	/**
-	 * 复制asset目录文件到data中
+	 * 复制asset目录文件到目录中
 	 * @param context
 	 * @param dirname
 	 * @throws IOException
      */
-	public static void copyAssetDirToFiles(Context context, String dirname)
+	public static void copyAssetDirToFiles(Context context, String dirname,File file)
 			throws IOException {
-		File dir = new File(context.getFilesDir() + "/" + dirname);
-		LogUtils.i("存放路径:"+context.getFilesDir() + "/" + dirname);
+		File dir = new File(file + "/" + dirname);
+		LogUtils.i("存放路径:"+file + "/" + dirname);
 		dir.mkdir();
 
 		AssetManager assetManager = context.getAssets();
@@ -446,9 +446,9 @@ public class FileUtils {
 			child = dirname + '/' + child;
 			String[] grandChildren = assetManager.list(child);
 			if (0 == grandChildren.length)
-				copyAssetFileToFiles(context, child,context.getFilesDir());
+				copyAssetFileToFiles(context, child,file);
 			else
-				copyAssetDirToFiles(context, child);
+				copyAssetDirToFiles(context, child,file);
 		}
 	}
 	private static void copyAssetFileToFiles(Context context, String filename,File where)
