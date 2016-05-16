@@ -273,6 +273,9 @@ public class LoopView extends View {
         remeasure();
         invalidate();
     }
+    public List<String> getItems(){
+        return items;
+    }
 
     @Override
     public int getPaddingLeft() {
