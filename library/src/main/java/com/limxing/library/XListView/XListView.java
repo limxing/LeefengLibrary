@@ -439,4 +439,11 @@ public class XListView extends ListView implements OnScrollListener {
         // trigger computeScroll
         invalidate();
     }
+
+    /**
+     * 设置隐藏时间
+     */
+    public void hideTimeView(){
+        mHeaderTimeView.setVisibility(View.GONE);
+    }
 }
