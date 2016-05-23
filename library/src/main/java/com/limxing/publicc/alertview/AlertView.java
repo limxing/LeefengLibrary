@@ -32,6 +32,7 @@ import java.util.List;
 public class AlertView {
     private Animation bgAnim;
     private Animation bgAnimOut;
+    private boolean cancelAble;
 
     public static enum Style{
         ActionSheet,
@@ -115,7 +116,9 @@ public class AlertView {
         rootView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                dismiss();
+                if (cancelAble) {
+                    dismiss();
+                }
                 return false;
             }
         });
@@ -394,4 +397,9 @@ public class AlertView {
             return false;
         }
     };
+
+    public AlertView setCancelAble(boolean cancelAble) {
+        this.cancelAble = cancelAble;
+        return this;
+    }
 }
