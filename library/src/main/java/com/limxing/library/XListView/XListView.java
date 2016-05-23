@@ -425,6 +425,7 @@ public class XListView extends ListView implements OnScrollListener {
     }
 
     /**
+     * Executive refresh
      * 执行刷新
      */
     public void startRefresh(){
@@ -441,6 +442,7 @@ public class XListView extends ListView implements OnScrollListener {
     }
 
     /**
+     * Set hide time
      * 设置隐藏时间
      */
     public void hideTimeView(){

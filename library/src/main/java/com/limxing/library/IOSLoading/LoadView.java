@@ -57,7 +57,6 @@ public class LoadView extends ImageView {
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.loading);
         setImageBitmap(bitmap);
         max = new Matrix();
-
         width = bitmap.getWidth() / 2;
         height = bitmap.getHeight() / 2;
         Timer time=new Timer();
