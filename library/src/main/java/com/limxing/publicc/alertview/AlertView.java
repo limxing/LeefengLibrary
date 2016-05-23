@@ -112,7 +112,20 @@ public class AlertView {
         rootView.setLayoutParams(new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
         ));
+        rootView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                dismiss();
+                return false;
+            }
+        });
         contentContainer = (ViewGroup) rootView.findViewById( R.id.content_container);
+        contentContainer.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return true;
+            }
+        });
         int margin_alert_left_right = 0;
         switch (style){
             case ActionSheet:
