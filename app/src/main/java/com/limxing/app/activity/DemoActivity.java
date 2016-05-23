@@ -82,8 +82,8 @@ public class DemoActivity extends AppCompatActivity {
                 return t;
             }
         });
-//        SVProgressHUD svProgressHUD=new SVProgressHUD(this);
-//        svProgressHUD.showLoading("dasda", SVProgressHUD.SVProgressHUDMaskType.Clear);
+        SVProgressHUD svProgressHUD=new SVProgressHUD(this);
+        svProgressHUD.showLoading("dasda", SVProgressHUD.SVProgressHUDMaskType.Clear);
 
     }
 }

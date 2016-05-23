@@ -17,16 +17,19 @@
         android:theme="@style/Theme.Swipe.Back"
         tools:replace="android:icon">
         <activity android:name=".activity.DemoActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".DragListViewActivity" />
         <activity android:name=".MyViewpagerActivity" />
         <activity android:name=".activity.LoginActivity">
 
+        </activity>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <!--<activity android:name=".activity.AllConversationActivity" />-->
         <activity android:name=".activity.WelcomeActivity">

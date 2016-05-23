@@ -10,22 +10,20 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
+        android:clipToPadding="true"
         android:layout_height="@dimen/title_height"
         android:background="@color/holo_blue_light">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="@dimen/padingTop">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="我是标题"
-                android:textColor="#ffffff"
-                android:textSize="20sp"></TextView>
-        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="我是标题"
+            android:textColor="#ffffff"
+            android:textSize="20sp"></TextView>
+
     </RelativeLayout>
 
     <com.limxing.library.SwipeBack.SwipeBackLayout
@@ -86,10 +84,11 @@
                 android:orientation="horizontal">
 
                 <Button
-                android:id="@+id/btn_bottom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="弹窗" />
+                    android:id="@+id/btn_bottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="弹窗" />
+
                 <Button
                     android:id="@+id/btn_drag"
                     android:layout_width="wrap_content"

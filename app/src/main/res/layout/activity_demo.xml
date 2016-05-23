@@ -6,9 +6,8 @@
     android:background="#5e5e5e"
    >
 
-
-
     <com.limxing.app.view.SlidMenu
+
         android:id="@+id/slidMenu"
         android:layout_width="wrap_content"
         android:layout_height="match_parent">

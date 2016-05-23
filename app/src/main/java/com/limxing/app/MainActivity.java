@@ -24,6 +24,7 @@ import com.limxing.library.BottomDialog.AlertDialog;
 import com.limxing.library.BottomDialog.BottomDialog;
 import com.limxing.library.BottomDialog.LMBottomSelecter;
 import com.limxing.library.CirculProgressBar.TasksCompletedView;
+import com.limxing.library.CustomDialog.DataDialog;
 import com.limxing.library.DragList.DragListView;
 import com.limxing.library.PullToRefresh.SwipeRefreshLayout;
 
@@ -40,14 +41,18 @@ import com.limxing.library.utils.LogUtils;
 import com.limxing.library.utils.MyThreadPool;
 import com.limxing.library.utils.PhoneInfo;
 import com.limxing.library.utils.ToastUtils;
+import com.limxing.publicc.alertview.AlertView;
+import com.limxing.publicc.alertview.OnItemClickListener;
 
 import java.math.MathContext;
+import java.util.ArrayList;
+import java.util.List;
 
 import note.aboutnet.Net;
 
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener,
-        SwipeRefreshLayout.OnLoadListener {
+        SwipeRefreshLayout.OnLoadListener, OnItemClickListener {
 
 
     private SwipeRefreshLayout main_fresh;
@@ -108,9 +113,28 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
+//                new AlertView("上传",null,"取消",null,new String[]{"拍照","从相册选择"},MainActivity.this,AlertView.Style.ActionSheet,MainActivity.this).show();
+//                new AlertView("标题", null, "取消", new String[]{"高亮按钮1"}, new String[]{"其他按钮1", "其他按钮2", "其他按钮3"}, MainActivity.this, AlertView.Style.ActionSheet, MainActivity.this).setCancelable(true).show();
+                new AlertView("标题", "内容", null, new String[]{"确定"}, null, MainActivity.this, AlertView.Style.Alert, MainActivity.this).show();
+
+//                年的选择
+//                List<String> list = new ArrayList<String>();
+//                for (int i = 0; i < 20; i++) {
+//                    list.add(2000 + i + "年");
+//                }
+//                DataDialog dataDialog = new DataDialog(MainActivity.this);
+//                dataDialog.setViewItems(list, list, null);
+//                dataDialog.setDataDialogListener(new DataDialog.DataDialogListener() {
+//                    @Override
+//                    public void onItemSelected(String year, String month, String day) {
+//                        LogUtils.i(year + month + day);
+//                    }
+//                });
+//                dataDialog.show();
+
 //                自定义Viewpager
-                Intent intent = new Intent(MainActivity.this, FirstActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(MainActivity.this, FirstActivity.class);
+//                startActivity(intent);
 
 
 //弹出加载中仿IOS的框
@@ -257,6 +281,16 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     private int mTotalProgress;
     private int mCurrentProgress;
+
+    /**
+     * alertview的点击事件
+     * @param o
+     * @param position
+     */
+    @Override
+    public void onItemClick(Object o, int position) {
+        ToastUtils.showShort(this,position+"");
+    }
 
     class ProgressRunable implements Runnable {
 
