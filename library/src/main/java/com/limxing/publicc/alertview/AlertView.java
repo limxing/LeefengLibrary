@@ -32,7 +32,6 @@ import java.util.List;
 public class AlertView {
     private Animation bgAnim;
     private Animation bgAnimOut;
-    private boolean cancelAble;
 
     public static enum Style{
         ActionSheet,
@@ -113,15 +112,15 @@ public class AlertView {
         rootView.setLayoutParams(new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
         ));
-        rootView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (cancelAble) {
-                    dismiss();
-                }
-                return false;
-            }
-        });
+//        rootView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                if () {
+//                    dismiss();
+//                }
+//                return false;
+//            }
+//        });
         contentContainer = (ViewGroup) rootView.findViewById( R.id.content_container);
         contentContainer.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -374,6 +373,12 @@ public class AlertView {
         params.setMargins(margin_alert_left_right,0,margin_alert_left_right,marginBottom);
         contentContainer.setLayoutParams(params);
     }
+
+    /**
+     * 设置点击返回键是否关闭对话框
+     * @param isCancelable
+     * @return
+     */
     public AlertView setCancelable(boolean isCancelable) {
         View view = rootView.findViewById( R.id.outmost_container);
 
@@ -397,9 +402,4 @@ public class AlertView {
             return false;
         }
     };
-
-    public AlertView setCancelAble(boolean cancelAble) {
-        this.cancelAble = cancelAble;
-        return this;
-    }
 }
