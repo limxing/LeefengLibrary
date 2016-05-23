@@ -30,6 +30,9 @@ import java.util.List;
  * 点击取消按钮返回 －1，其他按钮从0开始算
  */
 public class AlertView {
+    private Animation bgAnim;
+    private Animation bgAnimOut;
+
     public static enum Style{
         ActionSheet,
         Alert
@@ -246,6 +249,8 @@ public class AlertView {
     protected void init() {
         inAnim = getInAnimation();
         outAnim = getOutAnimation();
+        bgAnim=AnimationUtils.loadAnimation(context,R.anim.alertview_bgin);
+        bgAnimOut=AnimationUtils.loadAnimation(context,R.anim.alertview_bgout);
     }
     protected void initEvents() {
     }
@@ -260,6 +265,7 @@ public class AlertView {
      */
     private void onAttached(View view) {
         decorView.addView(view);
+        rootView.startAnimation(bgAnim);
         contentContainer.startAnimation(inAnim);
     }
     /**
@@ -313,6 +319,7 @@ public class AlertView {
             }
         });
         contentContainer.startAnimation(outAnim);
+        rootView.startAnimation(bgAnimOut);
         isDismissing = true;
     }
     public Animation getInAnimation() {
