@@ -11,6 +11,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.limxing.library.utils.LogUtils;
+
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -43,7 +45,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class LoopView extends View {
 
+//    private static final float CENTERCONTENTOFFSET = 6;
     private float scaleX = 1.05F;
+    private int widthMeasureSpec;
+    private float itemHeight;
+//    private float centerY;
 
     public enum ACTION {
         // 点击，滑翔(滑到尽头)，拖拽事件
@@ -79,8 +85,8 @@ public class LoopView extends View {
     boolean isLoop;
 
     // 第一条线Y坐标值
-    int firstLineY;
-    int secondLineY;
+    float firstLineY;
+    float secondLineY;
 
     int totalScrollY;
     int initPosition;
@@ -173,13 +179,20 @@ public class LoopView extends View {
         }
 
         measureTextWidthHeight();
-
-        halfCircumference = (int) (maxTextHeight * lineSpacingMultiplier * (itemsVisible - 1));
+        //最大Text的高度乘间距倍数得到 可见文字实际的总高度，半圆的周长
+        halfCircumference = (int) (itemHeight * (itemsVisible - 1)) ;
+//        halfCircumference = (int) (maxTextHeight * lineSpacingMultiplier * (itemsVisible - 1));
         measuredHeight = (int) ((halfCircumference * 2) / Math.PI);
         radius = (int) (halfCircumference / Math.PI);
-        measuredWidth = maxTextWidth + paddingLeft + paddingRight;
-        firstLineY = (int) ((measuredHeight - lineSpacingMultiplier * maxTextHeight) / 2.0F);
-        secondLineY = (int) ((measuredHeight + lineSpacingMultiplier * maxTextHeight) / 2.0F);
+//        measuredWidth = maxTextWidth + paddingLeft + paddingRight;
+        measuredWidth = MeasureSpec.getSize(widthMeasureSpec);
+        //计算两条横线和控件中间点的Y位置
+        firstLineY = (measuredHeight - itemHeight) / 2.0F;
+        secondLineY = (measuredHeight + itemHeight) / 2.0F;
+//        centerY = (measuredHeight + maxTextHeight) / 2.0F - CENTERCONTENTOFFSET;
+
+//        firstLineY = (int) ((measuredHeight - lineSpacingMultiplier * maxTextHeight) / 2.0F);
+//        secondLineY = (int) ((measuredHeight + lineSpacingMultiplier * maxTextHeight) / 2.0F);
         if (initPosition == -1) {
             if (isLoop) {
                 initPosition = (items.size() + 1) / 2;
@@ -205,13 +218,14 @@ public class LoopView extends View {
                 maxTextHeight = textHeight;
             }
         }
+        itemHeight = lineSpacingMultiplier * maxTextHeight;
 
     }
 
     void smoothScroll(ACTION action) {
         cancelFuture();
         if (action == ACTION.FLING || action == ACTION.DAGGLE) {
-            float itemHeight = lineSpacingMultiplier * maxTextHeight;
+//            float itemHeight = lineSpacingMultiplier * maxTextHeight;
             mOffset = (int) ((totalScrollY % itemHeight + itemHeight) % itemHeight);
             if ((float) mOffset > itemHeight / 2.0F) {
                 mOffset = (int) (itemHeight - (float) mOffset);
@@ -423,6 +437,7 @@ public class LoopView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        this.widthMeasureSpec = widthMeasureSpec;
         remeasure();
         setMeasuredDimension(measuredWidth, measuredHeight);
     }
