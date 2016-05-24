@@ -22,4 +22,7 @@
     <string name="updated_at">上次更新于%1$s前</string>
     <string name="updated_just_now">刚刚更新</string>
     <string name="time_error">时间有问题</string>
+    <!--alertview-->
+    <string name="pickerview_cancel">取消</string>
+    <string name="pickerview_submit">确定</string>
 </resources>

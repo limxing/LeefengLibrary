@@ -45,6 +45,7 @@ import com.limxing.library.R;
 
 /**
  * Numeric wheel view.
+ * 不好用,已弃用
  * 
  * @author Yuri Kanivets
  */

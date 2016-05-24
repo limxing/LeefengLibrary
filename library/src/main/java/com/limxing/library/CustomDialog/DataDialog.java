@@ -21,6 +21,8 @@ import java.util.List;
 
 /**
  * Created by limxing on 16/5/16.
+ *
+ * 还是学到了alertview中的方法
  */
 public class DataDialog implements OnItemSelectedListener, View.OnClickListener, DialogInterface.OnDismissListener {
     private  TextView confirmText;
@@ -111,6 +113,7 @@ public class DataDialog implements OnItemSelectedListener, View.OnClickListener,
     }
 
     public void show() {
+
         dialog = new Dialog(context, R.style.MMTheme_DataSheet);
         dialog.setOnDismissListener(this);
         dialog.setCanceledOnTouchOutside(true);
@@ -125,7 +128,7 @@ public class DataDialog implements OnItemSelectedListener, View.OnClickListener,
     }
 
     @Override
-    public void onItemSelected(int view) {
+    public void onItemSelected(LoopView view) {
         String year = yearView.getItems().get(yearView.getSelectedItem());
         String month = monthView.getItems().get(monthView.getSelectedItem());
         String day = "";
@@ -140,7 +143,7 @@ public class DataDialog implements OnItemSelectedListener, View.OnClickListener,
 
     @Override
     public void onClick(View view) {
-        onItemSelected(0);
+        onItemSelected(null);
         dialog.dismiss();
     }
 

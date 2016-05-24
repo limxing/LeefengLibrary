@@ -16,6 +16,6 @@ final class OnItemSelectedRunnable implements Runnable {
 
     @Override
     public final void run() {
-        loopView.onItemSelectedListener.onItemSelected(loopView.getSelectedItem());
+        loopView.onItemSelectedListener.onItemSelected(loopView);
     }
 }

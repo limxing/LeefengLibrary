@@ -6,5 +6,5 @@ package com.limxing.library.LoopView;
 
 
 public interface OnItemSelectedListener {
-    void onItemSelected(int view);
+    void onItemSelected(LoopView view);
 }

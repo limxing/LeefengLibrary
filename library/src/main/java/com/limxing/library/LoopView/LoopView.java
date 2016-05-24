@@ -45,7 +45,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class LoopView extends View {
 
-//    private static final float CENTERCONTENTOFFSET = 6;
+    //    private static final float CENTERCONTENTOFFSET = 6;
     private float scaleX = 1.05F;
     private int widthMeasureSpec;
     private float itemHeight;
@@ -135,7 +135,7 @@ public class LoopView extends View {
         gestureDetector.setIsLongpressEnabled(false);
 
         lineSpacingMultiplier = 1.6F;
-        isLoop = true;
+        isLoop = false;
         itemsVisible = 9;
         textSize = 0;
         colorGray = 0xffafafaf;
@@ -180,7 +180,7 @@ public class LoopView extends View {
 
         measureTextWidthHeight();
         //最大Text的高度乘间距倍数得到 可见文字实际的总高度，半圆的周长
-        halfCircumference = (int) (itemHeight * (itemsVisible - 1)) ;
+        halfCircumference = (int) (itemHeight * (itemsVisible - 1));
 //        halfCircumference = (int) (maxTextHeight * lineSpacingMultiplier * (itemsVisible - 1));
         measuredHeight = (int) ((halfCircumference * 2) / Math.PI);
         radius = (int) (halfCircumference / Math.PI);
@@ -287,7 +287,8 @@ public class LoopView extends View {
         remeasure();
         invalidate();
     }
-    public List<String> getItems(){
+
+    public List<String> getItems() {
         return items;
     }
 
@@ -331,7 +332,7 @@ public class LoopView extends View {
 
         String as[] = new String[itemsVisible];
         change = (int) (totalScrollY / (lineSpacingMultiplier * maxTextHeight));
-        preCurrentIndex = initPosition + change % items.size();
+        preCurrentIndex = initPosition + change % (items.size());
 
         if (!isLoop) {
             if (preCurrentIndex < 0) {
