@@ -489,7 +489,7 @@ public class LoopView extends View {
                         smoothScroll(ACTION.DAGGLE);
                     } else {
                         // 处理条目点击事件
-                        smoothScroll(ACTION.CLICK);
+//                        smoothScroll(ACTION.CLICK);
                     }
                 }
                 break;
