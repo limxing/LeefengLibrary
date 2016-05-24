@@ -22,6 +22,7 @@ import com.limxing.library.LoopView.LoopView;
 import com.limxing.library.LoopView.OnItemSelectedListener;
 import com.limxing.library.R;
 import com.limxing.library.utils.DisplayUtil;
+import com.limxing.library.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,6 +40,7 @@ public class AlertView implements OnItemSelectedListener {
     private LoopView yearView;
     private LoopView monthView;
     private LoopView dayView;
+    private ArrayList<String> dayList;
 
     /**
      * 三个时间的监听
@@ -47,14 +49,13 @@ public class AlertView implements OnItemSelectedListener {
      */
     @Override
     public void onItemSelected(LoopView view) {
-        String result = view.getItems().get(view.getSelectedItem());
-//        if (!result.endsWith("日")) {
-            String year = yearView.getItems().get(yearView.getSelectedItem());
-            year = year.substring(0, year.length() - 1);
-            String month = monthView.getItems().get(monthView.getSelectedItem());
-            month = month.substring(0, month.length() - 1);
-
-//        }
+        String year = yearView.getItems().get(yearView.getSelectedItem());
+        year = year.substring(0, year.length() - 1);
+        String month = monthView.getItems().get(monthView.getSelectedItem());
+        month = month.substring(0, month.length() - 1);
+        getDay(Integer.parseInt(year), Integer.parseInt(month));
+        dayView.setInitPosition(0);
+        dayView.setItems(dayList);
 
     }
 
@@ -65,8 +66,10 @@ public class AlertView implements OnItemSelectedListener {
      */
 
     private int getDay(int year, int month) {
+        int size = dayList.size();
         int day = 30;
         boolean flag = false;
+        LogUtils.i(year % 4 + "=" + month);
         switch (year % 4) {
             case 0:
                 flag = true;
@@ -84,12 +87,28 @@ public class AlertView implements OnItemSelectedListener {
             case 10:
             case 12:
                 day = 31;
+                for (int i = size; i < 31; i++) {
+                    dayList.add(i + 1 + "日");
+                }
                 break;
             case 2:
                 day = flag ? 29 : 28;
+                for (int i = day; i < size; i++) {
+                    dayList.remove(dayList.size() - 1);
+                }
+                if (size == 28 && flag) {
+                    dayList.add(29 + "日");
+                }
+
                 break;
             default:
                 day = 30;
+                for (int i = size; i < 30; i++) {
+                    dayList.add(i + 1 + "日");
+                }
+                if (size == 31) {
+                    dayList.remove(size - 1);
+                }
                 break;
         }
         return day;
@@ -164,7 +183,7 @@ public class AlertView implements OnItemSelectedListener {
     private void initData(int startyear, int endyear) {
         List<String> yearList = new ArrayList<>();
         List<String> monthList = new ArrayList<>();
-        List<String> dayList = new ArrayList<>();
+        dayList = new ArrayList<>();
         for (int i = startyear; i < endyear + 1; i++) {
             yearList.add(i + "年");
         }
