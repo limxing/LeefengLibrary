@@ -195,7 +195,9 @@ public class LoopView extends View {
 //        secondLineY = (int) ((measuredHeight + lineSpacingMultiplier * maxTextHeight) / 2.0F);
         if (initPosition == -1) {
             if (isLoop) {
-                initPosition = (items.size() + 1) / 2;
+//                biaoji
+//                initPosition = (items.size() + 1) / 2;
+                initPosition = 0;
             } else {
                 initPosition = 0;
             }
@@ -462,9 +464,26 @@ public class LoopView extends View {
                 totalScrollY = (int) (totalScrollY + dy);
 
                 // 边界处理。
+//                if (!isLoop) {
+//                    float top = -initPosition * itemHeight;
+//                    float bottom = (items.size() - 1 - initPosition) * itemHeight;
+//
+//                    if (totalScrollY < top) {
+//                        totalScrollY = (int) top;
+//                    } else if (totalScrollY > bottom) {
+//                        totalScrollY = (int) bottom;
+//                    }
+//                }
+                // 边界处理。
                 if (!isLoop) {
                     float top = -initPosition * itemHeight;
                     float bottom = (items.size() - 1 - initPosition) * itemHeight;
+                    if(totalScrollY - itemHeight*0.3 < top){
+                        top = totalScrollY - dy;
+                    }
+                    else if(totalScrollY + itemHeight*0.3 > bottom){
+                        bottom = totalScrollY - dy;
+                    }
 
                     if (totalScrollY < top) {
                         totalScrollY = (int) top;
@@ -484,13 +503,13 @@ public class LoopView extends View {
                     float extraOffset = (totalScrollY % itemHeight + itemHeight) % itemHeight;
                     mOffset = (int) ((circlePosition - itemsVisible / 2) * itemHeight - extraOffset);
 
-                    if ((System.currentTimeMillis() - startTime) > 120) {
+//                    if ((System.currentTimeMillis() - startTime) > 120) {
                         // 处理拖拽事件
                         smoothScroll(ACTION.DAGGLE);
-                    } else {
+//                    } else {
                         // 处理条目点击事件
 //                        smoothScroll(ACTION.CLICK);
-                    }
+//                    }
                 }
                 break;
         }

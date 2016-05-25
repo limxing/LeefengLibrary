@@ -21,6 +21,8 @@ final class MessageHandler extends Handler {
         this.loopview = loopview;
     }
 
+
+
     @Override
     public final void handleMessage(Message msg) {
         switch (msg.what) {
