@@ -26,6 +26,8 @@ import com.limxing.library.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -164,23 +166,32 @@ public class AlertView implements OnItemSelectedListener {
         initEvents();
     }
 
-    public AlertView(String title, Context context, int startyear, int endyear, OnConfirmeListener confirmeListener) {
+    /**
+     * 创建时间选择器
+     * @param title 标题
+     * @param context 上下文
+     * @param startyear 开始时间
+     * @param endyear 介素时间
+     * @param date 初始日期 null为当前
+     * @param confirmeListener
+     */
+    public AlertView(String title, Context context, int startyear, int endyear, Date date, OnConfirmeListener confirmeListener) {
         this.title = title;
         this.context = context;
         this.confirmeListener = confirmeListener;
         this.style = Style.Date;
-        initData(startyear, endyear);
+        initData(startyear, endyear,date);
         init();
         initEvents();
     }
 
     /**
      * 初始化时间
-     *
-     * @param startyear
+     *  @param startyear
      * @param endyear
+     * @param date
      */
-    private void initData(int startyear, int endyear) {
+    private void initData(int startyear, int endyear, Date date) {
         List<String> yearList = new ArrayList<>();
         List<String> monthList = new ArrayList<>();
         dayList = new ArrayList<>();
@@ -193,8 +204,32 @@ public class AlertView implements OnItemSelectedListener {
         for (int i = 1; i < 32; i++) {
             dayList.add(i + "日");
         }
+
+
         initViews(yearList, monthList, dayList);
+        setInitIndex(startyear,date);
         initLoopViewListener();
+
+    }
+
+    /**
+     * 设置时间的初始值
+     * @param startyear
+     * @param date
+     */
+    private void setInitIndex(int startyear, Date date) {
+        Calendar calendar = Calendar.getInstance();
+        if (date == null)
+            calendar.setTimeInMillis(System.currentTimeMillis());
+        else
+            calendar.setTime(date);
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        yearView.setInitPosition(year-startyear);
+
+        monthView.setInitPosition(month);
+        dayView.setInitPosition(day-1);
 
     }
 
