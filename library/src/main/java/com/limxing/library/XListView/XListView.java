@@ -209,6 +209,22 @@ public class XListView extends ListView implements OnScrollListener {
     }
 
     /**
+     * 添加一个停止加载后更改提示字的方法
+     * @param msg
+     */
+    public void stopLoadMore(String msg) {
+        if (mPullLoading) {
+            mPullLoad=false;
+            mPullLoading = false;
+            mFooterView.setState(XListViewFooter.STATE_NORMAL);
+            resetFooterHeight();
+        }
+        if (msg.length()>0){
+            mFooterView.getmHintView().setText(msg);
+        }
+    }
+
+    /**
      * set last refresh time
      *
      * @param time
