@@ -195,9 +195,7 @@ public class LoopView extends View {
 //        secondLineY = (int) ((measuredHeight + lineSpacingMultiplier * maxTextHeight) / 2.0F);
         if (initPosition == -1) {
             if (isLoop) {
-//                biaoji
-//                initPosition = (items.size() + 1) / 2;
-                initPosition = 0;
+                initPosition = (items.size() + 1) / 2;
             } else {
                 initPosition = 0;
             }
