@@ -51,6 +51,7 @@ public class XListView extends ListView implements OnScrollListener {
     private boolean mEnablePullLoad=false;
     private boolean mPullLoading;
     private boolean mIsFooterReady = false;
+    private boolean isPullLoad = false;
 
     // total list items, used to detect is at the bottom of listview.
     private int mTotalItemCount;
@@ -157,6 +158,7 @@ public class XListView extends ListView implements OnScrollListener {
      * @param enable
      */
     public void setPullLoadEnable(boolean enable) {
+        isPullLoad=enable;
         mEnablePullLoad = enable;
         if (!mEnablePullLoad) {
             mFooterView.hide();
@@ -482,4 +484,29 @@ public class XListView extends ListView implements OnScrollListener {
     }
 
 
+    /**
+     * notification的时候调用
+     */
+    @Override
+    public void requestLayout() {
+        super.requestLayout();
+        if (mFooterView == null) {
+            return;
+        }
+        if (getCount() <= getHeaderViewsCount() + getFooterViewsCount()) {
+            mFooterView.setNoneDataState(true);
+            if (isPullLoad) {
+//                setPullLoadEnable(false);
+                mEnablePullLoad = false;
+                mFooterView.hide();
+            }
+        } else {
+            mFooterView.setNoneDataState(false);
+            if (isPullLoad) {
+//                setPullLoadEnable(true);
+                mEnablePullLoad = true;
+                mFooterView.show();
+            }
+        }
+    }
 }
