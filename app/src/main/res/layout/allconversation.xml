@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/limxing_title"
+        layout="@layout/title" />
+
+    <FrameLayout
+        android:id="@+id/allconversation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/limxing_title"></FrameLayout>
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_alignParentBottom="true"
+    android:layout_height="@dimen/bottom_height">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#eeeeee"/>
+
+    <!--<RadioGroup-->
+        <!--android:id="@+id/limxing_main_rg"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="@color/aliwx_white"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<RadioButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:textSize="12sp"-->
+            <!--android:button="@null"-->
+            <!--android:drawableTop="@drawable/aliwx_topbar_icon_message_pre"-->
+            <!--android:gravity="center"-->
+            <!--android:background="@null"-->
+            <!--android:paddingTop="2dp"-->
+            <!--android:text="聊天" />-->
+
+        <!--<RadioButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:textSize="12sp"-->
+            <!--android:paddingTop="2dp"-->
+            <!--android:button="@null"-->
+            <!--android:background="@null"-->
+            <!--android:drawableTop="@drawable/aliwx_topbar_icon_message_pre"-->
+            <!--android:gravity="center"-->
+            <!--android:text="联系人" />-->
+
+        <!--<RadioButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:paddingTop="2dp"-->
+            <!--android:background="@null"-->
+            <!--android:textSize="12sp"-->
+            <!--android:button="@null"-->
+            <!--android:drawableTop="@drawable/aliwx_topbar_icon_message_pre"-->
+            <!--android:gravity="center"-->
+            <!--android:text="更多" />-->
+
+    <!--</RadioGroup>-->
+</LinearLayout>
+</RelativeLayout>

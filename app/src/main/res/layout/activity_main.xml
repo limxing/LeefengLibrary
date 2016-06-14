@@ -96,21 +96,10 @@
                     android:text="DragList" />
             </LinearLayout>
 
-            <com.limxing.library.PullToRefresh.SwipeRefreshLayout
-                android:id="@+id/main_fresh"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/main_ll"
-                swiperefresh:srlAnimationStyle="rotate"
-                swiperefresh:srlTextSize="16sp">
-
-                <ListView
-                    android:id="@+id/main_listview"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#ffffff"
-                    android:dividerHeight="1dp"></ListView>
-            </com.limxing.library.PullToRefresh.SwipeRefreshLayout>
+          <com.limxing.library.XListView.XListView
+              android:id="@+id/main_xlistview"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"></com.limxing.library.XListView.XListView>
         </LinearLayout>
     </com.limxing.library.SwipeBack.SwipeBackLayout>
 </LinearLayout>

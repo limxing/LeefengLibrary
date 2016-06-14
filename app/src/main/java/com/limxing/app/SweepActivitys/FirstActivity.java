@@ -10,7 +10,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.limxing.app.R;
-import com.limxing.library.BottomDialog.AlertDialog;
 import com.limxing.library.DatePicker.DatePickerView;
 import com.limxing.library.NoTitleBar.SystemBarTintManager;
 import com.limxing.library.PullToRefresh.SwipeRefreshLayout;

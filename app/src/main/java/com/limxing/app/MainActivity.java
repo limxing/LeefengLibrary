@@ -2,67 +2,71 @@ package com.limxing.app;
 
 import android.annotation.TargetApi;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
-import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.limxing.app.SweepActivitys.FirstActivity;
 import com.limxing.app.activity.CameraActivity;
-import com.limxing.library.BottomDialog.AlertDialog;
-import com.limxing.library.BottomDialog.BottomDialog;
-import com.limxing.library.BottomDialog.LMBottomSelecter;
+import com.limxing.app.bean.Student;
 import com.limxing.library.CirculProgressBar.TasksCompletedView;
 import com.limxing.library.CustomDialog.DataDialog;
-import com.limxing.library.DragList.DragListView;
 import com.limxing.library.PullToRefresh.SwipeRefreshLayout;
-
-import com.limxing.library.SVProgressHUD.SVProgressHUD;
-import com.limxing.library.SweetAlert.SweetAlertDialog;
-import com.limxing.library.SwipeBack.SwipeBackActivity;
 
 import com.limxing.library.NoTitleBar.SystemBarTintManager;
 
-import com.limxing.library.SwipeBack.SwipeBackLayout;
-import com.limxing.library.utils.DisplayUtil;
+import com.limxing.library.XListView.XListView;
 import com.limxing.library.utils.EncryptUtil;
 import com.limxing.library.utils.LogUtils;
-import com.limxing.library.utils.MyThreadPool;
 import com.limxing.library.utils.PhoneInfo;
 import com.limxing.library.utils.ToastUtils;
 import com.limxing.publicc.alertview.AlertView;
+import com.limxing.publicc.alertview.OnConfirmeListener;
 import com.limxing.publicc.alertview.OnItemClickListener;
 
-import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
 
-import note.aboutnet.Net;
 
 
-public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener,
-        SwipeRefreshLayout.OnLoadListener, OnItemClickListener {
-
+public class MainActivity extends AppCompatActivity implements OnItemClickListener, OnConfirmeListener {
 
     private SwipeRefreshLayout main_fresh;
-    private ListView main_listview;
-    private AlertDialog dialog;
+    private XListView main_xlistview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        main_xlistview=(XListView)findViewById(R.id.main_xlistview);
+        main_xlistview.setAdapter(new BaseAdapter() {
+            @Override
+            public int getCount() {
+                return 0;
+            }
+
+            @Override
+            public Object getItem(int i) {
+                return null;
+            }
+
+            @Override
+            public long getItemId(int i) {
+                return 0;
+            }
+
+            @Override
+            public View getView(int i, View view, ViewGroup viewGroup) {
+                return null;
+            }
+        });
+//        main_xlistview.set
 //        MyThreadPool.excuteCachedTask(new Runnable() {
 //            @Override
 //            public void run() {
@@ -79,67 +83,47 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         SystemBarTintManager.initSystemBar(this, R.color.transparent);
         PhoneInfo.show(MainActivity.this);
-        main_fresh = (com.limxing.library.PullToRefresh.SwipeRefreshLayout) findViewById(R.id.main_fresh);
 //设置滑动返回
 //        SwipeBackLayout swipeBackLayout = (SwipeBackLayout) findViewById(R.id.swipeBackLayout);
 //        swipeBackLayout.setDragEdge(SwipeBackLayout.DragEdge.LEFT);
 
-        main_listview = (ListView) findViewById(R.id.main_listview);
-        main_listview.setAdapter(new BaseAdapter() {
-            @Override
-            public int getCount() {
-                return 20;
-            }
 
-            @Override
-            public Object getItem(int i) {
-                return i;
-            }
-
-            @Override
-            public long getItemId(int i) {
-                return i;
-            }
-
-            @Override
-            public View getView(int i, View view, ViewGroup viewGroup) {
-                TextView textView = new TextView(MainActivity.this);
-                textView.setText("你是谁");
-                textView.setHeight(200);
-                return textView;
-            }
-        });
         findViewById(R.id.btn_bottom).setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
-//                new AlertView("上传",null,"取消",null,new String[]{"拍照","从相册选择"},MainActivity.this,AlertView.Style.ActionSheet,MainActivity.this).show();
-//                new AlertView("标题", null, "取消", new String[]{"高亮按钮1"}, new String[]{"其他按钮1", "其他按钮2", "其他按钮3"}, MainActivity.this, AlertView.Style.ActionSheet, MainActivity.this).setCancelable(true).show();
-                new AlertView("标题", "内容", null, new String[]{"确定"}, null, MainActivity.this, AlertView.Style.Alert, MainActivity.this).show();
-
-//                年的选择
-//                List<String> list = new ArrayList<String>();
-//                for (int i = 0; i < 20; i++) {
-//                    list.add(2000 + i + "年");
-//                }
-//                DataDialog dataDialog = new DataDialog(MainActivity.this);
-//                dataDialog.setViewItems(list, list, null);
-//                dataDialog.setDataDialogListener(new DataDialog.DataDialogListener() {
-//                    @Override
-//                    public void onItemSelected(String year, String month, String day) {
-//                        LogUtils.i(year + month + day);
-//                    }
-//                });
-//                dataDialog.show();
-
-//                自定义Viewpager
-//                Intent intent = new Intent(MainActivity.this, FirstActivity.class);
-//                startActivity(intent);
 
 
-//弹出加载中仿IOS的框
-//                new SVProgressHUD(MainActivity.this).showLmWithStatus("加载中...", SVProgressHUD.SVProgressHUDMaskType.Clear);
-                ;
+     //                new AlertView("上传",null,"取消",null,new String[]{"拍照","从相册选择"},MainActivity.this,AlertView.Style.ActionSheet,MainActivity.this).show();
+     //                new AlertView("标题", null, "取消", new String[]{"高亮按钮1"}, new String[]{"其他按钮1", "其他按钮2", "其他按钮3"}, MainActivity.this, AlertView.Style.ActionSheet, MainActivity.this).setCancelable(true).show();
+     //                new AlertView("标题", "内容", null, new String[]{"确定"}, null, MainActivity.this, AlertView.Style.Alert, MainActivity.this).show();
+
+     //                年的选择
+     //                List<String> list = new ArrayList<String>();
+     //                for (int i = 0; i < 20; i++) {
+     //                    list.add(2000 + i + "年");
+     //                }
+     //                new AlertView("请选择日期",MainActivity.this,1990,2100,null,MainActivity.this).show();
+     //                new AlertView("选择日期",MainActivity.this,list,list,null,MainActivity.this).setCancelable(true).show();
+     //                DataDialog dataDialog = new DataDialog(MainActivity.this);
+     //                dataDialog.setViewItems(list, list, null);
+     //                dataDialog.setDataDialogListener(new DataDialog.DataDialogListener() {
+     //                    @Override
+     //                    public void onItemSelected(String year, String month, String day) {
+     //                        LogUtils.i(year + month + day);
+     //                    }
+     //                });
+     //                dataDialog.show();
+
+     //                自定义Viewpager
+     //                Intent intent = new Intent(MainActivity.this, FirstActivity.class);
+     //                startActivity(intent);
+
+
+     //弹出加载中仿IOS的框
+     //                new SVProgressHUD(MainActivity.this).showLmWithStatus("加载中...", SVProgressHUD.SVProgressHUDMaskType.Clear);
+                     ;
+              
 
 
 //弹出底部选择框
@@ -251,8 +235,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
             }
         });
-        main_fresh.setOnRefreshListener(this);
-        main_fresh.setOnLoadListener(this);
         String username = "woaini";
 
         LogUtils.i("加密MD5.woaini:" + EncryptUtil.MD5Encode(username));
@@ -292,6 +274,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         ToastUtils.showShort(this,position+"");
     }
 
+    @Override
+    public void result(String s) {
+        ToastUtils.showShort(MainActivity.this,s);
+    }
+
     class ProgressRunable implements Runnable {
 
         @Override
@@ -310,16 +297,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     }
 
     @Override
-    public void onLoad() {
-        LogUtils.i("onLoad");
-    }
-
-    @Override
-    public void onRefresh() {
-        LogUtils.i("onRefresh");
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (resultCode) {
@@ -330,13 +307,4 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     }
 
-    @Override
-    protected void onPause() {
-        if (dialog != null && dialog.isShowing()) {
-            dialog.dismiss();
-
-
-        }
-        super.onPause();
-    }
 }
