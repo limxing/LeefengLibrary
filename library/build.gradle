@@ -27,6 +27,7 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
     compile 'com.pnikosis:materialish-progress:1.0'//金属加载进度条https://github.com/pnikosis/materialish-progress
 //    compile 'com.bigkoo:alertview:1.0.2'//防iOS对话框https://github.com/saiwu-bigkoo/Android-AlertView
+    compile 'com.github.orhanobut:logger:1.12'//打印日志的
 }
 def makeJar(String target,String classDir){
     exec{
