@@ -1,8 +1,6 @@
 package com.limxing.app.application;
 
 import android.app.Application;
-import android.content.Context;
-import android.content.Intent;
 
 //import com.alibaba.mobileim.IYWLoginService;
 //import com.alibaba.mobileim.IYWPushListener;
@@ -17,8 +15,7 @@ import android.content.Intent;
 //import com.alibaba.mobileim.gingko.model.tribe.YWTribe;
 //import com.alibaba.mobileim.login.IYWConnectionListener;
 //import com.alibaba.wxlib.util.SysUtil;
-import com.limxing.app.activity.LoginActivity;
-import com.limxing.library.utils.ToastUtils;
+
 //import com.umeng.openim.OpenIMAgent;
 
 /**

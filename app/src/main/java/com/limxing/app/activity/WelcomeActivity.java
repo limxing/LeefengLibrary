@@ -7,10 +7,8 @@ import android.content.Intent;
 //import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.limxing.app.BaseActivity;
 import com.limxing.app.R;
-import com.limxing.app.application.MyApplication;
-import com.limxing.library.utils.LogUtils;
+import com.limxing.app.recycleview.LoginActivity;
 import com.limxing.library.utils.SharedPreferencesUtil;
-import com.limxing.library.utils.ToastUtils;
 
 /**
  * Created by limxing on 16/1/25.
