@@ -14,7 +14,6 @@ import com.limxing.library.R;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
 /**
  * Created by limxing on 16/1/7.
  */
@@ -40,33 +39,25 @@ public class LoadView extends ImageView {
         init();
     }
 
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            degrees += 30f;
-            max.setRotate(degrees, width, height);
-            setImageMatrix(max);
-            if(degrees==360){
-                degrees=0;
-            }
-        }
-    };
-
     private void init() {
         setScaleType(ScaleType.MATRIX);
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.loading);
         setImageBitmap(bitmap);
         max = new Matrix();
+
         width = bitmap.getWidth() / 2;
         height = bitmap.getHeight() / 2;
-        Timer time=new Timer();
-        time.schedule(new TimerTask() {
+        scheduleDrawable(getResources().getDrawable(R.drawable.loading), new Runnable() {
             @Override
             public void run() {
-                handler.sendEmptyMessage(0);
+                degrees += 30f;
+                max.setRotate(degrees, width, height);
+                setImageMatrix(max);
+                if (degrees == 360) {
+                    degrees = 0;
+                }
             }
-        },0,80);
+        }, 80);
     }
-
 
 }
