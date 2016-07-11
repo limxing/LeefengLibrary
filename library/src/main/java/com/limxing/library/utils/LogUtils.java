@@ -1,5 +1,6 @@
 package com.limxing.library.utils;
 
+import android.app.Activity;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -163,6 +164,22 @@ public class LogUtils {
 		 mDebuggable = LEVEL_NONE;
 		}else{
 			mDebuggable = LEVEL_ERROR;
+		}
+	}
+
+	/**
+	 * 添加两个带类名得日志结果输出
+	 * @param activity
+	 * @param msg
+     */
+	public static void i(Activity activity, String msg) {
+		if (mDebuggable >= LEVEL_INFO) {
+			Log.i(mTag, activity.getClass().getSimpleName()+":"+msg);
+		}
+	}
+	public static void i(Class classd, String msg) {
+		if (mDebuggable >= LEVEL_INFO) {
+			Log.i(mTag,classd.getSimpleName()+":"+msg);
 		}
 	}
 }
