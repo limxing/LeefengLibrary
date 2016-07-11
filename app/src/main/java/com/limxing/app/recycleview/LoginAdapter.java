@@ -37,6 +37,7 @@ public class LoginAdapter extends RecyclerView.Adapter<LoginAdapter.MasonryView>
 //        ImageView imageView;
         TextView textView;
 
+        
         public MasonryView(View itemView) {
             super(itemView);
 //            imageView= (ImageView) itemView.findViewById(R.id.masonry_item_img );
