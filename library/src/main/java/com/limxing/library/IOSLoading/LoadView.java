@@ -22,7 +22,7 @@ public class LoadView extends ImageView {
     private Matrix max;
     private int width;
     private int height;
-    private Bitmap bitmap;
+    private MyRunable runnable;
 
     public LoadView(Context context) {
         super(context);
@@ -41,23 +41,26 @@ public class LoadView extends ImageView {
 
     private void init() {
         setScaleType(ScaleType.MATRIX);
-        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.loading);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.loading);
         setImageBitmap(bitmap);
         max = new Matrix();
-
         width = bitmap.getWidth() / 2;
         height = bitmap.getHeight() / 2;
-        scheduleDrawable(getResources().getDrawable(R.drawable.loading), new Runnable() {
-            @Override
-            public void run() {
-                degrees += 30f;
-                max.setRotate(degrees, width, height);
-                setImageMatrix(max);
-                if (degrees == 360) {
-                    degrees = 0;
-                }
-            }
-        }, 80);
+        runnable = new MyRunable();
+        postDelayed(runnable, 80);
+
     }
 
+    class MyRunable implements Runnable {
+        @Override
+        public void run() {
+            degrees += 30f;
+            max.setRotate(degrees, width, height);
+            setImageMatrix(max);
+            if (degrees == 360) {
+                degrees = 0;
+            }
+            postDelayed(runnable, 80);
+        }
+    }
 }
