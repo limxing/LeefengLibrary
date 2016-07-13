@@ -51,6 +51,7 @@ public class LoadView extends ImageView {
 
     }
 
+    
     class MyRunable implements Runnable {
         @Override
         public void run() {
