@@ -14,6 +14,7 @@ import com.limxing.library.R;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
 /**
  * Created by limxing on 16/1/7.
  */
@@ -39,6 +40,13 @@ public class LoadView extends ImageView {
         init();
     }
 
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        runnable = null;
+        max = null;
+    }
+
     private void init() {
         setScaleType(ScaleType.MATRIX);
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.loading);
@@ -51,17 +59,45 @@ public class LoadView extends ImageView {
 
     }
 
-    
+    public void startLoad() {
+        if (runnable != null) {
+            runnable.startload();
+        }
+    }
+
+    public void stopLoad() {
+        if (runnable != null) {
+            runnable.stopload();
+        }
+    }
+
     class MyRunable implements Runnable {
+        private boolean flag;
+
         @Override
         public void run() {
-            degrees += 30f;
-            max.setRotate(degrees, width, height);
-            setImageMatrix(max);
-            if (degrees == 360) {
-                degrees = 0;
+            if (runnable != null && max != null) {
+                degrees += 30f;
+                max.setRotate(degrees, width, height);
+                setImageMatrix(max);
+                if (degrees == 360) {
+                    degrees = 0;
+                }
+                if (flag) {
+                    postDelayed(runnable, 80);
+                }
             }
-            postDelayed(runnable, 80);
+        }
+
+        public void stopload() {
+            flag = false;
+        }
+
+        public void startload() {
+            flag = true;
+            if (runnable != null && max != null) {
+                postDelayed(runnable, 80);
+            }
         }
     }
 }
