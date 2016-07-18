@@ -36,7 +36,8 @@ import com.limxing.library.utils.ToastUtils;
  * 修改历史：
  */
 public class CellView extends RelativeLayout implements TextWatcher, View.OnClickListener {
-    private static final float DEFALT_TEXT_SIZE = 30;
+//    private static final float DEFALT_TEXT_SIZE = 30;
+    private static final float DEFALT_TEXT_SIZE_NEW = 20;
     private boolean topLine;
     private boolean isSendType;//设置edittext的按钮
     private int length;
@@ -133,7 +134,8 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
         tv.setText(mTitle);
         tv.setTextColor(getResources().getColor(R.color.cellview_color));
         //调节左边文字大小
-        tv.setTextSize(DisplayUtil.px2sp(context, DEFALT_TEXT_SIZE));
+//        tv.setTextSize(DisplayUtil.px2sp(context, DEFALT_TEXT_SIZE));
+        tv.setTextSize(DEFALT_TEXT_SIZE_NEW);
         if (leftDrawable != null) {
             leftDrawable.setBounds(0, 0, leftDrawable.getMinimumWidth(), leftDrawable.getMinimumHeight());
             tv.setCompoundDrawables(leftDrawable, null, null, null);
@@ -182,7 +184,8 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
             textView.setText(mHint);
             textView.setTextColor(getResources().getColor(R.color.cellview_edite_textcolor));
             //调节右边文字的大小
-            textView.setTextSize(DisplayUtil.px2sp(context, DEFALT_TEXT_SIZE));
+//            textView.setTextSize(DisplayUtil.px2sp(context, DEFALT_TEXT_SIZE));
+            textView.setTextSize(DEFALT_TEXT_SIZE_NEW);
             if (clickAble) {
                 textView.setOnClickListener(this);
             }
@@ -213,7 +216,8 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
             editText.setHintTextColor(getResources().getColor(R.color.cellview_edite_texthintcolor));
             editText.setTextColor(getResources().getColor(R.color.cellview_edite_textcolor));
             //调节右边输入框文字的大小
-            editText.setTextSize(DisplayUtil.px2sp(context, DEFALT_TEXT_SIZE));
+//            editText.setTextSize(DisplayUtil.px2sp(context, DEFALT_TEXT_SIZE));
+            editText.setTextSize(DEFALT_TEXT_SIZE_NEW);
             editText.setGravity(Gravity.RIGHT);
 
             if (length > 0) {
