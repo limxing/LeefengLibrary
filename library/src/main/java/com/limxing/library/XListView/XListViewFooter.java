@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
+import com.limxing.library.IOSLoading.LoadView;
 import com.limxing.library.R;
 
 public class XListViewFooter extends LinearLayout {
@@ -28,6 +29,7 @@ public class XListViewFooter extends LinearLayout {
 	private View mProgressBar;
 	private TextView mHintView;
 	private RelativeLayout xlistview_footer_state;
+	private LoadView xlistview_footer_loadview;
 
 	public XListViewFooter(Context context) {
 		super(context);
@@ -48,8 +50,10 @@ public class XListViewFooter extends LinearLayout {
 			mHintView.setVisibility(View.VISIBLE);
 			mHintView.setText(R.string.xlistview_footer_hint_ready);
 		} else if (state == STATE_LOADING) {
+			xlistview_footer_loadview.startLoad();
 			mProgressBar.setVisibility(View.VISIBLE);
 		} else {
+			xlistview_footer_loadview.stopLoad();
 			mHintView.setVisibility(View.VISIBLE);
 			mHintView.setText(R.string.xlistview_footer_hint_normal);
 		}
@@ -115,7 +119,7 @@ public class XListViewFooter extends LinearLayout {
 		mContentView = moreView.findViewById(R.id.xlistview_footer_content);
 		mProgressBar = moreView.findViewById(R.id.xlistview_footer_progressbar);
 		mHintView = (TextView)moreView.findViewById(R.id.xlistview_footer_hint_textview);
-
+		xlistview_footer_loadview=(LoadView)moreView.findViewById(R.id.xlistview_footer_loadview);
 	}
 
 	public TextView getmHintView() {
