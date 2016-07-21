@@ -323,7 +323,7 @@ public class SwipeRefreshLayout extends ViewGroup {
 				R.drawable.default_ptr_flip);
 		finished_drawable = a.getResourceId(
 				R.styleable.swiperefresh_finishedImage,
-				R.drawable.ic_done_grey600_18dp);
+				R.drawable.xlistview_success);
 		pull2refresh = a.getBoolean(R.styleable.swiperefresh_ptr, true);
 		pull2load = a.getBoolean(R.styleable.swiperefresh_ptl, true);
 		textSize = a.getDimension(R.styleable.swiperefresh_srlTextSize,
