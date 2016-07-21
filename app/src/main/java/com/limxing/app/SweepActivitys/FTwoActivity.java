@@ -58,7 +58,7 @@ public class FTwoActivity extends SwipeBackActivity implements XListView.IXListV
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                xlist.stopRefresh();
+                xlist.stopRefresh(true);
             }
         }, 2000);
     }
