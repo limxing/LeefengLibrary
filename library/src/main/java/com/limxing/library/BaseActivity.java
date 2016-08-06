@@ -32,19 +32,28 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected abstract void init();
 
-    // 切换界面动画开启一个Activiyty
-    protected void startActivityWithAnim(Intent intent) {
-        startActivity(intent);
+    /**
+     * 切换界面动画开启一个Activiyty
+     */
+
+    @Override
+    public void startActivity(Intent intent) {
+        super.startActivity(intent);
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
 
-    // 切换界面动画关闭一个Activiyty
-    protected void finishActivity() {
-        finish();
+    /**
+     * 切换界面动画关闭一个Activiyty
+     */
+
+    @Override
+    public void finish() {
+        super.finish();
         overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
+
     //屏幕全屏
-    protected  void fullScreen(){
+    protected void fullScreen() {
         requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏标题栏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);//隐藏状态栏

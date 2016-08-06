@@ -5,12 +5,12 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_main">MainActivity</string>
-<!--SweetDialog-->
+    <!--SweetDialog-->
     <string name="dialog_default_title">Here\'s a message!</string>
     <string name="dialog_ok">确定</string>
     <string name="dialog_cancel">取消</string>
     <string name="LOADING">加载中...</string>
-<!--Xlist-->
+    <!--Xlist-->
     <string name="xlistview_header_hint_normal">下拉刷新</string>
     <string name="xlistview_header_hint_ready">松开刷新数据</string>
     <string name="xlistview_header_hint_loading">正在加载...</string>
@@ -26,4 +26,13 @@
     <!--alertview-->
     <string name="pickerview_cancel">取消</string>
     <string name="pickerview_submit">确定</string>
+
+    <!--6.0权限-->
+     <string name="perm_tip">
+        当前应用缺少必要权限。\n请点击"设置"-"权限"-打开所需权限。\n最后点击两次后退按钮，即可返回。
+    </string>
+    <string name="ask_again">请给予应用必要权限，让程序可正常工作。</string>
+    <string name="setting">设置</string>
+    <string name="cancel">取消</string>
+
 </resources>
