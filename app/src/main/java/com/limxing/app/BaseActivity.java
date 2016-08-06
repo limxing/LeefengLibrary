@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.limxing.library.NoTitleBar.StatusBarCompat;
 import com.limxing.library.NoTitleBar.SystemBarTintManager;
 import com.limxing.library.Permission.EasyPermissions;
 
@@ -22,7 +23,8 @@ public abstract class BaseActivity extends AppCompatActivity  implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SystemBarTintManager.initSystemBar(this);
+//        SystemBarTintManager.initSystemBar(this);
+        StatusBarCompat.translucentStatusBar(this);
         initView();
         init();
     }
