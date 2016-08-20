@@ -1,6 +1,7 @@
 package com.limxing.app.view;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.GestureDetector;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Scroller;
+import android.widget.TextView;
 
 import com.limxing.library.DatePicker.WheelScroller;
 import com.limxing.library.utils.LogUtils;
@@ -242,5 +244,13 @@ public class SlidMenu extends ViewGroup implements MyGestureActionListener {
     public void actionLeft() {
         LogUtils.i("向左手势");
         closeMenu();
+    }
+
+
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
     }
 }

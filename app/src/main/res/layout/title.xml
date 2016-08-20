@@ -3,28 +3,37 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/title_height"
     android:background="@color/holo_blue_light">
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/honey"/>
+    <TextView
+        android:id="@+id/tt"
 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="hahah" />
     <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="@dimen/title_height"-->
-        <!--android:layout_marginTop="@dimen/padingTop">-->
-        <!--<TextView-->
-            <!--android:id="@+id/chat_back"-->
-            <!--style="@style/aliwx_common_title_left_btn_shadow"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:visibility="gone"-->
-            <!--android:textSize="@dimen/aliwx_common_text_size"-->
-            <!--android:textColor="@color/aliwx_common_text_color"-->
-            <!--android:drawableLeft="@drawable/aliwx_common_back_btn_bg"-->
-            <!--android:text="@string/aliwx_back" />-->
-        <!--<TextView-->
-            <!--android:id="@+id/limxing_title_name"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:text="聊天列表"-->
-            <!--android:textColor="#ffffff"-->
-            <!--android:textSize="18sp"></TextView>-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/title_height"-->
+    <!--android:layout_marginTop="@dimen/padingTop">-->
+    <!--<TextView-->
+    <!--android:id="@+id/chat_back"-->
+    <!--style="@style/aliwx_common_title_left_btn_shadow"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:visibility="gone"-->
+    <!--android:textSize="@dimen/aliwx_common_text_size"-->
+    <!--android:textColor="@color/aliwx_common_text_color"-->
+    <!--android:drawableLeft="@drawable/aliwx_common_back_btn_bg"-->
+    <!--android:text="@string/aliwx_back" />-->
+    <!--<TextView-->
+    <!--android:id="@+id/limxing_title_name"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:text="聊天列表"-->
+    <!--android:textColor="#ffffff"-->
+    <!--android:textSize="18sp"></TextView>-->
     <!--</RelativeLayout>-->
 </RelativeLayout>
