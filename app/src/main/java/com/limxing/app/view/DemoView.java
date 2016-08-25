@@ -3,12 +3,9 @@ package com.limxing.app.view;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 /**
  * Created by limxing on 16/8/20.
@@ -45,8 +42,6 @@ public class DemoView extends View {
         }
     }
 
-    private int w;
-    private int h;
 
 
     @Override
@@ -64,6 +59,7 @@ public class DemoView extends View {
     }
 
     public void setText(View s) {
+        removeText();
         view = s;
         postInvalidate();
     }
