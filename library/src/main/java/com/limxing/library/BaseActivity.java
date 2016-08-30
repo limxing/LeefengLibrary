@@ -123,4 +123,11 @@ public abstract class BaseActivity extends AppCompatActivity  implements
     public void onPermissionsGranted(int requestCode, List<String> perms) {
 
     }
+      protected void closeInput() {
+        View view = getWindow().peekDecorView();
+        if (view != null) {
+            InputMethodManager inputmanger = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputmanger.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
 }
