@@ -86,6 +86,7 @@ public class PhotoView extends ImageView {
     private Runnable mCompleteCallBack;
 
     private float[] mValues = new float[16];
+    private boolean isSquare;
 
     public PhotoView(Context context) {
         super(context);
@@ -309,9 +310,11 @@ public class PhotoView extends ImageView {
         if (mImgRect.width() < mWidgetRect.width() || mImgRect.height() < mWidgetRect.height()) {
             float scaleX = mWidgetRect.width() / mImgRect.width();
             float scaleY = mWidgetRect.height() / mImgRect.height();
-
-            mScale = scaleX > scaleY ? scaleX : scaleY;
-
+if(isSquare) {
+    mScale = scaleX > scaleY ? scaleX : scaleY;
+}else{
+    mScale = scaleX < scaleY ? scaleX : scaleY;
+}
             mAnimaMatrix.postScale(mScale, mScale, mScreenCenter.x, mScreenCenter.y);
 
             executeTranslate();
@@ -1232,5 +1235,9 @@ public class PhotoView extends ImageView {
             mCompleteCallBack = completeCallBack;
             mTranslate.start();
         }
+    }
+
+    public void setSquare(boolean square) {
+        isSquare = square;
     }
 }
