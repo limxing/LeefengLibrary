@@ -46,7 +46,7 @@
 
 
         </activity>
-
+<activity android:name=".recycleview.ui.ViewImageActivity"/>
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="@string/umeng_appkey"></meta-data>

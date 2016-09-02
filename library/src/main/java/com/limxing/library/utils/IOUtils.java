@@ -1,7 +1,10 @@
 package com.limxing.library.utils;
 
+import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.PushbackInputStream;
 
 /**
  * IO流的操作类

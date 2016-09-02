@@ -16,4 +16,8 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
+    <!--浏览图片-->
+    <style name="ToolbarTheme" parent="Theme.AppCompat">
+        <item name="android:background">@color/transparent</item>
+    </style>
 </resources>
