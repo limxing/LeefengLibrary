@@ -235,7 +235,7 @@ public class PhotoView extends ImageView {
             sy = (float) h / imgh;
         }
 
-        float scale = sx < sy ? sx : sy;
+        float scale = sx > sy ? sx : sy;
 
         mBaseMatrix.reset();
         mBaseMatrix.postTranslate(tx, ty);
@@ -310,11 +310,11 @@ public class PhotoView extends ImageView {
         if (mImgRect.width() < mWidgetRect.width() || mImgRect.height() < mWidgetRect.height()) {
             float scaleX = mWidgetRect.width() / mImgRect.width();
             float scaleY = mWidgetRect.height() / mImgRect.height();
-if(isSquare) {
-    mScale = scaleX > scaleY ? scaleX : scaleY;
-}else{
-    mScale = scaleX < scaleY ? scaleX : scaleY;
-}
+            if (isSquare) {
+                mScale = scaleX > scaleY ? scaleX : scaleY;
+            } else {
+                mScale = scaleX < scaleY ? scaleX : scaleY;
+            }
             mAnimaMatrix.postScale(mScale, mScale, mScreenCenter.x, mScreenCenter.y);
 
             executeTranslate();
@@ -1237,6 +1237,10 @@ if(isSquare) {
         }
     }
 
+    /**
+     * 设置为方形
+     * @param square
+     */
     public void setSquare(boolean square) {
         isSquare = square;
     }
