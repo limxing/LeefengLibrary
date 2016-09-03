@@ -33,13 +33,16 @@ class ImageAdapter extends PagerAdapter {
         if (cahceViews.isEmpty()) {
             initView(4);
         }
-        httpImageView = cahceViews.get(0).get();
-
+        httpImageView = cahceViews.get(0).get();//弱引用的提取
         if (httpImageView == null) {  //由于用了弱引用，所以当垃圾回收器进行回收的时候就回收所有内存
             cahceViews.clear();   //需要先清理，GC后对象内存被回收
             initView(2);
             httpImageView = cahceViews.get(0).get();
             Log.i(TAG, "----发生了GC----  init view size : " + cahceViews.size());
+        }
+        String s= imageUrls.get(position);
+        if (httpImageView != null) {
+            httpImageView.setImageUrl(s);
         }
 
         ViewGroup parent = (ViewGroup) httpImageView.getParent();
@@ -48,7 +51,6 @@ class ImageAdapter extends PagerAdapter {
         } else {
             container.addView(httpImageView);
         }
-        httpImageView.setImageUrl(imageUrls.get(position));
 
         cahceViews.remove(0);
         Log.i(TAG, "instantiateItem cache size : " + cahceViews.size());
