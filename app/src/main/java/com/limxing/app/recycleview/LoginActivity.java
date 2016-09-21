@@ -129,7 +129,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        data.get
+
         super.onActivityResult(requestCode, resultCode, data);
     }
 }
