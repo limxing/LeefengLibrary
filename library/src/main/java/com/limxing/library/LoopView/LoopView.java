@@ -21,28 +21,29 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 使用方法
- * LoopView loopView = (LoopView) findViewById(R.id.loopview);
- * ArrayList<String> list = new ArrayList<>();
- * for (int i = 0; i < 15; i++) {
- * list.add(2000 + i+"年");
- * }
- * //设置是否循环播放
- * //loopView.setNotLoop();
- * //滚动监听
- * loopView.setListener(new OnItemSelectedListener() {
- *
- * @Override public void onItemSelected(int index) {
- * Log.d("debug", "Item " + index);
- * }
- * });
- * //设置原始数据
- * loopView.setItems(list);
- * //设置初始位置
- * loopView.setInitPosition(5);
- * //设置字体大小
- * //loopView.setTextSize(20);
+
  * Created by Weidongjian on 2015/8/18.
  */
+// * LoopView loopView = (LoopView) findViewById(R.id.loopview);
+// * ArrayList<String> list = new ArrayList<>();
+// * for (int i = 0; i < 15; i++) {
+// * list.add(2000 + i+"年");
+// * }
+// * //设置是否循环播放
+// * //loopView.setNotLoop();
+// * //滚动监听
+// * loopView.setListener(new OnItemSelectedListener() {
+// *
+// * @Override public void onItemSelected(int index) {
+// * Log.d("debug", "Item " + index);
+// * }
+// * });
+// * //设置原始数据
+// * loopView.setItems(list);
+// * //设置初始位置
+// * loopView.setInitPosition(5);
+// * //设置字体大小
+// * //loopView.setTextSize(20);
 public class LoopView extends View {
 
     //    private static final float CENTERCONTENTOFFSET = 6;

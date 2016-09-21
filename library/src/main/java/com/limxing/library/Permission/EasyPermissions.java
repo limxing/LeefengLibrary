@@ -37,7 +37,7 @@ import java.util.List;
 
 
 /**
- * Android M (API >= 23).
+ * Android M
  */
 public class EasyPermissions {
 

@@ -26,13 +26,13 @@ import com.limxing.library.utils.ToastUtils;
 
 /**
  * 版权：北京航天世景信息技术有限公司
- * <p/>
+
  * 作者：李利锋
- * <p/>
+
  * 创建日期：2016/4/24 15:02
- * <p/>
+
  * 描述：
- * <p/>
+
  * 修改历史：
  */
 public class CellView extends RelativeLayout implements TextWatcher, View.OnClickListener {

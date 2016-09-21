@@ -39,19 +39,19 @@ public class DemoActivity extends AppCompatActivity {
          slidMenu=(SlidMenu) findViewById(R.id.slidMenu);
 
 
-        final MyFragment mf = new MyFragment("第一个", Color.WHITE);
+//        final MyFragment mf = new MyFragment("第一个", Color.WHITE);
 
         final FragmentManager fm = getFragmentManager();
         FragmentTransaction fr =fm.beginTransaction();
-        fr.add(R.id.container, mf, "mf").commit();
+//        fr.add(R.id.container, mf, "mf").commit();
 
         listView = (ListView) findViewById(R.id.listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i<5) {
-                    MyFragment mf2 = new MyFragment("第二个",Color.BLUE);
-                    fm.beginTransaction().replace(R.id.container, mf2, "fg2").commit();
+//                    MyFragment mf2 = new MyFragment("第二个",Color.BLUE);
+//                    fm.beginTransaction().replace(R.id.container, mf2, "fg2").commit();
                 }
                 if(10>i&&i>5){
                     fm.beginTransaction().remove(fm.findFragmentByTag("fg2")).commit();

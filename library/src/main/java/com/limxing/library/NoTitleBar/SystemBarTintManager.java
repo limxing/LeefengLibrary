@@ -566,10 +566,9 @@ public class SystemBarTintManager {
     }
 
     /**
-     * @name: 初始化系统状态栏颜色
+     *  初始化系统状态栏颜色
      * 需要在布局文件中添加android:clipToPadding="true" android:fitsSystemWindows="true"
      *
-     * @autor Limxing
      * @param activity activity
      * @param color titlebar的颜色
      */
@@ -583,10 +582,9 @@ public class SystemBarTintManager {
     }
 
     /**
-     * @name: 初始化系统状态栏颜色,默认是透明的titleBar
+     * 初始化系统状态栏颜色,默认是透明的titleBar
      *
      *
-     * @autor Limxing
      * @param activity activity
      *
      */

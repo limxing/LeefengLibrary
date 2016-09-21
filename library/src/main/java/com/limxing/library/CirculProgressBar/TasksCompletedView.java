@@ -16,16 +16,17 @@ import com.limxing.library.R;
  * @author naiyu(http://snailws.com)
  * @version 1.0
  * xmlns:tc="http://schemas.android.com/apk/res/auto-..
-<com.limxing.library.CirculProgressBar.TasksCompletedView
-android:id="@+id/tasks_view"
-android:layout_width="fill_parent"
-android:layout_height="fill_parent"
-tc:radius="100dip"
-tc:strokeWidth="20dip"
-tc:circleColor="@color/circle_color"
-tc:ringColor="@color/ring_color" />
+
 
  */
+//<com.limxing.library.CirculProgressBar.TasksCompletedView
+//		android:id="@+id/tasks_view"
+//		android:layout_width="fill_parent"
+//		android:layout_height="fill_parent"
+//		tc:radius="100dip"
+//		tc:strokeWidth="20dip"
+//		tc:circleColor="@color/circle_color"
+//		tc:ringColor="@color/ring_color" />
 public class TasksCompletedView extends View {
 
 	// 画实心圆的画笔

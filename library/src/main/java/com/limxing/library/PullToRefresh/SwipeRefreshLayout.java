@@ -44,23 +44,7 @@ import com.limxing.library.utils.DisplayUtil;
 
 /**
  *
- * <com.limxing.library.PullToRefresh.SwipeRefreshLayout
- android:id="@+id/main_fresh"
- android:layout_width="match_parent"
- android:layout_height="match_parent"
- android:layout_below="@+id/main_title"
- swiperefresh:srlAnimationStyle="rotate"
- swiperefresh:srlTextSize="16sp" >
-
- <ListView
- android:id="@+id/main_listview"
- android:layout_width="match_parent"
- android:layout_height="match_parent"
- android:background="#ffffff"
- android:dividerHeight="1dp" >
- </ListView>
- </com.limxing.library.PullToRefresh.SwipeRefreshLayout>
-
+ *
  * The SwipeRefreshLayout should be used whenever the user can refresh the
  * contents of a view via a vertical swipe gesture. The activity that
  * instantiates this view should add an OnRefreshListener to be notified
@@ -73,15 +57,31 @@ import com.limxing.library.utils.DisplayUtil;
  * animation, it should call setRefreshing(true). To disable the gesture and
  * progress animation, call setEnabled(false) on the view.
  * 
- * <p>
+ *
  * This layout should be made the parent of the view that will be refreshed as a
  * result of the gesture and can only support one direct child. This view will
  * also be made the target of the gesture and will be forced to match both the
  * width and the height supplied in this layout. The SwipeRefreshLayout does not
  * provide accessibility events; instead, a menu item must be provided to allow
  * refresh of the content wherever this gesture is used.
- * </p>
+ *
  */
+//<com.limxing.library.PullToRefresh.SwipeRefreshLayout
+//		android:id="@+id/main_fresh"
+//		android:layout_width="match_parent"
+//		android:layout_height="match_parent"
+//		android:layout_below="@+id/main_title"
+//		swiperefresh:srlAnimationStyle="rotate"
+//		swiperefresh:srlTextSize="16sp" >
+//
+//		<ListView
+//		android:id="@+id/main_listview"
+//		android:layout_width="match_parent"
+//		android:layout_height="match_parent"
+//		android:background="#ffffff"
+//		android:dividerHeight="1dp" >
+//		</ListView>
+//		</com.limxing.library.PullToRefresh.SwipeRefreshLayout>
 public class SwipeRefreshLayout extends ViewGroup {
 	private static final String LOG_TAG = SwipeRefreshLayout.class
 			.getSimpleName();

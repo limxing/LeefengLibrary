@@ -18,9 +18,6 @@ package com.limxing.library.DatePicker;
 
 /**
  * Wheel changed listener interface.
- * <p>The onChanged() method is called whenever current wheel positions is changed:
- * <li> New Wheel position is set
- * <li> Wheel view is scrolled
  */
 public interface OnWheelChangedListener {
 	/**

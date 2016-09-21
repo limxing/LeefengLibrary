@@ -9,9 +9,9 @@ import android.view.WindowManager;
 
 /**
  * 作者： limxing
- * <p/>
+
  * 时间： 2015-10-30 上午10:51:16
- * <p/>
+
  * 描述：屏幕像素pxps dp之间的转换
  */
 public class DisplayUtil {

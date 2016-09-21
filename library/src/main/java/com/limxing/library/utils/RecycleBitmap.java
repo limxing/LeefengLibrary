@@ -98,7 +98,6 @@ public class RecycleBitmap {
     /**
      * 回收继承自AbsListView的类,如GridView,ListView等
      *
-     * @param
      * @param recycleIds 要清理的Id的集合;
      */
     public static void recycleViewGroup(ViewGroup layout, int[] recycleIds) {

@@ -85,7 +85,6 @@ public class BitmapHelper {
     /**
      * caculate the bitmap sampleSize
      *
-     * @param
      * @return
      */
     public static int caculateInSampleSize(Options options, int rqsW, int rqsH) {

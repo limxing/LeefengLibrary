@@ -1,13 +1,13 @@
 package com.limxing.library.BounceScrollView;
 
 /**
- * <p/>
+
  * 作者：李利锋
- * <p/>
+
  * 创建日期：2016/4/20 11:19
- * <p/>
+
  * 描述：
- * <p/>
+
  * 修改历史：
  */
 

@@ -34,17 +34,18 @@ import com.limxing.library.utils.LogUtils;
 
 /**
  * Swipe or Pull to finish a Activity.
- * <p/>
+
  * This layout must be a root layout and contains only one direct child view.
- * <p/>
+
  * The activity must use a theme that with translucent style.
- * <style name="Theme.Swipe.Back" parent="AppTheme">
- * <item name="android:windowIsTranslucent">true</item>
- * <item name="android:windowBackground">@android:color/transparent</item>
- * </style>
- * <p/>
+
+
  * Created by Eric on 15/1/8.
  */
+// * <style name="Theme.Swipe.Back" parent="AppTheme">
+// * <item name="android:windowIsTranslucent">true</item>
+// * <item name="android:windowBackground">@android:color/transparent</item>
+// * </style>
 public class SwipeBackLayout extends ViewGroup {
 
     private static final String TAG = "SwipeBackLayout";

@@ -19,15 +19,24 @@ import com.limxing.library.utils.LogUtils;
  * Created by limxing on 16/3/28.
  */
 public class MyFragment extends Fragment {
-    private final int color;
-    private String text;
-    public MyFragment(String s,int color){
-        super();
-        this.text=s;
-        this.color=color;
-        LogUtils.i("MyFragment==MyFragment");
-
+    private  int color;
+    public MyFragment() {
     }
+
+//    public MyFragment(String text,int color) {
+//        super.setArguments(getArguments());
+//        this.color = color;
+//        this.text = text;
+//    }
+
+    private String text;
+//    public MyFragment(String s,int color){
+//        super();
+//        this.text=s;
+//        this.color=color;
+//        LogUtils.i("MyFragment==MyFragment");
+//
+//    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
