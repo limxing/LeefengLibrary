@@ -22,6 +22,8 @@ public class AlertAnimateUtil {
                 return isInAnimation ?  R.anim.slide_in_bottom :  R.anim.slide_out_bottom;
             case Gravity.CENTER:
                 return isInAnimation ?  R.anim.fade_in_center :  R.anim.fade_out_center;
+            case Gravity.RIGHT:
+                 return isInAnimation ?  R.anim.slide_in_right :  R.anim.slide_out_right;
         }
         return INVALID;
     }

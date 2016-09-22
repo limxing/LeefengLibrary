@@ -68,7 +68,7 @@ public class ToggleButton extends View{
 
 	private OnToggleChanged listener;
 	
-	private ToggleButton(Context context) {
+	public ToggleButton(Context context) {
 		super(context);
 	}
 	public ToggleButton(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -133,21 +133,21 @@ public class ToggleButton extends View{
 		takeEffect(animate);
 		
 		if(listener != null){
-			listener.onToggle(toggleOn);
+			listener.onToggle(this,toggleOn);
 		}
 	}
 	
 	public void toggleOn() {
 		setToggleOn();
 		if(listener != null){
-			listener.onToggle(toggleOn);
+			listener.onToggle(this, toggleOn);
 		}
 	}
 	
 	public void toggleOff() {
 		setToggleOff();
 		if(listener != null){
-			listener.onToggle(toggleOn);
+			listener.onToggle(this, toggleOn);
 		}
 	}
 	
@@ -310,9 +310,10 @@ public class ToggleButton extends View{
 	 */
 	public interface OnToggleChanged{
 		/**
+		 * @param toggleButton
 		 * @param on
 		 */
-		public void onToggle(boolean on);
+		public void onToggle(ToggleButton toggleButton, boolean on);
 	}
 
 

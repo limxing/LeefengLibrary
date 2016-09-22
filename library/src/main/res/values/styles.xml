@@ -104,6 +104,12 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
-    <!--IOSAlertDialog-->
+    <style name="rightin" parent="android:Animation">
+        <!--<item name="@android:windowEnterAnimation">@anim/activity_totop</item>-->
+        <item name="@android:windowEnterAnimation">@anim/slide_in_right</item>
+        //进入时的动画
+        <item name="@android:windowExitAnimation">@anim/slide_out_right</item>
+        //退出时的动画
+    </style>
 
 </resources>

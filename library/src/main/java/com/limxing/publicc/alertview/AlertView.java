@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -43,6 +44,8 @@ public class AlertView implements OnItemSelectedListener {
     private LoopView monthView;
     private LoopView dayView;
     private ArrayList<String> dayList;
+    private String describe;
+    private TextView tvAlertMsg;//描述
 
     /**
      * 三个时间的监听
@@ -116,15 +119,19 @@ public class AlertView implements OnItemSelectedListener {
         return day;
     }
 
+    public void setDescribe(String describe) {
+        tvAlertMsg.setText(describe);
+    }
+
     public static enum Style {
         ActionSheet,
         Alert,
+        Custom,
         Date
     }
 
     private final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM
-    );
+            FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM);
     public static final int HORIZONTAL_BUTTONS_MAXCOUNT = 2;
     public static final String OTHERS = "others";
     public static final String DESTRUCTIVE = "destructive";
@@ -167,12 +174,34 @@ public class AlertView implements OnItemSelectedListener {
     }
 
     /**
+     * 只能添加上下弹出的不能设置左右弹出的
+     *
+     * @param view
+     * @param title
+     * @param msg
+     * @param context
+     */
+    public AlertView(View view, String title, String msg, Context context) {
+        this.context = context;
+        this.style = Style.Custom;
+        initViews();
+        init();
+        initEvents();
+//        RelativeLayout contentContainer = (RelativeLayout) this.contentContainer;
+//        contentContainer.setGravity(Gravity.RIGHT);
+        this.contentContainer.addView(view);
+
+//        addExtView(view);
+    }
+
+    /**
      * 创建时间选择器
-     * @param title 标题
-     * @param context 上下文
-     * @param startyear 开始时间
-     * @param endyear 介素时间
-     * @param date 初始日期 null为当前
+     *
+     * @param title            标题
+     * @param context          上下文
+     * @param startyear        开始时间
+     * @param endyear          介素时间
+     * @param date             初始日期 null为当前
      * @param confirmeListener
      */
     public AlertView(String title, Context context, int startyear, int endyear, Date date, OnConfirmeListener confirmeListener) {
@@ -180,14 +209,15 @@ public class AlertView implements OnItemSelectedListener {
         this.context = context;
         this.confirmeListener = confirmeListener;
         this.style = Style.Date;
-        initData(startyear, endyear,date);
+        initData(startyear, endyear, date);
         init();
         initEvents();
     }
 
     /**
      * 初始化时间
-     *  @param startyear
+     *
+     * @param startyear
      * @param endyear
      * @param date
      */
@@ -207,13 +237,14 @@ public class AlertView implements OnItemSelectedListener {
 
 
         initViews(yearList, monthList, dayList);
-        setInitIndex(startyear,date);
+        setInitIndex(startyear, date);
         initLoopViewListener();
 
     }
 
     /**
      * 设置时间的初始值
+     *
      * @param startyear
      * @param date
      */
@@ -226,10 +257,10 @@ public class AlertView implements OnItemSelectedListener {
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        yearView.setInitPosition(year-startyear);
+        yearView.setInitPosition(year - startyear);
 
         monthView.setInitPosition(month);
-        dayView.setInitPosition(day-1);
+        dayView.setInitPosition(day - 1);
 
     }
 
@@ -375,6 +406,11 @@ public class AlertView implements OnItemSelectedListener {
                 gravity = Gravity.CENTER;
                 initAlertViews(layoutInflater);
                 break;
+            case Custom:
+                params.gravity = Gravity.BOTTOM;
+                gravity = Gravity.BOTTOM;
+                contentContainer.setLayoutParams(params);
+                break;
         }
     }
 
@@ -382,7 +418,8 @@ public class AlertView implements OnItemSelectedListener {
         loAlertHeader = (ViewGroup) viewGroup.findViewById(R.id.loAlertHeader);
         //标题和消息
         TextView tvAlertTitle = (TextView) viewGroup.findViewById(R.id.tvAlertTitle);
-        TextView tvAlertMsg = (TextView) viewGroup.findViewById(R.id.tvAlertMsg);
+        tvAlertMsg = (TextView) viewGroup.findViewById(R.id.tvAlertMsg);
+        tvAlertMsg.setSingleLine();
         if (title != null) {
             tvAlertTitle.setText(title);
         } else {
