@@ -159,7 +159,7 @@ public class LogUtils {
 	 * 添加日志打印是否上线
 	 * @param b
      */
-	public void isOnline(boolean b){
+	public static void isOnline(boolean b){
 		if(b){
 		 mDebuggable = LEVEL_NONE;
 		}else{

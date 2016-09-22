@@ -19,8 +19,8 @@ import java.util.List;
 /**
  * Created by limxing on 15/12/1.
  */
-public abstract class BaseActivity extends AppCompatActivity  implements
-        EasyPermissions.PermissionCallbacks{
+public abstract class BaseActivity extends AppCompatActivity implements
+        EasyPermissions.PermissionCallbacks {
     protected static final int RC_PERM = 123;
 
     @Override
@@ -75,9 +75,10 @@ public abstract class BaseActivity extends AppCompatActivity  implements
 
     /**
      * 检查权限
-     * @param listener 全县坚挺
+     *
+     * @param listener  全县坚挺
      * @param resString 全县提示
-     * @param mPerms 全县内容
+     * @param mPerms    全县内容
      */
     public void checkPermission(CheckPermListener listener, String resString, String... mPerms) {
         mListener = listener;
@@ -126,7 +127,8 @@ public abstract class BaseActivity extends AppCompatActivity  implements
     public void onPermissionsGranted(int requestCode, List<String> perms) {
 
     }
-      protected void closeInput() {
+
+    protected void closeInput() {
         View view = getWindow().peekDecorView();
         if (view != null) {
             InputMethodManager inputmanger = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
