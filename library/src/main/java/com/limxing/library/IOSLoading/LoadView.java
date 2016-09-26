@@ -26,45 +26,50 @@ public class LoadView extends ImageView {
 
     public LoadView(Context context) {
         super(context);
-        init();
     }
 
     public LoadView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
     }
 
     public LoadView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
         init();
+        runnable.startload();
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+        runnable.stopload();
         runnable = null;
     }
 
     private void init() {
         setScaleType(ScaleType.MATRIX);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.loading);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.svpload);
         setImageBitmap(bitmap);
         width = bitmap.getWidth() / 2;
         height = bitmap.getHeight() / 2;
         runnable = new MyRunable(this);
     }
 
-    public void startLoad() {
-        if (runnable != null) {
-            runnable.startload();
-        }
-    }
-
-    public void stopLoad() {
-        if (runnable != null) {
-            runnable.stopload();
-        }
-    }
+//    public void startLoad() {
+//        if (runnable != null) {
+//            runnable.startload();
+//        }
+//    }
+//
+//    public void stopLoad() {
+//        if (runnable != null) {
+//            runnable.stopload();
+//        }
+//    }
 
     static class MyRunable implements Runnable {
         private boolean flag;

@@ -7,7 +7,22 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 这个权限用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+    <!-- 这个权限用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
+    <!-- 用于读取手机当前的状态-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+    <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+
     <application
 
         android:allowBackup="true"
@@ -39,20 +54,24 @@
         <activity android:name=".SweepActivitys.FirstActivity" />
         <activity android:name=".SweepActivitys.FTwoActivity" />
         <activity
-            android:theme="@style/AppTheme"
             android:name=".activity.CameraActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" >
-
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppTheme">
 
 
         </activity>
-<activity android:name=".recycleview.ui.ViewImageActivity"/>
+        <activity android:name=".recycleview.ui.ViewImageActivity" />
+        <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote">
+        </service>
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="@string/umeng_appkey"></meta-data>
         <meta-data
             android:name="APP_KEY"
             android:value="@string/app_key"></meta-data>
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="A5EqvUtox8b7644UvmbBFA9K" />       //key:开发者申请的key
     </application>
 
 
