@@ -62,6 +62,29 @@ public class AnimUtils {
 
         });
     }
+    /**
+     * y移动动画,属性动画
+     *
+     * @param view     需要移动的控件
+     * @param fromY        展示或者返回动画操作
+     * @param toY 移动的距离
+     *                 真实的修改了控件的位置
+     */
+    public static void translationY(final View view,int fromY, int toY) {
+        ValueAnimator animator = null;
+            animator = ValueAnimator.ofFloat(fromY, toY);
+        animator.setTarget(view);
+        animator.setDuration(500).start();
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float f = (Float) animation.getAnimatedValue();
+                view.setTranslationY(f);
+
+            }
+
+        });
+    }
 
     /**
      * 对iew透明度动画设置

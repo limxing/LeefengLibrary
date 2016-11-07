@@ -35,15 +35,19 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import me.leefeng.citypicker.CityPicker;
+import me.leefeng.citypicker.CityPickerListener;
+
 /**
  * Created by limxing on 16/1/23.
  */
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements CityPickerListener {
 
 
     private DemoView view1;
     private Timer time;
     private LocationClient mLocationClient;
+    private CityPicker cityPicker;
 
     @Override
     protected void onDestroy() {
@@ -93,6 +97,8 @@ public class LoginActivity extends BaseActivity {
         initLocation();
         mLocationClient.start();
 
+      cityPicker=   new CityPicker(LoginActivity.this,this);
+
     }
 
 
@@ -138,8 +144,9 @@ public class LoginActivity extends BaseActivity {
         final View v = View.inflate(LoginActivity.this, R.layout.title, null);
         final TextView tv = (TextView) v.findViewById(R.id.tt);
         view1.setText(v);
-        ImageUtil.getImageFromCamera(this);
+//        ImageUtil.getImageFromCamera(this);
         time = new Timer();
+        cityPicker.show();
 //        time.schedule(new TimerTask() {
 //            @Override
 //            public void run() {
@@ -164,5 +171,10 @@ public class LoginActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void getCity(String name) {
+
     }
 }
