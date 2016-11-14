@@ -8,3 +8,7 @@
 /captures
 
 library/build.gradle
+
+*.gradle
+
+library/build.gradle
