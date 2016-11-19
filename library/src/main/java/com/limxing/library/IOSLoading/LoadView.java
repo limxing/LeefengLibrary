@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
@@ -52,10 +53,17 @@ public class LoadView extends ImageView {
 
     private void init() {
         setScaleType(ScaleType.MATRIX);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.svpload);
-        setImageBitmap(bitmap);
-        width = bitmap.getWidth() / 2;
-        height = bitmap.getHeight() / 2;
+        Drawable drawable= getDrawable();
+        if (drawable==null) {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.svpload);
+            setImageBitmap(bitmap);
+            width = bitmap.getWidth() / 2;
+            height = bitmap.getHeight() / 2;
+        }else{
+            measure(0,0);
+            width = getMeasuredWidth() / 2;
+            height = getMeasuredHeight() / 2;
+        }
         runnable = new MyRunable(this);
     }
 
