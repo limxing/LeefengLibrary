@@ -44,11 +44,16 @@ public class LoadView extends ImageView {
         runnable.startload();
     }
 
+    public void setDrawable(int res){
+        super.setImageDrawable(getResources().getDrawable(res));
+        runnable.stopload();
+    }
+
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         runnable.stopload();
-        runnable = null;
+
     }
 
     private void init() {
@@ -107,6 +112,8 @@ public class LoadView extends ImageView {
 
         public void stopload() {
             flag = false;
+            max.setRotate(0, loadingViewSoftReference.get().width, loadingViewSoftReference.get().height);
+            loadingViewSoftReference.get().setImageMatrix(max);
         }
 
         public void startload() {
