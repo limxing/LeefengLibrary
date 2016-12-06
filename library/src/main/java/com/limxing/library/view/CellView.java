@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.preference.EditTextPreference;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -57,6 +58,7 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
     private String netName;
     private int cellId;
     private int mHeight;
+    private int inputType;
 
     /**
      * 涉及到网络的cell 初始化
@@ -114,6 +116,7 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
         mHint = typedArray.getString(R.styleable.CellView_hintText);
         style = typedArray.getInt(R.styleable.CellView_titleStyle, 1);
         length = typedArray.getInt(R.styleable.CellView_length, 0);
+        inputType = typedArray.getInt(R.styleable.CellView_inputType, 0);
         isHidden = typedArray.getBoolean(R.styleable.CellView_hiddenLine, false);
         showRightPic = typedArray.getBoolean(R.styleable.CellView_showRightPic, true);
         clickAble = typedArray.getBoolean(R.styleable.CellView_clickAble, true);
@@ -215,13 +218,14 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
             editText = new EditText(context);
             editText.setBackground(null);
             editText.addTextChangedListener(this);
+            editText.setInputType(inputType);
             editText.setHint(mHint);
             editText.setHintTextColor(getResources().getColor(R.color.cellview_edite_texthintcolor));
             editText.setTextColor(getResources().getColor(R.color.cellview_edite_textcolor));
             //调节右边输入框文字的大小
 //            editText.setTextSize(DisplayUtil.px2sp(context, DEFALT_TEXT_SIZE));
             editText.setTextSize(DEFALT_TEXT_SIZE_NEW);
-//            editText.setGravity(Gravity.RIGHT);
+            editText.setGravity(Gravity.RIGHT);
 
             if (length > 0) {
                 editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(length)});
@@ -233,7 +237,8 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
             h = editText.getMeasuredHeight();
             MarginLayoutParams editTextmp = new MarginLayoutParams(w
                     , h);  //item的宽高
-            editTextmp.setMargins(0, 0, padLeft, 0);//分别是margin_top那四个属性
+            int top=(mHeight-h)/2;
+            editTextmp.setMargins(0, top, padLeft, 0);//分别是margin_top那四个属性
 
             LayoutParams editeparams = new LayoutParams(editTextmp);
             editeparams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);

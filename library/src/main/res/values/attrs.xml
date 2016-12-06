@@ -105,6 +105,7 @@
         <attr name="titleText" format="string"></attr>
         <attr name="titleStyle" format="integer"></attr>
         <attr name="length" format="integer"></attr>
+        <attr name="inputType" format="integer"></attr>
         <attr name="hintText" format="string"></attr>
         <attr name="netName" format="string"></attr>
         <attr name="mSelect" format="string"></attr>
