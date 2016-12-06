@@ -10,6 +10,7 @@
     <com.limxing.library.view.CellView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:cellHeight="40dp"
         app:hintText="dsad"
         app:titleStyle="1"
         app:titleText="dsnaksdnas" />

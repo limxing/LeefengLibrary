@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.limxing.library.R;
 import com.limxing.library.utils.DisplayUtil;
+import com.limxing.library.utils.LogUtils;
 import com.limxing.library.utils.ToastUtils;
 
 
@@ -109,14 +110,13 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
         super(context, attrs);
 
         mContext = context;
-        mHeight = (int) (getResources().getDisplayMetrics().density * 60);
-
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.CellView);
         mTitle = typedArray.getString(R.styleable.CellView_titleText);
         mHint = typedArray.getString(R.styleable.CellView_hintText);
         style = typedArray.getInt(R.styleable.CellView_titleStyle, 1);
         length = typedArray.getInt(R.styleable.CellView_length, 0);
         inputType = typedArray.getInt(R.styleable.CellView_inputType, 0);
+        mHeight = (int) typedArray.getDimension(R.styleable.CellView_cellHeight, 60);
         isHidden = typedArray.getBoolean(R.styleable.CellView_hiddenLine, false);
         showRightPic = typedArray.getBoolean(R.styleable.CellView_showRightPic, true);
         clickAble = typedArray.getBoolean(R.styleable.CellView_clickAble, true);
@@ -129,6 +129,13 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
         typedArray.recycle();
         init(context);
 
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        LogUtils.i(getClass(), "gaodu:" + heightMeasureSpec);
+        mHeight = heightMeasureSpec;
     }
 
     private void init(Context context) {
@@ -237,7 +244,7 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
             h = editText.getMeasuredHeight();
             MarginLayoutParams editTextmp = new MarginLayoutParams(w
                     , h);  //item的宽高
-            int top=(mHeight-h)/2;
+            int top = (mHeight - h) / 2;
             editTextmp.setMargins(0, top, padLeft, 0);//分别是margin_top那四个属性
 
             LayoutParams editeparams = new LayoutParams(editTextmp);
