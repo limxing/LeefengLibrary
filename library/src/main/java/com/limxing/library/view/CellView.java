@@ -23,20 +23,19 @@ import com.limxing.library.utils.DisplayUtil;
 import com.limxing.library.utils.ToastUtils;
 
 
-
 /**
  * 版权：北京航天世景信息技术有限公司
-
+ * <p>
  * 作者：李利锋
-
+ * <p>
  * 创建日期：2016/4/24 15:02
-
+ * <p>
  * 描述：
-
+ * <p>
  * 修改历史：
  */
 public class CellView extends RelativeLayout implements TextWatcher, View.OnClickListener {
-//    private static final float DEFALT_TEXT_SIZE = 30;
+    //    private static final float DEFALT_TEXT_SIZE = 30;
     private static final float DEFALT_TEXT_SIZE_NEW = 20;
     private boolean topLine;
     private boolean isSendType;//设置edittext的按钮
@@ -57,6 +56,7 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
     private TextView textView;
     private String netName;
     private int cellId;
+    private int mHeight;
 
     /**
      * 涉及到网络的cell 初始化
@@ -105,7 +105,10 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
 
     public CellView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
         mContext = context;
+        mHeight = (int) (getResources().getDisplayMetrics().density * 60);
+
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.CellView);
         mTitle = typedArray.getString(R.styleable.CellView_titleText);
         mHint = typedArray.getString(R.styleable.CellView_hintText);
@@ -126,7 +129,7 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
     }
 
     private void init(Context context) {
-        int mHeight = DisplayUtil.dip2px(context, 60);
+
         setMinimumHeight(mHeight);
         setBackgroundColor(getResources().getColor(R.color.white));
         int padLeft = DisplayUtil.dip2px(context, 20);
@@ -218,7 +221,7 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
             //调节右边输入框文字的大小
 //            editText.setTextSize(DisplayUtil.px2sp(context, DEFALT_TEXT_SIZE));
             editText.setTextSize(DEFALT_TEXT_SIZE_NEW);
-            editText.setGravity(Gravity.RIGHT);
+//            editText.setGravity(Gravity.RIGHT);
 
             if (length > 0) {
                 editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(length)});
@@ -230,9 +233,11 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
             h = editText.getMeasuredHeight();
             MarginLayoutParams editTextmp = new MarginLayoutParams(w
                     , h);  //item的宽高
-            editTextmp.setMargins(0, mt, padLeft, 0);//分别是margin_top那四个属性
+            editTextmp.setMargins(0, 0, padLeft, 0);//分别是margin_top那四个属性
+
             LayoutParams editeparams = new LayoutParams(editTextmp);
             editeparams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+//            editeparams.addRule(RelativeLayout.CENTER_VERTICAL);
 //        editeparams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             editText.setLayoutParams(editeparams);
             if (isPassword) {
