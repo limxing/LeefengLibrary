@@ -8,6 +8,7 @@ import android.preference.EditTextPreference;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
@@ -60,6 +61,7 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
     private int cellId;
     private int mHeight;
     private int inputType;
+    private int drawablePad;
 
     /**
      * 涉及到网络的cell 初始化
@@ -115,8 +117,9 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
         mHint = typedArray.getString(R.styleable.CellView_hintText);
         style = typedArray.getInt(R.styleable.CellView_titleStyle, 1);
         length = typedArray.getInt(R.styleable.CellView_length, 0);
-        inputType = typedArray.getInt(R.styleable.CellView_inputType, 0);
+        inputType = typedArray.getInt(R.styleable.CellView_inputType, InputType.TYPE_CLASS_TEXT);
         mHeight = (int) typedArray.getDimension(R.styleable.CellView_cellHeight, 60);
+        drawablePad = (int) typedArray.getDimension(R.styleable.CellView_drawablePad, 5);
         isHidden = typedArray.getBoolean(R.styleable.CellView_hiddenLine, false);
         showRightPic = typedArray.getBoolean(R.styleable.CellView_showRightPic, true);
         clickAble = typedArray.getBoolean(R.styleable.CellView_clickAble, true);
