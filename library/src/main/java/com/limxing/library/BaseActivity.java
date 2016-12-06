@@ -42,6 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
     /**
      * 初始化数据
      */
+
     protected abstract void init();
 
     /**
