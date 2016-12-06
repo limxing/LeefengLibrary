@@ -155,7 +155,7 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
         if (leftDrawable != null) {
             leftDrawable.setBounds(0, 0, leftDrawable.getMinimumWidth(), leftDrawable.getMinimumHeight());
             tv.setCompoundDrawables(leftDrawable, null, null, null);
-            tv.setCompoundDrawablePadding(10);
+            tv.setCompoundDrawablePadding(drawablePad);
         }
         tv.measure(0, 0);
         int w = tv.getMeasuredWidth();
