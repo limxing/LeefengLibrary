@@ -38,20 +38,20 @@
     <!--SweetDialog-->
     <declare-styleable name="Rotate3dAnimation">
         <attr name="rollType" format="enum">
-            <enum name="x" value="0"/>
-            <enum name="y" value="1"/>
-            <enum name="z" value="2"/>
+            <enum name="x" value="0" />
+            <enum name="y" value="1" />
+            <enum name="z" value="2" />
         </attr>
         <attr name="fromDeg" format="float" />
         <attr name="toDeg" format="float" />
-        <attr name="pivotX" format="fraction"/>
+        <attr name="pivotX" format="fraction" />
         <attr name="pivotY" format="fraction" />
     </declare-styleable>
 
-<!--SVProgressHUD-->
+    <!--SVProgressHUD-->
     <declare-styleable name="SVCircleProgressBar">
-        <attr name="roundColor" format="color"/>
-        <attr name="roundProgressColor" format="color"/>
+        <attr name="roundColor" format="color" />
+        <attr name="roundProgressColor" format="color" />
         <attr name="roundWidth" format="dimension"></attr>
         <attr name="max" format="integer"></attr>
         <attr name="style">
@@ -59,31 +59,23 @@
             <enum name="FILL" value="1"></enum>
         </attr>
     </declare-styleable>
-<!--环形下载框的-->
+    <!--环形下载框的-->
     <declare-styleable name="TasksCompletedView">
-        <attr name="radius" format="dimension"/>
-        <attr name="strokeWidth" format="dimension"/>
-        <attr name="circleColor" format="color"/>
-        <attr name="ringColor" format="color"/>
+        <attr name="radius" format="dimension" />
+        <attr name="strokeWidth" format="dimension" />
+        <attr name="circleColor" format="color" />
+        <attr name="ringColor" format="color" />
     </declare-styleable>
 
 
-
     <declare-styleable name="ToggleButton">
-        <attr name="borderWidthT" format="dimension">
-        </attr>
-        <attr name="offBorderColor" format="reference|color">
-        </attr>
-        <attr name="offColor" format="reference|color">
-        </attr>
-        <attr name="onColor" format="reference|color">
-        </attr>
-        <attr name="spotColor" format="reference|color">
-        </attr>
-        <attr name="animate" format="reference|boolean">
-        </attr>
-        <attr name="isDefaultOn" format="reference|boolean">
-        </attr>
+        <attr name="borderWidthT" format="dimension"></attr>
+        <attr name="offBorderColor" format="reference|color"></attr>
+        <attr name="offColor" format="reference|color"></attr>
+        <attr name="onColor" format="reference|color"></attr>
+        <attr name="spotColor" format="reference|color"></attr>
+        <attr name="animate" format="reference|boolean"></attr>
+        <attr name="isDefaultOn" format="reference|boolean"></attr>
     </declare-styleable>
 
     <declare-styleable name="ExpandableView">
@@ -108,6 +100,8 @@
         <attr name="inputType" format="integer"></attr>
         <attr name="cellHeight" format="dimension"></attr>
         <attr name="drawablePad" format="dimension"></attr>
+        <attr name="titleTextSize" format="dimension"></attr>
+        <attr name="valueTextSize" format="dimension"></attr>
         <attr name="hintText" format="string"></attr>
         <attr name="netName" format="string"></attr>
         <attr name="mSelect" format="string"></attr>

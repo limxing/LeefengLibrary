@@ -39,7 +39,7 @@ import com.limxing.library.utils.ToastUtils;
  */
 public class CellView extends RelativeLayout implements TextWatcher, View.OnClickListener {
     //    private static final float DEFALT_TEXT_SIZE = 30;
-    private static final float DEFALT_TEXT_SIZE_NEW = 20;
+//    private static final float DEFALT_TEXT_SIZE_NEW = 20;
     private boolean topLine;
     private boolean isSendType;//设置edittext的按钮
     private int length;
@@ -62,6 +62,8 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
     private int mHeight;
     private int inputType;
     private int drawablePad;
+    private float titleTextSize;
+    private float valueTextSize;
 
     /**
      * 涉及到网络的cell 初始化
@@ -110,7 +112,7 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
 
     public CellView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
+        float density=getResources().getDisplayMetrics().density;
         mContext = context;
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.CellView);
         mTitle = typedArray.getString(R.styleable.CellView_titleText);
@@ -118,8 +120,12 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
         style = typedArray.getInt(R.styleable.CellView_titleStyle, 1);
         length = typedArray.getInt(R.styleable.CellView_length, 0);
         inputType = typedArray.getInt(R.styleable.CellView_inputType, InputType.TYPE_CLASS_TEXT);
-        mHeight = (int) typedArray.getDimension(R.styleable.CellView_cellHeight, 60);
-        drawablePad = (int) typedArray.getDimension(R.styleable.CellView_drawablePad, 5);
+
+        mHeight = (int) typedArray.getDimension(R.styleable.CellView_cellHeight, 50*density);
+        drawablePad = (int) typedArray.getDimension(R.styleable.CellView_drawablePad, 5*density);
+        titleTextSize = typedArray.getDimension(R.styleable.CellView_titleTextSize, 18);
+        valueTextSize = typedArray.getDimension(R.styleable.CellView_valueTextSize, 16);
+
         isHidden = typedArray.getBoolean(R.styleable.CellView_hiddenLine, false);
         showRightPic = typedArray.getBoolean(R.styleable.CellView_showRightPic, true);
         clickAble = typedArray.getBoolean(R.styleable.CellView_clickAble, true);
@@ -137,8 +143,8 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        LogUtils.i(getClass(), "gaodu:" + heightMeasureSpec);
-        mHeight = heightMeasureSpec;
+//        LogUtils.i(getClass(), "gaodu:" + heightMeasureSpec);
+//        mHeight = heightMeasureSpec;
     }
 
     private void init(Context context) {
@@ -148,10 +154,11 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
         int padLeft = DisplayUtil.dip2px(context, 20);
         TextView tv = new TextView(context);
         tv.setText(mTitle);
+        tv.setGravity(Gravity.CENTER_VERTICAL);
         tv.setTextColor(getResources().getColor(R.color.cellview_color));
         //调节左边文字大小
 //        tv.setTextSize(DisplayUtil.px2sp(context, DEFALT_TEXT_SIZE));
-        tv.setTextSize(DEFALT_TEXT_SIZE_NEW);
+        tv.setTextSize(titleTextSize);
         if (leftDrawable != null) {
             leftDrawable.setBounds(0, 0, leftDrawable.getMinimumWidth(), leftDrawable.getMinimumHeight());
             tv.setCompoundDrawables(leftDrawable, null, null, null);
@@ -201,7 +208,7 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
             textView.setTextColor(getResources().getColor(R.color.cellview_edite_textcolor));
             //调节右边文字的大小
 //            textView.setTextSize(DisplayUtil.px2sp(context, DEFALT_TEXT_SIZE));
-            textView.setTextSize(DEFALT_TEXT_SIZE_NEW);
+            textView.setTextSize(valueTextSize);
             if (clickAble) {
                 textView.setOnClickListener(this);
             }
@@ -234,7 +241,7 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
             editText.setTextColor(getResources().getColor(R.color.cellview_edite_textcolor));
             //调节右边输入框文字的大小
 //            editText.setTextSize(DisplayUtil.px2sp(context, DEFALT_TEXT_SIZE));
-            editText.setTextSize(DEFALT_TEXT_SIZE_NEW);
+            editText.setTextSize(valueTextSize);
             editText.setGravity(Gravity.RIGHT);
 
             if (length > 0) {
