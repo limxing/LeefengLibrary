@@ -1,10 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.leefeng.imageselector">
 
-    <application android:allowBackup="true" android:label="@string/app_name"
-        android:supportsRtl="true">
+    <application
+        android:allowBackup="true"
+        android:supportsRtl="true"
+        android:largeHeap="true">
 
-        <activity android:name=".ImageLoaderActivity" />
+        <activity
+            android:theme="@style/AppTheme"
+            android:name=".ImageLoaderActivity"
+            android:launchMode="standard" />
+        <activity android:name=".imagelook.ImageLookActivity" />
     </application>
 
 </manifest>

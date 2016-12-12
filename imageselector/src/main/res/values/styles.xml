@@ -1,0 +1,9 @@
+<resources>
+
+    <!-- Base application theme.
+     在这里我们是NoActionBar的主题而不是系统开始给我们的Theme.AppCompat.Light.DarkActionBar-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+    </style>
+
+</resources>

@@ -65,6 +65,7 @@ public class LoginActivity extends BaseActivity implements CityPickerListener {
 //        time=null;
 //        view1 = null;
 //        mLocationClient.stop();
+        me.leefeng.imageselector.ImgSelConfig.array = null;
     }
 
     @Override
@@ -86,7 +87,7 @@ public class LoginActivity extends BaseActivity implements CityPickerListener {
 //        config.maxNum = 9;
 //        config.array = new ArrayList<String>();
 //        ImageLoaderActivity.startActivityForResult(LoginActivity.this, config);
-        startActivityForResult(new Intent(this,ImageLoaderActivity.class), me.leefeng.imageselector.ImgSelConfig.REQUEST_CODE);
+        Log.i("", "init: " + me.leefeng.imageselector.ImgSelConfig.REQUEST_CODE);
 //        List<String> data = new ArrayList<>();
 //        data.add("http://img03.sogoucdn.com/app/a/100520093/39ccc87f3e85c326-d833987af7322860-4ce19032c3b0f23baadb92fbb834ca57.jpg");
 //        data.add("http://img03.sogoucdn.com/app/a/100520093/ff997748674109a3-a39fb229dd0dbda7-694fe393ad45dc0aa9ea5a22823a4a89.jpg");
@@ -153,7 +154,7 @@ public class LoginActivity extends BaseActivity implements CityPickerListener {
     int i = 0;
 
     public void hah(View view) {
-        ImageSelector.show(this, REQUEST_CODE_SELECT_IMG);
+//        ImageSelector.show(this, REQUEST_CODE_SELECT_IMG);
 //        final View v = View.inflate(LoginActivity.this, R.layout.title, null);
 //        final TextView tv = (TextView) v.findViewById(R.id.tt);
 //        view1.setText(v);
@@ -179,35 +180,9 @@ public class LoginActivity extends BaseActivity implements CityPickerListener {
 //        }, 0, 1000);
 
 
-// 自由配置选项
-        ImgSelConfig config = new ImgSelConfig.Builder(this, loader)
-                // 是否多选
-                .multiSelect(true)
-                // “确定”按钮背景色
-                .btnBgColor(Color.GRAY)
-                // “确定”按钮文字颜色
-                .btnTextColor(Color.BLUE)
-                // 使用沉浸式状态栏
-                .statusBarColor(Color.parseColor("#3F51B5"))
-                // 返回图标ResId
-//                .backResId(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_mtrl_am_alpha)
-                // 标题
-                .title("图片")
-                // 标题文字颜色
-                .titleColor(Color.WHITE)
-                // TitleBar背景色
-                .titleBgColor(Color.parseColor("#3F51B5"))
-                // 裁剪大小。needCrop为true的时候配置
-                .cropSize(1, 1, 200, 200)
-                .needCrop(true)
-                // 第一个是否显示相机
-                .needCamera(false)
-                // 最大选择图片数量
-                .maxNum(9)
-                .build();
-
-// 跳转到图片选择器
 //        ImgSelActivity.startActivity(this, config, 1);
+//        startActivityForResult(new Intent(LoginActivity.this, ImageLoaderActivity.class), me.leefeng.imageselector.ImgSelConfig.REQUEST_CODE);
+        ImageLoaderActivity.startActivityForResult(this, null);
     }
 
     // 自定义图片加载器
@@ -221,11 +196,10 @@ public class LoginActivity extends BaseActivity implements CityPickerListener {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.i("", "onActivityResult:resultCode： " + resultCode);
-        if (resultCode == me.leefeng.imageselector.ImgSelConfig.RESULT_CODE) {
+        if (requestCode == me.leefeng.imageselector.ImgSelConfig.REQUEST_CODE && data != null) {
             ArrayList<String> list = data.getStringArrayListExtra("array");
             for (String s : list) {
-                Log.i("", "onActivityResult: " + s);
+                ToastUtils.showShort(this, s);
             }
         }
     }
@@ -234,4 +208,6 @@ public class LoginActivity extends BaseActivity implements CityPickerListener {
     public void getCity(String name) {
 
     }
+
+
 }

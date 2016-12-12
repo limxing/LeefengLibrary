@@ -17,4 +17,7 @@ public class ImgSelConfig {
     public static boolean needCamera = false;
     public static ArrayList<String> array;
     public static int maxNum = 9;
+
+    public static List<Image> checkedList;
+    public static List<Image> currentList;
 }

@@ -62,6 +62,12 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderListAdapter.Fo
         return list.size();
     }
 
+    public void destory() {
+        context=null;
+        listItemListener=null;
+        list=null;
+    }
+
     public class FolderView extends RecyclerView.ViewHolder {
         ImageView image;
         TextView name;

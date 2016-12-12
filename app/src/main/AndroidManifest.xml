@@ -36,6 +36,7 @@
         </activity>
         <activity android:name=".DragListViewActivity" />
         <activity android:name=".MyViewpagerActivity" />
+
         <activity android:name=".recycleview.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -61,6 +62,10 @@
 
         </activity>
         <activity android:name=".recycleview.ui.ViewImageActivity" />
+        <activity android:name=".activity.ImageDemo" >
+
+        </activity>
+        <activity android:name=".activity.ImageDemo2" />
         <!--<service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote">-->
         <!--</service>-->
         <meta-data

@@ -2,15 +2,10 @@ package me.leefeng.imageselector;
 
 import java.util.List;
 
-/**
- * Folder bean
- * Created by Yancy on 2015/12/2.
- */
 public class Folder {
 
     public String name;
     public String path;
-    public Image cover;
     public List<Image> images;
 
     public boolean isAll = false;

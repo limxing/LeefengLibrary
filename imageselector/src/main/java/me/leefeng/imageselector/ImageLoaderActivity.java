@@ -24,6 +24,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.leefeng.imageselector.imagelook.ImageLookActivity;
+
 /**
  * Created by limxing on 2016/12/11.
  */
@@ -92,20 +94,23 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
         findViewById(R.id.selectimage_title_bac).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ImgSelConfig.array=null;
                 finish();
             }
         });
         findViewById(R.id.selectimage_confirm).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
+                Intent intent = getIntent();
                 intent.putExtra("array", imageListAdapter.getStringArray());
-                setResult(ImgSelConfig.RESULT_CODE, intent);
+                setResult(RESULT_OK, intent);
+                ImgSelConfig.array=imageListAdapter.getStringArray();
                 finish();
             }
         });
         folderList = new ArrayList<>();
         imageList = new ArrayList<>();
+        ImgSelConfig.currentList=imageList;//指向
         imageListAdapter = new ImageListAdapter(imageList, this, this);
         folderListAdapter = new FolderListAdapter(folderList, this, this);
 
@@ -124,7 +129,7 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
 
     public static void startActivityForResult(Activity activity, ImgSelConfig config) {
         Intent intent = new Intent(activity, ImageLoaderActivity.class);
-        intent.putStringArrayListExtra("array", config.array);
+//        intent.putStringArrayListExtra("array", config.array);
         activity.startActivityForResult(intent, ImgSelConfig.REQUEST_CODE);
     }
 
@@ -161,9 +166,9 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
                     data.moveToFirst();
                     do {
                         String path = data.getString(data.getColumnIndexOrThrow(IMAGE_PROJECTION[0]));
-                        String name = data.getString(data.getColumnIndexOrThrow(IMAGE_PROJECTION[1]));
+//                        String name = data.getString(data.getColumnIndexOrThrow(IMAGE_PROJECTION[1]));
                         long dateTime = data.getLong(data.getColumnIndexOrThrow(IMAGE_PROJECTION[2]));
-                        Image image = new Image(path, name, dateTime);
+                        Image image = new Image(path, dateTime);
                         if (!image.getPath().endsWith("gif"))
                             tempImageList.add(image);
                         if (!hasFolderGened) {
@@ -172,7 +177,6 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
                             Folder folder = new Folder();
                             folder.name = folderFile.getName();
                             folder.path = folderFile.getAbsolutePath();
-                            folder.cover = image;
                             if (!folderList.contains(folder)) {
                                 List<Image> imageList = new ArrayList<>();
                                 imageList.add(image);
@@ -198,7 +202,6 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
                     folder.name = "全部照片";
                     folderList.add(0, folder);
 
-                    Log.i(TAG, "onLoadFinished: " + imageList.size());
                     imageListAdapter.notifyDataSetChanged();
 //                    Log.i(TAG, "onLoadFinished: "+imageList.size());
 //                    if (Constant.imageList != null && Constant.imageList.size() > 0) {
@@ -265,8 +268,14 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        imageListAdapter.destory();
+        imageListAdapter=null;
+        folderListAdapter.destory();
         imageList.clear();
         folderList.clear();
+        ImgSelConfig.checkedList=null;
+        ImgSelConfig.currentList=null;
+        System.gc();
     }
 
     /**
@@ -277,12 +286,6 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
     @Override
     public void onItemChecked(int position) {
         int sumCheck = imageListAdapter.getCheckList().size();
-        if (sumCheck > ImgSelConfig.maxNum) {
-            Toast.makeText(this, "最多选择" + ImgSelConfig.maxNum + "张图片", Toast.LENGTH_LONG).show();
-            imageListAdapter.getCheckList().remove(sumCheck - 1);
-            imageListAdapter.notifyItemChanged(position);
-            return;
-        }
         if (sumCheck > 0) {
             selectimage_confirm_num.setVisibility(View.VISIBLE);
         } else {
@@ -295,6 +298,15 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
 
     @Override
     public void onItemClick(int position) {
+        Intent intent=new Intent(this, ImageLookActivity.class);
+        intent.putExtra("position",position);
+        startActivityForResult(intent,0);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        imageListAdapter.notifyDataSetChanged();
+        onItemChecked(0);
     }
 }

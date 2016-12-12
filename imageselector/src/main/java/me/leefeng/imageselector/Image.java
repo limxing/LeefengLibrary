@@ -9,9 +9,7 @@ public class Image {
     private String path;
     private String name;
     private long time;
-    private boolean checked;
     public boolean isCamera;
-    private int position;
 
 
 
@@ -25,9 +23,9 @@ public class Image {
         isCamera = true;
     }
 
-    public Image(String s, String s1) {
+    public Image(String s, long s1) {
         this.path = s;
-        this.name = s1;
+        this.time = s1;
     }
 
     public String getPath() {
@@ -54,13 +52,7 @@ public class Image {
         this.time = time;
     }
 
-    public boolean isChecked() {
-        return checked;
-    }
 
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
 
     public boolean isCamera() {
         return isCamera;
@@ -70,13 +62,6 @@ public class Image {
         isCamera = camera;
     }
 
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -89,7 +74,4 @@ public class Image {
         return super.equals(o);
     }
 
-    public void checkChanged() {
-        this.checked=!checked;
-    }
 }

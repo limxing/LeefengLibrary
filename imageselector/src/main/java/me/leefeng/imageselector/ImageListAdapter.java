@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -28,6 +29,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
         this.list = imageList;
         this.context = context;
         checkedList = new ArrayList<>();
+        ImgSelConfig.checkedList = checkedList;//指向
         this.listItemListener = listItemListener;
     }
 
@@ -47,27 +49,37 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
         } else {
             holder.checkBox.setImageResource(R.drawable.imgsel_icon_unselected);
         }
-        holder.checkBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        holder.checkBox.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
-                if (checkedList.contains(image)) {
-                    checkedList.remove(image);
-                    holder.checkBox.setImageResource(R.drawable.imgsel_icon_unselected);
+                        if (checkedList.contains(image)) {
+                            checkedList.remove(image);
+                            holder.checkBox.setImageResource(R.drawable.imgsel_icon_unselected);
 
-                } else {
-                    checkedList.add(image);
-                    holder.checkBox.setImageResource(R.drawable.imgsel_icon_selected);
+                        } else if (checkedList.size() >= ImgSelConfig.maxNum) {
+                            Toast.makeText(context, "最多选择" + ImgSelConfig.maxNum + "张图片", Toast.LENGTH_SHORT).show();
+                        } else {
+                            checkedList.add(image);
+                            holder.checkBox.setImageResource(R.drawable.imgsel_icon_selected);
+                        }
+
+                        listItemListener.onItemChecked(position);
+                    }
                 }
-                listItemListener.onItemChecked(position);
-            }
-        });
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listItemListener.onItemClick(position);
-            }
-        });
+
+        );
+        holder.imageView.setOnClickListener(new View.OnClickListener()
+
+                                            {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    listItemListener.onItemClick(position);
+                                                }
+                                            }
+
+        );
 
     }
 
@@ -85,6 +97,14 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
         return checkedList;
     }
 
+    public void destory() {
+        context = null;
+        listItemListener = null;
+        checkedList.clear();
+        checkedList = null;
+        list = null;
+    }
+
 
     public class ImageListView extends RecyclerView.ViewHolder {
         ImageView imageView;
@@ -95,10 +115,12 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
             imageView = (ImageView) itemView.findViewById(R.id.selimg_list_item_iv);
             checkBox = (ImageView) itemView.findViewById(R.id.selimg_list_item_cb);
         }
+
     }
 
     /**
      * 返回可存储的数组
+     *
      * @return
      */
     public ArrayList<String> getStringArray() {
