@@ -9,7 +9,7 @@
         <activity
             android:theme="@style/AppTheme"
             android:name=".ImageLoaderActivity"
-            android:launchMode="standard" />
+            />
         <activity android:name=".imagelook.ImageLookActivity" />
     </application>
 

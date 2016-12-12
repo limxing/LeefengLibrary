@@ -15,7 +15,7 @@ public class ImgSelConfig {
     public static int titleColor = 0xff000000;
     public static int stateColor = 0x00000000;
     public static boolean needCamera = false;
-    public static ArrayList<String> array;
+//    public static ArrayList<String> array;
     public static int maxNum = 9;
 
     public static List<Image> checkedList;

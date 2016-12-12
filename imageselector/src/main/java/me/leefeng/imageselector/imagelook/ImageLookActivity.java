@@ -46,14 +46,13 @@ public class ImageLookActivity extends AppCompatActivity implements ViewPager.On
                 if (ImgSelConfig.checkedList.contains(list.get(position))) {
                     ImgSelConfig.checkedList.remove(list.get(position));
                     imageLookCheck.setImageResource(R.drawable.imgsel_icon_unselected);
-                }
-                if (ImgSelConfig.checkedList.size() >= ImgSelConfig.maxNum) {
+                } else if (ImgSelConfig.checkedList.size() >= ImgSelConfig.maxNum) {
                     Toast.makeText(view.getContext(), "最多选择" + ImgSelConfig.maxNum + "张图片", Toast.LENGTH_SHORT).show();
                     return;
+                } else {
+                    ImgSelConfig.checkedList.add(list.get(position));
+                    imageLookCheck.setImageResource(R.drawable.imgsel_icon_selected);
                 }
-                ImgSelConfig.checkedList.add(list.get(position));
-                imageLookCheck.setImageResource(R.drawable.imgsel_icon_selected);
-
             }
         });
         int position = getIntent().getIntExtra("position", 0);

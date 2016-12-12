@@ -65,7 +65,6 @@ public class LoginActivity extends BaseActivity implements CityPickerListener {
 //        time=null;
 //        view1 = null;
 //        mLocationClient.stop();
-        me.leefeng.imageselector.ImgSelConfig.array = null;
     }
 
     @Override

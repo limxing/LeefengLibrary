@@ -5,6 +5,7 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.LoaderManager;
@@ -50,12 +51,15 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
     private View selectimage_list_folder_bac;
     private TextView selectimage_confirm_num;
     private TextView selectimage_title_right;
+    private TextView finishButton;
+    private ArrayList<String> array;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StatusBarCompat.translucentStatusBar(this);
         setContentView(R.layout.activity_selectimage);
+        array = getIntent().getStringArrayListExtra("array");
         View selectimage_bottom = findViewById(R.id.selectimage_bottom);
         selectimage_list_folder_bac = findViewById(R.id.selectimage_list_folder_bac);
         selectimage_list_folder_bac.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +80,12 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
         selectimage_list_folder.setLayoutParams(folderParamas);
         selectimage_confirm_num = (TextView) findViewById(R.id.selectimage_confirm_num);
         selectimage_title_right = (TextView) findViewById(R.id.selectimage_title_right);
+        if (ImgSelConfig.maxNum <= 0) {//不设上限选择
+            selectimage_title_right.setVisibility(View.GONE);
+        }
+        if (ImgSelConfig.maxNum == 0) {//单选，某一个返回
+            findViewById(R.id.selectimage_confirm).setVisibility(View.GONE);
+        }
         selectimage_folder_tv = (TextView) findViewById(R.id.selectimage_folder_tv);
         selectimage_folder_tv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,23 +104,24 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
         findViewById(R.id.selectimage_title_bac).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ImgSelConfig.array=null;
                 finish();
             }
         });
         findViewById(R.id.selectimage_confirm).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = getIntent();
-                intent.putExtra("array", imageListAdapter.getStringArray());
-                setResult(RESULT_OK, intent);
-                ImgSelConfig.array=imageListAdapter.getStringArray();
-                finish();
+                if (imageListAdapter.getCheckList().size() > 0) {
+                    Intent intent = getIntent();
+                    intent.putExtra("array", imageListAdapter.getStringArray());
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
             }
         });
+        finishButton = (TextView) findViewById(R.id.selectimage_confirm_text);
         folderList = new ArrayList<>();
         imageList = new ArrayList<>();
-        ImgSelConfig.currentList=imageList;//指向
+        ImgSelConfig.currentList = imageList;//指向
         imageListAdapter = new ImageListAdapter(imageList, this, this);
         folderListAdapter = new FolderListAdapter(folderList, this, this);
 
@@ -127,9 +138,9 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
 
     }
 
-    public static void startActivityForResult(Activity activity, ImgSelConfig config) {
+    public static void startActivityForResult(Activity activity, ArrayList<String> paths) {
         Intent intent = new Intent(activity, ImageLoaderActivity.class);
-//        intent.putStringArrayListExtra("array", config.array);
+        intent.putStringArrayListExtra("array", paths);
         activity.startActivityForResult(intent, ImgSelConfig.REQUEST_CODE);
     }
 
@@ -202,7 +213,6 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
                     folder.name = "全部照片";
                     folderList.add(0, folder);
 
-                    imageListAdapter.notifyDataSetChanged();
 //                    Log.i(TAG, "onLoadFinished: "+imageList.size());
 //                    if (Constant.imageList != null && Constant.imageList.size() > 0) {
                     //imageListAdapter.setDefaultSelected(Constant.imageList);
@@ -212,6 +222,18 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
 
                     hasFolderGened = true;
                     data.close();
+                    if (array != null && array.size() > 0) {
+                        for (String s : array) {
+                            for (Image image : imageList) {
+                                if (s.equals(image.getPath())) {
+                                    imageListAdapter.addCheckedImage(image);
+                                    continue;
+                                }
+                            }
+                        }
+                    }
+                    imageListAdapter.notifyDataSetChanged();
+
                 }
             }
         }
@@ -269,12 +291,13 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
     protected void onDestroy() {
         super.onDestroy();
         imageListAdapter.destory();
-        imageListAdapter=null;
+        imageListAdapter = null;
         folderListAdapter.destory();
         imageList.clear();
         folderList.clear();
-        ImgSelConfig.checkedList=null;
-        ImgSelConfig.currentList=null;
+        ImgSelConfig.checkedList = null;
+        ImgSelConfig.currentList = null;
+        mLoaderCallback = null;
         System.gc();
     }
 
@@ -288,8 +311,10 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
         int sumCheck = imageListAdapter.getCheckList().size();
         if (sumCheck > 0) {
             selectimage_confirm_num.setVisibility(View.VISIBLE);
+            finishButton.setTextColor(Color.WHITE);
         } else {
             selectimage_confirm_num.setVisibility(View.GONE);
+            finishButton.setTextColor(Color.parseColor("#cccccc"));
         }
         selectimage_confirm_num.setText(sumCheck + "");
         selectimage_title_right.setText(sumCheck + "/" + ImgSelConfig.maxNum);
@@ -298,9 +323,16 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
 
     @Override
     public void onItemClick(int position) {
-        Intent intent=new Intent(this, ImageLookActivity.class);
-        intent.putExtra("position",position);
-        startActivityForResult(intent,0);
+        if (ImgSelConfig.maxNum != 0) {
+            Intent intent = new Intent(this, ImageLookActivity.class);
+            intent.putExtra("position", position);
+            startActivityForResult(intent, 0);
+        } else {
+            Intent intent = getIntent();
+            intent.putExtra("path", imageList.get(position).getPath());
+            setResult(RESULT_OK, intent);
+            finish();
+        }
     }
 
     @Override

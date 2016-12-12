@@ -94,7 +94,8 @@
         <LinearLayout
             android:id="@+id/selectimage_confirm"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
@@ -114,11 +115,12 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/selectimage_confirm_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:text="完成"
-                android:textColor="#fff"
+                android:textColor="#ccc"
                 android:textSize="16sp" />
         </LinearLayout>
     </RelativeLayout>

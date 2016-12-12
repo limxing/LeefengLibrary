@@ -44,32 +44,36 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
         final Image image = list.get(position);
         Glide.with(context).load(image.getPath()).placeholder(R.drawable.ic_default_image)
                 .into(holder.imageView);
-        if (checkedList.contains(image)) {
-            holder.checkBox.setImageResource(R.drawable.imgsel_icon_selected);
-        } else {
-            holder.checkBox.setImageResource(R.drawable.imgsel_icon_unselected);
-        }
-        holder.checkBox.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+        if (ImgSelConfig.maxNum != 0) {
+            if (checkedList.contains(image)) {
+                holder.checkBox.setImageResource(R.drawable.imgsel_icon_selected);
+            } else {
+                holder.checkBox.setImageResource(R.drawable.imgsel_icon_unselected);
+            }
+            holder.checkBox.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
 
-                        if (checkedList.contains(image)) {
-                            checkedList.remove(image);
-                            holder.checkBox.setImageResource(R.drawable.imgsel_icon_unselected);
+                            if (checkedList.contains(image)) {
+                                checkedList.remove(image);
+                                holder.checkBox.setImageResource(R.drawable.imgsel_icon_unselected);
 
-                        } else if (checkedList.size() >= ImgSelConfig.maxNum) {
-                            Toast.makeText(context, "最多选择" + ImgSelConfig.maxNum + "张图片", Toast.LENGTH_SHORT).show();
-                        } else {
-                            checkedList.add(image);
-                            holder.checkBox.setImageResource(R.drawable.imgsel_icon_selected);
+                            } else if (checkedList.size() >= ImgSelConfig.maxNum) {
+                                Toast.makeText(context, "最多选择" + ImgSelConfig.maxNum + "张图片", Toast.LENGTH_SHORT).show();
+                            } else {
+                                checkedList.add(image);
+                                holder.checkBox.setImageResource(R.drawable.imgsel_icon_selected);
+                            }
+
+                            listItemListener.onItemChecked(position);
                         }
-
-                        listItemListener.onItemChecked(position);
                     }
-                }
 
-        );
+            );
+        }else{
+            holder.checkBox.setVisibility(View.GONE);
+        }
         holder.imageView.setOnClickListener(new View.OnClickListener()
 
                                             {
@@ -103,6 +107,10 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
         checkedList.clear();
         checkedList = null;
         list = null;
+    }
+
+    public void addCheckedImage(Image image) {
+        checkedList.add(image);
     }
 
 
