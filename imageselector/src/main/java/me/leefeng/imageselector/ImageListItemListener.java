@@ -5,6 +5,6 @@ package me.leefeng.imageselector;
  */
 
 public interface ImageListItemListener {
-    void onItemChecked();
+    void onItemChecked(int position);
     void onItemClick(int position);
 }

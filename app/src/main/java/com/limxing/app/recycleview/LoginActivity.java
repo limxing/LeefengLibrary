@@ -63,8 +63,8 @@ public class LoginActivity extends BaseActivity implements CityPickerListener {
         super.onDestroy();
 //        time.cancel();
 //        time=null;
-        view1 = null;
-        mLocationClient.stop();
+//        view1 = null;
+//        mLocationClient.stop();
     }
 
     @Override
@@ -82,10 +82,11 @@ public class LoginActivity extends BaseActivity implements CityPickerListener {
 
     @Override
     protected void init() {
-        me.leefeng.imageselector.ImgSelConfig config=new me.leefeng.imageselector.ImgSelConfig();
-        config.maxNum=9;
-        config.array=new ArrayList<String>();
-        ImageLoaderActivity.startActivityForResult(this,config);
+//        me.leefeng.imageselector.ImgSelConfig config = new me.leefeng.imageselector.ImgSelConfig();
+//        config.maxNum = 9;
+//        config.array = new ArrayList<String>();
+//        ImageLoaderActivity.startActivityForResult(LoginActivity.this, config);
+        startActivityForResult(new Intent(this,ImageLoaderActivity.class), me.leefeng.imageselector.ImgSelConfig.REQUEST_CODE);
 //        List<String> data = new ArrayList<>();
 //        data.add("http://img03.sogoucdn.com/app/a/100520093/39ccc87f3e85c326-d833987af7322860-4ce19032c3b0f23baadb92fbb834ca57.jpg");
 //        data.add("http://img03.sogoucdn.com/app/a/100520093/ff997748674109a3-a39fb229dd0dbda7-694fe393ad45dc0aa9ea5a22823a4a89.jpg");
@@ -220,8 +221,13 @@ public class LoginActivity extends BaseActivity implements CityPickerListener {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
+        Log.i("", "onActivityResult:resultCode： " + resultCode);
+        if (resultCode == me.leefeng.imageselector.ImgSelConfig.RESULT_CODE) {
+            ArrayList<String> list = data.getStringArrayListExtra("array");
+            for (String s : list) {
+                Log.i("", "onActivityResult: " + s);
+            }
+        }
     }
 
     @Override

@@ -8,12 +8,13 @@ import java.util.List;
  */
 
 public class ImgSelConfig {
-    public static final int IMAGELOAD_CODE = 999;
+    public static final int REQUEST_CODE = 999;
+    public static final int RESULT_CODE = 888;
 
-    public  int titleBacColor = 0xffffffff;
-    public  int titleColor = 0xff000000;
-    public  int stateColor = 0x00000000;
-    public  boolean needCamera=false;
-    public  ArrayList<String> array;
-    public int maxNum;
+    public static int titleBacColor = 0xffffffff;
+    public static int titleColor = 0xff000000;
+    public static int stateColor = 0x00000000;
+    public static boolean needCamera = false;
+    public static ArrayList<String> array;
+    public static int maxNum = 9;
 }

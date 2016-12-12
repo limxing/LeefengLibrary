@@ -1,7 +1,6 @@
 package me.leefeng.imageselector;
 
 
-import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Intent;
@@ -17,9 +16,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,7 +34,6 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
     private static final int LOADER_CATEGORY = 1;
     private static final String TAG = "ImageLoaderActivity";
     private static int DEFAULT_TOP = 500;
-    private static ImgSelConfig peizhi;
     private RecyclerView selectimage_list;
     private List<Folder> folderList;
     private List<Image> imageList;
@@ -74,8 +72,8 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
         folderParamas = (RelativeLayout.LayoutParams) selectimage_list_folder.getLayoutParams();
         folderParamas.setMargins(0, bottomY, 0, 0);
         selectimage_list_folder.setLayoutParams(folderParamas);
-        selectimage_confirm_num=(TextView)findViewById(R.id.selectimage_confirm_num);
-        selectimage_title_right=(TextView)findViewById(R.id.selectimage_title_right);
+        selectimage_confirm_num = (TextView) findViewById(R.id.selectimage_confirm_num);
+        selectimage_title_right = (TextView) findViewById(R.id.selectimage_title_right);
         selectimage_folder_tv = (TextView) findViewById(R.id.selectimage_folder_tv);
         selectimage_folder_tv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +98,9 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
         findViewById(R.id.selectimage_confirm).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                setResult();
+                Intent intent = new Intent();
+                intent.putExtra("array", imageListAdapter.getStringArray());
+                setResult(ImgSelConfig.RESULT_CODE, intent);
                 finish();
             }
         });
@@ -123,10 +123,9 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
     }
 
     public static void startActivityForResult(Activity activity, ImgSelConfig config) {
-        peizhi=config;
         Intent intent = new Intent(activity, ImageLoaderActivity.class);
         intent.putStringArrayListExtra("array", config.array);
-        activity.startActivityForResult(intent, ImgSelConfig.IMAGELOAD_CODE);
+        activity.startActivityForResult(intent, ImgSelConfig.REQUEST_CODE);
     }
 
     private LoaderManager.LoaderCallbacks<Cursor> mLoaderCallback = new LoaderManager.LoaderCallbacks<Cursor>() {
@@ -188,7 +187,7 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
                     } while (data.moveToNext());
 
                     imageList.clear();
-                    if (peizhi.needCamera)
+                    if (ImgSelConfig.needCamera)
                         imageList.add(new Image());
                     imageList.addAll(tempImageList);
 
@@ -260,7 +259,7 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
         selectimage_list_folder_bac.setVisibility(View.GONE);
         imageListAdapter.clearCheckList();
         selectimage_folder_tv.setText(folderList.get(position).name);
-        onItemChecked();
+        onItemChecked(position);
     }
 
     @Override
@@ -272,18 +271,25 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
 
     /**
      * 图片的点击事件
+     *
+     * @param position
      */
     @Override
-    public void onItemChecked() {
+    public void onItemChecked(int position) {
         int sumCheck = imageListAdapter.getCheckList().size();
-        if (sumCheck>0){
+        if (sumCheck > ImgSelConfig.maxNum) {
+            Toast.makeText(this, "最多选择" + ImgSelConfig.maxNum + "张图片", Toast.LENGTH_LONG).show();
+            imageListAdapter.getCheckList().remove(sumCheck - 1);
+            imageListAdapter.notifyItemChanged(position);
+            return;
+        }
+        if (sumCheck > 0) {
             selectimage_confirm_num.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             selectimage_confirm_num.setVisibility(View.GONE);
         }
-        selectimage_confirm_num.setText(sumCheck+"");
-        selectimage_title_right.setText(sumCheck+"/"+peizhi.maxNum);
-
+        selectimage_confirm_num.setText(sumCheck + "");
+        selectimage_title_right.setText(sumCheck + "/" + ImgSelConfig.maxNum);
 
     }
 

@@ -50,6 +50,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (checkedList.contains(image)) {
                     checkedList.remove(image);
                     holder.checkBox.setImageResource(R.drawable.imgsel_icon_unselected);
@@ -58,7 +59,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
                     checkedList.add(image);
                     holder.checkBox.setImageResource(R.drawable.imgsel_icon_selected);
                 }
-                listItemListener.onItemChecked();
+                listItemListener.onItemChecked(position);
             }
         });
         holder.imageView.setOnClickListener(new View.OnClickListener() {
@@ -94,5 +95,17 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
             imageView = (ImageView) itemView.findViewById(R.id.selimg_list_item_iv);
             checkBox = (ImageView) itemView.findViewById(R.id.selimg_list_item_cb);
         }
+    }
+
+    /**
+     * 返回可存储的数组
+     * @return
+     */
+    public ArrayList<String> getStringArray() {
+        ArrayList<String> list = new ArrayList<>();
+        for (Image image : checkedList) {
+            list.add(image.getPath());
+        }
+        return list;
     }
 }
