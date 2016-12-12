@@ -82,7 +82,10 @@ public class LoginActivity extends BaseActivity implements CityPickerListener {
 
     @Override
     protected void init() {
-startActivity(new Intent(this,ImageLoaderActivity.class));
+        me.leefeng.imageselector.ImgSelConfig config=new me.leefeng.imageselector.ImgSelConfig();
+        config.maxNum=9;
+        config.array=new ArrayList<String>();
+        ImageLoaderActivity.startActivityForResult(this,config);
 //        List<String> data = new ArrayList<>();
 //        data.add("http://img03.sogoucdn.com/app/a/100520093/39ccc87f3e85c326-d833987af7322860-4ce19032c3b0f23baadb92fbb834ca57.jpg");
 //        data.add("http://img03.sogoucdn.com/app/a/100520093/ff997748674109a3-a39fb229dd0dbda7-694fe393ad45dc0aa9ea5a22823a4a89.jpg");
@@ -106,17 +109,17 @@ startActivity(new Intent(this,ImageLoaderActivity.class));
 //        initLocation();
 //        mLocationClient.start();
 
-      cityPicker=   new CityPicker(LoginActivity.this,this);
+        cityPicker = new CityPicker(LoginActivity.this, this);
 
     }
 
 
-    private void initLocation(){
+    private void initLocation() {
         LocationClientOption option = new LocationClientOption();
         option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy
         );//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
         option.setCoorType("bd09ll");//可选，默认gcj02，设置返回的定位结果坐标系
-        int span=1000;
+        int span = 1000;
         option.setScanSpan(span);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
         option.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
         option.setOpenGps(true);//可选，默认false,设置是否使用gps
@@ -128,7 +131,6 @@ startActivity(new Intent(this,ImageLoaderActivity.class));
         option.setEnableSimulateGps(false);//可选，默认false，设置是否需要过滤gps仿真结果，默认需要
         mLocationClient.setLocOption(option);
     }
-
 
 
     @Override
@@ -176,7 +178,6 @@ startActivity(new Intent(this,ImageLoaderActivity.class));
 //        }, 0, 1000);
 
 
-
 // 自由配置选项
         ImgSelConfig config = new ImgSelConfig.Builder(this, loader)
                 // 是否多选
@@ -207,6 +208,7 @@ startActivity(new Intent(this,ImageLoaderActivity.class));
 // 跳转到图片选择器
 //        ImgSelActivity.startActivity(this, config, 1);
     }
+
     // 自定义图片加载器
     private ImageLoader loader = new ImageLoader() {
         @Override

@@ -19,11 +19,12 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderListAdapter.Fo
     private Context context;
     private List<Folder> list;
     private FolderListItemListener listItemListener;
+    private int checkPosition;
 
     public FolderListAdapter(List<Folder> folderList, Context context, FolderListItemListener listItemListener) {
         this.list = folderList;
         this.context = context;
-        this.listItemListener=listItemListener;
+        this.listItemListener = listItemListener;
     }
 
     @Override
@@ -32,7 +33,7 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderListAdapter.Fo
     }
 
     @Override
-    public void onBindViewHolder(FolderView holder, final int position) {
+    public void onBindViewHolder(final FolderView holder, final int position) {
         List<Image> l = list.get(position).images;
         Glide.with(context).load(l.get(0).getPath()).into(holder.image);
         holder.name.setText(list.get(position).name);
@@ -42,9 +43,18 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderListAdapter.Fo
             public void onClick(View view) {
                 if (listItemListener != null) {
                     listItemListener.folderListItemClick(position);
+                    notifyItemChanged(checkPosition);
+                    notifyItemChanged(position);
+                    checkPosition = position;
                 }
             }
         });
+        if (position == checkPosition) {
+            holder.check.setVisibility(View.VISIBLE);
+        } else {
+            holder.check.setVisibility(View.GONE);
+        }
+
     }
 
     @Override

@@ -22,11 +22,13 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
     private List<Image> list;
     private Context context;
     private List<Image> checkedList;
+    private ImageListItemListener listItemListener;
 
-    public ImageListAdapter(List<Image> imageList, Context context) {
+    public ImageListAdapter(List<Image> imageList, Context context, ImageListItemListener listItemListener) {
         this.list = imageList;
         this.context = context;
         checkedList = new ArrayList<>();
+        this.listItemListener = listItemListener;
     }
 
     @Override
@@ -36,7 +38,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
     }
 
     @Override
-    public void onBindViewHolder(final ImageListView holder, int position) {
+    public void onBindViewHolder(final ImageListView holder, final int position) {
         final Image image = list.get(position);
         Glide.with(context).load(image.getPath()).placeholder(R.drawable.ic_default_image)
                 .into(holder.imageView);
@@ -56,6 +58,13 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
                     checkedList.add(image);
                     holder.checkBox.setImageResource(R.drawable.imgsel_icon_selected);
                 }
+                listItemListener.onItemChecked();
+            }
+        });
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listItemListener.onItemClick(position);
             }
         });
 
@@ -69,6 +78,10 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
 
     public void clearCheckList() {
         checkedList.clear();
+    }
+
+    public List<Image> getCheckList() {
+        return checkedList;
     }
 
 

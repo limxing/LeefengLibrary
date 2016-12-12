@@ -3,6 +3,8 @@ package me.leefeng.imageselector;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
+import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -17,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,12 +29,13 @@ import java.util.List;
  * Created by limxing on 2016/12/11.
  */
 
-public class ImageLoaderActivity extends AppCompatActivity implements FolderListItemListener {
+public class ImageLoaderActivity extends AppCompatActivity implements FolderListItemListener, ImageListItemListener {
 
     private static final int LOADER_ALL = 0;
     private static final int LOADER_CATEGORY = 1;
     private static final String TAG = "ImageLoaderActivity";
     private static int DEFAULT_TOP = 500;
+    private static ImgSelConfig peizhi;
     private RecyclerView selectimage_list;
     private List<Folder> folderList;
     private List<Image> imageList;
@@ -41,9 +45,11 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
     private FolderListAdapter folderListAdapter;
     private RelativeLayout.LayoutParams folderParamas;
     private int bottomY;
-    private View selectimage_folder_tv;
+    private TextView selectimage_folder_tv;
     private int toY;
     private View selectimage_list_folder_bac;
+    private TextView selectimage_confirm_num;
+    private TextView selectimage_title_right;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +74,9 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
         folderParamas = (RelativeLayout.LayoutParams) selectimage_list_folder.getLayoutParams();
         folderParamas.setMargins(0, bottomY, 0, 0);
         selectimage_list_folder.setLayoutParams(folderParamas);
-
-        selectimage_folder_tv = findViewById(R.id.selectimage_folder_tv);
+        selectimage_confirm_num=(TextView)findViewById(R.id.selectimage_confirm_num);
+        selectimage_title_right=(TextView)findViewById(R.id.selectimage_title_right);
+        selectimage_folder_tv = (TextView) findViewById(R.id.selectimage_folder_tv);
         selectimage_folder_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,7 +106,7 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
         });
         folderList = new ArrayList<>();
         imageList = new ArrayList<>();
-        imageListAdapter = new ImageListAdapter(imageList, this);
+        imageListAdapter = new ImageListAdapter(imageList, this, this);
         folderListAdapter = new FolderListAdapter(folderList, this, this);
 
         selectimage_list.setLayoutManager(new GridLayoutManager(this, 3));
@@ -112,10 +119,14 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
 
         getSupportLoaderManager().initLoader(LOADER_ALL, null, mLoaderCallback);
 
+
     }
 
-    public static void startActivityForResult() {
-
+    public static void startActivityForResult(Activity activity, ImgSelConfig config) {
+        peizhi=config;
+        Intent intent = new Intent(activity, ImageLoaderActivity.class);
+        intent.putStringArrayListExtra("array", config.array);
+        activity.startActivityForResult(intent, ImgSelConfig.IMAGELOAD_CODE);
     }
 
     private LoaderManager.LoaderCallbacks<Cursor> mLoaderCallback = new LoaderManager.LoaderCallbacks<Cursor>() {
@@ -177,7 +188,7 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
                     } while (data.moveToNext());
 
                     imageList.clear();
-                    if (ImgSelConfig.needCamera)
+                    if (peizhi.needCamera)
                         imageList.add(new Image());
                     imageList.addAll(tempImageList);
 
@@ -247,7 +258,9 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
         imageListAdapter.notifyDataSetChanged();
         setAnimY(selectimage_list_folder, DEFAULT_TOP, bottomY);
         selectimage_list_folder_bac.setVisibility(View.GONE);
-imageListAdapter.clearCheckList();
+        imageListAdapter.clearCheckList();
+        selectimage_folder_tv.setText(folderList.get(position).name);
+        onItemChecked();
     }
 
     @Override
@@ -255,5 +268,27 @@ imageListAdapter.clearCheckList();
         super.onDestroy();
         imageList.clear();
         folderList.clear();
+    }
+
+    /**
+     * 图片的点击事件
+     */
+    @Override
+    public void onItemChecked() {
+        int sumCheck = imageListAdapter.getCheckList().size();
+        if (sumCheck>0){
+            selectimage_confirm_num.setVisibility(View.VISIBLE);
+        }else{
+            selectimage_confirm_num.setVisibility(View.GONE);
+        }
+        selectimage_confirm_num.setText(sumCheck+"");
+        selectimage_title_right.setText(sumCheck+"/"+peizhi.maxNum);
+
+
+    }
+
+    @Override
+    public void onItemClick(int position) {
+
     }
 }
