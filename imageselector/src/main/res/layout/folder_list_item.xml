@@ -3,40 +3,38 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+
+    <ImageView
+        android:id="@+id/folder_item_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/imgsel_folder"
+        android:paddingBottom="17dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="9dp"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/folder_item_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/folder_item_image"
+        android:text="相机"
+        android:textColor="#000"
+        android:textSize="18sp" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/imgsel_folder">
+    <TextView
+        android:id="@+id/folder_item_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/folder_item_name"
+        android:text="(10)"
+        android:textColor="#aaa"
+        android:textSize="16sp" />
 
-            <ImageView
-                android:id="@+id/folder_item_image"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/folder_item_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="相机"
-            android:textColor="#000"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/folder_item_size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="(10)"
-            android:textColor="#eee"
-            android:textSize="16sp" />
-
-    </LinearLayout>
 
     <ImageView
         android:id="@+id/folder_item_check"
@@ -46,4 +44,10 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="20dp"
         android:src="@drawable/imgsel_folder_check" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/folder_item_image"
+        android:background="#eee" />
 </RelativeLayout>

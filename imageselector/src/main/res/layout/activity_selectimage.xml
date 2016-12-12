@@ -56,11 +56,21 @@
         android:layout_above="@+id/selectimage_bottom"
         android:layout_below="@+id/selectimage_title" />
 
+    <View
+        android:id="@+id/selectimage_list_folder_bac"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/selectimage_bottom"
+        android:background="#70000000"
+        android:clickable="true"
+        android:visibility="gone" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/selectimage_list_folder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/selectimage_bottom" />
+        android:layout_above="@+id/selectimage_bottom"
+        android:background="#fff" />
 
 
     <RelativeLayout
@@ -71,6 +81,7 @@
         android:background="@color/style">
 
         <TextView
+            android:id="@+id/selectimage_folder_tv"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"

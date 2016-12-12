@@ -18,10 +18,12 @@ import java.util.List;
 public class FolderListAdapter extends RecyclerView.Adapter<FolderListAdapter.FolderView> {
     private Context context;
     private List<Folder> list;
+    private FolderListItemListener listItemListener;
 
-    public FolderListAdapter(List<Folder> folderList, Context context) {
+    public FolderListAdapter(List<Folder> folderList, Context context, FolderListItemListener listItemListener) {
         this.list = folderList;
         this.context = context;
+        this.listItemListener=listItemListener;
     }
 
     @Override
@@ -30,11 +32,19 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderListAdapter.Fo
     }
 
     @Override
-    public void onBindViewHolder(FolderView holder, int position) {
+    public void onBindViewHolder(FolderView holder, final int position) {
         List<Image> l = list.get(position).images;
         Glide.with(context).load(l.get(0).getPath()).into(holder.image);
         holder.name.setText(list.get(position).name);
-        holder.size.setText(l.size());
+        holder.size.setText("(" + l.size() + ")");
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listItemListener != null) {
+                    listItemListener.folderListItemClick(position);
+                }
+            }
+        });
     }
 
     @Override
@@ -47,13 +57,17 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderListAdapter.Fo
         TextView name;
         TextView size;
         View check;
+        View view;
 
         public FolderView(View itemView) {
             super(itemView);
+            view = itemView;
             image = (ImageView) itemView.findViewById(R.id.folder_item_image);
             name = (TextView) itemView.findViewById(R.id.folder_item_name);
             size = (TextView) itemView.findViewById(R.id.folder_item_size);
             check = itemView.findViewById(R.id.folder_item_check);
         }
     }
+
+
 }

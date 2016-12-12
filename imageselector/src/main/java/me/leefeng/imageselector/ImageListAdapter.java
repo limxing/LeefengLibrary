@@ -18,8 +18,7 @@ import java.util.List;
  * Created by limxing on 2016/12/11.
  */
 
-public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ImageListView>
-        implements View.OnClickListener {
+public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ImageListView> {
     private List<Image> list;
     private Context context;
     private List<Image> checkedList;
@@ -32,7 +31,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
 
     @Override
     public ImageListView onCreateViewHolder(ViewGroup parent, int viewType) {
-        return  new ImageListView(View.inflate(parent.getContext(),
+        return new ImageListView(View.inflate(parent.getContext(),
                 R.layout.selimg_list_item, null));
     }
 
@@ -49,11 +48,11 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (checkedList.contains(image)){
+                if (checkedList.contains(image)) {
                     checkedList.remove(image);
                     holder.checkBox.setImageResource(R.drawable.imgsel_icon_unselected);
 
-                }else{
+                } else {
                     checkedList.add(image);
                     holder.checkBox.setImageResource(R.drawable.imgsel_icon_selected);
                 }
@@ -67,16 +66,9 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
         return list.size();
     }
 
-    @Override
-    public void onClick(View view) {
 
-//        if (view.getId() == R.id.selimg_list_item_iv) {
-//
-//        } else {
-//            int i = Integer.parseInt(view.getTag().toString());
-//            list.get(i).checkChanged();
-//            notifyItemChanged(i);
-//        }
+    public void clearCheckList() {
+        checkedList.clear();
     }
 
 
