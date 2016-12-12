@@ -57,6 +57,7 @@ public class LoginActivity extends BaseActivity implements CityPickerListener {
     private Timer time;
     private LocationClient mLocationClient;
     private CityPicker cityPicker;
+    private ImageView image;
 
     @Override
     protected void onDestroy() {
@@ -73,7 +74,8 @@ public class LoginActivity extends BaseActivity implements CityPickerListener {
         RecyclerView recycleview = (RecyclerView) findViewById(R.id.recycleview);
         recycleview.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL));
         recycleview.setAdapter(new LoginAdapter());
-        view1 = (DemoView) findViewById(R.id.view);
+        image=(ImageView) findViewById(R.id.image);
+//        view1 = (DemoView) findViewById(R.id.view);
 //        boolean isOpen = Settings.Secure.getInt(getContentResolver(), Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0;
 //        ToastUtils.showLong(this,isOpen+"打开里吗?");
 
@@ -181,6 +183,8 @@ public class LoginActivity extends BaseActivity implements CityPickerListener {
 
 //        ImgSelActivity.startActivity(this, config, 1);
 //        startActivityForResult(new Intent(LoginActivity.this, ImageLoaderActivity.class), me.leefeng.imageselector.ImgSelConfig.REQUEST_CODE);
+        me.leefeng.imageselector.ImgSelConfig.maxNum=0;
+        me.leefeng.imageselector.ImgSelConfig.titleBackImage=getResources().getDrawable(R.drawable.ic_back);
         ImageLoaderActivity.startActivityForResult(this, null);
     }
 
@@ -197,8 +201,12 @@ public class LoginActivity extends BaseActivity implements CityPickerListener {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == me.leefeng.imageselector.ImgSelConfig.REQUEST_CODE && data != null) {
             ArrayList<String> list = data.getStringArrayListExtra("array");
-            for (String s : list) {
-                ToastUtils.showShort(this, s);
+            String path = data.getStringExtra("path");
+            if (list != null)
+                Glide.with(this).load(list.get(0)).into(image);
+            if (path!=null){
+                Glide.with(this).load(path).into(image);
+                ToastUtils.showShort(this, path);
             }
         }
     }

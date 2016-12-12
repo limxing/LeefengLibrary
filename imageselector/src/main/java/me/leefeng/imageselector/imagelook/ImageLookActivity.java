@@ -64,6 +64,9 @@ public class ImageLookActivity extends AppCompatActivity implements ViewPager.On
         if (ImgSelConfig.checkedList.contains(list.get(position))) {
             imageLookCheck.setImageResource(R.drawable.imgsel_icon_selected);
         }
+        if (ImgSelConfig.titleBackImage != null) {
+            ((ImageView) findViewById(R.id.imagelook_bac)).setImageDrawable(ImgSelConfig.titleBackImage);
+        }
         findViewById(R.id.imagelook_bac).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -24,13 +24,17 @@
         android:layout_height="60dp"
         android:background="#70123456"
         android:visibility="gone" />
+<ImageView
+    android:id="@+id/image"
+    android:scaleType="centerCrop"
+    android:layout_width="match_parent"
+    android:layout_height="500dp" />
+    <!--<com.limxing.app.view.DemoView-->
+        <!--android:id="@+id/view"-->
+        <!--android:layout_marginTop="50dp"-->
 
-    <com.limxing.app.view.DemoView
-        android:id="@+id/view"
-        android:layout_marginTop="50dp"
-
-        android:layout_width="match_parent"
-        android:layout_height="500dp" />
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="500dp" />-->
 
     <Button
         android:background="#f0f"

@@ -17,6 +17,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -101,6 +102,9 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
                 }
             }
         });
+        if (ImgSelConfig.titleBackImage != null) {
+            ((ImageView) findViewById(R.id.selectimage_title_bac)).setImageDrawable(ImgSelConfig.titleBackImage);
+        }
         findViewById(R.id.selectimage_title_bac).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
