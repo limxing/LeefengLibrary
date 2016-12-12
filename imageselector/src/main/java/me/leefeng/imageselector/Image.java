@@ -6,11 +6,14 @@ package me.leefeng.imageselector;
  */
 public class Image {
 
-    public String path;
-    public String name;
-    public long time;
+    private String path;
+    private String name;
+    private long time;
+    private boolean checked;
+    public boolean isCamera;
+    private int position;
 
-    public boolean isCamera = false;
+
 
     public Image(String path, String name, long time) {
         this.path = path;
@@ -18,8 +21,61 @@ public class Image {
         this.time = time;
     }
 
-    public Image(){
+    public Image() {
         isCamera = true;
+    }
+
+    public Image(String s, String s1) {
+        this.path = s;
+        this.name = s1;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
+    public boolean isCamera() {
+        return isCamera;
+    }
+
+    public void setCamera(boolean camera) {
+        isCamera = camera;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     @Override
@@ -31,5 +87,9 @@ public class Image {
             e.printStackTrace();
         }
         return super.equals(o);
+    }
+
+    public void checkChanged() {
+        this.checked=!checked;
     }
 }

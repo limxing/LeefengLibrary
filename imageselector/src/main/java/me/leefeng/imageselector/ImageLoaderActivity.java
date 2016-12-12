@@ -1,7 +1,6 @@
 package me.leefeng.imageselector;
 
 
-import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -9,7 +8,9 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import java.io.File;
@@ -24,10 +25,14 @@ public class ImageLoaderActivity extends AppCompatActivity {
 
     private static final int LOADER_ALL = 0;
     private static final int LOADER_CATEGORY = 1;
+    private static final String TAG = "ImageLoaderActivity";
     private RecyclerView selectimage_list;
     private List<Folder> folderList;
     private List<Image> imageList;
     private boolean hasFolderGened = false;
+    private ImageListAdapter imageListAdapter;
+    private RecyclerView selectimage_list_folder;
+    private FolderListAdapter folderListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,7 @@ public class ImageLoaderActivity extends AppCompatActivity {
         StatusBarCompat.translucentStatusBar(this);
         setContentView(R.layout.activity_selectimage);
         selectimage_list = (RecyclerView) findViewById(R.id.selectimage_list);
+        selectimage_list_folder = (RecyclerView) findViewById(R.id.selectimage_list_folder);
         findViewById(R.id.selectimage_title_bac).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,7 +56,17 @@ public class ImageLoaderActivity extends AppCompatActivity {
         });
         folderList = new ArrayList<>();
         imageList = new ArrayList<>();
-        new ImageListAdapter(imageList);
+        imageListAdapter = new ImageListAdapter(imageList, this);
+        folderListAdapter=new FolderListAdapter(folderList,this);
+
+        selectimage_list.setLayoutManager(new GridLayoutManager(this, 3));
+        selectimage_list.addItemDecoration(new DividerGridItemDecoration(selectimage_list.getContext()));
+        selectimage_list.setAdapter(imageListAdapter);
+        getSupportLoaderManager().initLoader(LOADER_ALL, null, mLoaderCallback);
+
+    }
+    public static void startActivityForResult(){
+
     }
 
     private LoaderManager.LoaderCallbacks<Cursor> mLoaderCallback = new LoaderManager.LoaderCallbacks<Cursor>() {
@@ -89,7 +105,7 @@ public class ImageLoaderActivity extends AppCompatActivity {
                         String name = data.getString(data.getColumnIndexOrThrow(IMAGE_PROJECTION[1]));
                         long dateTime = data.getLong(data.getColumnIndexOrThrow(IMAGE_PROJECTION[2]));
                         Image image = new Image(path, name, dateTime);
-                        if (!image.path.endsWith("gif"))
+                        if (!image.getPath().endsWith("gif"))
                             tempImageList.add(image);
                         if (!hasFolderGened) {
                             File imageFile = new File(path);
@@ -116,9 +132,9 @@ public class ImageLoaderActivity extends AppCompatActivity {
                         imageList.add(new Image());
                     imageList.addAll(tempImageList);
 
-
+                    Log.i(TAG, "onLoadFinished: " + imageList.size());
                     imageListAdapter.notifyDataSetChanged();
-
+//                    Log.i(TAG, "onLoadFinished: "+imageList.size());
 //                    if (Constant.imageList != null && Constant.imageList.size() > 0) {
                     //imageListAdapter.setDefaultSelected(Constant.imageList);
 //                    }

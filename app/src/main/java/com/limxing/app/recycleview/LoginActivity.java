@@ -31,6 +31,7 @@ import com.limxing.app.R;
 import com.limxing.app.recycleview.ui.ViewImageActivity;
 import com.limxing.app.view.DemoView;
 import com.limxing.library.utils.ToastUtils;
+import com.scrat.app.selectorlibrary.ImageSelector;
 import com.yuyh.library.imgsel.ImageLoader;
 import com.yuyh.library.imgsel.ImgSelActivity;
 import com.yuyh.library.imgsel.ImgSelConfig;
@@ -51,6 +52,7 @@ import me.leefeng.imageselector.ImageLoaderActivity;
 public class LoginActivity extends BaseActivity implements CityPickerListener {
 
 
+    private static final int REQUEST_CODE_SELECT_IMG = 1;
     private DemoView view1;
     private Timer time;
     private LocationClient mLocationClient;
@@ -76,7 +78,7 @@ public class LoginActivity extends BaseActivity implements CityPickerListener {
 //        ToastUtils.showLong(this,isOpen+"打开里吗?");
 
     }
-    public BDLocationListener myListener = new MyLocationListener();
+//    public BDLocationListener myListener = new MyLocationListener();
 
     @Override
     protected void init() {
@@ -99,10 +101,10 @@ startActivity(new Intent(this,ImageLoaderActivity.class));
 //        intent.putExtra(ViewImageActivity.IMAGE_NUM, 1);
 //        intent.putExtra(ViewImageActivity.IMAGES_DATA_LIST, (Serializable) data);
 //        startActivity(intent);
-        mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
-        mLocationClient.registerLocationListener(myListener);    //注册监听函数
-        initLocation();
-        mLocationClient.start();
+//        mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
+//        mLocationClient.registerLocationListener(myListener);    //注册监听函数
+//        initLocation();
+//        mLocationClient.start();
 
       cityPicker=   new CityPicker(LoginActivity.this,this);
 
@@ -148,6 +150,7 @@ startActivity(new Intent(this,ImageLoaderActivity.class));
     int i = 0;
 
     public void hah(View view) {
+        ImageSelector.show(this, REQUEST_CODE_SELECT_IMG);
 //        final View v = View.inflate(LoginActivity.this, R.layout.title, null);
 //        final TextView tv = (TextView) v.findViewById(R.id.tt);
 //        view1.setText(v);
@@ -202,7 +205,7 @@ startActivity(new Intent(this,ImageLoaderActivity.class));
                 .build();
 
 // 跳转到图片选择器
-        ImgSelActivity.startActivity(this, config, 1);
+//        ImgSelActivity.startActivity(this, config, 1);
     }
     // 自定义图片加载器
     private ImageLoader loader = new ImageLoader() {
