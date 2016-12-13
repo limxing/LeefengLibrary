@@ -183,7 +183,7 @@ public class LoginActivity extends BaseActivity implements CityPickerListener {
 
 //        ImgSelActivity.startActivity(this, config, 1);
 //        startActivityForResult(new Intent(LoginActivity.this, ImageLoaderActivity.class), me.leefeng.imageselector.ImgSelConfig.REQUEST_CODE);
-        me.leefeng.imageselector.ImgSelConfig.maxNum=0;
+        me.leefeng.imageselector.ImgSelConfig.maxNum=6;
         me.leefeng.imageselector.ImgSelConfig.titleBackImage=getResources().getDrawable(R.drawable.ic_back);
         ImageLoaderActivity.startActivityForResult(this, null);
     }

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.leefeng.imageselector.Image;
-import uk.co.senab.photoview.PhotoView;
+import me.leefeng.imageselector.PhotoView.PhotoView;
 
 /**
  * 版权：北京航天世景信息技术有限公司
@@ -68,7 +68,8 @@ public class ViewPagerAdapter extends PagerAdapter {
         } else {
             container.addView(view);
         }
-        view.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        view.enable();
+        view.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         Glide.with(container.getContext())
                 .load(att.getPath())
                 .into(view);
@@ -102,6 +103,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     }
 
     public void onDestory() {
+        context=null;
         list = null;
         clear();
         imageList.clear();

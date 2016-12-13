@@ -80,7 +80,11 @@ public class ImageLookActivity extends AppCompatActivity implements ViewPager.On
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        vp.removeAllViews();
+        vp.setAdapter(null);
+        vp = null;
         adapter.onDestory();
+        adapter = null;
         list = null;
     }
 

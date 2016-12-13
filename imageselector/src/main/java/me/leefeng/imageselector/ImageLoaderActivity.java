@@ -81,6 +81,7 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
         selectimage_list_folder.setLayoutParams(folderParamas);
         selectimage_confirm_num = (TextView) findViewById(R.id.selectimage_confirm_num);
         selectimage_title_right = (TextView) findViewById(R.id.selectimage_title_right);
+        selectimage_title_right.setText("0/"+ImgSelConfig.maxNum);
         if (ImgSelConfig.maxNum <= 0) {//不设上限选择
             selectimage_title_right.setVisibility(View.GONE);
         }
@@ -254,7 +255,7 @@ public class ImageLoaderActivity extends AppCompatActivity implements FolderList
      * @param view
      * @param fromY
      * @param toYY
-     * @param
+     *
      */
 
     public void setAnimY(final View view, int fromY, int toYY) {
