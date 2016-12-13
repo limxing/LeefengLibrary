@@ -12,8 +12,25 @@
         android:layout_height="wrap_content"
         app:hintText="这是用户名"
         app:titleStyle="2"
-
         app:titleText="用户名" />
+
+    <com.limxing.library.view.CellView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:lastIsEdite="true"
+        app:clickAble="true"
+        app:hintText="请选择日期"
+        app:mSelect="@string/array"
+        app:titleStyle="1"
+        app:titleText="什么鬼" />
+    <com.limxing.library.view.CellView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:lastIsEdite="true"
+        app:clickAble="true"
+        app:mSelect="@string/array"
+        app:titleStyle="1"
+        app:titleText="什么鬼" />
 
 
 </LinearLayout>

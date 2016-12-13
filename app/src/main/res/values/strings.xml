@@ -2,4 +2,5 @@
     <string name="app_name">aTalk</string>
     <string name="app_key">23302065</string>
     <string name="umeng_appkey">56a5b044e0f55a021b0003ec</string>
+    <string name="array">星期一,星期二,星期三,星期四,星期五,星期一,星期二,星期三,星期四,星期五,星期一,星期二,星期三,星期四,星期五</string>
 </resources>

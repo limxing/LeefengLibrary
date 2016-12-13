@@ -31,7 +31,6 @@ import com.limxing.app.R;
 import com.limxing.app.recycleview.ui.ViewImageActivity;
 import com.limxing.app.view.DemoView;
 import com.limxing.library.utils.ToastUtils;
-import com.scrat.app.selectorlibrary.ImageSelector;
 import com.yuyh.library.imgsel.ImageLoader;
 import com.yuyh.library.imgsel.ImgSelActivity;
 import com.yuyh.library.imgsel.ImgSelConfig;

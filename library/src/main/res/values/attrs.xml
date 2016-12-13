@@ -111,6 +111,7 @@
         <attr name="isPassword" format="boolean"></attr>
         <attr name="setSendType" format="boolean"></attr>
         <attr name="topLine" format="boolean"></attr>
+        <attr name="lastIsEdite" format="boolean"></attr>
         <attr name="drawable" format="reference"></attr>
     </declare-styleable>
 

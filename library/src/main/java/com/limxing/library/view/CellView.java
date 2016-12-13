@@ -1,11 +1,10 @@
 package com.limxing.library.view;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.preference.EditTextPreference;
-import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -38,6 +37,7 @@ import com.limxing.library.utils.ToastUtils;
  * 修改历史：
  */
 public class CellView extends RelativeLayout implements TextWatcher, View.OnClickListener {
+    private boolean lastIsNone;
     //    private static final float DEFALT_TEXT_SIZE = 30;
 //    private static final float DEFALT_TEXT_SIZE_NEW = 20;
     private boolean topLine;
@@ -45,7 +45,7 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
     private int length;
     private boolean isPassword;
     private Drawable leftDrawable;
-    private boolean clickAble = true;//在style下是否可以选择
+    private boolean clickAble;//在style下是否可以选择
     private boolean showRightPic = true;
     private String mTitle;
     private String mHint;
@@ -112,7 +112,7 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
 
     public CellView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        float density=getResources().getDisplayMetrics().density;
+        float density = getResources().getDisplayMetrics().density;
         mContext = context;
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.CellView);
         mTitle = typedArray.getString(R.styleable.CellView_titleText);
@@ -121,22 +121,27 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
         length = typedArray.getInt(R.styleable.CellView_length, 0);
         inputType = typedArray.getInt(R.styleable.CellView_inputType, InputType.TYPE_CLASS_TEXT);
 
-        mHeight = (int) typedArray.getDimension(R.styleable.CellView_cellHeight, 50*density);
-        drawablePad = (int) typedArray.getDimension(R.styleable.CellView_drawablePad, 5*density);
+        mHeight = (int) typedArray.getDimension(R.styleable.CellView_cellHeight, 50 * density);
+        drawablePad = (int) typedArray.getDimension(R.styleable.CellView_drawablePad, 5 * density);
         titleTextSize = typedArray.getDimension(R.styleable.CellView_titleTextSize, 18);
         valueTextSize = typedArray.getDimension(R.styleable.CellView_valueTextSize, 16);
 
         isHidden = typedArray.getBoolean(R.styleable.CellView_hiddenLine, false);
         showRightPic = typedArray.getBoolean(R.styleable.CellView_showRightPic, true);
-        clickAble = typedArray.getBoolean(R.styleable.CellView_clickAble, true);
+        clickAble = typedArray.getBoolean(R.styleable.CellView_clickAble, false);
         isPassword = typedArray.getBoolean(R.styleable.CellView_isPassword, false);
         isSendType = typedArray.getBoolean(R.styleable.CellView_setSendType, false);
         mSelect = typedArray.getString(R.styleable.CellView_mSelect);
         leftDrawable = typedArray.getDrawable(R.styleable.CellView_drawable);
         netName = typedArray.getString(R.styleable.CellView_netName);
         topLine = typedArray.getBoolean(R.styleable.CellView_topLine, false);
+        lastIsNone = typedArray.getBoolean(R.styleable.CellView_lastIsEdite, false);
+        String select = typedArray.getString(R.styleable.CellView_mSelect);
         typedArray.recycle();
         init(context);
+        if (select != null) {
+            selects = select.split(",");
+        }
 
     }
 
@@ -262,6 +267,7 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
 //            editeparams.addRule(RelativeLayout.CENTER_VERTICAL);
 //        editeparams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             editText.setLayoutParams(editeparams);
+            editText.setInputType(EditorInfo.TYPE_CLASS_TEXT);
             if (isPassword) {
 //                editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
@@ -272,6 +278,17 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
                 editText.setInputType(EditorInfo.TYPE_CLASS_TEXT);
             }
             addView(editText);
+            if (clickAble) {
+                editText.setOnFocusChangeListener(new OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View view, boolean b) {
+                        if (b) {
+                            onClick(view);
+                        }
+                    }
+                });
+//                editText.setOnClickListener(this);
+            }
         }
 
     }
@@ -312,7 +329,8 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
         if (!clickAble) {
             return;
         }
-        selects = new String[0];
+        if (selects == null)
+            selects = new String[0];
         /**
          * 这里应该给selects赋值,
          */
@@ -332,14 +350,25 @@ public class CellView extends RelativeLayout implements TextWatcher, View.OnClic
 //            }
 //        });
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        builder.setTitle(mHint);
+        if (mHint == null || mHint.length() == 0) {
+            builder.setTitle("请选择");
+        } else {
+            builder.setTitle(mHint);
+        }
         //    指定下拉列表的显示数据
         //    设置一个下拉的列表选择项
         builder.setItems(selects, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 result = selects[which];
-                ((TextView) view).setText(result);
+                if (textView != null) {
+                    ((TextView) view).setText(result);
+                }
+                if (editText != null) {
+                    if (which != selects.length - 1 || !lastIsNone) {
+                        editText.setText(result);
+                    }
+                }
                 dialog.dismiss();
             }
         });
