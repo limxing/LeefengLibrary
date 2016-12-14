@@ -117,7 +117,7 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
 
         setFocusable(true);
         setClickable(true);
-        setBackgroundColor(itemBacColor);
+        setBackgroundResource(itemBacColor);
         View view = View.inflate(context, R.layout.itemview, null);
         addView(view);
         RelativeLayout itemview_container = (RelativeLayout) findViewById(R.id.itemview_container);
