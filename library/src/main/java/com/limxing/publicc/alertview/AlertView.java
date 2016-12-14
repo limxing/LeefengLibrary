@@ -3,6 +3,7 @@ package com.limxing.publicc.alertview;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -17,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.limxing.library.LoopView.LoopView;
@@ -24,6 +26,7 @@ import com.limxing.library.LoopView.OnItemSelectedListener;
 import com.limxing.library.R;
 import com.limxing.library.utils.DisplayUtil;
 import com.limxing.library.utils.LogUtils;
+import com.limxing.library.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -258,7 +261,6 @@ public class AlertView implements OnItemSelectedListener {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         yearView.setInitPosition(year - startyear);
-
         monthView.setInitPosition(month);
         dayView.setInitPosition(day - 1);
 

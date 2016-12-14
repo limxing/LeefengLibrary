@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemview_container"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+
+    <View
+        android:id="@+id/item_topline"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/cell_line_color"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/itemview_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_centerVertical="true"
+        android:drawablePadding="5dp"
+        android:text="标题"
+        android:textSize="18sp" />
+
+    <View
+        android:id="@+id/item_bottomline"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/cell_line_color" />
+
+    <TextView
+        android:id="@+id/itemview_value_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/itemview_title"
+        android:gravity="right|center_vertical"
+        android:hint="请选择"
+        android:singleLine="true"
+        android:text="我是内容"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/itemview_value_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/itemview_title"
+        android:gravity="right|center_vertical"
+        android:hint="请输入"
+        android:singleLine="true"
+        android:visibility="gone" />
+
+</RelativeLayout>

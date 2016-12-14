@@ -7,30 +7,100 @@
     android:orientation="vertical">
 
 
-    <com.limxing.library.view.CellView
+    <!--<com.limxing.library.view.CellView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--app:hintText="这是用户名"-->
+    <!--app:titleStyle="2"-->
+    <!--app:titleText="用户名" />-->
+
+    <!--<com.limxing.library.view.CellView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--app:clickAble="true"-->
+    <!--app:hintText="请选择日期"-->
+    <!--app:lastIsEdite="true"-->
+    <!--app:mSelect="@string/array"-->
+    <!--app:titleStyle="1"-->
+    <!--app:titleText="什么鬼" />-->
+
+    <!--<com.limxing.library.view.CellView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--app:clickAble="true"-->
+    <!--app:lastIsEdite="true"-->
+    <!--app:mSelect="@string/array"-->
+    <!--app:titleStyle="1"-->
+    <!--app:titleText="什么鬼" />-->
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:hintText="这是用户名"
+        android:onClick="dianji"
+        android:text="点这里" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.limxing.library.LoopView.LoopView
+            android:id="@+id/loopview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <com.limxing.library.LoopView.LoopView
+            android:id="@+id/loopview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <com.limxing.library.view.ItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:clickAble="true"
+        app:drawable="@drawable/default_ptr_flip"
+        app:lastIsEdite="true"
+        app:mSelect="@string/array"
+        app:showRightPic="true"
         app:titleStyle="2"
-        app:titleText="用户名" />
+        app:titleText="普通"
+        app:topLine="true"
+        app:topLineBrim="true" />
 
-    <com.limxing.library.view.CellView
+    <com.limxing.library.view.ItemView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:lastIsEdite="true"
         app:clickAble="true"
-        app:hintText="请选择日期"
+        app:drawable="@drawable/default_ptr_flip"
+        app:lastIsEdite="true"
         app:mSelect="@string/array"
-        app:titleStyle="1"
-        app:titleText="什么鬼" />
-    <com.limxing.library.view.CellView
+        app:rightDrawable="@drawable/imgsel_icon_selected"
+        app:showRightPic="true"
+        app:titleStyle="2"
+        app:titleText="普通" />
+
+    <com.limxing.library.view.ItemView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:lastIsEdite="true"
         app:clickAble="true"
+
+        app:lastIsEdite="true"
         app:mSelect="@string/array"
         app:titleStyle="1"
-        app:titleText="什么鬼" />
+        app:titleText="输入" />
 
+    <com.limxing.library.view.ItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bottomLineBrim="true"
+        app:clickAble="true"
+        app:hintText="请输入"
+        app:lastIsEdite="true"
+        app:mSelect="@string/array"
+        app:titleStyle="1"
+        app:titleText="输入" />
 
 </LinearLayout>
