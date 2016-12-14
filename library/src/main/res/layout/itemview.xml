@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/itemview_container"
     android:layout_width="match_parent"
-    android:layout_height="50dp">
+
+    android:layout_height="50dp"
+   >
 
     <View
         android:id="@+id/item_topline"
@@ -15,9 +17,9 @@
         android:id="@+id/itemview_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
         android:layout_centerVertical="true"
         android:drawablePadding="5dp"
+        android:gravity="center_vertical"
         android:text="标题"
         android:textSize="18sp" />
 

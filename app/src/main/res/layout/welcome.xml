@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="#eee"
     android:orientation="vertical">
 
 
@@ -60,7 +60,7 @@
     <com.limxing.library.view.ItemView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:clickAble="true"
+        app:clickAble="false"
         app:drawable="@drawable/default_ptr_flip"
         app:lastIsEdite="true"
         app:mSelect="@string/array"

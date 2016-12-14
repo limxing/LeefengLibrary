@@ -59,6 +59,8 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
     private int lineColor;
     private boolean topLineBrim;
     private boolean bottomLineBrim;
+    private int itemBacColor;
+    private boolean metalDialog;
 
     public ItemView(Context context) {
         super(context);
@@ -93,14 +95,16 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
         rightDrawable = typedArray.getDrawable(R.styleable.ItemView_rightDrawable);
         netName = typedArray.getString(R.styleable.ItemView_netName);
         topLine = typedArray.getBoolean(R.styleable.ItemView_topLine, false);
-        topLineBrim = typedArray.getBoolean(R.styleable.ItemView_topLineBrim, false);
-        bottomLineBrim = typedArray.getBoolean(R.styleable.ItemView_bottomLineBrim, false);
+        topLineBrim = typedArray.getBoolean(R.styleable.ItemView_topLineBrim, true);
+        bottomLineBrim = typedArray.getBoolean(R.styleable.ItemView_bottomLineBrim, true);
         lastIsEdite = typedArray.getBoolean(R.styleable.ItemView_lastIsEdite, false);
+        metalDialog = typedArray.getBoolean(R.styleable.ItemView_metalDialog, false);
         String select = typedArray.getString(R.styleable.ItemView_mSelect);
         titleColor = typedArray.getColor(R.styleable.ItemView_titleColor, getResources().getColor(R.color.cellview_edite_textcolor));
         valueColor = typedArray.getColor(R.styleable.ItemView_valueColor, getResources().getColor(R.color.cellview_edite_textcolor));
         valueHintColor = typedArray.getColor(R.styleable.ItemView_valueHintColor, getResources().getColor(R.color.cellview_edite_texthintcolor));
         lineColor = typedArray.getColor(R.styleable.ItemView_lineColor, getResources().getColor(R.color.cell_line_color));
+        itemBacColor = typedArray.getResourceId(R.styleable.ItemView_itemBacColor, R.drawable.itemview_bg_selector);
         typedArray.recycle();
         init(context);
         if (select != null) {
@@ -110,6 +114,10 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
     }
 
     private void init(Context context) {
+
+        setFocusable(true);
+        setClickable(true);
+        setBackgroundColor(itemBacColor);
         View view = View.inflate(context, R.layout.itemview, null);
         addView(view);
         RelativeLayout itemview_container = (RelativeLayout) findViewById(R.id.itemview_container);
@@ -213,7 +221,13 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
             Toast.makeText(view.getContext(), "没有相关数据", Toast.LENGTH_LONG).show();
             return;
         }
-        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+        AlertDialog.Builder builder;
+        if (metalDialog) {
+            builder = new AlertDialog.Builder(view.getContext());
+        } else {
+            builder = new AlertDialog.Builder(view.getContext(), AlertDialog.THEME_HOLO_LIGHT);
+        }
+
         if (mHint == null || mHint.length() == 0) {
             builder.setTitle("请选择");
         } else {
