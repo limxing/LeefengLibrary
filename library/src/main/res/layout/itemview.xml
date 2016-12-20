@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/itemview_container"
     android:layout_width="match_parent"
-
     android:layout_height="50dp"
    >
 
@@ -20,7 +19,6 @@
         android:layout_centerVertical="true"
         android:drawablePadding="5dp"
         android:gravity="center_vertical"
-        android:text="标题"
         android:textSize="18sp" />
 
     <View
@@ -39,9 +37,7 @@
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/itemview_title"
         android:gravity="right|center_vertical"
-        android:hint="请选择"
         android:singleLine="true"
-        android:text="我是内容"
         android:visibility="gone" />
 
     <EditText
@@ -53,7 +49,6 @@
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/itemview_title"
         android:gravity="right|center_vertical"
-        android:hint="请输入"
         android:singleLine="true"
         android:visibility="gone" />
 

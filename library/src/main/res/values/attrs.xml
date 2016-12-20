@@ -141,7 +141,7 @@
         <attr name="isPassword" format="boolean"></attr>
         <attr name="setSendType" format="boolean"></attr>
         <attr name="topLine" format="boolean"></attr>
-        <attr name="lastIsEdite" format="boolean"></attr>
+        <attr name="cancleAble" format="boolean"></attr>
         <attr name="metalDialog" format="boolean"></attr>
         <attr name="drawable" format="reference"></attr>
         <attr name="rightDrawable" format="reference"></attr>
@@ -150,6 +150,7 @@
         <attr name="valueHintColor" format="color"></attr>
         <attr name="lineColor" format="color"></attr>
         <attr name="itemBacColor" format="reference"></attr>
+        <attr name="cancleText" format="string"></attr>
     </declare-styleable>
 
 </resources>

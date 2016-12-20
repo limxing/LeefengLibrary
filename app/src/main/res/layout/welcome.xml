@@ -62,7 +62,6 @@
         android:layout_height="wrap_content"
         app:clickAble="false"
         app:drawable="@drawable/default_ptr_flip"
-        app:lastIsEdite="true"
         app:mSelect="@string/array"
         app:showRightPic="true"
         app:titleStyle="2"
@@ -75,7 +74,6 @@
         android:layout_height="wrap_content"
         app:clickAble="true"
         app:drawable="@drawable/default_ptr_flip"
-        app:lastIsEdite="true"
         app:mSelect="@string/array"
         app:rightDrawable="@drawable/imgsel_icon_selected"
         app:showRightPic="true"
@@ -86,8 +84,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:clickAble="true"
-
-        app:lastIsEdite="true"
         app:mSelect="@string/array"
         app:titleStyle="1"
         app:titleText="输入" />
@@ -97,8 +93,9 @@
         android:layout_height="wrap_content"
         app:bottomLineBrim="true"
         app:clickAble="true"
-        app:hintText="请输入"
-        app:lastIsEdite="true"
+        app:hintText="请输入或选择"
+        app:cancleText="输入新类型"
+        app:cancleAble="true"
         app:mSelect="@string/array"
         app:titleStyle="1"
         app:titleText="输入" />

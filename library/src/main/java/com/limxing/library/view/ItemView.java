@@ -42,12 +42,11 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
     private boolean clickAble;
     private boolean isPassword;
     private boolean isSendType;
-    private String mSelect;
     private Drawable leftDrawable;
     private Drawable rightDrawable;
     private String netName;
     private boolean topLine;
-    private boolean lastIsEdite;
+    private boolean cancleAble;
     private String[] selects;
     private int padingLeft;
     private int titleColor;
@@ -55,12 +54,13 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
     private TextView valueTextView;
     private EditText editText;
     private int valueHintColor;
-    private String result;
+    private String result="";
     private int lineColor;
     private boolean topLineBrim;
     private boolean bottomLineBrim;
     private int itemBacColor;
     private boolean metalDialog;
+    private String cancleText;
 
     public ItemView(Context context) {
         super(context);
@@ -90,14 +90,14 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
         clickAble = typedArray.getBoolean(R.styleable.ItemView_clickAble, false);
         isPassword = typedArray.getBoolean(R.styleable.ItemView_isPassword, false);
         isSendType = typedArray.getBoolean(R.styleable.ItemView_setSendType, false);
-        mSelect = typedArray.getString(R.styleable.ItemView_mSelect);
         leftDrawable = typedArray.getDrawable(R.styleable.ItemView_drawable);
         rightDrawable = typedArray.getDrawable(R.styleable.ItemView_rightDrawable);
         netName = typedArray.getString(R.styleable.ItemView_netName);
         topLine = typedArray.getBoolean(R.styleable.ItemView_topLine, false);
         topLineBrim = typedArray.getBoolean(R.styleable.ItemView_topLineBrim, true);
         bottomLineBrim = typedArray.getBoolean(R.styleable.ItemView_bottomLineBrim, true);
-        lastIsEdite = typedArray.getBoolean(R.styleable.ItemView_lastIsEdite, false);
+        cancleAble = typedArray.getBoolean(R.styleable.ItemView_cancleAble, false);
+        cancleText = typedArray.getString(R.styleable.ItemView_cancleText);
         metalDialog = typedArray.getBoolean(R.styleable.ItemView_metalDialog, false);
         String select = typedArray.getString(R.styleable.ItemView_mSelect);
         titleColor = typedArray.getColor(R.styleable.ItemView_titleColor, getResources().getColor(R.color.cellview_edite_textcolor));
@@ -212,6 +212,9 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
 
     @Override
     public void onClick(View view) {
+        if (!clickAble){
+            return;
+        }
         if (selects == null)
             selects = new String[0];
         /**
@@ -228,6 +231,7 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
             builder = new AlertDialog.Builder(view.getContext(), AlertDialog.THEME_HOLO_LIGHT);
         }
 
+
         if (mHint == null || mHint.length() == 0) {
             builder.setTitle("请选择");
         } else {
@@ -240,16 +244,22 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
             public void onClick(DialogInterface dialog, int which) {
                 result = selects[which];
                 if (tileStyle == 1) {
-                    if (which != selects.length - 1 || !lastIsEdite) {
-                        editText.setText(result);
-                        editText.setSelection(result.length());
-                    }
+                    editText.setText(result);
+                    editText.setSelection(result.length());
                 } else {
                     valueTextView.setText(result);
                 }
                 dialog.dismiss();
             }
         });
+        if (cancleAble) {
+            builder.setNegativeButton(cancleText, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    editText.setText("");
+                }
+            });
+        }
         builder.show();
     }
 
@@ -294,5 +304,14 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
 
     public TextView getValueTextView() {
         return valueTextView;
+    }
+
+
+    public void setEnable(boolean b){
+        this.clickAble = b;
+        if (editText!=null){
+            editText.setEnabled(b);
+        }
+
     }
 }
