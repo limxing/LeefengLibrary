@@ -1,6 +1,7 @@
 package com.limxing.library.LoopView;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -11,6 +12,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.limxing.library.R;
 import com.limxing.library.utils.LogUtils;
 
 import java.util.List;
@@ -73,7 +75,7 @@ public class LoopView extends View {
 
     List<String> items;
 
-    int textSize;
+    float textSize;
     int maxTextWidth;
     int maxTextHeight;
 
@@ -116,39 +118,35 @@ public class LoopView extends View {
 
     public LoopView(Context context) {
         super(context);
-        initLoopView(context);
+
     }
 
     public LoopView(Context context, AttributeSet attributeset) {
         super(context, attributeset);
-        initLoopView(context);
+        initLoopView(context,attributeset);
     }
 
-    public LoopView(Context context, AttributeSet attributeset, int defStyleAttr) {
-        super(context, attributeset, defStyleAttr);
-        initLoopView(context);
-    }
 
-    private void initLoopView(Context context) {
+    private void initLoopView(Context context, AttributeSet attributeset) {
         this.context = context;
         handler = new MessageHandler(this);
         gestureDetector = new GestureDetector(context, new LoopViewGestureListener(this));
         gestureDetector.setIsLongpressEnabled(false);
-
-        lineSpacingMultiplier = 1.6F;
-        isLoop = false;
-        itemsVisible = 9;
-        textSize = 0;
+        TypedArray typedArray = getContext().obtainStyledAttributes(attributeset, R.styleable.LoopView);
+        lineSpacingMultiplier=typedArray.getDimension(R.styleable.LoopView_lineSpacingMultiplier,1.6f);
+        textSize=typedArray.getDimension(R.styleable.LoopView_textSize,20f);
+        itemsVisible=typedArray.getInt(R.styleable.LoopView_itemsVisible,9);
+        isLoop=typedArray.getBoolean(R.styleable.LoopView_isLoop,false);
+        typedArray.recycle();
         colorGray = 0xffafafaf;
         colorBlack = 0xff313131;
         colorLightGray = 0xffc5c5c5;
-
         totalScrollY = 0;
         initPosition = -1;
 
         initPaints();
 
-        setTextSize(20F);
+        setTextSize(textSize);
     }
 
     private void initPaints() {

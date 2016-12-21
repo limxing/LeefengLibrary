@@ -152,5 +152,14 @@
         <attr name="itemBacColor" format="reference"></attr>
         <attr name="cancleText" format="string"></attr>
     </declare-styleable>
+    <declare-styleable name="LoopView">
+        <attr name="itemHeight" format="dimension"></attr>
+        <attr name="lineSpacingMultiplier" format="dimension"></attr>
+        <attr name="textSize" format="dimension"></attr>
+        <attr name="itemsVisible" format="integer"></attr>
+        <attr name="isLoop" format="boolean"></attr>
+
+
+    </declare-styleable>
 
 </resources>
