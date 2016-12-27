@@ -76,7 +76,7 @@
                 tc:circleColor="@color/circle_color"
                 tc:radius="20dip"
                 tc:ringColor="@color/ring_color"
-                tc:strokeWidth="5dip" />
+                tc:strokWidth="5dip" />
 
             <LinearLayout
                 android:layout_width="match_parent"
