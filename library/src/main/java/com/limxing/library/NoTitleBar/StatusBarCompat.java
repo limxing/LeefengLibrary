@@ -82,6 +82,18 @@ public class StatusBarCompat {
 
     public static void translucentStatusBar(Activity activity) {
         translucentStatusBar(activity, false);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Window win = activity.getWindow();
+            win.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);//透明状态栏
+            // 状态栏字体设置为深色，SYSTEM_UI_FLAG_LIGHT_STATUS_BAR 为SDK23增加
+            win.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+
+            // 部分机型的statusbar会有半透明的黑色背景
+            win.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            win.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            win.setStatusBarColor(Color.TRANSPARENT);// SDK21
+
+        }
     }
 
     /**
