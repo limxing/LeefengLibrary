@@ -44,20 +44,20 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.limxing.library.LoopView.LoopView
+        <me.leefeng.library.LoopView.LoopView
             android:id="@+id/loopview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <com.limxing.library.LoopView.LoopView
+        <me.leefeng.library.LoopView.LoopView
             android:id="@+id/loopview2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
     </LinearLayout>
 
-    <com.limxing.library.view.ItemView
+    <me.leefeng.library.view.ItemView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:clickAble="false"
@@ -69,7 +69,7 @@
         app:topLine="true"
         app:topLineBrim="true" />
 
-    <com.limxing.library.view.ItemView
+    <me.leefeng.library.view.ItemView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:clickAble="true"
@@ -80,7 +80,7 @@
         app:titleStyle="2"
         app:titleText="普通" />
 
-    <com.limxing.library.view.ItemView
+    <me.leefeng.library.view.ItemView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:clickAble="true"
@@ -88,7 +88,7 @@
         app:titleStyle="1"
         app:titleText="输入" />
 
-    <com.limxing.library.view.ItemView
+    <me.leefeng.library.view.ItemView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:bottomLineBrim="true"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.limxing.app">
+    package="com.leefeng.app">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -31,41 +31,39 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".activity.DemoActivity">
+        <activity android:name="com.leefeng.app.activity.DemoActivity">
 
         </activity>
-        <activity android:name=".DragListViewActivity" />
-        <activity android:name=".MyViewpagerActivity" />
+        <activity android:name="com.leefeng.app.DragListViewActivity" />
+        <activity android:name="com.leefeng.app.MyViewpagerActivity" />
 
-        <activity android:name=".recycleview.LoginActivity">
+        <activity android:name="com.leefeng.app.recycleview.LoginActivity">
         </activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
-        <!--<activity android:name=".activity.AllConversationActivity" />-->
-        <activity android:name=".activity.WelcomeActivity">
+        <activity android:name="com.leefeng.app.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <!--<activity android:name=".activity.AllConversationActivity" />-->
+        <activity android:name="com.leefeng.app.activity.WelcomeActivity">
+
 
         </activity>
         <!--<activity android:name=".activity.ChattingActivity" />-->
-        <activity android:name=".SweepActivitys.FirstActivity" />
-        <activity android:name=".SweepActivitys.FTwoActivity" />
         <activity
-            android:name=".activity.CameraActivity"
+            android:name="com.leefeng.app.activity.CameraActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme">
 
 
         </activity>
-        <activity android:name=".recycleview.ui.ViewImageActivity" />
-        <activity android:name=".activity.ImageDemo" >
+        <activity android:name="com.leefeng.app.recycleview.ui.ViewImageActivity" />
+        <activity android:name="com.leefeng.app.activity.ImageDemo" >
 
         </activity>
-        <activity android:name=".activity.ImageDemo2" />
+        <activity android:name="com.leefeng.app.activity.ImageDemo2" />
         <!--<service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote">-->
         <!--</service>-->
         <meta-data

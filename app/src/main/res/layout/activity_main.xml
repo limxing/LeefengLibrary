@@ -5,101 +5,28 @@
     android:id="@+id/main_ll"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/black_overlay"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:fitsSystemWindows="true"
+        android:layout_height="wrap_content"
+        android:background="@color/holo_blue_light"
         android:clipToPadding="true"
-        android:layout_height="@dimen/title_height"
-        android:background="@color/holo_blue_light">
+        android:fitsSystemWindows="true">
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="我是标题"
-            android:textColor="#ffffff"
-            android:textSize="20sp"></TextView>
-
-    </RelativeLayout>
-
-    <com.limxing.library.SwipeBack.SwipeBackLayout
-        android:id="@+id/swipeBackLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#ffffff"
-            android:orientation="vertical">
+            android:layout_height="@dimen/title_height">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#ff2222"
-                android:text="Hello World!" />
+                android:layout_centerInParent="true"
+                android:text="我是标题"
+                android:textColor="#ffffff"
+                android:textSize="20sp"></TextView>
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true" />
+        </RelativeLayout>
+    </RelativeLayout>
 
-            <ProgressBar
-                android:id="@+id/login_progress"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:indeterminate="true"
-                android:indeterminateDrawable="@drawable/loading_progress" />
-
-            <ImageView
-                android:id="@+id/loading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp" />
-
-            <com.limxing.library.IOSLoading.LoadView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <com.limxing.library.CirculProgressBar.TasksCompletedView
-                android:id="@+id/tasks_view"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                tc:circleColor="@color/circle_color"
-                tc:radius="20dip"
-                tc:ringColor="@color/ring_color"
-                tc:strokWidth="5dip" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btn_bottom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="弹窗" />
-
-                <Button
-                    android:id="@+id/btn_drag"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="DragList" />
-            </LinearLayout>
-
-          <com.limxing.library.XListView.XListView
-              android:id="@+id/main_xlistview"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"></com.limxing.library.XListView.XListView>
-        </LinearLayout>
-    </com.limxing.library.SwipeBack.SwipeBackLayout>
 </LinearLayout>

@@ -1,7 +1,7 @@
 package note.aboutnet;
 
-import com.limxing.library.utils.FileUtils;
-import com.limxing.library.utils.LogUtils;
+import me.leefeng.library.utils.FileUtils;
+import me.leefeng.library.utils.LogUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;

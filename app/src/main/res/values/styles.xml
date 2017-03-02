@@ -8,7 +8,8 @@
         //设置标题栏的颜色,不用padding25但是不能背景是图片等,Android5.0.2以上系统支持
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/SlideRightAnimation</item>
     </style>
 <!--这个是右滑退出的主题,在继承优化推出界面的主题使用这个-->
     <style name="Theme.Swipe.Back" parent="Theme.AppCompat.Light.NoActionBar">

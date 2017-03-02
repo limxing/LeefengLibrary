@@ -6,7 +6,7 @@
     android:background="#5e5e5e"
    >
 
-    <com.limxing.app.view.SlidMenu
+    <com.leefeng.app.view.SlidMenu
 
         android:id="@+id/slidMenu"
         android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
         </FrameLayout>
         <!--<include layout="@layout/activity_main" />-->
 
-    </com.limxing.app.view.SlidMenu>
+    </com.leefeng.app.view.SlidMenu>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,9 +51,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/lan"/>
-        <com.limxing.library.ToggleButton.ToggleButton
+        <com.leefeng.library.ToggleButton.ToggleButton
             android:layout_width="54dp"
             android:layout_height="30dp" >
-        </com.limxing.library.ToggleButton.ToggleButton>
+        </com.leefeng.library.ToggleButton.ToggleButton>
     </RelativeLayout>
 </RelativeLayout>
