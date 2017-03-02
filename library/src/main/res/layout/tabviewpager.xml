@@ -24,7 +24,7 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <com.limxing.library.MyView.LLFViewPager
+    <me.leefeng.library.MyView.LLFViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -98,5 +98,5 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/view_line2"
             android:background="#ffffff" />
-    </com.limxing.library.MyView.LLFViewPager>
+    </me.leefeng.library.MyView.LLFViewPager>
 </LinearLayout>
