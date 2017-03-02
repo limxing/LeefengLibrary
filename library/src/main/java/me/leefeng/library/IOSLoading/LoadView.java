@@ -8,9 +8,11 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 
-import com.leefeng.library.R;
+
 
 import java.lang.ref.SoftReference;
+
+import me.leefeng.library.R;
 
 /**
  * Created by limxing on 16/1/7.

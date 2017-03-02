@@ -16,7 +16,8 @@ import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.leefeng.library.R;
+import me.leefeng.library.R;
+
 
 /***
  * 自定义可拖拽ListView适配器

@@ -37,9 +37,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout.LayoutParams;
 
-import com.leefeng.library.R;
+
 
 import java.lang.reflect.Method;
+
+import me.leefeng.library.R;
 
 /**
  * Class to manage status and navigation bar tint effects when using KitKat 

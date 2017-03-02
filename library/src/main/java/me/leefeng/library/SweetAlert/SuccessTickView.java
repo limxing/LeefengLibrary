@@ -9,7 +9,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
-import com.leefeng.library.R;
+import me.leefeng.library.R;
+
 
 public class SuccessTickView extends View {
     private float mDensity = -1;

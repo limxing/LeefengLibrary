@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.leefeng.library.R;
+
 
 import java.util.List;
+
+import me.leefeng.library.R;
 
 /**
  * Created by Sai on 15/8/9.

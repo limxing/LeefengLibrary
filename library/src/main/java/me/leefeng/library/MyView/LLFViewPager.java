@@ -21,7 +21,8 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.leefeng.library.R;
+import me.leefeng.library.R;
+
 
 @SuppressLint("NewApi")
 public class LLFViewPager extends RelativeLayout {

@@ -33,6 +33,7 @@ dependencies {
     compile 'com.pnikosis:materialish-progress:1.0'//金属加载进度条https://github.com/pnikosis/materialish-progress
 //    compile 'com.bigkoo:alertview:1.0.2'//防iOS对话框https://github.com/saiwu-bigkoo/Android-AlertView
 //    compile 'com.github.orhanobut:logger:1.12'//打印日志的
+    compile 'com.android.support:support-annotations:24.2.0'
 }
 //def makeJar(String target,String classDir){
 //    exec{

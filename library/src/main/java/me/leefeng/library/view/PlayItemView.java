@@ -8,7 +8,8 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.leefeng.library.R;
+import me.leefeng.library.R;
+
 
 /**
  * Created by limxing on 2017/1/17.

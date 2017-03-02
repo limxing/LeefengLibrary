@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import me.leefeng.library.LoopView.LoopView;
 import me.leefeng.library.LoopView.OnItemSelectedListener;
-import com.leefeng.library.R;
+import me.leefeng.library.R;
 import me.leefeng.library.utils.DisplayUtil;
 
 import java.util.List;

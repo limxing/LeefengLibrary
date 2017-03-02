@@ -2,8 +2,10 @@ package me.leefeng.library.SweetAlert;
 
 import android.content.Context;
 
-import com.leefeng.library.R;
+
 import com.pnikosis.materialishprogress.ProgressWheel;
+
+import me.leefeng.library.R;
 
 
 public class ProgressHelper {

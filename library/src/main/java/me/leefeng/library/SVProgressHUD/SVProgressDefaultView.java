@@ -10,7 +10,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.leefeng.library.R;
+import me.leefeng.library.R;
+
 
 /**
  * Created by Sai on 15/8/15.

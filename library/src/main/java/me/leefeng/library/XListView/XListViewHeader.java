@@ -21,7 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import me.leefeng.library.IOSLoading.LoadView;
-import com.leefeng.library.R;
+import me.leefeng.library.R;
+
 
 public class XListViewHeader extends LinearLayout {
     private LinearLayout mContainer;

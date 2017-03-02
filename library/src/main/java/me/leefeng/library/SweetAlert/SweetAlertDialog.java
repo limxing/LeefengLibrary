@@ -17,11 +17,13 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.leefeng.library.R;
+
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 
 import java.util.List;
+
+import me.leefeng.library.R;
 
 public class SweetAlertDialog extends Dialog implements View.OnClickListener {
     private View mDialogView;

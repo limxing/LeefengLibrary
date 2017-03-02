@@ -18,7 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.leefeng.library.R;
+import me.leefeng.library.R;
 
 
 /**

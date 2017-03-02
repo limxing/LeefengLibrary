@@ -13,10 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.leefeng.library.R;
+
 
 import java.util.ArrayList;
 import java.util.List;
+
+import me.leefeng.library.R;
 
 public class SwipeBackLayout extends FrameLayout {
     private static final String TAG = "ViewDragHelper";

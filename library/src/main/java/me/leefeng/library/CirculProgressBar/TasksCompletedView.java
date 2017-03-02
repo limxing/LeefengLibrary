@@ -9,7 +9,7 @@ import android.graphics.Paint.FontMetrics;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.leefeng.library.R;
+import me.leefeng.library.R;
 
 
 /**

@@ -37,7 +37,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.leefeng.library.R;
+
+import me.leefeng.library.R;
 import me.leefeng.library.utils.DisplayUtil;
 
 

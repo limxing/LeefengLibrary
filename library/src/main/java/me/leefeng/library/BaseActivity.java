@@ -14,18 +14,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import me.leefeng.library.NoTitleBar.SystemBarTintManager;
-import me.leefeng.library.Permission.CheckPermListener;
-import me.leefeng.library.Permission.EasyPermissions;
 
-import com.leefeng.library.R;
 
 import java.util.List;
 
 /**
  * Created by limxing on 15/12/1.
  */
-public abstract class BaseActivity extends AppCompatActivity implements
-        EasyPermissions.PermissionCallbacks {
+public abstract class BaseActivity extends AppCompatActivity  {
     protected static final int RC_PERM = 123;
 
     @Override
@@ -74,65 +70,6 @@ public abstract class BaseActivity extends AppCompatActivity implements
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);//隐藏状态栏
     }
 
-    /**
-     * 权限回调接口
-     */
-    private CheckPermListener mListener;
-
-    /**
-     * 检查权限
-     *
-     * @param listener  全县坚挺
-     * @param resString 全县提示
-     * @param mPerms    全县内容
-     */
-    public void checkPermission(CheckPermListener listener, String resString, String... mPerms) {
-        mListener = listener;
-        if (EasyPermissions.hasPermissions(this, mPerms)) {
-            if (mListener != null)
-                mListener.superPermission();
-        } else {
-            EasyPermissions.requestPermissions(this, resString,
-                    RC_PERM, mPerms);
-        }
-    }
-
-    /**
-     * 用户权限处理,
-     * 如果全部获取, 则直接过.
-     * 如果权限缺失, 则提示Dialog.
-     *
-     * @param requestCode  请求码
-     * @param permissions  权限
-     * @param grantResults 结果
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
-    }
-
-    //同意了全部权限
-    @Override
-    public void onPermissionsAllGranted() {
-        if (mListener != null)
-            mListener.superPermission();//同意了全部权限的回调
-    }
-
-    //权限被拒绝
-    @Override
-    public void onPermissionsDenied(int requestCode, List<String> perms) {
-
-        EasyPermissions.checkDeniedPermissionsNeverAskAgain(this,
-                getString(R.string.perm_tip),
-                R.string.setting, R.string.cancel, null, perms);
-    }
-
-    //同意了某些权限可能不是全部
-    @Override
-    public void onPermissionsGranted(int requestCode, List<String> perms) {
-
-    }
 
     protected void closeInput() {
         View view = getWindow().peekDecorView();

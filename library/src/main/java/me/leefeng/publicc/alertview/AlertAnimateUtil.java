@@ -2,7 +2,8 @@ package me.leefeng.publicc.alertview;
 
 import android.view.Gravity;
 
-import com.leefeng.library.R;
+import me.leefeng.library.R;
+
 
 /**
  * Created by Sai on 15/8/9.

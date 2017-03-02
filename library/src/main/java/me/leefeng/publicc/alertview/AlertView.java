@@ -20,7 +20,8 @@ import android.widget.TextView;
 
 import me.leefeng.library.LoopView.LoopView;
 import me.leefeng.library.LoopView.OnItemSelectedListener;
-import com.leefeng.library.R;
+
+import me.leefeng.library.R;
 import me.leefeng.library.utils.LogUtils;
 
 import java.util.ArrayList;

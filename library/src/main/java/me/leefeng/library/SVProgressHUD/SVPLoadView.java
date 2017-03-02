@@ -9,10 +9,12 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.leefeng.library.R;
+
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import me.leefeng.library.R;
 
 /**
  * Created by limxing on 16/1/7.

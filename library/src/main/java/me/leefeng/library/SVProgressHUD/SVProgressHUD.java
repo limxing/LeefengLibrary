@@ -13,7 +13,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 
-import com.leefeng.library.R;
+import me.leefeng.library.R;
+
 
 /**
  * Created by Sai on 15/8/15.

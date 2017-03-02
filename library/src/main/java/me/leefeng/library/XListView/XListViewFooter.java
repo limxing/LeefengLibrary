@@ -16,7 +16,8 @@ import android.widget.TextView;
 
 
 import me.leefeng.library.IOSLoading.LoadView;
-import com.leefeng.library.R;
+import me.leefeng.library.R;
+
 
 public class XListViewFooter extends LinearLayout {
 	public final static int STATE_NORMAL = 0;

@@ -38,7 +38,8 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Transformation;
 import android.widget.AbsListView;
 
-import com.leefeng.library.R;
+
+import me.leefeng.library.R;
 import me.leefeng.library.utils.DisplayUtil;
 
 

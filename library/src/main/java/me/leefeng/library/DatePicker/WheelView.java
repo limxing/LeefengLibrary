@@ -39,7 +39,8 @@ import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
 
 import me.leefeng.library.DatePicker.adapter.WheelViewAdapter;
-import com.leefeng.library.R;
+import me.leefeng.library.R;
+
 
 /**
  * Numeric wheel view.
