@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Utility to request and check System permissions for apps targeting Android M (API >= 23).
+ * Utility to request and check System permissions for apps targeting Android M (API than 23).
  */
 public class EasyPermissions {
 
@@ -109,7 +109,7 @@ public class EasyPermissions {
      *                       will be displayed if the user rejects the request the first time.
      * @param positiveButton custom text for positive button
      * @param negativeButton custom text for negative button
-     * @param requestCode    request code to track this request, must be < 256.
+     * @param requestCode    request code to track this request, must be smaller than 256.
      * @param perms          a set of permissions to be requested.
      * @see Manifest.permission
      */
