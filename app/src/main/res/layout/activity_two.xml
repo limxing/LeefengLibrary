@@ -15,10 +15,5 @@
         android:textColor="#ffffff"
         android:background="#222222"
         android:text="Xlist个人升级版" />
-    <me.leefeng.library.XListView.XListView
-        android:id="@+id/xlist"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
 
 </LinearLayout>

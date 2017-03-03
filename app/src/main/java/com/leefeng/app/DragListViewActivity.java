@@ -3,16 +3,13 @@ package com.leefeng.app;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import me.leefeng.library.DragList.DragListAdapter;
-import me.leefeng.library.DragList.DragListView;
-
 import java.util.ArrayList;
 
 /**
  * Created by limxing on 16/1/12.
  */
 public class DragListViewActivity  extends AppCompatActivity{
-    private DragListAdapter mAdapter = null;
+//    private DragListAdapter mAdapter = null;
     private ArrayList<String> mData = new ArrayList<String>();
 
 
@@ -28,9 +25,8 @@ public class DragListViewActivity  extends AppCompatActivity{
     private void initView() {
         initData();//
 
-        DragListView dragListView = (DragListView) findViewById(R.id.other_drag_list);
-        mAdapter = new DragListAdapter(this, mData);
-        dragListView.setAdapter(mAdapter);
+//        mAdapter = new DragListAdapter(this, mData);
+//        dragListView.setAdapter(mAdapter);
     }
 
     public void initData() {

@@ -19,20 +19,5 @@
         android:layout_height="wrap_content"
         android:onClick="next"/>
 
-    <me.leefeng.library.PullToRefresh.SwipeRefreshLayout
-        android:id="@+id/main_fresh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        swiperefresh:srlAnimationStyle="rotate"
-        swiperefresh:srlTextSize="16sp">
-
-        <ListView
-            android:id="@+id/main_listview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#ffffff"
-            android:dividerHeight="1dp"></ListView>
-    </me.leefeng.library.PullToRefresh.SwipeRefreshLayout>
 
 </LinearLayout>

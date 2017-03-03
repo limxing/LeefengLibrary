@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         , EasyPermissions.PermissionCallbacks{
 
 
+    private static final int NUM = 1001;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         new Thread(new ProgressRunable()).start();
 
 
-        EasyPermissions.requestPermissions(this, "NEED SMS PLZ", 1001,
+        EasyPermissions.requestPermissions(this, "NEED SMS PLZ", NUM,
                 Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE);
     }
 
