@@ -29,38 +29,23 @@ import me.leefeng.library.R;
 //		tc:ringColor="@color/ring_color" />
 public class TasksCompletedView extends View {
 
-	// 画实心圆的画笔
 	private Paint mCirclePaint;
-	// 画圆环的画笔
 	private Paint mRingPaint;
-	// 画字体的画笔
 	private Paint mTextPaint;
-	// 圆形颜色
 	private int mCircleColor;
-	// 圆环颜色
 	private int mRingColor;
-	// 半径
 	private float mRadius;
-	// 圆环半径
 	private float mRingRadius;
-	// 圆环宽度
 	private float mStrokeWidth;
-	// 圆心x坐标
 	private int mXCenter;
-	// 圆心y坐标
 	private int mYCenter;
-	// 字的长度
 	private float mTxtWidth;
-	// 字的高度
 	private float mTxtHeight;
-	// 总进度
 	private int mTotalProgress = 100;
-	// 当前进度
 	private int mProgress;
 
 	public TasksCompletedView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		// 获取自定义的属性
 		initAttrs(context, attrs);
 		initVariable();
 	}

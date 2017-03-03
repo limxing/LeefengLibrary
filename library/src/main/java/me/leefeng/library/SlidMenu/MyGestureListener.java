@@ -45,10 +45,6 @@ public class MyGestureListener implements GestureDetector.OnGestureListener {
 
 
     /**
-     * @param e1        手势起点的移动事件
-     * @param e2        当前手势点的移动事件
-     * @param velocityX 每秒x移动的距离,也就是速度
-     * @param velocityY 每秒y移动的距离,也就是速度
      * @return
      */
     @Override

@@ -569,11 +569,8 @@ public class SystemBarTintManager {
     }
 
     /**
-     *  初始化系统状态栏颜色
-     * 需要在布局文件中添加android:clipToPadding="true" android:fitsSystemWindows="true"
      *
      * @param activity activity
-     * @param color titlebar的颜色
      */
     public static void initSystemBar(Activity activity,int color) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -585,7 +582,6 @@ public class SystemBarTintManager {
     }
 
     /**
-     * 初始化系统状态栏颜色,默认是透明的titleBar
      *
      *
      * @param activity activity
@@ -615,10 +611,8 @@ public class SystemBarTintManager {
         }
         win.setAttributes(winParams);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            win.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);//透明状态栏
-            // 状态栏字体设置为深色，SYSTEM_UI_FLAG_LIGHT_STATUS_BAR 为SDK23增加
+            win.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);//
             win.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-            // 部分机型的statusbar会有半透明的黑色背景
             win.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             win.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             win.setStatusBarColor(Color.TRANSPARENT);// SDK21

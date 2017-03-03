@@ -44,8 +44,7 @@ import me.leefeng.library.R;
 
 /**
  * Numeric wheel view.
- * 不好用,已弃用
- * 
+ *
  * @author Yuri Kanivets
  */
 public class WheelView extends View {
@@ -671,7 +670,7 @@ public class WheelView extends View {
 	private void drawCenterRect(Canvas canvas) {
 		int center = getHeight() / 2;
 		int offset = (int) (getItemHeight() / 2 * 1.2);
-		/*/ Remarked by wulianghuan 2014-11-27  使用自己的画线，而不是描边
+		/*/ Remarked by wulianghuan 2014-11-27
 		Rect rect = new Rect(left, top, right, bottom)
 		centerDrawable.setBounds(bounds)
 		centerDrawable.setBounds(0, center - offset, getWidth(), center + offset);
@@ -679,12 +678,9 @@ public class WheelView extends View {
 		//*/
 		Paint paint = new Paint();
 		paint.setColor(getResources().getColor(R.color.province_line_border));
-		// 设置线宽
 		paint.setStrokeWidth((float) 3);
-		// 绘制上边直线
 		canvas.drawLine(0, center - offset, getWidth(), center - offset, paint);
 //		canvas.drawLine(0, center - offset, 500, center - offset, paint);
-		// 绘制下边直线
 		canvas.drawLine(0, center + offset, getWidth(), center + offset, paint);
 		//*/
 	}

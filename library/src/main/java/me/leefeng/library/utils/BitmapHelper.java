@@ -1,9 +1,7 @@
 package me.leefeng.library.utils;
 
 /**
- * 作者：李利锋
- * 创建日期：2016/2/26 22:57
- * 描述：bitmap处理,图片文件路径缩小后保存,纠正图片的方向
+ * leefeng .me
  */
 
 import java.io.ByteArrayOutputStream;
@@ -112,7 +110,6 @@ public class BitmapHelper {
     }
 
 //    /**
-//     * 压缩指定路径的图片，并得到图片对象
 //     *
 //     * @param path bitmap source path
 //     * @return Bitmap {@link Bitmap}
@@ -128,7 +125,6 @@ public class BitmapHelper {
 //    }
 
     /**
-     * 根据需要压缩到某尺寸压缩指定路径的图片，并得到图片对象
      *
      * @param path
      * @param rqsW
@@ -142,7 +138,6 @@ public class BitmapHelper {
     }
 
     /**
-     * 压缩指定路径图片，并将其保存在缓存目录中，通过isDelSrc判定是否删除源文件，并获取到缓存后的图片路径
      *
      * @param context
      * @param srcPath
@@ -153,14 +148,14 @@ public class BitmapHelper {
      */
     public static String compressBitmap(Context context, String srcPath, int rqsW, int rqsH, boolean isDelSrc) {
         int degree = getDegress(srcPath);
-        Bitmap bitmap = compressBitmap(srcPath, rqsW, rqsH);//根据长宽以及图片的长宽得到缩放图片
+        Bitmap bitmap = compressBitmap(srcPath, rqsW, rqsH);//
         File srcFile = new File(srcPath);
         String desPath = getImageCacheDir(context) + srcFile.getName();
         try {
             if (degree != 0) bitmap = rotateBitmap(bitmap, degree);
             File file = new File(desPath);
             FileOutputStream fos = new FileOutputStream(file);
-            bitmap.compress(CompressFormat.JPEG, 80, fos);//80是图片质量
+            bitmap.compress(CompressFormat.JPEG, 80, fos);//
             fos.close();
             if (isDelSrc) srcFile.deleteOnExit();
 
@@ -174,8 +169,7 @@ public class BitmapHelper {
     }
 
     /**
-     * 此方法过期，该方法可能造成OutOfMemoryError，使用不含isAdjust参数的方法
-     *
+     * out of date
      * @param is
      * @param reqsW
      * @param reqsH
@@ -189,7 +183,6 @@ public class BitmapHelper {
     }
 
     /**
-     * 压缩某个输入流中的图片，可以解决网络输入流压缩问题，并得到图片对象
      *
      * @return Bitmap {@link Bitmap}
      */
@@ -217,7 +210,6 @@ public class BitmapHelper {
     }
 
     /**
-     * 压缩指定byte[]图片，并得到压缩后的图像
      *
      * @param bts
      * @param reqsW
@@ -234,8 +226,7 @@ public class BitmapHelper {
     }
 
     /**
-     * 此方法已过期，该方法可能造成OutOfMemoryError，使用不含isAdjust参数的方法
-     *
+     *out of date
      * @param bitmap
      * @param reqsW
      * @param reqsH
@@ -259,7 +250,6 @@ public class BitmapHelper {
     }
 
     /**
-     * 压缩已存在的图片对象，并返回压缩后的图片
      *
      * @param bitmap
      * @param reqsW
@@ -282,7 +272,7 @@ public class BitmapHelper {
     }
 
     /**
-     * 此方法过期，该方法可能造成OutOfMemoryError，使用不含isAdjust参数的方法
+     * out of date
      * get bitmap form resource dictory, and then compress bitmap according to reqsW and reqsH
      *
      * @param res   {@link Resources}
@@ -317,10 +307,6 @@ public class BitmapHelper {
 
 
     /**
-     * 基于质量的压缩算法， 此方法未 解决压缩后图像失真问题
-     * <br> 可先调用比例压缩适当压缩图片后，再调用此方法可解决上述问题
-     *
-     * @param maxBytes 压缩后的图像最大大小 单位为byte
      * @return
      */
     public static Bitmap compressBitmap(Bitmap bitmap, long maxBytes) {

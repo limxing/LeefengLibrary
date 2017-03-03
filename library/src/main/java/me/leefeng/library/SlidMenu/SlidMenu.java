@@ -40,7 +40,6 @@ public class SlidMenu extends ViewGroup implements MyGestureActionListener{
         DisplayMetrics metrics = new DisplayMetrics();
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         wm.getDefaultDisplay().getMetrics(metrics);
-        //获取屏幕的宽和高
         mScreenWidth = metrics.widthPixels;
         mScreenHeight = metrics.heightPixels;
 
@@ -63,12 +62,11 @@ public class SlidMenu extends ViewGroup implements MyGestureActionListener{
         setMeasuredDimension(mScreenWidth, mScreenHeight);
 
     }
-    //保证Scroller自动滑动
     @Override
     public void computeScroll() {
         if (mScroller.computeScrollOffset()){
             scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
-            mMenu.setTranslationX(2 * (mMenuWidth + getScrollX()) / 3);//位移差的滑动
+            mMenu.setTranslationX(2 * (mMenuWidth + getScrollX()) / 3);//
             invalidate();
         }
     }
@@ -80,7 +78,6 @@ public class SlidMenu extends ViewGroup implements MyGestureActionListener{
         mContent.layout(0, 0, mScreenWidth, mScreenHeight);
     }
 
-    //拦截事件分发,不让子view得到触摸事件
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         LogUtils.i("onInterceptTouchEvent");
@@ -94,9 +91,9 @@ public class SlidMenu extends ViewGroup implements MyGestureActionListener{
             case MotionEvent.ACTION_MOVE:
                 int deltaX = (int) ev.getX() - mLastXIntercept;
                 int deltaY = (int) ev.getY() - mLastYIntercept;
-                if (Math.abs(deltaX) > Math.abs(deltaY)){//横向滑动
+                if (Math.abs(deltaX) > Math.abs(deltaY)){//
                     intercept = true;
-                }else{//纵向滑动
+                }else{//
                     intercept = false;
                 }
                 break;
@@ -113,7 +110,6 @@ public class SlidMenu extends ViewGroup implements MyGestureActionListener{
         }
         return intercept;
     }
-//处理touch事件
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 //        LogUtils.i("onTouchEvent");
@@ -127,32 +123,21 @@ public class SlidMenu extends ViewGroup implements MyGestureActionListener{
             case MotionEvent.ACTION_MOVE:
                 int currentX = (int) event.getX();
                 int currentY = (int) event.getY();
-                //拿到x方向的偏移量
                 int dx = currentX - mLastX;
-                if (dx < 0) {//向左滑动
-                    //边界控制，如果Menu已经完全显示，再滑动的话
-                    //Menu左侧就会出现白边了,进行边界控制
+                if (dx < 0) {//
                     if (getScrollX() + Math.abs(dx) >= 0) {
-                        //直接移动到（0，0）位置，不会出现白边
                         scrollTo(0, 0);
 
-                    } else {//Menu没有完全显示呢
-                        //其实这里dx还是-dx，大家不用刻意去记
-                        //大家可以先使用dx，然后运行一下，发现
-                        //移动的方向是相反的，那么果断这里加个负号就可以了
+                    } else {//
                         scrollBy(-dx, 0);
 
                     }
 
-                } else {//向右滑动
-                    //边界控制，如果Content已经完全显示，再滑动的话
-                    //Content右侧就会出现白边了，进行边界控制
+                } else {
                     if (getScrollX() - dx <= -mMenuWidth) {
-                        //直接移动到（-mMenuWidth,0）位置，不会出现白边
                         scrollTo(-mMenuWidth, 0);
 
-                    } else {//Content没有完全显示呢
-                        //根据手指移动
+                    } else {
                         scrollBy(-dx, 0);
 
                     }
@@ -160,20 +145,15 @@ public class SlidMenu extends ViewGroup implements MyGestureActionListener{
                 }
                 mLastX = currentX;
                 mLastY = currentY;
-                mMenu.setTranslationX(2 * (mMenuWidth + getScrollX()) / 3);//位移差的滑动
+                mMenu.setTranslationX(2 * (mMenuWidth + getScrollX()) / 3);
 
                 break;
             case MotionEvent.ACTION_UP:
-                if (getScrollX() < -mMenuWidth / 2){//打开Menu
-                    //调用startScroll方法，第一个参数是起始X坐标，第二个参数
-                    //是起始Y坐标，第三个参数是X方向偏移量，第四个参数是Y方向偏移量
+                if (getScrollX() < -mMenuWidth / 2){
                     mScroller.startScroll(getScrollX(), 0, -mMenuWidth - getScrollX(), 0, 300);
-                    //设置一个已经打开的标识，当实现点击开关自动打开关闭功能时会用到
                     isOpen = true;
-                    //一定不要忘了调用这个方法重绘，否则没有动画效果
                     invalidate();
-                }else{//关闭Menu
-                    //同上
+                }else{
                     mScroller.startScroll(getScrollX(), 0, -getScrollX(), 0, 300);
                     isOpen = false;
                     invalidate();
@@ -197,7 +177,6 @@ public class SlidMenu extends ViewGroup implements MyGestureActionListener{
     }
 
     /**
-     * 点击开关，开闭Menu，如果当前menu已经打开，则关闭，如果当前menu已经关闭，则打开
      */
     public void toggleMenu(){
         if (isOpen){
@@ -208,17 +187,14 @@ public class SlidMenu extends ViewGroup implements MyGestureActionListener{
     }
 
     /**
-     * 关闭menu
      */
     private void closeMenu() {
-        //也是使用startScroll方法，dx和dy的计算方法一样
         mScroller.startScroll(getScrollX(),0,-getScrollX(),0,500);
         invalidate();
         isOpen = false;
     }
 
     /**
-     * 打开menu
      */
     private void openMenu() {
         mScroller.startScroll(getScrollX(),0,-mMenuWidth-getScrollX(),0,500);
@@ -229,13 +205,11 @@ public class SlidMenu extends ViewGroup implements MyGestureActionListener{
 
     @Override
     public void actionRight() {
-        LogUtils.i("向右手势");
         openMenu();
     }
 
     @Override
     public void actionLeft() {
-        LogUtils.i("向左手势");
         closeMenu();
     }
 }

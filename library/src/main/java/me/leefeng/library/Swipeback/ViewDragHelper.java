@@ -1217,7 +1217,6 @@ public class ViewDragHelper {
                         mVelocityTracker.addMovement(ev);
 
                     final int index = MotionEventCompat.findPointerIndex(ev, mActivePointerId);
-                    //如果触发手势已经结束，不做处理。等待所有手势结束再关闭
                     if (index == -1)break;
 
                     final float x = MotionEventCompat.getX(ev, index);

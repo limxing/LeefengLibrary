@@ -25,21 +25,21 @@ public class SVProgressHUD {
     private SVProgressHUDMaskType mSVProgressHUDMaskType;
 
     public enum SVProgressHUDMaskType {
-        None,  // 允许遮罩下面控件点击
-        Clear,     // 不允许遮罩下面控件点击
-        Black,     // 不允许遮罩下面控件点击，背景黑色半透明
-        Gradient,   // 不允许遮罩下面控件点击，背景渐变半透明
-        ClearCancel,     // 不允许遮罩下面控件点击，点击遮罩消失
-        BlackCancel,     // 不允许遮罩下面控件点击，背景黑色半透明，点击遮罩消失
-        GradientCancel   // 不允许遮罩下面控件点击，背景渐变半透明，点击遮罩消失
+        None,  //
+        Clear,     //
+        Black,     //
+        Gradient,   //
+        ClearCancel,     //
+        BlackCancel,     //
+        GradientCancel   //
         ;
     }
 
     private final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM
     );
-    private ViewGroup decorView;//activity的根View
-    private ViewGroup rootView;// mSharedView 的 根View
+    private ViewGroup decorView;//
+    private ViewGroup rootView;//
     private SVProgressDefaultView mSharedView;
 
     private Animation outAnim;
@@ -78,7 +78,6 @@ public class SVProgressHUD {
     }
 
     /**
-     * show的时候调用
      */
     private void onAttached() {
         decorView.addView(rootView);
@@ -88,7 +87,6 @@ public class SVProgressHUD {
     }
 
     /**
-     * 添加这个View到Activity的根视图
      */
     private void svShow() {
 
@@ -121,7 +119,6 @@ public class SVProgressHUD {
     }
 
     /**
-     * 开启等待,系统默认
      *
      * @param string
      * @param maskType
@@ -133,7 +130,6 @@ public class SVProgressHUD {
     }
 
     /**
-     * 开启等待旋转,仿ios
      *
      * @param string
      * @param maskType
@@ -231,11 +227,9 @@ public class SVProgressHUD {
                 configMaskType(R.color.bgColor_overlay, true, true);
                 break;
             case Gradient:
-                //TODO 设置半透明渐变背景
                 configMaskType(R.drawable.bg_overlay_gradient, true, false);
                 break;
             case GradientCancel:
-                //TODO 设置半透明渐变背景
                 configMaskType(R.drawable.bg_overlay_gradient, true, true);
                 break;
             default:
@@ -250,7 +244,6 @@ public class SVProgressHUD {
     }
 
     /**
-     * 检测该View是不是已经添加到根视图
      *
      * @return 如果视图已经存在该View返回true
      */

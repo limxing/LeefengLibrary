@@ -28,7 +28,7 @@ public class SVProgressDefaultView extends LinearLayout {
     private TextView tvMsg;
 
     private RotateAnimation mRotateAnimation;
-    private SVPLoadView loadView;//添加自定义的加载旋转的空间
+    private SVPLoadView loadView;//
 
     public SVProgressDefaultView(Context context) {
         super(context);
@@ -61,7 +61,6 @@ public class SVProgressDefaultView extends LinearLayout {
         ivSmallLoading.setVisibility(View.VISIBLE);
         circleProgressBar.setVisibility(View.GONE);
         tvMsg.setVisibility(View.GONE);
-        //开启旋转动画
         ivBigLoading.startAnimation(mRotateAnimation);
     }
 
@@ -71,7 +70,6 @@ public class SVProgressDefaultView extends LinearLayout {
             return;
         }
         showBaseStatus(resBigLoading, string);
-        //开启旋转动画
         ivSmallLoading.startAnimation(mRotateAnimation);
     }
     public void showLmWithStatus(String string) {

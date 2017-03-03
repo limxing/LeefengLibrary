@@ -64,8 +64,8 @@ public class ExpandableView extends LinearLayout implements View.OnClickListener
 
     /* Listener for callback */
     private OnExpandStateChangeListener mListener;
-    private int mHeight;//需要改变的高度
-    private int mMinHeight;//最小距离
+    private int mHeight;//
+    private int mMinHeight;//
     private Drawable mTitleImage;
     private RelativeLayout title;
     private float title_size;
@@ -148,7 +148,6 @@ public class ExpandableView extends LinearLayout implements View.OnClickListener
             return;
         }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        //如果展开
         if (mCollapsed) {
             mHeight = getMeasuredHeight();
         }
@@ -156,9 +155,6 @@ public class ExpandableView extends LinearLayout implements View.OnClickListener
 
     /**
      *
-     * @param child 子view
-     * @param index 添加位置
-     * @param b 是否自主添加
      */
     public void addView(View child, int index, boolean b) {
         if (b) {
@@ -219,7 +215,8 @@ public class ExpandableView extends LinearLayout implements View.OnClickListener
             initTitleText();
         }
         typedArray.recycle();
-        LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);//定义一个LayoutParams
+        LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);//
 
         layoutParams.setMargins(0, DisplayUtil.dip2px(context, 10), 0, 0);
         setLayoutParams(layoutParams);
@@ -227,7 +224,6 @@ public class ExpandableView extends LinearLayout implements View.OnClickListener
     }
 
     /**
-     * 初始化标题题目
      */
     private void initTitleText() {
         int padLeft = DisplayUtil.dip2px(mContext, 25);
@@ -245,8 +241,8 @@ public class ExpandableView extends LinearLayout implements View.OnClickListener
         mButton = new ImageButton(mContext);
         mButton.setImageDrawable(mCollapsed ? mExpandDrawable : mCollapseDrawable);
         h = mExpandDrawable.getMinimumHeight();
-        MarginLayoutParams mp = new MarginLayoutParams(h, h);  //item的宽高
-        mp.setMargins(0, 0, padLeft, 0);//分别是margin_top那四个属性
+        MarginLayoutParams mp = new MarginLayoutParams(h, h);  //
+        mp.setMargins(0, 0, padLeft, 0);//
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(mp);
         params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         params.addRule(RelativeLayout.CENTER_VERTICAL);
@@ -257,10 +253,10 @@ public class ExpandableView extends LinearLayout implements View.OnClickListener
         View line = new View(mContext);
         line.setBackgroundColor(line_color);
         h = DisplayUtil.dip2px(mContext, 1);
-        MarginLayoutParams mpLine = new MarginLayoutParams(LayoutParams.MATCH_PARENT, h);  //item的宽高
+        MarginLayoutParams mpLine = new MarginLayoutParams(LayoutParams.MATCH_PARENT, h);  //
         title.measure(0, 0);
         h = title.getMeasuredHeight() - h;
-        mpLine.setMargins(0, h, 0, 0);//分别是margin_top那四个属性
+        mpLine.setMargins(0, h, 0, 0);//
         RelativeLayout.LayoutParams mpLineparams = new RelativeLayout.LayoutParams(mpLine);
         line.setLayoutParams(mpLineparams);
         title.addView(line);
@@ -268,7 +264,7 @@ public class ExpandableView extends LinearLayout implements View.OnClickListener
         View line1 = new View(mContext);
         line1.setBackgroundColor(line_color);
         h = DisplayUtil.dip2px(mContext, 1);
-        MarginLayoutParams mpLine1 = new MarginLayoutParams(LayoutParams.MATCH_PARENT, h);  //item的宽高
+        MarginLayoutParams mpLine1 = new MarginLayoutParams(LayoutParams.MATCH_PARENT, h);  //
         RelativeLayout.LayoutParams mpLineparams1 = new RelativeLayout.LayoutParams(mpLine1);
         line1.setLayoutParams(mpLineparams1);
         title.addView(line1);
@@ -279,14 +275,13 @@ public class ExpandableView extends LinearLayout implements View.OnClickListener
     }
 
     /**
-     * 初始化标题图片
      */
     private void initTitleImage() {
         int padLeft = DisplayUtil.dip2px(mContext, 20);
         int h = mTitleImage.getMinimumHeight();
         ImageView imageView = new ImageView(mContext);
         imageView.setImageDrawable(mTitleImage);
-        MarginLayoutParams mp = new MarginLayoutParams(h, h);  //item的宽高
+        MarginLayoutParams mp = new MarginLayoutParams(h, h);  //
         mp.setMargins(padLeft, 0, 0, 0);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(mp);
         params.addRule(RelativeLayout.CENTER_VERTICAL);

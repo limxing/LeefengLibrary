@@ -7,10 +7,8 @@ import java.io.InputStream;
 import java.io.PushbackInputStream;
 
 /**
- * IO流的操作类
  */
 public class IOUtils {
-	/** 关闭流 */
 	public static boolean close(Closeable io) {
 		if (io != null) {
 			try {
@@ -22,10 +20,6 @@ public class IOUtils {
 		return true;
 	}
 	/**
-	 * 将输入流转换成字符串
-	 *
-	 * @param is
-	 *            从网络获取的输入流
 	 * @return
 	 */
 	public static String streamToString(InputStream is) {
@@ -46,7 +40,6 @@ public class IOUtils {
 	}
 
 	/**
-	 * 读流转为成字符串
 	 * @param in
 	 * @return
 	 * @throws IOException

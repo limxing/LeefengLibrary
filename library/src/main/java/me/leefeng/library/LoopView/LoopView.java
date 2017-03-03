@@ -23,29 +23,23 @@ import java.util.concurrent.TimeUnit;
 import me.leefeng.library.R;
 
 /**
- * 使用方法
 
  * Created by Weidongjian on 2015/8/18.
  */
 // * LoopView loopView = (LoopView) findViewById(R.id.loopview);
 // * ArrayList<String> list = new ArrayList<>();
 // * for (int i = 0; i < 15; i++) {
-// * list.add(2000 + i+"年");
+// * list.add(2000 + i+"");
 // * }
-// * //设置是否循环播放
 // * //loopView.setNotLoop();
-// * //滚动监听
 // * loopView.setListener(new OnItemSelectedListener() {
 // *
 // * @Override public void onItemSelected(int index) {
 // * Log.d("debug", "Item " + index);
 // * }
 // * });
-// * //设置原始数据
 // * loopView.setItems(list);
-// * //设置初始位置
 // * loopView.setInitPosition(5);
-// * //设置字体大小
 // * //loopView.setTextSize(20);
 public class LoopView extends View {
 
@@ -56,7 +50,6 @@ public class LoopView extends View {
 //    private float centerY;
 
     public enum ACTION {
-        // 点击，滑翔(滑到尽头)，拖拽事件
         CLICK, FLING, DAGGLE
     }
 
@@ -66,7 +59,6 @@ public class LoopView extends View {
     private GestureDetector gestureDetector;
     OnItemSelectedListener onItemSelectedListener;
 
-    // Timer mTimer;
     ScheduledExecutorService mExecutor = Executors.newSingleThreadScheduledExecutor();
     private ScheduledFuture<?> mFuture;
 
@@ -84,11 +76,9 @@ public class LoopView extends View {
     int colorBlack;
     int colorLightGray;
 
-    // 条目间距倍数
     float lineSpacingMultiplier;
     boolean isLoop;
 
-    // 第一条线Y坐标值
     float firstLineY;
     float secondLineY;
 
@@ -98,17 +88,13 @@ public class LoopView extends View {
     int preCurrentIndex;
     int change;
 
-    // 显示几个条目
     int itemsVisible;
 
     int measuredHeight;
     int measuredWidth;
     int paddingLeft = 0;
     int paddingRight = 0;
-
-    // 半圆周长
     int halfCircumference;
-    // 半径
     int radius;
 
     private int mOffset = 0;
@@ -179,14 +165,12 @@ public class LoopView extends View {
         }
 
         measureTextWidthHeight();
-        //最大Text的高度乘间距倍数得到 可见文字实际的总高度，半圆的周长
         halfCircumference = (int) (itemHeight * (itemsVisible - 1));
 //        halfCircumference = (int) (maxTextHeight * lineSpacingMultiplier * (itemsVisible - 1));
         measuredHeight = (int) ((halfCircumference * 2) / Math.PI);
         radius = (int) (halfCircumference / Math.PI);
 //        measuredWidth = maxTextWidth + paddingLeft + paddingRight;
         measuredWidth = MeasureSpec.getSize(widthMeasureSpec);
-        //计算两条横线和控件中间点的Y位置
         firstLineY = (measuredHeight - itemHeight) / 2.0F;
         secondLineY = (measuredHeight + itemHeight) / 2.0F;
 //        centerY = (measuredHeight + maxTextHeight) / 2.0F - CENTERCONTENTOFFSET;
@@ -212,7 +196,7 @@ public class LoopView extends View {
             if (textWidth > maxTextWidth) {
                 maxTextWidth = (int) (textWidth * scaleX);
             }
-            paintCenterText.getTextBounds("\u661F\u671F", 0, 2, tempRect); // 星期
+            paintCenterText.getTextBounds("\u661F\u671F", 0, 2, tempRect); //
             int textHeight = tempRect.height();
             if (textHeight > maxTextHeight) {
                 maxTextHeight = textHeight;
@@ -244,7 +228,6 @@ public class LoopView extends View {
 
     protected final void scrollBy(float velocityY) {
         cancelFuture();
-        // 修改这个值可以改变滑行速度
         int velocityFling = 10;
         mFuture = mExecutor.scheduleWithFixedDelay(new InertiaTimerTask(this, velocityY), 0, velocityFling, TimeUnit.MILLISECONDS);
     }
@@ -302,7 +285,6 @@ public class LoopView extends View {
         return paddingRight;
     }
 
-    // 设置左右内边距
     public void setViewPadding(int left, int top, int right, int bottom) {
         paddingLeft = left;
         paddingRight = right;
@@ -351,7 +333,6 @@ public class LoopView extends View {
         }
 
         int j2 = (int) (totalScrollY % (lineSpacingMultiplier * maxTextHeight));
-        // 设置as数组中每个元素的值
         int k1 = 0;
         while (k1 < itemsVisible) {
             int l1 = preCurrentIndex - (itemsVisible / 2 - k1);
@@ -378,11 +359,8 @@ public class LoopView extends View {
         int j1 = 0;
         while (j1 < itemsVisible) {
             canvas.save();
-            // L(弧长)=α（弧度）* r(半径) （弧度制）
-            // 求弧度--> (L * π ) / (π * r)   (弧长X派/半圆周长)
             float itemHeight = maxTextHeight * lineSpacingMultiplier;
             double radian = ((itemHeight * j1 - j2) * Math.PI) / halfCircumference;
-            // 弧度转换成角度(把半圆以Y轴为轴心向右转90度，使其处于第一象限及第四象限
             float angle = (float) (90D - (radian / Math.PI) * 180D);
             if (angle >= 90F || angle <= -90F) {
                 canvas.restore();
@@ -391,7 +369,6 @@ public class LoopView extends View {
                 canvas.translate(0.0F, translateY);
                 canvas.scale(1.0F, (float) Math.sin(radian));
                 if (translateY <= firstLineY && maxTextHeight + translateY >= firstLineY) {
-                    // 条目经过第一条线
                     canvas.save();
                     canvas.clipRect(0, 0, measuredWidth, firstLineY - translateY);
                     canvas.drawText(as[j1], getTextX(as[j1], paintOuterText, tempRect), maxTextHeight, paintOuterText);
@@ -401,7 +378,6 @@ public class LoopView extends View {
                     canvas.drawText(as[j1], getTextX(as[j1], paintCenterText, tempRect), maxTextHeight, paintCenterText);
                     canvas.restore();
                 } else if (translateY <= secondLineY && maxTextHeight + translateY >= secondLineY) {
-                    // 条目经过第二条线
                     canvas.save();
                     canvas.clipRect(0, 0, measuredWidth, secondLineY - translateY);
                     canvas.drawText(as[j1], getTextX(as[j1], paintCenterText, tempRect), maxTextHeight, paintCenterText);
@@ -411,12 +387,10 @@ public class LoopView extends View {
                     canvas.drawText(as[j1], getTextX(as[j1], paintOuterText, tempRect), maxTextHeight, paintOuterText);
                     canvas.restore();
                 } else if (translateY >= firstLineY && maxTextHeight + translateY <= secondLineY) {
-                    // 中间条目
                     canvas.clipRect(0, 0, measuredWidth, (int) (itemHeight));
                     canvas.drawText(as[j1], getTextX(as[j1], paintCenterText, tempRect), maxTextHeight, paintCenterText);
                     selectedItem = items.indexOf(as[j1]);
                 } else {
-                    // 其他条目
                     canvas.clipRect(0, 0, measuredWidth, (int) (itemHeight));
                     canvas.drawText(as[j1], getTextX(as[j1], paintOuterText, tempRect), maxTextHeight, paintOuterText);
                 }
@@ -426,12 +400,9 @@ public class LoopView extends View {
         }
     }
 
-    // 绘制文字起始位置
     private int getTextX(String a, Paint paint, Rect rect) {
         paint.getTextBounds(a, 0, a.length(), rect);
-        // 获取到的是实际文字宽度
         int textWidth = rect.width();
-        // 转换成绘制文字宽度
         textWidth *= scaleX;
         return (measuredWidth - textWidth) / 2;
     }
@@ -461,7 +432,6 @@ public class LoopView extends View {
 
                 totalScrollY = (int) (totalScrollY + dy);
 
-                // 边界处理。
 //                if (!isLoop) {
 //                    float top = -initPosition * itemHeight;
 //                    float bottom = (items.size() - 1 - initPosition) * itemHeight;
@@ -472,7 +442,6 @@ public class LoopView extends View {
 //                        totalScrollY = (int) bottom;
 //                    }
 //                }
-                // 边界处理。
                 if (!isLoop) {
                     float top = -initPosition * itemHeight;
                     float bottom = (items.size() - 1 - initPosition) * itemHeight;

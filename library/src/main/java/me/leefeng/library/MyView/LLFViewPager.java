@@ -1,8 +1,5 @@
 package me.leefeng.library.MyView;
 /**
- * 这是一个滑动的,有标题的滑动
- *
- * 实际操作可能需要把viewpager单独在activity中操作
  */
 import java.util.ArrayList;
 
@@ -155,7 +152,7 @@ public class LLFViewPager extends RelativeLayout {
 		mList = new ArrayList<TextView>();
 		for (int i = 0; i < 3; i++) {
 			TextView view = new TextView(context);
-			view.setText("这是界面：" + i);
+			view.setText("this" + i);
 			mList.add(view);
 		}
 

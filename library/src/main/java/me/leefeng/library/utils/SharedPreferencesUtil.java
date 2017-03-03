@@ -5,9 +5,6 @@ import android.content.SharedPreferences;
 
 
 /**
- * 读写SharedPreferences
- *
- * 修正: 设置了保存文件的标识，能够多用户登录时 方便使用
  */
 public class SharedPreferencesUtil {
 private static String info="limxing.data";
@@ -82,7 +79,6 @@ private static String info="limxing.data";
         sharedPreferences.edit().putInt(key, value).commit();
     }
 
-    //获取Int类型数据】
     public static int getIntData(Context context, String key, int value) {
         if (sharedPreferences == null) {
             sharedPreferences = context.getSharedPreferences(info,

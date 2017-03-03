@@ -22,7 +22,6 @@ import java.util.List;
 /**
  * Created by limxing on 16/5/16.
  *
- * 还是学到了alertview中的方法
  */
 public class DataDialog implements OnItemSelectedListener, View.OnClickListener, DialogInterface.OnDismissListener {
     private  TextView confirmText;
@@ -52,7 +51,7 @@ public class DataDialog implements OnItemSelectedListener, View.OnClickListener,
         monthView.setListener(this);
         dayView.setListener(this);
         confirmText = new TextView(context);
-        confirmText.setText("确定");
+        confirmText.setText(R.string.confirm);
         confirmText.setTextColor(Color.parseColor("#7bbfea"));
         confirmText.setTextSize(18);
         confirmText.setOnClickListener(this);
@@ -89,22 +88,22 @@ public class DataDialog implements OnItemSelectedListener, View.OnClickListener,
         int dayW = dayView.getMeasuredWidth();
         int padleft = DisplayUtil.getScreenWith(context) / 2 - (yearW + monthW + dayW + 100) / 2;
 
-        ViewGroup.MarginLayoutParams mp = new ViewGroup.MarginLayoutParams(yearW, ViewGroup.LayoutParams.WRAP_CONTENT);  //item的宽高
-        mp.setMargins(padleft, textH, 0, 30);//分别是margin_top那四个属性
+        ViewGroup.MarginLayoutParams mp = new ViewGroup.MarginLayoutParams(yearW, ViewGroup.LayoutParams.WRAP_CONTENT);
+        mp.setMargins(padleft, textH, 0, 30);//
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(mp);
         yearView.setLayoutParams(params);
         relativeLayout.addView(yearView);
 
         padleft = padleft + yearW + 50;
-        mp = new ViewGroup.MarginLayoutParams(monthW, ViewGroup.LayoutParams.WRAP_CONTENT);  //item的宽高
-        mp.setMargins(padleft, textH, 0, 30);//分别是margin_top那四个属性
+        mp = new ViewGroup.MarginLayoutParams(monthW, ViewGroup.LayoutParams.WRAP_CONTENT);  //
+        mp.setMargins(padleft, textH, 0, 30);//
         params = new RelativeLayout.LayoutParams(mp);
         monthView.setLayoutParams(params);
         relativeLayout.addView(monthView);
 
         padleft = padleft + monthW + 50;
-        mp = new ViewGroup.MarginLayoutParams(dayW, ViewGroup.LayoutParams.WRAP_CONTENT);  //item的宽高
-        mp.setMargins(padleft, textH, 0, 30);//分别是margin_top那四个属性
+        mp = new ViewGroup.MarginLayoutParams(dayW, ViewGroup.LayoutParams.WRAP_CONTENT);  //
+        mp.setMargins(padleft, textH, 0, 30);//
         params = new RelativeLayout.LayoutParams(mp);
         dayView.setLayoutParams(params);
         relativeLayout.addView(dayView);
@@ -122,7 +121,7 @@ public class DataDialog implements OnItemSelectedListener, View.OnClickListener,
         WindowManager.LayoutParams lp = w.getAttributes();
         lp.dimAmount = 0.4f;
         lp.gravity = Gravity.BOTTOM;
-        lp.width = DisplayUtil.getScreenWith(context); //设置宽度
+        lp.width = DisplayUtil.getScreenWith(context); //
         w.setAttributes(lp);
         dialog.show();
     }

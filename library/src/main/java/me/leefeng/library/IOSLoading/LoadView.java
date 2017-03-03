@@ -43,7 +43,6 @@ public class LoadView extends ImageView {
     }
 
     /**
-     * 设置静态的图片
      *
      * @param res
      */

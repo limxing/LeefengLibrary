@@ -216,7 +216,6 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
         if (selects == null)
             selects = new String[0];
         /**
-         * 这里应该给selects赋值,
          */
         if (selects.length == 0) {
             Toast.makeText(view.getContext(), "没有相关数据", Toast.LENGTH_LONG).show();
@@ -231,12 +230,10 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
 
 
         if (mHint == null || mHint.length() == 0) {
-            builder.setTitle("请选择");
+            builder.setTitle(R.string.please_select);
         } else {
             builder.setTitle(mHint);
         }
-        //    指定下拉列表的显示数据
-        //    设置一个下拉的列表选择项
         builder.setItems(selects, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

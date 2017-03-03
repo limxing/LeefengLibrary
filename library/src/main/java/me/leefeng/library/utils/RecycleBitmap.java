@@ -19,11 +19,9 @@ public class RecycleBitmap {
      * 清理map中的bitmap;
      *
      * @param imgCache ImageCacheMap
-     * @param maxSize  允许添加的最大图片数量
      * @param freeSize 释放掉图片的数量;
      */
     public static void recycleMapCache(LinkedHashMap<String, Bitmap> imgCache, int maxSize, int freeSize) {
-        //超出最大容量时清理
         if (imgCache.values().size() > maxSize) {
             synchronized (imgCache) {
                 Iterator<String> it = imgCache.keySet().iterator();
@@ -42,9 +40,7 @@ public class RecycleBitmap {
 
 
     /**
-     * 清理View中的ImagView被BitMap占用的内存;
      *
-     * @param mapViews 一个View的合集
      */
     public static void recycle(Map<View, int[]> mapViews) {
         synchronized (mapViews) {
@@ -53,10 +49,8 @@ public class RecycleBitmap {
                 //获取布局
                 View view = it.next();
                 if (view == null) return;
-                //获取要布局内要回收的ids;
                 int[] recycleIds = mapViews.get(view);
 
-                //如果是listView,先找到每个布局文件.重要提示:每个ImagView在布局文件的第一层;
                 if ((view instanceof AbsListView)) {
                     recycleAbsList((AbsListView) view, recycleIds);
                 }
@@ -75,17 +69,11 @@ public class RecycleBitmap {
 
 
     /**
-     * 回收继承自AbsListView的类,如GridView,ListView等
-     *
-     * @param absView
-     * @param recycleIds 要清理的Id的集合;
      */
     public static void recycleAbsList(AbsListView absView, int[] recycleIds) {
         if (absView == null) return;
         synchronized (absView) {
-            //回收当前显示的区域
             for (int index = absView.getFirstVisiblePosition(); index <= absView.getLastVisiblePosition(); index++) {
-                //获取每一个显示区域的具体ItemView
                 ViewGroup views = (ViewGroup) absView.getAdapter().getView(index, null, absView);
                 for (int count = 0; count < recycleIds.length; count++) {
                     recycleImageView(views.findViewById(recycleIds[count]));
@@ -96,9 +84,6 @@ public class RecycleBitmap {
 
 
     /**
-     * 回收继承自AbsListView的类,如GridView,ListView等
-     *
-     * @param recycleIds 要清理的Id的集合;
      */
     public static void recycleViewGroup(ViewGroup layout, int[] recycleIds) {
         if (layout == null) return;
@@ -120,7 +105,6 @@ public class RecycleBitmap {
 
 
     /**
-     * 回收ImageView占用的图像内存;
      *
      * @param view
      */

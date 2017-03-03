@@ -47,7 +47,6 @@ public class DatePickerView {
     }
 
     /**
-     * 初始化选择器的日期
      *
      * @param year
      * @param month
@@ -60,7 +59,6 @@ public class DatePickerView {
     }
 
     /**
-     * 展示对话框
      */
     public void show() {
         dialog = new Dialog(mContext, R.style.MMTheme_DatePicker);
@@ -72,7 +70,7 @@ public class DatePickerView {
         lp.x=0;
         lp.y = cMakeBottom;
         lp.gravity = Gravity.BOTTOM;
-        lp.width = DisplayUtil.getScreenWith(mContext); //设置宽度
+        lp.width = DisplayUtil.getScreenWith(mContext); //
         w.setAttributes(lp);
 
         dialog.show();
@@ -83,7 +81,6 @@ public class DatePickerView {
     }
 
     /**
-     * 设置开始结束的年
      *
      * @param fromYear
      * @param toYear
@@ -114,7 +111,7 @@ public class DatePickerView {
 
         NumericWheelAdapter numericWheelAdapter1 = new NumericWheelAdapter(
                 mContext, fromYear, toYear);
-        numericWheelAdapter1.setLabel("年");
+        numericWheelAdapter1.setLabel(mContext.getString(R.string.year));
         numericWheelAdapter1.setTextGravity(Gravity.RIGHT);
         year.setViewAdapter(numericWheelAdapter1);
         year.setCyclic(true);//
@@ -122,7 +119,7 @@ public class DatePickerView {
 
         NumericWheelAdapter numericWheelAdapter2 = new NumericWheelAdapter(
                 mContext, 1, 12, "%d");
-        numericWheelAdapter2.setLabel("月");
+        numericWheelAdapter2.setLabel(mContext.getString(R.string.month));
         month.setViewAdapter(numericWheelAdapter2);
         month.setCyclic(true);
         month.addScrollingListener(scrollListener);
@@ -150,7 +147,7 @@ public class DatePickerView {
         NumericWheelAdapter numericWheelAdapter = new NumericWheelAdapter(mContext,
                 1, getDay(arg1, arg2), "%d");
         numericWheelAdapter.setTextGravity(Gravity.LEFT);
-        numericWheelAdapter.setLabel("日");
+        numericWheelAdapter.setLabel(mContext.getString(R.string.day));
         day.setViewAdapter(numericWheelAdapter);
     }
 

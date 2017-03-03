@@ -18,37 +18,30 @@ import me.leefeng.library.R;
 public class SVCircleProgressBar extends View {
     private Context mContext;
     /**
-     * 画笔对象的引用
      */
     private Paint paint;
 
     /**
-     * 圆环的颜色
      */
     private int roundColor;
 
     /**
-     * 圆环进度的颜色
      */
     private int roundProgressColor;
 
     /**
-     * 圆环的宽度
      */
     private float roundWidth;
 
     /**
-     * 最大进度
      */
     private int max;
 
     /**
-     * 当前进度
      */
     private int progress;
 
     /**
-     * 进度的风格，实心或者空心
      */
     private int style;
 
@@ -75,7 +68,6 @@ public class SVCircleProgressBar extends View {
         TypedArray mTypedArray = context.obtainStyledAttributes(attrs,
                 R.styleable.SVCircleProgressBar);
 
-        // 获取自定义属性和默认值
         roundColor = mTypedArray.getColor(R.styleable.SVCircleProgressBar_roundColor, Color.BLUE);
         roundProgressColor = mTypedArray.getColor(R.styleable.SVCircleProgressBar_roundProgressColor,
                 Color.GRAY);
@@ -91,37 +83,34 @@ public class SVCircleProgressBar extends View {
         super.onDraw(canvas);
 
         /**
-         * 画最外层的大圆环
          */
-        int centre = getWidth() / 2; // 获取圆心的x坐标
-        int radius = (int) (centre - roundWidth / 2); // 圆环的半径
-        paint.setAntiAlias(true); // 消除锯齿
-        paint.setColor(roundColor); // 设置圆环的颜色
-        paint.setStyle(Paint.Style.STROKE); // 设置空心
-        paint.setStrokeWidth(roundWidth); // 设置圆环的宽度
-        canvas.drawCircle(centre, centre, radius, paint); // 画出圆环
+        int centre = getWidth() / 2; //
+        int radius = (int) (centre - roundWidth / 2); //
+        paint.setAntiAlias(true); //
+        paint.setColor(roundColor); //
+        paint.setStyle(Paint.Style.STROKE); //
+        paint.setStrokeWidth(roundWidth); //
+        canvas.drawCircle(centre, centre, radius, paint); //
 
 
         /**
-         * 画圆弧 ，画圆环的进度
          */
 
-        // 设置进度是实心还是空心
-        paint.setStrokeWidth(roundWidth); // 设置圆环的宽度
-        paint.setColor(roundProgressColor); // 设置进度的颜色
+        paint.setStrokeWidth(roundWidth); //
+        paint.setColor(roundProgressColor); //
         RectF oval = new RectF(centre - radius, centre - radius, centre
-                + radius, centre + radius); // 用于定义的圆弧的形状和大小的界限
+                + radius, centre + radius); //
 
         switch (style) {
             case STROKE: {
                 paint.setStyle(Paint.Style.STROKE);
-                canvas.drawArc(oval, 270, 360 * progress / max, false, paint); // 根据进度画圆弧
+                canvas.drawArc(oval, 270, 360 * progress / max, false, paint); //
                 break;
             }
             case FILL: {
                 paint.setStyle(Paint.Style.FILL_AND_STROKE);
                 if (progress != 0)
-                    canvas.drawArc(oval, 270, 360 * progress / max, true, paint); // 根据进度画圆弧
+                    canvas.drawArc(oval, 270, 360 * progress / max, true, paint); //
                 break;
             }
         }
@@ -133,7 +122,6 @@ public class SVCircleProgressBar extends View {
     }
 
     /**
-     * 设置进度的最大值
      *
      * @param max
      */
@@ -145,7 +133,6 @@ public class SVCircleProgressBar extends View {
     }
 
     /**
-     * 获取进度.需要同步
      *
      * @return
      */
@@ -154,8 +141,6 @@ public class SVCircleProgressBar extends View {
     }
 
     /**
-     * 设置进度，此为线程安全控件，由于考虑多线的问题，需要同步
-     * 刷新界面调用postInvalidate()能在非UI线程刷新
      *
      * @param progress
      */

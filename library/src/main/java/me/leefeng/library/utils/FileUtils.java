@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * 文件操作类
  *
  * Created by limxing .
  */
@@ -21,7 +20,7 @@ public class FileUtils {
 	public static final String CACHE_DIR = "cache";
 	public static final String ICON_DIR = "icon";
 
-	/** 判断SD卡是否挂载 */
+	/**  */
 	public static boolean isSDCardAvailable() {
 		if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
 			return true;
@@ -30,22 +29,22 @@ public class FileUtils {
 		}
 	}
 
-	/** 获取下载目录 */
+	/**  */
 	public static String getDownloadDir() {
 		return getDir(DOWNLOAD_DIR);
 	}
 
-	/** 获取缓存目录 */
+	/**  */
 	public static String getCacheDir() {
 		return getDir(CACHE_DIR);
 	}
 
-	/** 获取icon目录 */
+	/**  */
 	public static String getIconDir() {
 		return getDir(ICON_DIR);
 	}
 
-	/** 获取应用目录，当SD卡存在时，获取SD卡上的目录，当SD卡不存在时，获取应用的cache目录 */
+	/**  */
 	public static String getDir(String name) {
 		StringBuilder sb = new StringBuilder();
 		if (isSDCardAvailable()) {
@@ -63,7 +62,7 @@ public class FileUtils {
 		}
 	}
 
-	/** 获取SD下的应用目录 */
+	/** obtain external app path */
 	public static String getExternalStoragePath() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(Environment.getExternalStorageDirectory().getAbsolutePath());
@@ -73,7 +72,7 @@ public class FileUtils {
 		return sb.toString();
 	}
 
-	/** 获取应用的cache目录 */
+	/** obtain an app cache path */
 	public static String getCachePath() {
 		File f = UIUtils.getContext().getCacheDir();
 		if (null == f) {
@@ -83,7 +82,7 @@ public class FileUtils {
 		}
 	}
 
-	/** 创建文件夹 */
+	/** creat a document */
 	public static boolean createDirs(String dirPath) {
 		File file = new File(dirPath);
 		if (!file.exists() || !file.isDirectory()) {
@@ -93,7 +92,7 @@ public class FileUtils {
 	}
 
 	/**
-	 * 创建文件
+	 * creat a file
 	 * @param filePath
 	 * @return
 	 */
@@ -114,14 +113,14 @@ public class FileUtils {
 		return true;
 	}
 
-	/** 复制文件，可以选择是否删除源文件 */
+	/** copy a file*/
 	public static boolean copyFile(String srcPath, String destPath, boolean deleteSrc) {
 		File srcFile = new File(srcPath);
 		File destFile = new File(destPath);
 		return copyFile(srcFile, destFile, deleteSrc);
 	}
 
-	/** 复制文件，可以选择是否删除源文件 */
+	/** copy a file */
 	public static boolean copyFile(File srcFile, File destFile, boolean deleteSrc) {
 		if (!srcFile.exists() || !srcFile.isFile()) {
 			return false;
@@ -150,7 +149,7 @@ public class FileUtils {
 		return true;
 	}
 
-	/** 判断文件是否可写 */
+	/** return a file if writable */
 	public static boolean isWriteable(String path) {
 		try {
 			if (StringUtils.isEmpty(path)) {
@@ -164,7 +163,7 @@ public class FileUtils {
 		}
 	}
 
-	/** 修改文件的权限,例如"777"等 */
+	/** change permission like "777" and so on */
 	public static void chmod(String path, String mode) {
 		try {
 			String command = "chmod " + mode + " " + path;
@@ -176,11 +175,7 @@ public class FileUtils {
 	}
 
 	/**
-	 * 把数据写入文件
-	 * @param is       数据流
-	 * @param path     文件路径
-	 * @param recreate 如果文件存在，是否需要删除重建
-	 * @return 是否写入成功
+	 * write stream into a file
 	 */
 	public static boolean writeFile(InputStream is, String path, boolean recreate) {
 		boolean res = false;
@@ -211,11 +206,7 @@ public class FileUtils {
 	}
 
 	/**
-	 * 把字符串数据写入文件
-	 * @param content 需要写入的字符串
-	 * @param path    文件路径名称
-	 * @param append  是否以添加的模式写入
-	 * @return 是否写入成功
+	 * write byte[] into a file
 	 */
 	public static boolean writeFile(byte[] content, String path, boolean append) {
 		boolean res = false;
@@ -245,22 +236,14 @@ public class FileUtils {
 	}
 
 	/**
-	 * 把字符串数据写入文件
-	 * @param content 需要写入的字符串
-	 * @param path    文件路径名称
-	 * @param append  是否以添加的模式写入
-	 * @return 是否写入成功
+	 * write string to fle
 	 */
 	public static boolean writeFile(String content, String path, boolean append) {
 		return writeFile(content.getBytes(), path, append);
 	}
 
 	/**
-	 * 把键值对写入文件
-	 * @param filePath 文件路径
-	 * @param key      键
-	 * @param value    值
-	 * @param comment  该键值对的注释
+	 * write a value into a file with a key
 	 */
 	public static void writeProperties(String filePath, String key, String value, String comment) {
 		if (StringUtils.isEmpty(key) || StringUtils.isEmpty(filePath)) {
@@ -275,7 +258,7 @@ public class FileUtils {
 			}
 			fis = new FileInputStream(f);
 			Properties p = new Properties();
-			p.load(fis);// 先读取文件，再把键值对追加到后面
+			p.load(fis);//
 			p.setProperty(key, value);
 			fos = new FileOutputStream(f);
 			p.store(fos, comment);
@@ -287,7 +270,7 @@ public class FileUtils {
 		}
 	}
 
-	/** 根据值读取 */
+	/** read a file which is a map file find a value from a key */
 	public static String readProperties(String filePath, String key, String defaultValue) {
 		if (StringUtils.isEmpty(key) || StringUtils.isEmpty(filePath)) {
 			return null;
@@ -311,7 +294,7 @@ public class FileUtils {
 		return value;
 	}
 
-	/** 把字符串键值对的map写入文件 */
+	/** write map into file */
 	public static void writeMap(String filePath, Map<String, String> map, boolean append, String comment) {
 		if (map == null || map.size() == 0 || StringUtils.isEmpty(filePath)) {
 			return;
@@ -326,7 +309,7 @@ public class FileUtils {
 			Properties p = new Properties();
 			if (append) {
 				fis = new FileInputStream(f);
-				p.load(fis);// 先读取文件，再把键值对追加到后面
+				p.load(fis);
 			}
 			p.putAll(map);
 			fos = new FileOutputStream(f);
@@ -339,7 +322,6 @@ public class FileUtils {
 		}
 	}
 
-	/** 把字符串键值对的文件读入map */
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static Map<String, String> readMap(String filePath, String defaultValue) {
 		if (StringUtils.isEmpty(filePath)) {
@@ -355,7 +337,7 @@ public class FileUtils {
 			fis = new FileInputStream(f);
 			Properties p = new Properties();
 			p.load(fis);
-			map = new HashMap<String, String>((Map) p);// 因为properties继承了map，所以直接通过p来构造一个map
+			map = new HashMap<String, String>((Map) p);
 		} catch (Exception e) {
 			LogUtils.e(e);
 		} finally {
@@ -364,7 +346,13 @@ public class FileUtils {
 		return map;
 	}
 
-	/** 改名 */
+	/**
+	 * rename
+	 * @param src
+	 * @param des
+	 * @param delete
+	 * @return
+	 */
 	public static boolean copy(String src, String des, boolean delete) {
 		File file = new File(src);
 		if (!file.exists()) {
@@ -396,7 +384,6 @@ public class FileUtils {
 	}
 
 	/**
-	 * 获取沙盒File目录
 	 * @param context
 	 * @return
      */
@@ -406,7 +393,6 @@ public class FileUtils {
 
 
 	/**
-	 * 复制asset目录文件到data中
 	 * @param context
 	 * @param dirname
 	 * @throws IOException
@@ -414,7 +400,6 @@ public class FileUtils {
 //	public static void copyAssetDirToSD(Context context, String dirname)
 //			throws IOException {
 //		File dir = new File(Environment.getExternalStorageDirectory() + "/" + dirname);
-//		LogUtils.i("存放路径:"+Environment.getExternalStorageDirectory()+ "/" + dirname);
 //		dir.mkdir();
 //
 //		AssetManager assetManager = context.getAssets();
@@ -429,7 +414,6 @@ public class FileUtils {
 //		}
 //	}
 	/**
-	 * 复制asset目录文件到目录中
 	 * @param context
 	 * @param dirname
 	 * @throws IOException
@@ -437,7 +421,6 @@ public class FileUtils {
 	public static void copyAssetDirToFiles(Context context, String dirname,File file)
 			throws IOException {
 		File dir = new File(file + "/" + dirname);
-		LogUtils.i("存放路径:"+file + "/" + dirname);
 		dir.mkdir();
 
 		AssetManager assetManager = context.getAssets();

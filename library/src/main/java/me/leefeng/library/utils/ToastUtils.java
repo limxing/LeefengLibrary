@@ -4,7 +4,6 @@ import android.widget.Toast;
 
 
 /**
- * 吐丝工具类
  *
  */
 public class ToastUtils {

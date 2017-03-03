@@ -8,10 +8,8 @@ import android.view.ViewGroup;
 
 /**
  * Created by Mr.Jude on 2015/8/3.
- * 每个滑动页面的管理
  */
 public class SwipeBackPage {
-    //仅为判断是否需要将mSwipeBackLayout注入进去
     private boolean mEnable = true;
     private boolean mRelativeEnable = false;
 
@@ -22,7 +20,6 @@ public class SwipeBackPage {
         this.mActivity = activity;
     }
 
-    //页面的回调用于配置滑动效果
     void onCreate(){
         mActivity.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mActivity.getWindow().getDecorView().setBackgroundColor(Color.TRANSPARENT);
@@ -48,7 +45,6 @@ public class SwipeBackPage {
         return this;
     }
 
-    //是否可滑动关闭
     public SwipeBackPage setSwipeBackEnable(boolean enable) {
         mEnable = enable;
         mSwipeBackLayout.setEnableGesture(enable);
@@ -64,19 +60,16 @@ public class SwipeBackPage {
         }
     }
 
-    //可滑动的范围。百分比。200表示为左边200px的屏幕
     public SwipeBackPage setSwipeEdge(int swipeEdge){
         mSwipeBackLayout.setEdgeSize(swipeEdge);
         return this;
     }
 
-    //可滑动的范围。百分比。0.2表示为左边20%的屏幕
     public SwipeBackPage setSwipeEdgePercent(float swipeEdgePercent){
         mSwipeBackLayout.setEdgeSizePercent(swipeEdgePercent);
         return this;
     }
 
-    //对横向滑动手势的敏感程度。0为迟钝 1为敏感
     public SwipeBackPage setSwipeSensitivity(float sensitivity){
         mSwipeBackLayout.setSensitivity(mActivity, sensitivity);
         return this;
@@ -88,7 +81,6 @@ public class SwipeBackPage {
         return this;
     }
 
-    //触发关闭Activity百分比
     public SwipeBackPage setClosePercent(float percent){
         mSwipeBackLayout.setScrollThreshold(percent);
         return this;

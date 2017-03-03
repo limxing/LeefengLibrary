@@ -32,20 +32,11 @@ public abstract class BaseActivity extends AppCompatActivity  {
         init();
     }
 
-    /**
-     * 初始化界面
-     */
     protected abstract void initView();
 
-    /**
-     * 初始化数据
-     */
 
     protected abstract void init();
 
-    /**
-     * 切换界面动画开启一个Activiyty
-     */
 
     @Override
     public void startActivity(Intent intent) {
@@ -53,9 +44,6 @@ public abstract class BaseActivity extends AppCompatActivity  {
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
 
-    /**
-     * 切换界面动画关闭一个Activiyty
-     */
 
     @Override
     public void finish() {
@@ -63,11 +51,10 @@ public abstract class BaseActivity extends AppCompatActivity  {
         overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
 
-    //屏幕全屏
     protected void fullScreen() {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏标题栏
+        requestWindowFeature(Window.FEATURE_NO_TITLE);//
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);//隐藏状态栏
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);//
     }
 
 
@@ -80,9 +67,6 @@ public abstract class BaseActivity extends AppCompatActivity  {
     }
 
 
-    /**
-     * 把findViewById封装
-     */
     class Query {
         private final Activity activity;
         private View view;

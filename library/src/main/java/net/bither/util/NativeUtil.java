@@ -18,7 +18,6 @@ package net.bither.util;
 /**
  * 使用说明:
  * NativeUtil.compressBitmap(BitmapFactory.decodeFile(path), 80,path, true);
- * 参数分别是:原文件的bitmap,压缩质量,保存路径,true比false占用空间更小,false是android底层的实现
  */
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -63,7 +62,7 @@ public class NativeUtil {
 	 * @param quality 1~100 质量
 	 * @param fileName 保存路径
 	 * @param optimize 是否采用更好压缩
-	 * @param isDelete 是否删除原文件
+	 * @param isDelete
 	 */
 	public static void compressBitmap(String path,int quality, String fileName,
 									  boolean optimize,boolean isDelete) {

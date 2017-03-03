@@ -5,7 +5,6 @@ import android.app.Activity;
 import java.util.Stack;
 
 /**
- * 滑动的全局管理类
  */
 public class SwipeBackHelper {
 

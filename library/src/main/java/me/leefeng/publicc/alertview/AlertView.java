@@ -33,7 +33,6 @@ import java.util.List;
 /**
  * Created by Sai on 15/8/9.
  * 精仿iOSAlertViewController控件
- * 点击取消按钮返回 －1，其他按钮从0开始算
  */
 public class AlertView implements OnItemSelectedListener {
     private OnConfirmeListener confirmeListener;
@@ -47,7 +46,6 @@ public class AlertView implements OnItemSelectedListener {
     private TextView tvAlertMsg;//描述
 
     /**
-     * 三个时间的监听
      *
      * @param view
      */
@@ -92,7 +90,7 @@ public class AlertView implements OnItemSelectedListener {
             case 12:
                 day = 31;
                 for (int i = size; i < 31; i++) {
-                    dayList.add(i + 1 + "日");
+                    dayList.add(i + 1 + context.getString(R.string.day));
                 }
                 break;
             case 2:
@@ -101,14 +99,14 @@ public class AlertView implements OnItemSelectedListener {
                     dayList.remove(dayList.size() - 1);
                 }
                 if (size == 28 && flag) {
-                    dayList.add(29 + "日");
+                    dayList.add(29 + context.getString(R.string.day));
                 }
 
                 break;
             default:
                 day = 30;
                 for (int i = size; i < 30; i++) {
-                    dayList.add(i + 1 + "日");
+                    dayList.add(i + 1 + context.getString(R.string.day));
                 }
                 if (size == 31) {
                     dayList.remove(size - 1);
@@ -137,7 +135,7 @@ public class AlertView implements OnItemSelectedListener {
     public static final String CANCEL = "cancel";
     public static final String TITLE = "title";
     public static final String MSG = "msg";
-    public static final int CANCELPOSITION = -1;//点击取消按钮返回 －1，其他按钮从0开始算
+    public static final int CANCELPOSITION = -1;//
 
     private String title;
     private String msg;
@@ -149,7 +147,7 @@ public class AlertView implements OnItemSelectedListener {
     private Context context;
     private ViewGroup contentContainer;
     private ViewGroup decorView;//activity的根View
-    private ViewGroup rootView;//AlertView 的 根View
+    private ViewGroup rootView;//AlertView
     private ViewGroup loAlertHeader;//窗口headerView
 
     private Style style = Style.Alert;
@@ -194,13 +192,9 @@ public class AlertView implements OnItemSelectedListener {
     }
 
     /**
-     * 创建时间选择器
      *
      * @param title            标题
-     * @param context          上下文
-     * @param startyear        开始时间
      * @param endyear          介素时间
-     * @param date             初始日期 null为当前
      * @param confirmeListener
      */
     public AlertView(String title, Context context, int startyear, int endyear, Date date, OnConfirmeListener confirmeListener) {
@@ -214,7 +208,6 @@ public class AlertView implements OnItemSelectedListener {
     }
 
     /**
-     * 初始化时间
      *
      * @param startyear
      * @param endyear
@@ -225,13 +218,13 @@ public class AlertView implements OnItemSelectedListener {
         List<String> monthList = new ArrayList<>();
         dayList = new ArrayList<>();
         for (int i = startyear; i < endyear + 1; i++) {
-            yearList.add(i + "年");
+            yearList.add(i + context.getString(R.string.year));
         }
         for (int i = 1; i < 13; i++) {
-            monthList.add(i + "月");
+            monthList.add(i + context.getString(R.string.month));
         }
         for (int i = 1; i < 32; i++) {
-            dayList.add(i + "日");
+            dayList.add(i + context.getString(R.string.day));
         }
 
 
@@ -242,7 +235,6 @@ public class AlertView implements OnItemSelectedListener {
     }
 
     /**
-     * 设置时间的初始值
      *
      * @param startyear
      * @param date
@@ -269,7 +261,6 @@ public class AlertView implements OnItemSelectedListener {
     }
 
     /**
-     * 自定义的三级选择,联动需要自己设置下一个loopView的内容
      *
      * @param title
      * @param context
@@ -414,7 +405,6 @@ public class AlertView implements OnItemSelectedListener {
 
     protected void initHeaderView(ViewGroup viewGroup) {
         loAlertHeader = (ViewGroup) viewGroup.findViewById(R.id.loAlertHeader);
-        //标题和消息
         TextView tvAlertTitle = (TextView) viewGroup.findViewById(R.id.tvAlertTitle);
         tvAlertMsg = (TextView) viewGroup.findViewById(R.id.tvAlertMsg);
         tvAlertMsg.setSingleLine();
@@ -481,9 +471,7 @@ public class AlertView implements OnItemSelectedListener {
             viewStub.inflate();
             LinearLayout loAlertButtons = (LinearLayout) contentContainer.findViewById(R.id.loAlertButtons);
             for (int i = 0; i < mDatas.size(); i++) {
-                //如果不是第一个按钮
                 if (i != 0) {
-                    //添加上按钮之间的分割线
                     View divier = new View(context);
                     divier.setBackgroundColor(context.getResources().getColor(R.color.bgColor_divier));
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int) context.getResources().getDimension(R.dimen.size_divier), LinearLayout.LayoutParams.MATCH_PARENT);
@@ -496,22 +484,20 @@ public class AlertView implements OnItemSelectedListener {
                 //设置点击效果
                 if (mDatas.size() == 1) {
                     tvAlert.setBackgroundResource(R.drawable.bg_alertbutton_bottom);
-                } else if (i == 0) {//设置最左边的按钮效果
+                } else if (i == 0) {//
                     tvAlert.setBackgroundResource(R.drawable.bg_alertbutton_left);
-                } else if (i == mDatas.size() - 1) {//设置最右边的按钮效果
+                } else if (i == mDatas.size() - 1) {//
                     tvAlert.setBackgroundResource(R.drawable.bg_alertbutton_right);
                 }
                 String data = mDatas.get(i);
                 tvAlert.setText(data);
 
-                //取消按钮的样式
                 if (data == cancel) {
                     tvAlert.setTypeface(Typeface.DEFAULT_BOLD);
                     tvAlert.setTextColor(context.getResources().getColor(R.color.textColor_alert_button_cancel));
                     tvAlert.setOnClickListener(new OnTextClickListener(CANCELPOSITION));
                     position = position - 1;
                 }
-                //高亮按钮的样式
                 else if (mDestructive != null && mDestructive.contains(data)) {
                     tvAlert.setTextColor(context.getResources().getColor(R.color.textColor_alert_button_destructive));
                 }
@@ -544,7 +530,6 @@ public class AlertView implements OnItemSelectedListener {
     }
 
     /**
-     * show的时候调用
      *
      * @param view 这个View
      */
@@ -565,7 +550,6 @@ public class AlertView implements OnItemSelectedListener {
     }
 
     /**
-     * 检测该View是不是已经添加到根视图
      *
      * @return 如果视图已经存在该View返回true
      */
@@ -591,7 +575,6 @@ public class AlertView implements OnItemSelectedListener {
                 decorView.post(new Runnable() {
                     @Override
                     public void run() {
-                        //从activity根视图移除
                         decorView.removeView(rootView);
                         isDismissing = false;
                         if (onDismissListener != null) {
@@ -643,7 +626,6 @@ public class AlertView implements OnItemSelectedListener {
     }
 
     /**
-     * 主要用于拓展View的时候有输入框，键盘弹出则设置MarginBottom往上顶，避免输入法挡住界面
      */
     public void setMarginBottom(int marginBottom) {
         int margin_alert_left_right = context.getResources().getDimensionPixelSize(R.dimen.margin_alert_left_right);
