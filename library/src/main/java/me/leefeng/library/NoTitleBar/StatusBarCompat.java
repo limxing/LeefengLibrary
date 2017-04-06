@@ -86,13 +86,15 @@ public class StatusBarCompat {
             Window win = activity.getWindow();
             win.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);//
             win.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-
             win.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             win.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             win.setStatusBarColor(Color.TRANSPARENT);// SDK21
 
         }
+
     }
+
+
 
     /**
      * change to full screen mode
@@ -167,5 +169,40 @@ public class StatusBarCompat {
         green = (int) (green * a + 0.5);
         blue = (int) (blue * a + 0.5);
         return 0xff << 24 | red << 16 | green << 8 | blue;
+    }
+
+    /**
+     * first step before oncreat()
+     * Do not need the above code, do not need to add xml in the head to adapt,
+     * automatically use the title of the background color fill status bar
+     * @param activity
+     */
+    public static void statusBarWithTitle(Activity activity){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+            window.setNavigationBarColor(Color.TRANSPARENT);
+        }
+    }
+
+    /**
+     * Second step change height of view in titlelayout
+     * @param view titleLayout a View which height is 0dp
+     */
+    public static void statusBarWithTitleSetHeight(View view){
+        int statusHeight = -1;
+        try {
+            Class<?> clazz = Class.forName("com.android.internal.R$dimen");
+            Object object = clazz.newInstance();
+            int height = Integer.parseInt(clazz.getField("status_bar_height").get(object).toString());
+            statusHeight = view.getContext().getResources().getDimensionPixelSize(height);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        view.getLayoutParams().height =statusHeight;
     }
 }
