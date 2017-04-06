@@ -30,7 +30,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:support-v4:23.1.1'
     compile 'com.android.support:design:23.1.1'
-    compile 'com.pnikosis:materialish-progress:1.0'//金属加载进度条https://github.com/pnikosis/materialish-progress
+    compile 'com.pnikosis:materialish-progress:1.0'
+//金属加载进度条https://github.com/pnikosis/materialish-progress
 //    compile 'com.bigkoo:alertview:1.0.2'//防iOS对话框https://github.com/saiwu-bigkoo/Android-AlertView
 //    compile 'com.github.orhanobut:logger:1.12'//打印日志的
     compile 'com.android.support:support-annotations:24.2.0'
@@ -54,7 +55,7 @@ publish {
     groupId = 'me.leefeng'//jcenter上的路径
     artifactId = 'library'//项目名称
     publishVersion = '3.0.1'//版本号
-    desc = '我的个人库,更改动画'//描述，不重要
+    desc = 'my personal library'//描述，不重要
     website = 'https://github.com/limxing/LeefengLibrary'//网站，不重要
 }
 //./gradlew clean build bintrayUpload -PbintrayUser=limxing -PbintrayKey=50fddf0aeababc65b71d85c15c2230136e82cf0c -PdryRun=false
