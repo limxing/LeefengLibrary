@@ -24,8 +24,9 @@ public class StatusBarCompat {
 
     /**
      * set statusBarColor
+     *
      * @param statusColor color
-     * @param alpha 0 - 255
+     * @param alpha       0 - 255
      */
     public static void setStatusBarColor(Activity activity, int statusColor, int alpha) {
         setStatusBarColor(activity, calculateStatusBarColor(statusColor, alpha));
@@ -51,7 +52,7 @@ public class StatusBarCompat {
                 }
             } else {
                 ViewGroup mDecorView = (ViewGroup) window.getDecorView();
-                if (mDecorView.getTag() != null && mDecorView.getTag() instanceof Boolean && (Boolean)mDecorView.getTag()) {
+                if (mDecorView.getTag() != null && mDecorView.getTag() instanceof Boolean && (Boolean) mDecorView.getTag()) {
                     //if has add fake status bar view
                     View mStatusBarView = mDecorView.getChildAt(0);
                     if (mStatusBarView != null) {
@@ -95,9 +96,9 @@ public class StatusBarCompat {
     }
 
 
-
     /**
      * change to full screen mode
+     *
      * @param hideStatusBarBackground hide status bar alpha Background when SDK  21, true if hide it
      */
     public static void translucentStatusBar(Activity activity, boolean hideStatusBarBackground) {
@@ -130,7 +131,7 @@ public class StatusBarCompat {
                 }
             } else {
                 ViewGroup mDecorView = (ViewGroup) window.getDecorView();
-                if (mDecorView.getTag() != null && mDecorView.getTag() instanceof Boolean && (Boolean)mDecorView.getTag()) {
+                if (mDecorView.getTag() != null && mDecorView.getTag() instanceof Boolean && (Boolean) mDecorView.getTag()) {
                     mChildView = mDecorView.getChildAt(0);
                     //remove fake status bar view.
                     mContentView.removeView(mChildView);
@@ -175,34 +176,44 @@ public class StatusBarCompat {
      * first step before oncreat()
      * Do not need the above code, do not need to add xml in the head to adapt,
      * automatically use the title of the background color fill status bar
+     *
      * @param activity
      */
-    public static void statusBarWithTitle(Activity activity){
+    public static void statusBarWithTitle(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = activity.getWindow();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN );
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS |
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.TRANSPARENT);
 //            window.setNavigationBarColor(Color.TRANSPARENT);
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);//
+//                window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+//                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//            }
+            window.setStatusBarColor(Color.TRANSPARENT);// SDK21
         }
     }
 
     /**
      * Second step change height of view in titlelayout
+     *
      * @param view titleLayout a View which height is 0dp
      */
-    public static void statusBarWithTitleSetHeight(View view){
-        int statusHeight = -1;
-        try {
-            Class<?> clazz = Class.forName("com.android.internal.R$dimen");
-            Object object = clazz.newInstance();
-            int height = Integer.parseInt(clazz.getField("status_bar_height").get(object).toString());
-            statusHeight = view.getContext().getResources().getDimensionPixelSize(height);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static void statusBarWithTitleSetHeight(View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            int statusHeight = -1;
+            try {
+                Class<?> clazz = Class.forName("com.android.internal.R$dimen");
+                Object object = clazz.newInstance();
+                int height = Integer.parseInt(clazz.getField("status_bar_height").get(object).toString());
+                statusHeight = view.getContext().getResources().getDimensionPixelSize(height);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            view.getLayoutParams().height = statusHeight;
         }
-
-        view.getLayoutParams().height =statusHeight;
     }
 }

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import java.util.List;
 
+import me.leefeng.library.NoTitleBar.StatusBarCompat;
 import me.leefeng.library.NoTitleBar.SystemBarTintManager;
 
 import me.leefeng.library.Permission.EasyPermissions;
@@ -23,14 +24,14 @@ import me.leefeng.publicc.alertview.OnItemClickListener;
 
 public class MainActivity extends AppCompatActivity implements OnItemClickListener, OnConfirmeListener
         , EasyPermissions.PermissionCallbacks{
-
-
     private static final int NUM = 1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SystemBarTintManager.initSystemBar(this);
+        StatusBarCompat.statusBarWithTitle(this);
+
+
         SwipeBackHelper.onCreate(this);
         SwipeBackHelper.getCurrentPage(this)
                 .setSwipeBackEnable(true)
@@ -53,7 +54,8 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 //            }
 //        });
 
-        SystemBarTintManager.initSystemBar(this, R.color.transparent);
+//        SystemBarTintManager.initSystemBar(this, R.color.transparent);
+
         PhoneInfo.show(MainActivity.this);
 //设置滑动返回
 //        SwipeBackLayout swipeBackLayout = (SwipeBackLayout) findViewById(R.id.swipeBackLayout);
