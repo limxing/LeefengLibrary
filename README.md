@@ -1,6 +1,6 @@
 
 ```
- compile 'me.leefeng:library:3.0.0'
+ compile 'me.leefeng:library:3.0.1'
 ```
 
 
