@@ -54,7 +54,7 @@ publish {
     userOrg = 'limxing'//bintray.com用户名
     groupId = 'me.leefeng'//jcenter上的路径
     artifactId = 'library'//项目名称
-    publishVersion = '3.0.1'//版本号
+    publishVersion = '3.0.2'//版本号
     desc = 'my personal library'//描述，不重要
     website = 'https://github.com/limxing/LeefengLibrary'//网站，不重要
 }
