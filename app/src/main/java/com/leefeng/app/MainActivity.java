@@ -1,11 +1,14 @@
 package com.leefeng.app;
 
 import android.Manifest;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 
 import java.util.List;
 
@@ -18,13 +21,17 @@ import me.leefeng.library.utils.EncryptUtil;
 import me.leefeng.library.utils.LogUtils;
 import me.leefeng.library.utils.PhoneInfo;
 import me.leefeng.library.utils.ToastUtils;
+import me.leefeng.library.view.WelcomePassView;
 import me.leefeng.publicc.alertview.OnConfirmeListener;
 import me.leefeng.publicc.alertview.OnItemClickListener;
+
+import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 
 public class MainActivity extends AppCompatActivity implements OnItemClickListener, OnConfirmeListener
         , EasyPermissions.PermissionCallbacks{
     private static final int NUM = 1001;
+    private WelcomePassView main_pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 .setSwipeRelateEnable(true)
                 .setSwipeRelateOffset(300);
         setContentView(R.layout.activity_main);
+        main_pass=(WelcomePassView)  findViewById(R.id.main_pass);
 //        main_xlistview.set
 //        MyThreadPool.excuteCachedTask(new Runnable() {
 //            @Override
@@ -79,6 +87,31 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
         EasyPermissions.requestPermissions(this, "NEED SMS PLZ", NUM,
                 Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+
+
+        findViewById(R.id.main_start).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                main_pass.setmAction(new WelcomePassView.Action() {
+                    @Override
+                    public void onAction() {
+                        finish();
+                    }
+                });
+                main_pass.start();
+//                ValueAnimator valueAnimator=ValueAnimator.ofInt(0,1);
+//                valueAnimator.setDuration(3000);
+//                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//                    @Override
+//                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+//                        Object l=  valueAnimator.getAnimatedFraction();
+//                        Log.i(TAG, "onAnimationUpdate: "+l);
+//                    }
+//                });
+//                valueAnimator.start();
+            }
+        });
     }
 
 
