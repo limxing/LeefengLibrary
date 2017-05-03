@@ -81,7 +81,6 @@ public class LoadView extends ImageView {
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                LogUtils.i("==" + valueAnimator.getAnimatedValue());
                 float degrees = 30 * Integer.parseInt(valueAnimator.getAnimatedValue().toString());
                 max.setRotate(degrees, width, height);
                 setImageMatrix(max);
