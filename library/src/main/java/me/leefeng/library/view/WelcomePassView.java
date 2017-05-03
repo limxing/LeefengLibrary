@@ -155,9 +155,7 @@ public class WelcomePassView extends TextView {
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
-
                 floatPro = valueAnimator.getAnimatedFraction();
-                Log.i("leefeng", "onAnimationUpdate: "+floatPro);
                 postInvalidate();
             }
         });
@@ -169,7 +167,6 @@ public class WelcomePassView extends TextView {
 
             @Override
             public void onAnimationEnd(Animator animator) {
-
                 if (mAction != null) mAction.onAction();
             }
 
