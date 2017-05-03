@@ -1,6 +1,7 @@
 package me.leefeng.library.view;
 
 import android.animation.Animator;
+import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -150,10 +151,13 @@ public class WelcomePassView extends TextView {
     public void start() {
         ValueAnimator valueAnimator = ValueAnimator.ofInt(0, 1);
         valueAnimator.setDuration(time);
+        valueAnimator.setInterpolator(new ThisInterpolator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
+
                 floatPro = valueAnimator.getAnimatedFraction();
+                Log.i("leefeng", "onAnimationUpdate: "+floatPro);
                 postInvalidate();
             }
         });
@@ -194,5 +198,13 @@ public class WelcomePassView extends TextView {
 
     public interface Action {
         void onAction();
+    }
+
+    class ThisInterpolator implements TimeInterpolator{
+
+        @Override
+        public float getInterpolation(float v) {
+            return (float) Math.sin((v / 2) * Math.PI);
+        }
     }
 }
