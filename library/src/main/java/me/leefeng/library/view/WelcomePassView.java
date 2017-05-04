@@ -12,6 +12,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.animation.LinearInterpolator;
 import android.widget.TextView;
 
 
@@ -151,7 +152,7 @@ public class WelcomePassView extends TextView {
     public void start() {
         ValueAnimator valueAnimator = ValueAnimator.ofInt(0, 1);
         valueAnimator.setDuration(time);
-        valueAnimator.setInterpolator(new ThisInterpolator());
+        valueAnimator.setInterpolator(new LinearInterpolator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {

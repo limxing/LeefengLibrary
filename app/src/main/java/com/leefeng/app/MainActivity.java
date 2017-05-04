@@ -12,6 +12,7 @@ import android.view.View;
 
 import java.util.List;
 
+import me.leefeng.library.IOSLoading.LoadView;
 import me.leefeng.library.NoTitleBar.StatusBarCompat;
 import me.leefeng.library.NoTitleBar.SystemBarTintManager;
 
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         , EasyPermissions.PermissionCallbacks{
     private static final int NUM = 1001;
     private WelcomePassView main_pass;
+    private LoadView maon_loadview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 .setSwipeRelateOffset(300);
         setContentView(R.layout.activity_main);
         main_pass=(WelcomePassView)  findViewById(R.id.main_pass);
+        maon_loadview=(LoadView) findViewById(R.id.maon_loadview);
 //        main_xlistview.set
 //        MyThreadPool.excuteCachedTask(new Runnable() {
 //            @Override
@@ -96,20 +99,10 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 main_pass.setmAction(new WelcomePassView.Action() {
                     @Override
                     public void onAction() {
-                        finish();
+//                        finish();
                     }
                 });
                 main_pass.start();
-//                ValueAnimator valueAnimator=ValueAnimator.ofInt(0,1);
-//                valueAnimator.setDuration(3000);
-//                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//                    @Override
-//                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
-//                        Object l=  valueAnimator.getAnimatedFraction();
-//                        Log.i(TAG, "onAnimationUpdate: "+l);
-//                    }
-//                });
-//                valueAnimator.start();
             }
         });
     }

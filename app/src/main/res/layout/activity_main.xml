@@ -1,46 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:swiperefresh="http://schemas.android.com/apk/res-auto"
-    xmlns:tc="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_ll"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout xmlns:tc="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/main_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/holo_blue_light"
-        android:clipToPadding="true"
-        android:fitsSystemWindows="true">
+        android:background="#eee"
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/title_height">
+            android:layout_height="wrap_content"
+            android:background="@color/holo_blue_light"
+            android:clipToPadding="true"
+            android:fitsSystemWindows="true">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="我是标题"
-                android:textColor="#ffffff"
-                android:textSize="20sp"></TextView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/title_height">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="我是标题"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"></TextView>
+
+            </RelativeLayout>
         </RelativeLayout>
-    </RelativeLayout>
 
-    <me.leefeng.library.view.SwitchView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        swiperefresh:hasShadow="false" />
+        <me.leefeng.library.view.SwitchView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            swiperefresh:hasShadow="false" />
 
-    <Button
-        android:id="@+id/main_start"
+        <Button
+            android:id="@+id/main_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="开始" />
+
+        <me.leefeng.library.view.WelcomePassView
+            android:id="@+id/main_pass"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <me.leefeng.library.IOSLoading.LoadView
+            android:id="@+id/maon_loadview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+    <me.leefeng.library.view.FailView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="开始" />
-    <me.leefeng.library.view.WelcomePassView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/main_pass"/>
-</LinearLayout>
+        android:layout_height="match_parent" />
+</FrameLayout>

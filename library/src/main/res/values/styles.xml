@@ -4,7 +4,7 @@
      在这里我们是NoActionBar的主题而不是系统开始给我们的Theme.AppCompat.Light.DarkActionBar-->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-
+<!--<item name="android:navigationMode"></item>-->
     </style>
     <!--这个是右滑手势退出的主题,在继右滑退出界面的主题使用这个-->
     <style name="Theme.Swipe.Back" parent="Theme.AppCompat.Light.NoActionBar">

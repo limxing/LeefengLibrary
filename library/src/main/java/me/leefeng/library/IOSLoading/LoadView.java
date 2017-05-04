@@ -8,12 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
-
-
-import java.lang.ref.SoftReference;
-
 import me.leefeng.library.R;
-import me.leefeng.library.utils.LogUtils;
 
 /**
  * Created by limxing on 16/1/7.
@@ -81,7 +76,7 @@ public class LoadView extends ImageView {
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                float degrees = 30 * Integer.parseInt(valueAnimator.getAnimatedValue().toString());
+                float degrees = 30 * (Integer) valueAnimator.getAnimatedValue();
                 max.setRotate(degrees, width, height);
                 setImageMatrix(max);
             }
