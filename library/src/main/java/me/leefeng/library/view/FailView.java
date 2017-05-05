@@ -38,10 +38,10 @@ public class FailView extends View {
     private static final String TEXT_CRY = "";
     private static final String TEXT_RESULT = "没有结果";
     private static final String TAG = "FailView";
-    private int failCricleRadius;
-    private int failCricleDuration;
-    private int failCricleColor;
-    private int failCricleBacColor;
+    private int failCircleRadius;
+    private int failCircleDuration;
+    private int failCircleColor;
+    private int failCircleBacColor;
     private float radius;
     private float textSize;
     private int textfocusColor;
@@ -58,13 +58,15 @@ public class FailView extends View {
     private FailViewListener listener;
     private float startRadius;
     private ValueAnimator animator;
-    private RectF oval;//画圆弧
+    private RectF circleRect;//画圆弧
+    private Rect touchRect;
     private Bitmap bitmap;
     private String text = "";
+    private int top;
+    private int textTop;
 
     public FailView(Context context) {
         super(context);
-
     }
 
     @Override
@@ -72,10 +74,11 @@ public class FailView extends View {
         super.onDetachedFromWindow();
         paint = null;
         textR = null;
+        touchRect = null;
         if (bitmap != null)
             bitmap.recycle();
         bitmap = null;
-        oval = null;
+        circleRect = null;
     }
 
     public FailView(Context context, AttributeSet attrs) {
@@ -85,10 +88,10 @@ public class FailView extends View {
         int bacColor = typedArray.getColor(R.styleable.FailView_backgroundColor, Color.parseColor("#eeeeee"));
         textnormalColor = typedArray.getColor(R.styleable.FailView_textNomorColor, Color.parseColor("#bfbfbf"));
         textfocusColor = typedArray.getColor(R.styleable.FailView_textFocusColor, Color.parseColor("#8a8a8a"));
-        failCricleBacColor = typedArray.getColor(R.styleable.FailView_failCricleBacColor, Color.GRAY);
-        failCricleColor = typedArray.getColor(R.styleable.FailView_failCricleColor, Color.RED);
-        failCricleDuration = typedArray.getInteger(R.styleable.FailView_failCricleDuration, 1000);
-        failCricleRadius = typedArray.getInteger(R.styleable.FailView_failCricleRadius, 60);
+        failCircleBacColor = typedArray.getColor(R.styleable.FailView_failCircleBacColor, Color.GRAY);
+        failCircleColor = typedArray.getColor(R.styleable.FailView_failCircleColor, Color.RED);
+        failCircleDuration = typedArray.getInteger(R.styleable.FailView_failCircleDuration, 1000);
+        failCircleRadius = typedArray.getInteger(R.styleable.FailView_failCircleRadius, 60);
         textSize = typedArray.getDimension(R.styleable.FailView_failTextSize, density * 16);
         radius = typedArray.getDimension(R.styleable.FailView_failRadius, density * 30);
         typedArray.recycle();
@@ -101,6 +104,8 @@ public class FailView extends View {
 
         paint = new Paint();
         textR = new Rect();
+        touchRect = new Rect();
+
         setVisibility(View.GONE);
     }
 
@@ -124,9 +129,9 @@ public class FailView extends View {
             width = getWidth();
             height = getHeight();
         }
-        int top = height / 5;
+        top = height / 5;
 
-        int textTop = 0;
+        textTop = 0;
         if (currentMode == MODE_REFRESH) {
             paint.reset();
             paint.setStyle(Paint.Style.STROKE);
@@ -134,26 +139,30 @@ public class FailView extends View {
             paint.setStrokeCap(Paint.Cap.ROUND);
             paint.setAntiAlias(true);
             paint.setStrokeWidth(density * 5);
-            paint.setColor(failCricleBacColor);
+            paint.setColor(failCircleBacColor);
             paint.setAlpha(120);
             canvas.drawCircle(width / 2, top + radius, radius, paint);
 
-            paint.setColor(failCricleColor);
-            if (oval == null) {
-                oval = new RectF();                     //RectF对象
-                oval.left = width / 2 - radius;                              //左边
-                oval.top = top;                                   //上边
-                oval.right = width / 2 + radius;                             //右边
-                oval.bottom = top + 2 * radius;
+            paint.setColor(failCircleColor);
+            if (circleRect == null) {
+                circleRect = new RectF();                     //RectF对象
+                circleRect.left = width / 2 - radius;                              //左边
+                circleRect.top = top;                                   //上边
+                circleRect.right = width / 2 + radius;                             //右边
+                circleRect.bottom = top + 2 * radius;
             }//下边
-            canvas.drawArc(oval, startRadius, failCricleRadius, false, paint);    //绘制圆弧
+            canvas.drawArc(circleRect, startRadius, failCircleRadius, false, paint);    //绘制圆弧
 
 
-            textTop = (int) (oval.bottom + density * 40);
+            textTop = (int) (circleRect.bottom + density * 40);
 
         } else if (bitmap != null) {
             canvas.drawBitmap(bitmap, width / 2 - bitmap.getWidth() / 2, top, null);
             textTop = (int) (top + bitmap.getHeight() + density * 40);
+            touchRect.top = top;
+            touchRect.bottom = bitmap.getHeight() + top;
+            touchRect.left = width / 2 - bitmap.getWidth() / 2;
+            touchRect.right = width / 2 + bitmap.getWidth() / 2;
         }
         paint.reset();
         if (isFocus) {
@@ -169,8 +178,6 @@ public class FailView extends View {
         paint.setAntiAlias(true);
         paint.getTextBounds(text, 0, text.length(), textR);
         canvas.drawText(text, width / 2 - textR.width() / 2, textTop, paint);
-
-
     }
 
     /**
@@ -189,14 +196,13 @@ public class FailView extends View {
             case MODE_REFRESH:
                 if (animator == null) {
                     animator = ValueAnimator.ofInt(-90, 270);
-                    animator.setDuration(failCricleDuration);
+                    animator.setDuration(failCircleDuration);
                     animator.setInterpolator(new LinearInterpolator());
                     animator.setRepeatCount(Integer.MAX_VALUE);
                     animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                         @Override
                         public void onAnimationUpdate(ValueAnimator valueAnimator) {
                             startRadius = (int) valueAnimator.getAnimatedValue();
-//                            Log.i(TAG, "onAnimationUpdate: ");
                             postInvalidate();
                         }
                     });
@@ -240,33 +246,37 @@ public class FailView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch (currentMode) {
-            case MODE_REFRESH:
-                break;
-            case MODE_FAIL:
-            case MODE_NONET:
-            case MODE_CRY:
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        isFocus = true;
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        isFocus = false;
-                        postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                               // setVisibility(View.GONE);
-                                setMode(MODE_REFRESH);
-                                if (listener != null) {
-                                    listener.onClick();
+        int x = (int) event.getX();
+        int y = (int) event.getY();
+        if (touchRect.contains(x, y) || textR.contains(x, y)) {
+            switch (currentMode) {
+                case MODE_REFRESH:
+                    break;
+                case MODE_FAIL:
+                case MODE_NONET:
+                case MODE_CRY:
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            isFocus = true;
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            isFocus = false;
+                            postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // setVisibility(View.GONE);
+                                    setMode(MODE_REFRESH);
+                                    if (listener != null) {
+                                        listener.onClick();
+                                    }
                                 }
-                            }
-                        }, 100);
-                        break;
-                }
-                break;
+                            }, 100);
+                            break;
+                    }
+                    break;
+            }
+            invalidate();
         }
-        invalidate();
         return true;
     }
 

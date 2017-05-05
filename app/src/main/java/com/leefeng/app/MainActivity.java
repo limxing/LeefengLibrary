@@ -122,13 +122,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         main_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                main_pass.setmAction(new WelcomePassView.Action() {
-                    @Override
-                    public void onAction() {
-//                        finish();
-                        main_failview.setMode(FailView.MODE_CRY);
-                    }
-                });
+
                 main_pass.start();
             }
         });

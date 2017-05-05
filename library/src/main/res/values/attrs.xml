@@ -175,9 +175,9 @@
         <attr name="textFocusColor" format="color"/>
         <attr name="failTextSize" format="dimension"/>
         <attr name="failRadius" format="dimension"/>
-        <attr name="failCricleBacColor" format="color"/>
-        <attr name="failCricleColor" format="color"/>
-        <attr name="failCricleDuration" format="integer"/>
-        <attr name="failCricleRadius" format="integer"/>
+        <attr name="failCircleBacColor" format="color"/>
+        <attr name="failCircleColor" format="color"/>
+        <attr name="failCircleDuration" format="integer"/>
+        <attr name="failCircleRadius" format="integer"/>
     </declare-styleable>
 </resources>

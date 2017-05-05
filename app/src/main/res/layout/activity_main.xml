@@ -68,8 +68,9 @@
         <me.leefeng.library.view.FailView
             android:id="@+id/main_failview"
             android:layout_width="match_parent"
+            app:failCircleDuration="800"
             android:layout_height="match_parent"
-            android:visibility="gone" />
+            />
 
     </LinearLayout>
 
