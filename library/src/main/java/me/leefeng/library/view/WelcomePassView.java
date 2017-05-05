@@ -141,6 +141,7 @@ public class WelcomePassView extends TextView {
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN && mAction != null) {
             mAction.onAction();
+            mAction=null;
         }
         return super.onTouchEvent(event);
     }
