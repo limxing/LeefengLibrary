@@ -101,7 +101,6 @@ public class FailView extends View {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-
         paint = new Paint();
         textR = new Rect();
         touchRect = new Rect();
@@ -160,7 +159,7 @@ public class FailView extends View {
             canvas.drawBitmap(bitmap, width / 2 - bitmap.getWidth() / 2, top, null);
             textTop = (int) (top + bitmap.getHeight() + density * 40);
             touchRect.top = top;
-            touchRect.bottom = bitmap.getHeight() + top;
+            touchRect.bottom = (int) (textTop + 20 * density);
             touchRect.left = width / 2 - bitmap.getWidth() / 2;
             touchRect.right = width / 2 + bitmap.getWidth() / 2;
         }
@@ -248,7 +247,7 @@ public class FailView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         int x = (int) event.getX();
         int y = (int) event.getY();
-        if (touchRect.contains(x, y) || textR.contains(x, y)) {
+        if (touchRect.contains(x, y)) {
             switch (currentMode) {
                 case MODE_REFRESH:
                     break;
