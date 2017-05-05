@@ -158,10 +158,7 @@ public class FailView extends View {
         } else if (bitmap != null) {
             canvas.drawBitmap(bitmap, width / 2 - bitmap.getWidth() / 2, top, null);
             textTop = (int) (top + bitmap.getHeight() + density * 40);
-            touchRect.top = top;
-            touchRect.bottom = (int) (textTop + 20 * density);
-            touchRect.left = width / 2 - bitmap.getWidth() / 2;
-            touchRect.right = width / 2 + bitmap.getWidth() / 2;
+
         }
         paint.reset();
         if (isFocus) {
@@ -177,6 +174,15 @@ public class FailView extends View {
         paint.setAntiAlias(true);
         paint.getTextBounds(text, 0, text.length(), textR);
         canvas.drawText(text, width / 2 - textR.width() / 2, textTop, paint);
+        //touchRect
+        if (currentMode != MODE_REFRESH) {
+            touchRect.top = top;
+            touchRect.bottom = (int) (textTop + 10 * density+textR.height());
+            Log.i(TAG, "onDraw: " + textR.height());
+            touchRect.left = Math.max(width / 2 - bitmap.getWidth() / 2, width / 2 - textR.width() / 2);
+            touchRect.right = Math.max(width / 2 + bitmap.getWidth() / 2, width / 2 + textR.width() / 2);
+        }
+
     }
 
     /**
@@ -263,9 +269,8 @@ public class FailView extends View {
                             postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    // setVisibility(View.GONE);
-                                    setMode(MODE_REFRESH);
                                     if (listener != null) {
+                                        setMode(MODE_REFRESH);
                                         listener.onClick();
                                     }
                                 }
