@@ -22,6 +22,7 @@ import me.leefeng.library.utils.EncryptUtil;
 import me.leefeng.library.utils.LogUtils;
 import me.leefeng.library.utils.PhoneInfo;
 import me.leefeng.library.utils.ToastUtils;
+import me.leefeng.library.view.FailView;
 import me.leefeng.library.view.WelcomePassView;
 import me.leefeng.publicc.alertview.OnConfirmeListener;
 import me.leefeng.publicc.alertview.OnItemClickListener;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     private static final int NUM = 1001;
     private WelcomePassView main_pass;
     private LoadView maon_loadview;
+    private FailView main_failview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         setContentView(R.layout.activity_main);
         main_pass=(WelcomePassView)  findViewById(R.id.main_pass);
         maon_loadview=(LoadView) findViewById(R.id.maon_loadview);
+        main_failview=(FailView)findViewById(R.id.main_failview);
 //        main_xlistview.set
 //        MyThreadPool.excuteCachedTask(new Runnable() {
 //            @Override
@@ -100,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                     @Override
                     public void onAction() {
 //                        finish();
+                        main_failview.setMode(FailView.MODE_RESULT);
                     }
                 });
                 main_pass.start();

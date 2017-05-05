@@ -1,12 +1,13 @@
 package me.leefeng.library.view;
 
 import android.animation.ValueAnimator;
+import android.bluetooth.le.ScanCallback;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
@@ -17,7 +18,6 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 import me.leefeng.library.R;
-import me.leefeng.library.utils.LogUtils;
 
 /**
  * Created by FengTing on 2017/5/4.
@@ -28,8 +28,16 @@ public class FailView extends View {
     private static final String TAG = "FailView";
     private static final String CLICKFRESH = "糟糕，网络遇到问题，点击刷新";
     private static final String REFRESHING = "正在加载...";
-    private static final int MODE_NONET = 1002;
+    public static final int MODE_NONET = 1002;
+    public static final int MODE_FAIL = 1003;
+    public static final int MODE_CRY = 1004;
+    public static final int MODE_RESULT = 1005;
     private static final int MODE_REFRESH = 1001;
+    private static final String TEXT_FAIL = "获取失败，请点击重试";
+    private static final String TEXT_CRY = "";
+    private static final String TEXT_RESULT = "没有结果";
+    private int textfocusColor;
+    private int textnormalColor;
     private int width;
     private int height;
     private Paint paint;
@@ -46,10 +54,15 @@ public class FailView extends View {
 
     }
 
-    public FailView(Context context, @Nullable AttributeSet attrs) {
+    public FailView(Context context, AttributeSet attrs) {
         super(context, attrs);
         Log.i(TAG, "FailView: ");
-        setBackgroundColor(Color.parseColor("#eeeeee"));
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.FailView);
+        int bacColor = typedArray.getColor(R.styleable.FailView_backgroundColor, Color.parseColor("#eeeeee"));
+        textnormalColor = typedArray.getColor(R.styleable.FailView_textNomorColor, Color.parseColor("#bfbfbf"));
+        textfocusColor = typedArray.getColor(R.styleable.FailView_textFocusColor, Color.parseColor("#8a8a8a"));
+        typedArray.recycle();
+        setBackgroundColor(bacColor);
     }
 
     @Override
@@ -59,7 +72,7 @@ public class FailView extends View {
         Log.i(TAG, "onAttachedToWindow: ");
         density = getResources().getDisplayMetrics().density;
         paint = new Paint();
-        paint.setColor(Color.parseColor("#bfbfbf"));
+        paint.setColor(textnormalColor);
         paint.setStrokeWidth(1);
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setStrokeJoin(Paint.Join.ROUND);
@@ -99,6 +112,18 @@ public class FailView extends View {
                 text = CLICKFRESH;
                 bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_failview_nonet);
                 break;
+            case MODE_FAIL:
+                text = TEXT_FAIL;
+                bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_failview_fail);
+                break;
+            case MODE_CRY:
+                text = TEXT_FAIL;
+                bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_failview_nodata);
+                break;
+            case MODE_RESULT:
+                text = TEXT_RESULT;
+                bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_failview_noresult);
+                break;
         }
 //        Log.i(TAG, "onDraw: "+bitmap.getHeight());
         canvas.drawBitmap(bitmap, width / 2 - bitmap.getWidth() / 2, top, null);
@@ -124,13 +149,15 @@ public class FailView extends View {
         switch (currentMode) {
             case MODE_REFRESH:
                 break;
+            case MODE_FAIL:
             case MODE_NONET:
+            case MODE_CRY:
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        paint.setColor(Color.parseColor("#8a8a8a"));
+                        paint.setColor(textfocusColor);
                         break;
                     case MotionEvent.ACTION_UP:
-                        paint.setColor(Color.parseColor("#bfbfbf"));
+                        paint.setColor(textnormalColor);
                         postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -139,7 +166,7 @@ public class FailView extends View {
                                     listener.onClick();
                                 }
                             }
-                        }, 500);
+                        }, 300);
                         break;
                 }
                 break;
@@ -147,6 +174,7 @@ public class FailView extends View {
         invalidate();
         return true;
     }
+
 
     private void start() {
 

@@ -168,4 +168,10 @@
         <attr name="primaryColorDark" format="color"/>
         <attr name="isOpened" format="boolean"/>
     </declare-styleable>
+
+    <declare-styleable name="FailView">
+        <attr name="backgroundColor" format="color"/>
+        <attr name="textNomorColor" format="color"/>
+        <attr name="textFocusColor" format="color"/>
+    </declare-styleable>
 </resources>

@@ -90,7 +90,6 @@ public class StatusBarCompat {
             win.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             win.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             win.setStatusBarColor(Color.TRANSPARENT);// SDK21
-
         }
 
     }
