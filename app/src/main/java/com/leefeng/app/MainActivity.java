@@ -53,11 +53,14 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         setContentView(R.layout.activity_main);
         main_pass = (WelcomePassView) findViewById(R.id.main_pass);
         main_pass.setTime(5000);
+
         main_pass.setmAction(new WelcomePassView.Action() {
             @Override
             public void onAction() {
 //                        finish();
+                Log.i(TAG, "onAction: ");
                 main_failview.setMode(FailView.MODE_NONET);
+                main_failview.setText("没有网络怎么办");
             }
         });
         maon_loadview = (LoadView) findViewById(R.id.maon_loadview);

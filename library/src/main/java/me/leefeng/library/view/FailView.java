@@ -178,7 +178,6 @@ public class FailView extends View {
         if (currentMode != MODE_REFRESH) {
             touchRect.top = top;
             touchRect.bottom = (int) (textTop + 10 * density+textR.height());
-            Log.i(TAG, "onDraw: " + textR.height());
             touchRect.left = Math.max(width / 2 - bitmap.getWidth() / 2, width / 2 - textR.width() / 2);
             touchRect.right = Math.max(width / 2 + bitmap.getWidth() / 2, width / 2 + textR.width() / 2);
         }
