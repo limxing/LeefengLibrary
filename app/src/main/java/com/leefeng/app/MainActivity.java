@@ -31,11 +31,12 @@ import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 
 public class MainActivity extends AppCompatActivity implements OnItemClickListener, OnConfirmeListener
-        , EasyPermissions.PermissionCallbacks{
+        , EasyPermissions.PermissionCallbacks {
     private static final int NUM = 1001;
     private WelcomePassView main_pass;
     private LoadView maon_loadview;
     private FailView main_failview;
+    private View main_start;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +51,30 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 .setSwipeRelateEnable(true)
                 .setSwipeRelateOffset(300);
         setContentView(R.layout.activity_main);
-        main_pass=(WelcomePassView)  findViewById(R.id.main_pass);
-        maon_loadview=(LoadView) findViewById(R.id.maon_loadview);
-        main_failview=(FailView)findViewById(R.id.main_failview);
+        main_pass = (WelcomePassView) findViewById(R.id.main_pass);
+        main_pass.setTime(5000);
+        main_pass.setmAction(new WelcomePassView.Action() {
+            @Override
+            public void onAction() {
+//                        finish();
+                main_failview.setMode(FailView.MODE_NONET);
+            }
+        });
+        maon_loadview = (LoadView) findViewById(R.id.maon_loadview);
+        main_failview = (FailView) findViewById(R.id.main_failview);
+        main_failview.setListener(new FailView.FailViewListener() {
+            @Override
+            public void onClick() {
+
+                main_pass.start();
+            }
+        });
+        findViewById(R.id.main_loading).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                main_failview.setMode(FailView.MODE_REFRESH);
+            }
+        });
 //        main_xlistview.set
 //        MyThreadPool.excuteCachedTask(new Runnable() {
 //            @Override
@@ -92,18 +114,19 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
 
         EasyPermissions.requestPermissions(this, "NEED SMS PLZ", NUM,
-                Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
 
-
-        findViewById(R.id.main_start).setOnClickListener(new View.OnClickListener() {
+        main_start = findViewById(R.id.main_start)
+        ;
+        main_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 main_pass.setmAction(new WelcomePassView.Action() {
                     @Override
                     public void onAction() {
 //                        finish();
-                        main_failview.setMode(FailView.MODE_RESULT);
+                        main_failview.setMode(FailView.MODE_CRY);
                     }
                 });
                 main_pass.start();
@@ -117,18 +140,20 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
     /**
      * alertview的点击事件
+     *
      * @param o
      * @param position
      */
     @Override
     public void onItemClick(Object o, int position) {
-        ToastUtils.showShort(this,position+"");
+        ToastUtils.showShort(this, position + "");
     }
 
     @Override
     public void result(String s) {
-        ToastUtils.showShort(MainActivity.this,s);
+        ToastUtils.showShort(MainActivity.this, s);
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -136,6 +161,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         // EasyPermissions handles the request result.
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
+
     @Override
     public void onPermissionsGranted(int requestCode, List<String> perms) {
 
@@ -173,6 +199,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         }
 
     }
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);

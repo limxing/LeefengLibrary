@@ -173,5 +173,11 @@
         <attr name="backgroundColor" format="color"/>
         <attr name="textNomorColor" format="color"/>
         <attr name="textFocusColor" format="color"/>
+        <attr name="failTextSize" format="dimension"/>
+        <attr name="failRadius" format="dimension"/>
+        <attr name="failCricleBacColor" format="color"/>
+        <attr name="failCricleColor" format="color"/>
+        <attr name="failCricleDuration" format="integer"/>
+        <attr name="failCricleRadius" format="integer"/>
     </declare-styleable>
 </resources>

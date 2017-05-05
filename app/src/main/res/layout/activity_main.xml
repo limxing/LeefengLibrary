@@ -2,8 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-  >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/main_ll"
@@ -39,11 +38,22 @@
             android:layout_height="wrap_content"
             app:hasShadow="false" />
 
-        <Button
-            android:id="@+id/main_start"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="开始" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/main_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开始" />
+            <Button
+                android:layout_width="wrap_content"
+                android:text="加载中"
+                android:id="@+id/main_loading"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
         <me.leefeng.library.view.WelcomePassView
             android:id="@+id/main_pass"
@@ -55,15 +65,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <me.leefeng.library.view.FailView
+            android:id="@+id/main_failview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
 
     </LinearLayout>
-    <me.leefeng.library.view.FailView
-        android:id="@+id/main_failview"
 
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
     <View
         android:id="@+id/title_top"
         android:layout_width="match_parent"
-        android:layout_height="0dp"/>
+        android:layout_height="0dp" />
 </FrameLayout>
