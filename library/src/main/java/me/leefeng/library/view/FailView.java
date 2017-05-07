@@ -38,6 +38,7 @@ public class FailView extends View {
     private static final String TEXT_CRY = "";
     private static final String TEXT_RESULT = "没有结果";
     private static final String TAG = "FailView";
+    private static final int DURATION_CIRCLE = 1500;
     private int failCircleRadius;
     private int failCircleDuration;
     private int failCircleColor;
@@ -90,7 +91,7 @@ public class FailView extends View {
         textfocusColor = typedArray.getColor(R.styleable.FailView_textFocusColor, Color.parseColor("#8a8a8a"));
         failCircleBacColor = typedArray.getColor(R.styleable.FailView_failCircleBacColor, Color.GRAY);
         failCircleColor = typedArray.getColor(R.styleable.FailView_failCircleColor, Color.RED);
-        failCircleDuration = typedArray.getInteger(R.styleable.FailView_failCircleDuration, 1000);
+        failCircleDuration = typedArray.getInteger(R.styleable.FailView_failCircleDuration, DURATION_CIRCLE);
         failCircleRadius = typedArray.getInteger(R.styleable.FailView_failCircleRadius, 60);
         textSize = typedArray.getDimension(R.styleable.FailView_failTextSize, density * 16);
         radius = typedArray.getDimension(R.styleable.FailView_failRadius, density * 30);
