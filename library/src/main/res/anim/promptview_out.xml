@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="@integer/animation_default_duration">
+    <alpha
+        android:fromAlpha="1"
+        android:toAlpha="0" />
+    <scale
+        android:fromXScale="100%"
+        android:fromYScale="100%"
+        android:pivotX="50%"
+        android:pivotY="45%"
+        android:toXScale="200%"
+        android:toYScale="200%" />
+</set>

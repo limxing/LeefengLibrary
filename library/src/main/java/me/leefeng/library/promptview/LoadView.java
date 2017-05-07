@@ -7,9 +7,11 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
@@ -19,6 +21,9 @@ import me.leefeng.library.R;
  * Created by limxing on 16/1/7.
  */
 public class LoadView extends ImageView {
+    private static final int PROMPT_SUCCESS = 101;
+    private static final int PROMPT_LOADING = 102;
+    private static final int PROMPT_ERROR = 103;
     private int width;
     private int height;
     private ValueAnimator animator;
@@ -30,6 +35,13 @@ public class LoadView extends ImageView {
     private int canvasHeight;
 
     private float pad;
+    private RectF leftTopRect;
+    private RectF rightTopRect;
+    private RectF roundRect;
+    private float round;
+    private boolean touchAble;
+    private int currentType;
+    private Drawable drawable;//loadingdrawable
 
     public LoadView(Context context) {
         super(context);
@@ -49,6 +61,11 @@ public class LoadView extends ImageView {
             canvasWidth = getResources().getDisplayMetrics().widthPixels;
             canvasHeight = getResources().getDisplayMetrics().heightPixels;
         }
+        paint.reset();
+        paint.setAntiAlias(true);
+        paint.setColor(Color.BLACK);
+        paint.setAlpha(90);
+        canvas.drawRect(0, 0, canvasWidth, canvasHeight, paint);
 //        paint.reset();
 //        paint.setAntiAlias(true);
 //        paint.setColor(Color.RED);
@@ -68,20 +85,34 @@ public class LoadView extends ImageView {
         paint.getTextBounds(text, 0, text.length(), textRect);
 
         float popWidth = Math.max(100 * density, textRect.width() + pad * 2);
-        float popHeight = textRect.height() + 3 * pad+height*2;
+        float popHeight = textRect.height() + 3 * pad + height * 2;
 
 
-        float top = canvasHeight / 2 - height * 2 - pad;
+        float top = canvasHeight / 2 - height * 3 - pad;
         float left = canvasWidth / 2 - popWidth / 2;
 
         canvas.translate(left, top);
         paint.reset();
         paint.setAntiAlias(true);
         paint.setColor(Color.BLACK);
-        paint.setAlpha(160);
+        paint.setAlpha(120);
+
+//        canvas.drawRect(0, 0, popWidth, popHeight, paint);
 
 
-        canvas.drawRect(0, 0, popWidth, popHeight, paint);
+//        paint.setColor(Color.RED);
+
+//        if (leftTopRect == null)
+//            leftTopRect = new RectF(0, 0, pad, pad);
+//        canvas.drawArc(leftTopRect, 0, 90, false, paint);    //绘制圆弧
+//        if (rightTopRect == null)
+//            rightTopRect = new RectF(popWidth, 0, pad, pad);
+//        canvas.drawArc(leftTopRect, 90, 180, false, paint);    //绘制圆弧
+//        if (leftBottomRect)
+        if (roundRect == null)
+            roundRect = new RectF(0, 0, popWidth, popHeight);
+        roundRect.set(0, 0, popWidth, popHeight);
+        canvas.drawRoundRect(roundRect, round, round, paint);
 
 
         paint.reset();
@@ -91,7 +122,7 @@ public class LoadView extends ImageView {
         paint.setAntiAlias(true);
 
         top = pad * 2 + height * 2 + textRect.height();
-        left=popWidth/2-textRect.width()/2;
+        left = popWidth / 2 - textRect.width() / 2;
         canvas.drawText(text, left, top, paint);
 
 
@@ -118,7 +149,8 @@ public class LoadView extends ImageView {
     private void initData() {
         textRect = new Rect();
         density = getResources().getDisplayMetrics().density;
-        pad = 10 * density;
+        pad = 15 * density;
+        round = 10 * density;
     }
 
     /**
@@ -135,23 +167,29 @@ public class LoadView extends ImageView {
         animator = null;
 //        runnable.stopload();
         textRect = null;
-
+        drawable = null;
         Log.i("leefeng", "onDetachedFromWindow: ");
 
     }
 
+    private void initLoadingDrawable() {
+        if (drawable == null) {
+            drawable = getDrawable();
+            if (drawable == null) {
+                drawable = getResources().getDrawable(R.drawable.svpload);
+                setImageDrawable(drawable);
+            }
+
+            measure(0, 0);
+            width = getMeasuredWidth() / 2;
+            height = getMeasuredHeight() / 2;
+        }
+    }
+
     private void init() {
         setScaleType(ScaleType.MATRIX);
-        Drawable drawable = getDrawable();
-        if (drawable == null) {
-            drawable = getResources().getDrawable(R.drawable.svpload);
-            setImageDrawable(drawable);
-        }
+        initLoadingDrawable();
         measure(0, 0);
-
-        width = getMeasuredWidth() / 2;
-        height = getMeasuredHeight() / 2;
-        start();
 
         paint = new Paint();
     }
@@ -175,53 +213,43 @@ public class LoadView extends ImageView {
         animator.start();
     }
 
-//    static class MyRunable implements Runnable {
-//        private boolean flag;
-//        private SoftReference<LoadView> loadingViewSoftReference;
-//        private float degrees = 0f;
-//        private Matrix max;
-//
-//        public MyRunable(LoadView loadingView) {
-//            loadingViewSoftReference = new SoftReference<LoadView>(loadingView);
-//            max = new Matrix();
-//        }
-//
-//        @Override
-//        public void run() {
-//            if (loadingViewSoftReference.get().runnable != null && max != null) {
-//                degrees += 30f;
-//                max.setRotate(degrees, loadingViewSoftReference.get().width, loadingViewSoftReference.get().height);
-//                loadingViewSoftReference.get().setImageMatrix(max);
-//                if (degrees == 360) {
-//                    degrees = 0;
-//                }
-//                if (flag) {
-//                    loadingViewSoftReference.get().postDelayed(loadingViewSoftReference.get().runnable, 80);
-//                } else {
-//                    max.setRotate(0, loadingViewSoftReference.get().width, loadingViewSoftReference.get().height);
-//                    loadingViewSoftReference.get().setImageMatrix(max);
-//                }
-//            }
-//        }
-//
-//        public void stopload() {
-//            flag = false;
-//
-//        }
-//
-//        public void startload() {
-//            flag = true;
-//            if (loadingViewSoftReference.get().runnable != null && max != null) {
-//                loadingViewSoftReference.get().postDelayed(loadingViewSoftReference.get().runnable, 80);
-//            }
-//        }
-//    }
 
-
-
-
-    public void setText(String text) {
+    private void setText(String text) {
         this.text = text;
         invalidate();
+    }
+
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        return !touchAble;
+//    }
+
+    public void setTouchAble(boolean touchAble) {
+        this.touchAble = touchAble;
+    }
+
+    public void setSuccess(String success) {
+        currentType = PROMPT_SUCCESS;
+        if (animator.isRunning())
+            animator.end();
+        setImageDrawable(getResources().getDrawable(R.drawable.ic_prompt_success));
+        setText(success);
+    }
+
+    public void setError(String error){
+        currentType = PROMPT_ERROR;
+        if (animator.isRunning())
+            animator.end();
+        setImageDrawable(getResources().getDrawable(R.drawable.ic_prompt_error));
+        setText(error);
+    }
+
+    public void setLoading(String loading) {
+        if (currentType!=PROMPT_LOADING) {
+            currentType = PROMPT_LOADING;
+            setImageDrawable(drawable);
+            start();
+        }
+        setText(loading);
     }
 }
