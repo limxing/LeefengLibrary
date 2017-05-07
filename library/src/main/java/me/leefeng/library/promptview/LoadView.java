@@ -37,7 +37,7 @@ public class LoadView extends ImageView {
     private RectF rightTopRect;
     private RectF roundRect;
     private float round;
-    private boolean touchAble;
+    private boolean touchAble=true;
 
     private Drawable drawable;//loadingdrawable
 
