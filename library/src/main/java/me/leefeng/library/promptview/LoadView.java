@@ -21,9 +21,7 @@ import me.leefeng.library.R;
  * Created by limxing on 16/1/7.
  */
 public class LoadView extends ImageView {
-    private static final int PROMPT_SUCCESS = 101;
-    private static final int PROMPT_LOADING = 102;
-    private static final int PROMPT_ERROR = 103;
+
     private int width;
     private int height;
     private ValueAnimator animator;
@@ -40,7 +38,7 @@ public class LoadView extends ImageView {
     private RectF roundRect;
     private float round;
     private boolean touchAble;
-    private int currentType;
+
     private Drawable drawable;//loadingdrawable
 
     public LoadView(Context context) {
@@ -214,7 +212,7 @@ public class LoadView extends ImageView {
     }
 
 
-    private void setText(String text) {
+    public void setText(String text) {
         this.text = text;
         invalidate();
     }
@@ -229,15 +227,15 @@ public class LoadView extends ImageView {
     }
 
     public void setSuccess(String success) {
-        currentType = PROMPT_SUCCESS;
+
         if (animator.isRunning())
             animator.end();
         setImageDrawable(getResources().getDrawable(R.drawable.ic_prompt_success));
         setText(success);
     }
 
-    public void setError(String error){
-        currentType = PROMPT_ERROR;
+    public void setError(String error) {
+
         if (animator.isRunning())
             animator.end();
         setImageDrawable(getResources().getDrawable(R.drawable.ic_prompt_error));
@@ -245,11 +243,9 @@ public class LoadView extends ImageView {
     }
 
     public void setLoading(String loading) {
-        if (currentType!=PROMPT_LOADING) {
-            currentType = PROMPT_LOADING;
-            setImageDrawable(drawable);
-            start();
-        }
+
+        setImageDrawable(drawable);
+        start();
         setText(loading);
     }
 }

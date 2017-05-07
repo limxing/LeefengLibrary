@@ -15,7 +15,10 @@ import me.leefeng.library.R;
  */
 
 public class PromptView {
-
+    private static final int PROMPT_SUCCESS = 101;
+    private static final int PROMPT_LOADING = 102;
+    private static final int PROMPT_ERROR = 103;
+    private int currentType;
     private Animation outAnim;
     private Animation inAnim;
     private LoadView loadView;
@@ -32,11 +35,16 @@ public class PromptView {
     }
 
     public PromptView showLoading(String msg, boolean withAnimation) {
-        loadView.setLoading(msg);
-        if (loadView.getParent() == null) {
-            decorView.addView(loadView);
-            if (withAnimation)
-                loadView.startAnimation(inAnim);
+        if (currentType != PROMPT_LOADING) {
+            currentType = PROMPT_LOADING;
+            loadView.setLoading(msg);
+            if (loadView.getParent() == null) {
+                decorView.addView(loadView);
+                if (withAnimation)
+                    loadView.startAnimation(inAnim);
+            }
+        } else {
+            loadView.setText(msg);
         }
 //        rootView = (ViewGroup) layoutInflater.inflate(R.layout.layout_alertview, decorView, false);
 //        rootView.setLayoutParams(new FrameLayout.LayoutParams(
@@ -45,14 +53,18 @@ public class PromptView {
         return this;
 
     }
-    public void showSuccess(String msg){
-        loadView.setSuccess(msg);
-        loadView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                dismiss(true);
-            }
-        },1000);
+
+    public void showSuccess(String msg) {
+        if (loadView.getParent() != null && currentType != PROMPT_SUCCESS) {
+            currentType = PROMPT_SUCCESS;
+            loadView.setSuccess(msg);
+            loadView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    dismiss(true);
+                }
+            }, 1000);
+        }
     }
 
     public void dismiss(boolean withAnimation) {
@@ -75,7 +87,7 @@ public class PromptView {
 
                     }
                 });
-            }else{
+            } else {
                 decorView.removeView(loadView);
             }
 
@@ -84,13 +96,15 @@ public class PromptView {
     }
 
     public void showError(String msg) {
-
-        loadView.setError(msg);
-        loadView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                dismiss(true);
-            }
-        },1000);
+        if (loadView.getParent() != null && currentType != PROMPT_ERROR) {
+            currentType = PROMPT_ERROR;
+            loadView.setError(msg);
+            loadView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    dismiss(true);
+                }
+            }, 1000);
+        }
     }
 }
