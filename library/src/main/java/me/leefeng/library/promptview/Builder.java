@@ -12,7 +12,7 @@ public class Builder {
     int textColor = Color.WHITE;
     float textSize = 14;
     float padding = 15;
-    float round = 10;
+    float round = 8;
     int roundColor = Color.BLACK;
     int roundAlpha = 120;
     boolean touchAble = false;
