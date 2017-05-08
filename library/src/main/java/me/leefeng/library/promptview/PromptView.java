@@ -5,8 +5,11 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.graphics.Color;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
+import android.view.animation.ScaleAnimation;
 
 import me.leefeng.library.R;
 
@@ -23,8 +26,8 @@ public class PromptView {
 //    private static final int PROMPT_WARN = 106;
     private static final String TAG = "PromptView";
     private int currentType;
-    private Animation outAnim;
-    private Animation inAnim;
+    private AnimationSet outAnim;
+    private AnimationSet inAnim;
     private LoadView loadView;
     //    private Context context;
     private ViewGroup decorView;
@@ -43,9 +46,30 @@ public class PromptView {
 
     public PromptView(Builder builder, Activity context) {
         decorView = (ViewGroup) context.getWindow().getDecorView().findViewById(android.R.id.content);
-        inAnim = AnimationUtils.loadAnimation(context, R.anim.promptview_in);
-        outAnim = AnimationUtils.loadAnimation(context, R.anim.promptview_out);
+        initAnim(context.getResources().getDisplayMetrics().widthPixels, context.getResources().getDisplayMetrics().heightPixels);
+//        inAnim = AnimationUtils.loadAnimation(context, R.anim.promptview_in);
+//        outAnim = AnimationUtils.loadAnimation(context, R.anim.promptview_out);
         loadView = new LoadView(context, builder);
+    }
+
+    private void initAnim(int widthPixels, int heightPixels) {
+        inAnim = new AnimationSet(true);
+        ScaleAnimation scaleAnimation = new ScaleAnimation(2, 1, 2,
+                1, widthPixels * 0.5f, heightPixels * 0.45f);
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+        inAnim.addAnimation(scaleAnimation);
+        inAnim.addAnimation(alphaAnimation);
+        inAnim.setDuration(300);
+
+        outAnim = new AnimationSet(true);
+        scaleAnimation = new ScaleAnimation(1, 2, 1,
+                2, widthPixels * 0.5f, heightPixels * 0.45f);
+        alphaAnimation = new AlphaAnimation(1, 0);
+        outAnim.addAnimation(scaleAnimation);
+        outAnim.addAnimation(alphaAnimation);
+        outAnim.setDuration(300);
+
+
     }
 
 
