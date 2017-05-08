@@ -29,8 +29,7 @@ import me.leefeng.library.R;
 /**
  * Created by limxing on 16/1/7.
  */
-class LoadView extends ImageView implements
-        KeyEvent.Callback, View.OnKeyListener {
+class LoadView extends ImageView  {
     public static final int PROMPT_SUCCESS = 101;
     public static final int PROMPT_LOADING = 102;
     public static final int PROMPT_ERROR = 103;
@@ -79,7 +78,6 @@ class LoadView extends ImageView implements
         this.builder = builder;
         this.promptView = promptView;
 
-        setOnKeyListener(this);
     }
 
 
@@ -126,7 +124,8 @@ class LoadView extends ImageView implements
         switch (currentType) {
             case PROMPT_ALERT_WARN:
 
-                popWidth = Math.max(textRect.width() + pad * 2, buttons.length * buttonW);
+                popWidth = Math.max(textRect.width() + pad * 2, 2 * buttonW);
+
                 popHeight = textRect.height() + 3 * pad + height * 2 + buttonH;
                 break;
             default:
@@ -342,7 +341,7 @@ class LoadView extends ImageView implements
         float y = event.getY();
         if (currentType == PROMPT_ALERT_WARN) {
             if (builder.cancleAble && !roundTouchRect.contains(x, y)) {
-                promptView.dismiss(0);
+                promptView.dismiss();
             }
             for (PromptButton button : buttons) {
                 if (button.getRect().contains(x, y)) {
@@ -355,7 +354,7 @@ class LoadView extends ImageView implements
                         invalidate();
                         if (button.getListener() != null)
                             button.getListener().onClick(button);
-                        promptView.dismiss(0);
+                        promptView.dismiss();
                     }
                     return true;
                 }
@@ -420,40 +419,44 @@ class LoadView extends ImageView implements
 
 
     public void showSomthingAlert(int currentType, String text, PromptButton[] button) {
-        builder.roundColor = Color.WHITE;
-        builder.roundAlpha = 255;
-        builder.textColor = Color.BLACK;
+
+
         showSomthing(currentType, text);
         this.buttons = button;
-        if (buttons.length == 1) {
-            buttonH = buttonH * 0.8f;
-        }
+//        if (buttons.length == 1) {
+//            buttonH = buttonH * 0.8f;
+//        }
     }
 
 
-    @Override
-    public boolean onKey(View v, int keyCode, KeyEvent event) {
-        Log.i(TAG, "onKey: ");
-        return false;
-    }
-
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Log.i(TAG, "onKeyDown: ");
-        return super.onKeyDown(keyCode, event);
-    }
+//    @Override
+//    public boolean onKey(View v, int keyCode, KeyEvent event) {
+//        Log.i(TAG, "onKey: ");
+//        return false;
+//    }
+//
+//
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        Log.i(TAG, "onKeyDown: ");
+//        return super.onKeyDown(keyCode, event);
+//    }
 
     //
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         Log.i(TAG, "dispatchKeyEvent: ");
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && currentType == PROMPT_ALERT_WARN) {
-            promptView.dismiss(0);
+            promptView.dismiss();
 
             return false;
         }
 //
         return super.dispatchKeyEvent(event);
+    }
+
+    public void setBuilder(Builder builder) {
+        if (this.builder != builder)
+            this.builder = builder;
     }
 }

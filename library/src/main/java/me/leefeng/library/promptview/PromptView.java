@@ -4,6 +4,9 @@ import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PixelFormat;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
@@ -11,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 
 
 /**
@@ -19,29 +23,29 @@ import android.view.inputmethod.InputMethodManager;
 
 public class PromptView {
     private static final String TAG = "PromptView";
-    private WindowManager.LayoutParams layoutParams;
 
     private InputMethodManager inputmanger;
     private int currentType;
     private AnimationSet outAnim;
     private AnimationSet inAnim;
     private LoadView loadView;
-    //    private Context context;
     private ViewGroup decorView;
     private ValueAnimator dissmissAnim;
     private boolean dissmissAnimCancle;
+    private boolean outAnimRunning;
 
     public void onDetach() {
 //        inputmanger=null;
 //        loadView=null;
 //        decorView=null;
 //        dissmissAnim=null;
+//        context.getWindowManager().
     }
 
     public PromptView(Activity context) {
 //        this.context = context;
 //        LayoutInflater layoutInflater = LayoutInflater.from(context);
-        this(new Builder(), context);
+        this(Builder.getDefaultBuilder(), context);
     }
 
     public Builder getBuilder() {
@@ -56,6 +60,17 @@ public class PromptView {
         loadView = new LoadView(context, builder, this);
         inputmanger = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
 //        window=context.getWindow();
+
+//        m = new TouchView(context);
+//        m.setBackgroundColor(Color.BLUE);
+//        WindowManager.LayoutParams wl = new WindowManager.LayoutParams();
+//        wl.height = 10;
+//        wl.width = 10;
+//        wl.format = PixelFormat.TRANSLUCENT;// 支持透明
+//        windowManager = context.getWindowManager();
+//        m.setVisibility(View.GONE);
+//        windowManager.addView(m, wl);
+
 
     }
 
@@ -79,6 +94,7 @@ public class PromptView {
         scaleAnimation = new ScaleAnimation(1, 2, 1,
                 2, widthPixels * 0.5f, heightPixels * 0.45f);
         alphaAnimation = new AlphaAnimation(1, 0);
+        alphaAnimation.setDuration(200);
         outAnim.addAnimation(scaleAnimation);
         outAnim.addAnimation(alphaAnimation);
         outAnim.setDuration(300);
@@ -90,21 +106,24 @@ public class PromptView {
     /**
      * close
      */
-    public void dismiss(long delayTime) {
-        if (loadView.getParent() != null && currentType != LoadView.PROMPT_LOADING) {
+    public void dismiss() {
+
+        if (loadView.getParent() != null && currentType != LoadView.PROMPT_LOADING && !outAnimRunning) {
             if (getBuilder().withAnim) {
 //                outAnim.setStartOffset(delayTime);
                 loadView.startAnimation(outAnim);
                 outAnim.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
-
+                        outAnimRunning = true;
                     }
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
+//                        windowManager.removeView(loadView);
                         decorView.removeView(loadView);
                         currentType = LoadView.PROMPT_NONE;
+                        outAnimRunning = false;
                     }
 
                     @Override
@@ -113,6 +132,7 @@ public class PromptView {
                     }
                 });
             } else {
+//                windowManager.removeView(loadView);
                 decorView.removeView(loadView);
                 currentType = LoadView.PROMPT_NONE;
             }
@@ -143,6 +163,7 @@ public class PromptView {
         closeInput();
         checkLoadView();
         if (loadView.getParent() != null && currentType != promptError) {
+            loadView.setBuilder(Builder.getDefaultBuilder());
             currentType = promptError;
             loadView.showSomthing(currentType, msg);
             dissmissAni();
@@ -151,13 +172,13 @@ public class PromptView {
     }
 
     public void showWarnAlert(String text, PromptButton... button) {
+
         closeInput();
         checkLoadView();
         if (currentType != LoadView.PROMPT_ALERT_WARN) {
+            loadView.setBuilder(Builder.getAlertDefaultBuilder());
             currentType = LoadView.PROMPT_ALERT_WARN;
             loadView.showSomthingAlert(currentType, text, button);
-//            dissmissAni();
-//            dismiss(getBuilder().stayDuration);
             if (dissmissAnim != null && dissmissAnim.isRunning()) {
                 dissmissAnimCancle = true;
                 dissmissAnim.end();
@@ -182,9 +203,8 @@ public class PromptView {
     }
 
     private void checkLoadView() {
-        long time = System.currentTimeMillis() - outAnim.getStartTime();
-//        Log.i(TAG, "checkLoadView: " + time+"=="+outAnim.getStartTime());
         if (loadView.getParent() == null) {
+//            windowManager.addView(loadView,wl);
             decorView.addView(loadView);
             if (loadView.getBuilder().withAnim)
                 loadView.startAnimation(inAnim);
@@ -207,7 +227,7 @@ public class PromptView {
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     if (!dissmissAnimCancle) {
-                        dismiss(getBuilder().stayDuration);
+                        dismiss();
                     }
                 }
 
@@ -231,8 +251,8 @@ public class PromptView {
     }
 
     protected void closeInput() {
-        if (decorView != null) {
-            inputmanger.hideSoftInputFromWindow(decorView.getWindowToken(), 0);
+        if (loadView != null) {
+            inputmanger.hideSoftInputFromWindow(loadView.getWindowToken(), 0);
         }
 //        window.closeAllPanels();
     }

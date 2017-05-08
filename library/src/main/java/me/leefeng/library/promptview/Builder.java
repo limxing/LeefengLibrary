@@ -7,6 +7,8 @@ import android.graphics.Color;
  */
 
 public class Builder {
+    private static Builder defaultBuilder;
+    private static Builder alertDefaultBuilder;
     int backColor = Color.BLACK;
     int backAlpha = 90;
     int textColor = Color.WHITE;
@@ -74,11 +76,28 @@ public class Builder {
         this.stayDuration = time;
         return this;
     }
-    public Builder cancleAble(boolean  time) {
+
+    public Builder cancleAble(boolean time) {
         this.cancleAble = time;
         return this;
     }
 
     public Builder() {
+    }
+
+    /**
+     * @return
+     */
+    public static Builder getDefaultBuilder() {
+        if (defaultBuilder == null)
+            defaultBuilder = new Builder();
+        return defaultBuilder;
+    }
+
+    public static Builder getAlertDefaultBuilder() {
+        if (alertDefaultBuilder == null)
+            alertDefaultBuilder = new Builder().roundColor(Color.WHITE).roundAlpha(255).
+                    textColor(Color.GRAY).textSize(15).cancleAble(true);
+        return alertDefaultBuilder;
     }
 }
