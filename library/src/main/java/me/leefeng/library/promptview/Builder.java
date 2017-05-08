@@ -18,6 +18,7 @@ public class Builder {
     boolean touchAble = false;
     boolean withAnim = true;
     long stayDuration = 1000;
+    boolean cancleAble;
 
     public Builder backColor(int backColor) {
         this.backColor = backColor;
@@ -71,6 +72,10 @@ public class Builder {
 
     public Builder stayDuration(long time) {
         this.stayDuration = time;
+        return this;
+    }
+    public Builder cancleAble(boolean  time) {
+        this.cancleAble = time;
         return this;
     }
 
