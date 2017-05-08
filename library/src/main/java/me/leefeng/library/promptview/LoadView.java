@@ -13,7 +13,9 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.animation.LinearInterpolator;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
 import me.leefeng.library.R;
@@ -267,4 +269,6 @@ class LoadView extends ImageView {
         setImageDrawable(getResources().getDrawable(drawableId));
         setText(msg);
     }
+
+
 }

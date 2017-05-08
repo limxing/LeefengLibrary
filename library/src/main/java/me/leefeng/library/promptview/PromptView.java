@@ -3,13 +3,16 @@ package me.leefeng.library.promptview;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
+import android.view.inputmethod.InputMethodManager;
 
 import me.leefeng.library.R;
 
@@ -25,6 +28,7 @@ public class PromptView {
 //    private static final int PROMPT_INFO = 105;
 //    private static final int PROMPT_WARN = 106;
     private static final String TAG = "PromptView";
+    private InputMethodManager inputmanger;
     private int currentType;
     private AnimationSet outAnim;
     private AnimationSet inAnim;
@@ -50,6 +54,7 @@ public class PromptView {
 //        inAnim = AnimationUtils.loadAnimation(context, R.anim.promptview_in);
 //        outAnim = AnimationUtils.loadAnimation(context, R.anim.promptview_out);
         loadView = new LoadView(context, builder);
+        inputmanger = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
     }
 
     private void initAnim(int widthPixels, int heightPixels) {
@@ -74,6 +79,7 @@ public class PromptView {
 
 
     public PromptView showLoading(String msg) {
+        closeInput();
         checkLoadView();
         if (currentType != LoadView.PROMPT_LOADING) {
             currentType = LoadView.PROMPT_LOADING;
@@ -137,6 +143,7 @@ public class PromptView {
     }
 
     private void showSomthing(int promptError, String msg) {
+        closeInput();
         checkLoadView();
         if (loadView.getParent() != null && currentType != promptError) {
             currentType = promptError;
@@ -192,5 +199,10 @@ public class PromptView {
         dissmissAnimCancle = false;
     }
 
+    protected void closeInput() {
+        if (decorView != null) {
+            inputmanger.hideSoftInputFromWindow(decorView.getWindowToken(), 0);
+        }
+    }
 
 }
