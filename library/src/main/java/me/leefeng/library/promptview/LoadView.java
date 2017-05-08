@@ -1,6 +1,7 @@
 package me.leefeng.library.promptview;
 
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -20,8 +21,14 @@ import me.leefeng.library.R;
 /**
  * Created by limxing on 16/1/7.
  */
-public class LoadView extends ImageView {
-
+class LoadView extends ImageView {
+    public static final int PROMPT_SUCCESS = 101;
+    public static final int PROMPT_LOADING = 102;
+    public static final int PROMPT_ERROR = 103;
+    public static final int PROMPT_NONE = 104;
+    public static final int PROMPT_INFO = 105;
+    public static final int PROMPT_WARN = 106;
+    private  Builder builder;
     private int width;
     private int height;
     private ValueAnimator animator;
@@ -33,11 +40,8 @@ public class LoadView extends ImageView {
     private int canvasHeight;
 
     private float pad;
-    private RectF leftTopRect;
-    private RectF rightTopRect;
     private RectF roundRect;
     private float round;
-    private boolean touchAble=true;
 
     private Drawable drawable;//loadingdrawable
 
@@ -53,6 +57,11 @@ public class LoadView extends ImageView {
         super(context, attrs, defStyleAttr);
     }
 
+    public LoadView(Activity context, Builder builder) {
+        super(context);
+        this.builder = builder;
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         if (canvasWidth == 0) {
@@ -61,8 +70,8 @@ public class LoadView extends ImageView {
         }
         paint.reset();
         paint.setAntiAlias(true);
-        paint.setColor(Color.BLACK);
-        paint.setAlpha(90);
+        paint.setColor(builder.backColor);
+        paint.setAlpha(builder.backAlpha);
         canvas.drawRect(0, 0, canvasWidth, canvasHeight, paint);
 //        paint.reset();
 //        paint.setAntiAlias(true);
@@ -76,9 +85,9 @@ public class LoadView extends ImageView {
          * 计算文字的宽度确定总宽
          */
         paint.reset();
-        paint.setColor(Color.WHITE);
+        paint.setColor(builder.textColor);
         paint.setStrokeWidth(1 * density);
-        paint.setTextSize(density * 16);
+        paint.setTextSize(density * builder.textSize);
         paint.setAntiAlias(true);
         paint.getTextBounds(text, 0, text.length(), textRect);
 
@@ -92,21 +101,9 @@ public class LoadView extends ImageView {
         canvas.translate(left, top);
         paint.reset();
         paint.setAntiAlias(true);
-        paint.setColor(Color.BLACK);
-        paint.setAlpha(120);
+        paint.setColor(builder.roundColor);
+        paint.setAlpha(builder.roundAlpha);
 
-//        canvas.drawRect(0, 0, popWidth, popHeight, paint);
-
-
-//        paint.setColor(Color.RED);
-
-//        if (leftTopRect == null)
-//            leftTopRect = new RectF(0, 0, pad, pad);
-//        canvas.drawArc(leftTopRect, 0, 90, false, paint);    //绘制圆弧
-//        if (rightTopRect == null)
-//            rightTopRect = new RectF(popWidth, 0, pad, pad);
-//        canvas.drawArc(leftTopRect, 90, 180, false, paint);    //绘制圆弧
-//        if (leftBottomRect)
         if (roundRect == null)
             roundRect = new RectF(0, 0, popWidth, popHeight);
         roundRect.set(0, 0, popWidth, popHeight);
@@ -114,9 +111,9 @@ public class LoadView extends ImageView {
 
 
         paint.reset();
-        paint.setColor(Color.WHITE);
+        paint.setColor(builder.textColor);
         paint.setStrokeWidth(1 * density);
-        paint.setTextSize(density * 16);
+        paint.setTextSize(density * builder.textSize);
         paint.setAntiAlias(true);
 
         top = pad * 2 + height * 2 + textRect.height();
@@ -147,8 +144,8 @@ public class LoadView extends ImageView {
     private void initData() {
         textRect = new Rect();
         density = getResources().getDisplayMetrics().density;
-        pad = 15 * density;
-        round = 10 * density;
+        pad = builder.padding * density;
+        round = builder.round * density;
     }
 
     /**
@@ -172,13 +169,14 @@ public class LoadView extends ImageView {
 
     private void initLoadingDrawable() {
         if (drawable == null) {
-            drawable = getDrawable();
-            if (drawable == null) {
-                drawable = getResources().getDrawable(R.drawable.svpload);
-                setImageDrawable(drawable);
-            }
+//            drawable = getDrawable();
+//            if (drawable == null) {
+            drawable = getResources().getDrawable(R.drawable.svpload);
+            setImageDrawable(drawable);
+//            }
 
             measure(0, 0);
+
             width = getMeasuredWidth() / 2;
             height = getMeasuredHeight() / 2;
         }
@@ -194,20 +192,25 @@ public class LoadView extends ImageView {
 
     private Matrix max;
 
+    /**
+     * 加载旋转动画
+     */
     private void start() {
-        max = new Matrix();
-        animator = ValueAnimator.ofInt(0, 12);
-        animator.setDuration(12 * 80);
-        animator.setInterpolator(new LinearInterpolator());
-        animator.setRepeatCount(Integer.MAX_VALUE);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                float degrees = 30 * (Integer) valueAnimator.getAnimatedValue();
-                max.setRotate(degrees, width, height);
-                setImageMatrix(max);
-            }
-        });
+        if (max == null || animator == null) {
+            max = new Matrix();
+            animator = ValueAnimator.ofInt(0, 12);
+            animator.setDuration(12 * 80);
+            animator.setInterpolator(new LinearInterpolator());
+            animator.setRepeatCount(Integer.MAX_VALUE);
+            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    float degrees = 30 * (Integer) valueAnimator.getAnimatedValue();
+                    max.setRotate(degrees, width, height);
+                    setImageMatrix(max);
+                }
+            });
+        }
         animator.start();
     }
 
@@ -217,35 +220,51 @@ public class LoadView extends ImageView {
         invalidate();
     }
 
-//    @Override
-//    public boolean onTouchEvent(MotionEvent event) {
-//        return !touchAble;
-//    }
-
-    public void setTouchAble(boolean touchAble) {
-        this.touchAble = touchAble;
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return !builder.touchAble;
     }
 
-    public void setSuccess(String success) {
 
-        if (animator.isRunning())
+    /**
+     * 停止旋转
+     */
+    private void endAnimator() {
+        if (animator != null && animator.isRunning()) {
             animator.end();
-        setImageDrawable(getResources().getDrawable(R.drawable.ic_prompt_success));
-        setText(success);
-    }
-
-    public void setError(String error) {
-
-        if (animator.isRunning())
-            animator.end();
-        setImageDrawable(getResources().getDrawable(R.drawable.ic_prompt_error));
-        setText(error);
+            max.setRotate(0, width, height);
+            setImageMatrix(max);
+        }
     }
 
     public void setLoading(String loading) {
-
         setImageDrawable(drawable);
         start();
         setText(loading);
+    }
+
+    public Builder getBuilder() {
+        return builder;
+    }
+
+    public void showSomthing(int currentType, String msg) {
+        endAnimator();
+        int drawableId=R.drawable.ic_prompt_success;
+        switch (currentType){
+            case PROMPT_SUCCESS:
+                drawableId=R.drawable.ic_prompt_success;
+                break;
+            case PROMPT_ERROR:
+                drawableId=R.drawable.ic_prompt_error;
+                break;
+            case PROMPT_INFO:
+                drawableId=R.drawable.ic_prompt_info;
+                break;
+            case PROMPT_WARN:
+                drawableId=R.drawable.ic_prompt_warn;
+                break;
+        }
+        setImageDrawable(getResources().getDrawable(drawableId));
+        setText(msg);
     }
 }
