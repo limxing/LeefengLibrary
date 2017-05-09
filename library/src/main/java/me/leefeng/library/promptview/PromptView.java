@@ -3,6 +3,7 @@ package me.leefeng.library.promptview;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
@@ -16,6 +17,8 @@ import android.view.animation.ScaleAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
+import me.leefeng.library.R;
+
 
 /**
  * Created by limxing on 2017/5/7.
@@ -26,8 +29,8 @@ public class PromptView {
 
     private InputMethodManager inputmanger;
     private int currentType;
-    private AnimationSet outAnim;
-    private AnimationSet inAnim;
+    private Animation outAnim;
+    private Animation inAnim;
     private LoadView loadView;
     private ViewGroup decorView;
     private ValueAnimator dissmissAnim;
@@ -48,9 +51,9 @@ public class PromptView {
         this(Builder.getDefaultBuilder(), context);
     }
 
-    public Builder getBuilder() {
-        return loadView.getBuilder();
-    }
+//    public Builder getBuilder() {
+//        return loadView.getBuilder();
+//    }
 
     public PromptView(Builder builder, Activity context) {
         decorView = (ViewGroup) context.getWindow().getDecorView().findViewById(android.R.id.content);
@@ -74,8 +77,10 @@ public class PromptView {
 
     }
 
+
     private void initAnim(int widthPixels, int heightPixels) {
-        inAnim = new AnimationSet(true);
+
+        AnimationSet inAnim = new AnimationSet(true);
         ScaleAnimation scaleAnimation = new ScaleAnimation(2, 1f, 2,
                 1f, widthPixels * 0.5f, heightPixels * 0.45f);
 //        scaleAnimation.setDuration(200);
@@ -87,10 +92,9 @@ public class PromptView {
 //                1, widthPixels * 0.5f, heightPixels * 0.45f);
 //        scaleAnimation.setDuration(100);
 //        inAnim.addAnimation(scaleAnimation);
-
         inAnim.setDuration(300);
-
-        outAnim = new AnimationSet(true);
+        this.inAnim = inAnim;
+        AnimationSet outAnim = new AnimationSet(true);
         scaleAnimation = new ScaleAnimation(1, 2, 1,
                 2, widthPixels * 0.5f, heightPixels * 0.45f);
         alphaAnimation = new AlphaAnimation(1, 0);
@@ -98,18 +102,35 @@ public class PromptView {
         outAnim.addAnimation(scaleAnimation);
         outAnim.addAnimation(alphaAnimation);
         outAnim.setDuration(300);
-
+        this.outAnim = outAnim;
 
     }
 
+    public void setOutAnim(Animation outAnim) {
+        this.outAnim = outAnim;
+    }
+
+    public void setInAnim(Animation inAnim) {
+        this.inAnim = inAnim;
+    }
 
     /**
-     * close
+     * 立刻关闭窗口
+     */
+    public void dismissImmediately() {
+        if (loadView.getParent() != null) {
+            decorView.removeView(loadView);
+            currentType = LoadView.PROMPT_NONE;
+        }
+    }
+
+    /**
+     * close,程序调用的关闭，非LOADING状态
      */
     public void dismiss() {
 
         if (loadView.getParent() != null && currentType != LoadView.PROMPT_LOADING && !outAnimRunning) {
-            if (getBuilder().withAnim) {
+            if (loadView.getBuilder().withAnim) {
 //                outAnim.setStartOffset(delayTime);
                 loadView.startAnimation(outAnim);
                 outAnim.setAnimationListener(new Animation.AnimationListener() {
@@ -142,66 +163,92 @@ public class PromptView {
     }
 
     public void showError(String msg) {
-        showSomthing(LoadView.PROMPT_ERROR, msg);
+        showSomthing(R.drawable.ic_prompt_error, LoadView.PROMPT_ERROR, msg);
 
     }
 
     public void showInfo(String msg) {
-        showSomthing(LoadView.PROMPT_INFO, msg);
+        showSomthing(R.drawable.ic_prompt_info, LoadView.PROMPT_INFO, msg);
     }
 
     public void showWarn(String msg) {
-        showSomthing(LoadView.PROMPT_WARN, msg);
+        showSomthing(R.drawable.ic_prompt_warn, LoadView.PROMPT_WARN, msg);
     }
 
     public void showSuccess(String msg) {
 
-        showSomthing(LoadView.PROMPT_SUCCESS, msg);
+        showSomthing(R.drawable.ic_prompt_success, LoadView.PROMPT_SUCCESS, msg);
     }
 
-    private void showSomthing(int promptError, String msg) {
+    /**
+     * 展示自定义的状态提示框
+     *
+     * @param icon
+     * @param msg
+     */
+    public void showCustom(int icon, String msg) {
+//        Builder builder = Builder.getDefaultBuilder();
+//        builder.icon(icon);
+//        builder.text(msg);
+
+        showSomthing(icon, LoadView.PROMPT_CUSTOM, msg);
+    }
+
+    private void showSomthing(int icon, int promptError, String msg) {
+        Builder builder = Builder.getDefaultBuilder();
+        builder.text(msg);
+        builder.icon(icon);
+
         closeInput();
         checkLoadView();
         if (loadView.getParent() != null && currentType != promptError) {
-            loadView.setBuilder(Builder.getDefaultBuilder());
+            loadView.setBuilder(builder);
             currentType = promptError;
-            loadView.showSomthing(currentType, msg);
+            loadView.showSomthing(promptError);
             dissmissAni();
 //            dismiss(getBuilder().stayDuration);
         }
     }
 
     public void showWarnAlert(String text, PromptButton... button) {
-
+        Builder builder = Builder.getAlertDefaultBuilder();
+        builder.text(text);
+        builder.icon(R.drawable.ic_prompt_alert_warn);
         closeInput();
         checkLoadView();
-        if (currentType != LoadView.PROMPT_ALERT_WARN) {
-            loadView.setBuilder(Builder.getAlertDefaultBuilder());
-            currentType = LoadView.PROMPT_ALERT_WARN;
-            loadView.showSomthingAlert(currentType, text, button);
-            if (dissmissAnim != null && dissmissAnim.isRunning()) {
-                dissmissAnimCancle = true;
-                dissmissAnim.end();
-            }
-        } else {
-            loadView.setText(text);
+//        if (currentType != LoadView.PROMPT_ALERT_WARN) {
+        loadView.setBuilder(builder);
+        currentType = LoadView.PROMPT_ALERT_WARN;
+        loadView.showSomthingAlert(currentType, button);
+        if (dissmissAnim != null && dissmissAnim.isRunning()) {
+            dissmissAnimCancle = true;
+            dissmissAnim.end();
         }
+//        } else {
+//            loadView.invalidate();
+//        }
 
     }
 
     public void showLoading(String msg) {
+        Builder builder = Builder.getDefaultBuilder();
+        builder.icon(R.drawable.svpload);
+        builder.text(msg);
         closeInput();
         checkLoadView();
         if (currentType != LoadView.PROMPT_LOADING) {
             currentType = LoadView.PROMPT_LOADING;
-            loadView.setLoading(msg);
-
+            loadView.setBuilder(builder);
+            loadView.showLoading();
         } else {
-            loadView.setText(msg);
+            loadView.invalidate();
         }
 
     }
 
+    /**
+     * 检查 loadview是否咋屏幕中，没有就添加
+     */
     private void checkLoadView() {
         if (loadView.getParent() == null) {
 //            windowManager.addView(loadView,wl);
@@ -212,12 +259,12 @@ public class PromptView {
     }
 
     /**
-     * 消失的动画
+     * 消失停留一秒的动画,如正在执行动画 停止
      */
     private void dissmissAni() {
         if (dissmissAnim == null) {
             dissmissAnim = ValueAnimator.ofInt(0, 1);
-            dissmissAnim.setDuration(getBuilder().stayDuration);
+            dissmissAnim.setDuration(loadView.getBuilder().stayDuration);
             dissmissAnim.addListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animation) {
@@ -251,10 +298,18 @@ public class PromptView {
     }
 
     protected void closeInput() {
-        if (loadView != null) {
-            inputmanger.hideSoftInputFromWindow(loadView.getWindowToken(), 0);
+        if (decorView != null) {
+            inputmanger.hideSoftInputFromWindow(decorView.getWindowToken(), 0);
+
         }
 //        window.closeAllPanels();
     }
 
+    public Builder getDefaultBuilder() {
+        return Builder.getDefaultBuilder();
+    }
+
+    public Builder getAlertDefaultBuilder() {
+        return Builder.getAlertDefaultBuilder();
+    }
 }

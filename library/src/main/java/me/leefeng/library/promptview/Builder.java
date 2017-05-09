@@ -21,6 +21,8 @@ public class Builder {
     boolean withAnim = true;
     long stayDuration = 1000;
     boolean cancleAble;
+    int icon;
+    String text;
 
     public Builder backColor(int backColor) {
         this.backColor = backColor;
@@ -88,16 +90,26 @@ public class Builder {
     /**
      * @return
      */
-    public static Builder getDefaultBuilder() {
+     static Builder getDefaultBuilder() {
         if (defaultBuilder == null)
             defaultBuilder = new Builder();
         return defaultBuilder;
     }
 
-    public static Builder getAlertDefaultBuilder() {
+     static Builder getAlertDefaultBuilder() {
         if (alertDefaultBuilder == null)
             alertDefaultBuilder = new Builder().roundColor(Color.WHITE).roundAlpha(255).
                     textColor(Color.GRAY).textSize(15).cancleAble(true);
         return alertDefaultBuilder;
+    }
+
+    public Builder icon(int icon) {
+        this.icon = icon;
+        return this;
+    }
+
+    public Builder text(String msg) {
+        this.text = msg;
+        return this;
     }
 }

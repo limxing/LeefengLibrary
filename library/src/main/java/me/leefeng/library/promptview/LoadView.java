@@ -1,6 +1,7 @@
 package me.leefeng.library.promptview;
 
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -29,7 +30,8 @@ import me.leefeng.library.R;
 /**
  * Created by limxing on 16/1/7.
  */
-class LoadView extends ImageView  {
+@SuppressLint("AppCompatCustomView")
+class LoadView extends ImageView {
     public static final int PROMPT_SUCCESS = 101;
     public static final int PROMPT_LOADING = 102;
     public static final int PROMPT_ERROR = 103;
@@ -38,6 +40,7 @@ class LoadView extends ImageView  {
     public static final int PROMPT_WARN = 106;
     public static final int PROMPT_ALERT_WARN = 107;
     private static final String TAG = "LOADVIEW";
+    public static final int PROMPT_CUSTOM = 108;
     private PromptView promptView;
     private Builder builder;
     private int width;
@@ -46,7 +49,6 @@ class LoadView extends ImageView  {
     private Paint paint;
     private float density;
     private Rect textRect;
-    private String text = "加载中...";
     private int canvasWidth;
     private int canvasHeight;
 
@@ -92,13 +94,12 @@ class LoadView extends ImageView  {
         paint.setColor(builder.backColor);
         paint.setAlpha(builder.backAlpha);
         canvas.drawRect(0, 0, canvasWidth, canvasHeight, paint);
-//        paint.reset();
-//        paint.setAntiAlias(true);
-//        paint.setColor(Color.RED);
-//        paint.setStrokeWidth(2);
-//        paint.setStyle(Paint.Style.STROKE);
-//
-//        canvas.drawRect(0, 0, canvasWidth / 2, canvasHeight / 2, paint);
+        paint.reset();
+        paint.setAntiAlias(true);
+        paint.setColor(Color.RED);
+        paint.setStrokeWidth(2);
+        paint.setStyle(Paint.Style.STROKE);
+        canvas.drawRect(0, 0, canvasWidth / 2, canvasHeight / 2, paint);
 
         /**
          * 计算文字的宽度确定总宽
@@ -110,7 +111,7 @@ class LoadView extends ImageView  {
 //        textPaint.setStrokeWidth(1 * density);
 //        StaticLayout layout = new StaticLayout(text, textPaint, (int) (canvasWidth * 0.8), Layout.Alignment.ALIGN_CENTER, 1.0F, 0.0F, true);
 
-
+        String text = builder.text;
         paint.reset();
         paint.setColor(builder.textColor);
         paint.setStrokeWidth(1 * density);
@@ -188,24 +189,22 @@ class LoadView extends ImageView  {
 
                 }
 
-                String text = button.getText();
+                String buttonText = button.getText();
                 paint.reset();
                 paint.setColor(button.getTextColor());
                 paint.setStrokeWidth(1 * density);
                 paint.setTextSize(density * button.getTextSize());
                 paint.setAntiAlias(true);
-                paint.getTextBounds(text, 0, text.length(), textRect);
+                paint.getTextBounds(buttonText, 0, buttonText.length(), textRect);
 
                 button.setTouchRect(new RectF(transLeft, transTop + top,
                         transLeft + popWidth, transTop + top + buttonH));
-                canvas.drawText(text, popWidth / 2 - textRect.width() / 2,
+                canvas.drawText(buttonText, popWidth / 2 - textRect.width() / 2,
                         top + textRect.height() / 2 + buttonH / 2, paint);
             }
             if (buttons.length > 1) {
 
                 canvas.drawLine(popWidth / 2, top, popWidth / 2, popHeight, paint);
-
-
                 for (int i = 0; i < buttons.length; i++) {
                     PromptButton button = buttons[i];
                     if (button.isFocus()) {
@@ -223,17 +222,17 @@ class LoadView extends ImageView  {
                             canvas.drawRect(buttonW, top + buttonH - round, buttonW * 2 - round, top + buttonH, paint);
                         }
                     }
-                    String text = button.getText();
+                    String buttonText = button.getText();
                     paint.reset();
                     paint.setColor(button.getTextColor());
                     paint.setStrokeWidth(1 * density);
                     paint.setTextSize(density * button.getTextSize());
                     paint.setAntiAlias(true);
-                    paint.getTextBounds(text, 0, text.length(), textRect);
+                    paint.getTextBounds(buttonText, 0, buttonText.length(), textRect);
 
                     button.setTouchRect(new RectF(transLeft + i * buttonW, transTop + top,
                             transLeft + i * buttonW + buttonW, transTop + top + buttonH));
-                    canvas.drawText(text, buttonW / 2 - textRect.width() / 2 + i * buttonW,
+                    canvas.drawText(buttonText, buttonW / 2 - textRect.width() / 2 + i * buttonW,
                             top + textRect.height() / 2 + buttonH / 2, paint);
 
                 }
@@ -330,11 +329,6 @@ class LoadView extends ImageView  {
     }
 
 
-    public void setText(String text) {
-        this.text = text;
-        invalidate();
-    }
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         float x = event.getX();
@@ -381,51 +375,49 @@ class LoadView extends ImageView  {
         }
     }
 
-    public void setLoading(String loading) {
-        setImageDrawable(drawable);
+    /**
+     *
+     */
+    public void showLoading() {
+        setImageDrawable(getResources().getDrawable(builder.icon));
         start();
-        setText(loading);
         currentType = PROMPT_LOADING;
     }
 
-    public Builder getBuilder() {
+    Builder getBuilder() {
         return builder;
     }
 
-    public void showSomthing(int currentType, String msg) {
+    public void showSomthing(int currentType) {
         endAnimator();
-        int drawableId = R.drawable.ic_prompt_success;
-        switch (currentType) {
-            case PROMPT_SUCCESS:
-                drawableId = R.drawable.ic_prompt_success;
-                break;
-            case PROMPT_ERROR:
-                drawableId = R.drawable.ic_prompt_error;
-                break;
-            case PROMPT_INFO:
-                drawableId = R.drawable.ic_prompt_info;
-                break;
-            case PROMPT_WARN:
-                drawableId = R.drawable.ic_prompt_warn;
-                break;
-            case PROMPT_ALERT_WARN:
-                drawableId = R.drawable.ic_prompt_alert_warn;
-                break;
-        }
-        setImageDrawable(getResources().getDrawable(drawableId));
-        setText(msg);
+//        int drawableId = R.drawable.ic_prompt_success;
+//        switch (currentType) {
+//            case PROMPT_SUCCESS:
+//                drawableId = R.drawable.ic_prompt_success;
+//                break;
+//            case PROMPT_ERROR:
+//                drawableId = R.drawable.ic_prompt_error;
+//                break;
+//            case PROMPT_INFO:
+//                drawableId = R.drawable.ic_prompt_info;
+//                break;
+//            case PROMPT_WARN:
+//                drawableId = R.drawable.ic_prompt_warn;
+//                break;
+//            case PROMPT_ALERT_WARN:
+//                drawableId = R.drawable.ic_prompt_alert_warn;
+//                break;
+//        }
+        setImageDrawable(getResources().getDrawable(builder.icon));
         this.currentType = currentType;
+        invalidate();
     }
 
 
-    public void showSomthingAlert(int currentType, String text, PromptButton[] button) {
-
-
-        showSomthing(currentType, text);
+    public void showSomthingAlert(int currentType, PromptButton[] button) {
         this.buttons = button;
-//        if (buttons.length == 1) {
-//            buttonH = buttonH * 0.8f;
-//        }
+        showSomthing(currentType);
+
     }
 
 
