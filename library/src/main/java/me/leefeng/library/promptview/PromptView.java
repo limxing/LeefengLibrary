@@ -209,7 +209,7 @@ class PromptView extends ImageView {
                         paint.setColor(button.getFocusBacColor());
                         paint.setStyle(Paint.Style.FILL);
 //                        paint.setAlpha(120);
-                        canvas.drawRect(buttonW * i, top, buttonW * (i + 1), top + buttonH - round, paint);
+                        canvas.drawRect(buttonW * i, top+1, buttonW * (i + 1), top + buttonH - round+1, paint);
                         if (i == 0) {
                             canvas.drawCircle(buttonW * i + round, top + buttonH - round, round, paint);
                             canvas.drawRect(round, top + buttonH - round, buttonW * (i + 1), top + buttonH, paint);
