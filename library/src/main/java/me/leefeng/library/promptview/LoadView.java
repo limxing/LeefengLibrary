@@ -300,7 +300,8 @@ class LoadView extends ImageView {
                 }
             });
         }
-        animator.start();
+        if (!animator.isRunning())
+            animator.start();
     }
 
 
@@ -309,7 +310,7 @@ class LoadView extends ImageView {
         float x = event.getX();
         float y = event.getY();
         if (currentType == PROMPT_ALERT_WARN) {
-            if ( builder.cancleAble &&event.getAction() == MotionEvent.ACTION_DOWN && !roundTouchRect.contains(x, y)) {
+            if (builder.cancleAble && event.getAction() == MotionEvent.ACTION_DOWN && !roundTouchRect.contains(x, y)) {
                 promptView.dismiss();
             }
             for (PromptButton button : buttons) {
@@ -359,6 +360,7 @@ class LoadView extends ImageView {
         height = getDrawable().getMinimumHeight() / 2;
         start();
         currentType = PROMPT_LOADING;
+
     }
 
     Builder getBuilder() {
@@ -393,9 +395,9 @@ class LoadView extends ImageView {
     }
 
 
-    public void showSomthingAlert(int currentType, PromptButton... button) {
+    public void showSomthingAlert(PromptButton... button) {
         this.buttons = button;
-        showSomthing(currentType);
+        showSomthing(PROMPT_ALERT_WARN);
 
     }
 

@@ -28,7 +28,7 @@ public class PromptView {
     private static final String TAG = "PromptView";
 
     private InputMethodManager inputmanger;
-    private int currentType;
+    //    private int currentType;
     private Animation outAnim;
     private Animation inAnim;
     private LoadView loadView;
@@ -36,7 +36,7 @@ public class PromptView {
     private ValueAnimator dissmissAnim;
     private boolean dissmissAnimCancle;
     private boolean outAnimRunning;
-    private long viewAnimDuration=200;
+    private long viewAnimDuration = 200;
 
     public void setViewAnimDuration(long viewAnimDuration) {
         this.viewAnimDuration = viewAnimDuration;
@@ -125,7 +125,6 @@ public class PromptView {
     public void dismissImmediately() {
         if (loadView.getParent() != null) {
             decorView.removeView(loadView);
-            currentType = LoadView.PROMPT_NONE;
         }
     }
 
@@ -134,7 +133,7 @@ public class PromptView {
      */
     public void dismiss() {
 
-        if (loadView.getParent() != null && currentType != LoadView.PROMPT_LOADING && !outAnimRunning) {
+        if (loadView.getParent() != null && !outAnimRunning) {
             if (loadView.getBuilder().withAnim) {
 //                outAnim.setStartOffset(delayTime);
                 loadView.startAnimation(outAnim);
@@ -148,7 +147,6 @@ public class PromptView {
                     public void onAnimationEnd(Animation animation) {
 //                        windowManager.removeView(loadView);
                         decorView.removeView(loadView);
-                        currentType = LoadView.PROMPT_NONE;
                         outAnimRunning = false;
                     }
 
@@ -159,8 +157,7 @@ public class PromptView {
                 });
             } else {
 //                windowManager.removeView(loadView);
-                decorView.removeView(loadView);
-                currentType = LoadView.PROMPT_NONE;
+                dismissImmediately();
             }
 
         }
@@ -203,14 +200,12 @@ public class PromptView {
         Builder builder = Builder.getDefaultBuilder();
         builder.text(msg);
         builder.icon(icon);
-
         closeInput();
         checkLoadView();
-        if (loadView.getParent() != null && currentType != promptError) {
+        if (loadView.getParent() != null) {
             loadView.setBuilder(builder);
-            currentType = promptError;
             loadView.showSomthing(promptError);
-            dissmissAni();
+            dissmissAni(false);
         }
     }
 
@@ -228,17 +223,9 @@ public class PromptView {
         builder.icon(R.drawable.ic_prompt_alert_warn);
         closeInput();
         checkLoadView();
-//        if (currentType != LoadView.PROMPT_ALERT_WARN) {
         loadView.setBuilder(builder);
-        currentType = LoadView.PROMPT_ALERT_WARN;
-        loadView.showSomthingAlert(currentType, button);
-        if (dissmissAnim != null && dissmissAnim.isRunning()) {
-            dissmissAnimCancle = true;
-            dissmissAnim.end();
-        }
-//        } else {
-//            loadView.invalidate();
-//        }
+        loadView.showSomthingAlert(button);
+        dissmissAni(true);
 
     }
 
@@ -246,15 +233,11 @@ public class PromptView {
         Builder builder = Builder.getDefaultBuilder();
         builder.icon(R.drawable.svpload);
         builder.text(msg);
+        loadView.setBuilder(builder);
         closeInput();
         checkLoadView();
-        if (currentType != LoadView.PROMPT_LOADING) {
-            currentType = LoadView.PROMPT_LOADING;
-            loadView.setBuilder(builder);
-            loadView.showLoading();
-        } else {
-            loadView.invalidate();
-        }
+        loadView.showLoading();
+        dissmissAni(true);
 
     }
 
@@ -273,7 +256,7 @@ public class PromptView {
     /**
      * 消失停留一秒的动画,如正在执行动画 停止
      */
-    private void dissmissAni() {
+    private void dissmissAni(boolean isCancle) {
         if (dissmissAnim == null) {
             dissmissAnim = ValueAnimator.ofInt(0, 1);
             dissmissAnim.setDuration(loadView.getBuilder().stayDuration);
@@ -305,8 +288,10 @@ public class PromptView {
             dissmissAnim.end();
 
         }
-        dissmissAnim.start();
-        dissmissAnimCancle = false;
+        if (!isCancle) {
+            dissmissAnim.start();
+            dissmissAnimCancle = false;
+        }
     }
 
     protected void closeInput() {
