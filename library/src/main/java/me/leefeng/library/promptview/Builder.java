@@ -18,7 +18,7 @@ public class Builder {
     int roundColor = Color.BLACK;
     int roundAlpha = 120;
     boolean touchAble = false;
-    boolean withAnim = true;
+    boolean withAnim = true;//
     long stayDuration = 1000;
     boolean cancleAble;
     int icon;

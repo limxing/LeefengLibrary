@@ -36,6 +36,11 @@ public class PromptView {
     private ValueAnimator dissmissAnim;
     private boolean dissmissAnimCancle;
     private boolean outAnimRunning;
+    private long viewAnimDuration=200;
+
+    public void setViewAnimDuration(long viewAnimDuration) {
+        this.viewAnimDuration = viewAnimDuration;
+    }
 
     public void onDetach() {
 //        inputmanger=null;
@@ -92,7 +97,7 @@ public class PromptView {
 //                1, widthPixels * 0.5f, heightPixels * 0.45f);
 //        scaleAnimation.setDuration(100);
 //        inAnim.addAnimation(scaleAnimation);
-        inAnim.setDuration(300);
+        inAnim.setDuration(viewAnimDuration);
         this.inAnim = inAnim;
         AnimationSet outAnim = new AnimationSet(true);
         scaleAnimation = new ScaleAnimation(1, 2, 1,
@@ -206,11 +211,18 @@ public class PromptView {
             currentType = promptError;
             loadView.showSomthing(promptError);
             dissmissAni();
-//            dismiss(getBuilder().stayDuration);
         }
     }
 
-    public void showWarnAlert(String text, PromptButton... button) {
+    public void showWarnAlert(String text, PromptButton button) {
+        showAlert(text, button);
+    }
+
+    public void showWarnAlert(String text, PromptButton button1, PromptButton button2) {
+        showAlert(text, button1, button2);
+    }
+
+    private void showAlert(String text, PromptButton... button) {
         Builder builder = Builder.getAlertDefaultBuilder();
         builder.text(text);
         builder.icon(R.drawable.ic_prompt_alert_warn);

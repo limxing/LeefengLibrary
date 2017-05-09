@@ -52,9 +52,9 @@ class LoadView extends ImageView {
     private int canvasWidth;
     private int canvasHeight;
 
-    private float pad;
+    //    private float pad;
     private RectF roundRect;
-    private float round;
+//    private float round;
 
     private Drawable drawable;//loadingdrawable
     private int currentType;//当前窗口类型
@@ -112,6 +112,8 @@ class LoadView extends ImageView {
 //        StaticLayout layout = new StaticLayout(text, textPaint, (int) (canvasWidth * 0.8), Layout.Alignment.ALIGN_CENTER, 1.0F, 0.0F, true);
 
         String text = builder.text;
+        float pad = builder.padding * density;
+        float round = builder.round * density;
         paint.reset();
         paint.setColor(builder.textColor);
         paint.setStrokeWidth(1 * density);
@@ -140,6 +142,8 @@ class LoadView extends ImageView {
         float transLeft = canvasWidth / 2 - popWidth / 2;
 
         canvas.translate(transLeft, transTop);
+
+
         paint.reset();
         paint.setAntiAlias(true);
         paint.setColor(builder.roundColor);
@@ -247,24 +251,17 @@ class LoadView extends ImageView {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-
-        init();
+        setScaleType(ScaleType.MATRIX);
+        paint = new Paint();
         initData();
     }
 
     private void initData() {
         textRect = new Rect();
         density = getResources().getDisplayMetrics().density;
-        pad = builder.padding * density;
-        round = builder.round * density;
+
         buttonW = density * 120;
         buttonH = density * 44;
-    }
-
-    /**
-     */
-    public void setDrawable(Drawable drawable) {
-        setImageDrawable(drawable);
     }
 
     @Override
@@ -281,28 +278,6 @@ class LoadView extends ImageView {
 
     }
 
-    private void initLoadingDrawable() {
-        if (drawable == null) {
-//            drawable = getDrawable();
-//            if (drawable == null) {
-            drawable = getResources().getDrawable(R.drawable.svpload);
-            setImageDrawable(drawable);
-//            }
-
-            measure(0, 0);
-
-            width = getMeasuredWidth() / 2;
-            height = getMeasuredHeight() / 2;
-        }
-    }
-
-    private void init() {
-        setScaleType(ScaleType.MATRIX);
-        initLoadingDrawable();
-        measure(0, 0);
-
-        paint = new Paint();
-    }
 
     private Matrix max;
 
@@ -334,7 +309,7 @@ class LoadView extends ImageView {
         float x = event.getX();
         float y = event.getY();
         if (currentType == PROMPT_ALERT_WARN) {
-            if (builder.cancleAble && !roundTouchRect.contains(x, y)) {
+            if ( builder.cancleAble &&event.getAction() == MotionEvent.ACTION_DOWN && !roundTouchRect.contains(x, y)) {
                 promptView.dismiss();
             }
             for (PromptButton button : buttons) {
@@ -380,6 +355,8 @@ class LoadView extends ImageView {
      */
     public void showLoading() {
         setImageDrawable(getResources().getDrawable(builder.icon));
+        width = getDrawable().getMinimumWidth() / 2;
+        height = getDrawable().getMinimumHeight() / 2;
         start();
         currentType = PROMPT_LOADING;
     }
@@ -409,12 +386,14 @@ class LoadView extends ImageView {
 //                break;
 //        }
         setImageDrawable(getResources().getDrawable(builder.icon));
+        width = getDrawable().getMinimumWidth() / 2;
+        height = getDrawable().getMinimumHeight() / 2;
         this.currentType = currentType;
         invalidate();
     }
 
 
-    public void showSomthingAlert(int currentType, PromptButton[] button) {
+    public void showSomthingAlert(int currentType, PromptButton... button) {
         this.buttons = button;
         showSomthing(currentType);
 
