@@ -1,8 +1,14 @@
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}Copy
 
-```
- compile 'me.leefeng:library:3.0.1'
-```
 
-
-
-
+Step 2. Add the dependency
+````
+	dependencies {
+	        compile 'com.github.limxing:LeefengLibrary:1.0.1'
+	}
+````

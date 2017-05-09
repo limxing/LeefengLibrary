@@ -4,6 +4,7 @@ import android.graphics.Color;
 
 /**
  * Created by FengTing on 2017/5/8.
+ * https://www.github.com/limxing
  */
 
 public class Builder {
@@ -90,13 +91,13 @@ public class Builder {
     /**
      * @return
      */
-     static Builder getDefaultBuilder() {
+    static Builder getDefaultBuilder() {
         if (defaultBuilder == null)
             defaultBuilder = new Builder();
         return defaultBuilder;
     }
 
-     static Builder getAlertDefaultBuilder() {
+    static Builder getAlertDefaultBuilder() {
         if (alertDefaultBuilder == null)
             alertDefaultBuilder = new Builder().roundColor(Color.WHITE).roundAlpha(255).
                     textColor(Color.GRAY).textSize(15).cancleAble(true);

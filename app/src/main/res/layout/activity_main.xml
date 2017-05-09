@@ -33,6 +33,10 @@
             </RelativeLayout>
         </RelativeLayout>
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <me.leefeng.library.view.SwitchView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,11 +52,52 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="开始" />
+
             <Button
-                android:layout_width="wrap_content"
-                android:text="加载中"
                 android:id="@+id/main_loading"
-                android:layout_height="wrap_content" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="加载中" />
+
+            <Button
+                android:id="@+id/main_success"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="成功" />
+
+            <Button
+                android:id="@+id/main_fail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="失败" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/main_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="信息" />
+            <Button
+                android:id="@+id/main_customer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="自定义" />
+            <Button
+                android:id="@+id/main_warn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="警告" />
+            <Button
+                android:id="@+id/main_system"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="系统" />
+
         </LinearLayout>
 
         <me.leefeng.library.view.WelcomePassView
@@ -68,9 +113,8 @@
         <me.leefeng.library.view.FailView
             android:id="@+id/main_failview"
             android:layout_width="match_parent"
-            app:failCircleDuration="800"
             android:layout_height="match_parent"
-            />
+            app:failCircleDuration="800" />
 
     </LinearLayout>
 

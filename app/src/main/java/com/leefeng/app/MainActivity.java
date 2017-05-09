@@ -1,23 +1,26 @@
 package com.leefeng.app;
 
 import android.Manifest;
-import android.animation.ValueAnimator;
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 
 import java.util.List;
 
 import me.leefeng.library.IOSLoading.LoadView;
 import me.leefeng.library.NoTitleBar.StatusBarCompat;
-import me.leefeng.library.NoTitleBar.SystemBarTintManager;
 
 import me.leefeng.library.Permission.EasyPermissions;
-import me.leefeng.library.Swipeback.SwipeBackHelper;
+import me.leefeng.library.promptview.PromptButton;
+import me.leefeng.library.promptview.PromptButtonListener;
+import me.leefeng.library.promptview.PromptDialog;
 import me.leefeng.library.utils.EncryptUtil;
 import me.leefeng.library.utils.LogUtils;
 import me.leefeng.library.utils.PhoneInfo;
@@ -37,19 +40,20 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     private LoadView maon_loadview;
     private FailView main_failview;
     private View main_start;
+    private PromptDialog promptDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarCompat.statusBarWithTitle(this);
+        StatusBarCompat.translucentStatusBar(this);
 
 
-        SwipeBackHelper.onCreate(this);
-        SwipeBackHelper.getCurrentPage(this)
-                .setSwipeBackEnable(true)
-                .setSwipeSensitivity(0.5f)
-                .setSwipeRelateEnable(true)
-                .setSwipeRelateOffset(300);
+//        SwipeBackHelper.onCreate(this);
+//        SwipeBackHelper.getCurrentPage(this)
+//                .setSwipeBackEnable(true)
+//                .setSwipeSensitivity(0.5f)
+//                .setSwipeRelateEnable(true)
+//                .setSwipeRelateOffset(300);
         setContentView(R.layout.activity_main);
         main_pass = (WelcomePassView) findViewById(R.id.main_pass);
         main_pass.setTime(5000);
@@ -72,10 +76,65 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 main_pass.start();
             }
         });
+        promptDialog = new PromptDialog(this);
+        promptDialog.getDefaultBuilder().touchAble(true).round(3);
+
+
         findViewById(R.id.main_loading).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                main_failview.setMode(FailView.MODE_REFRESH);
+//                main_failview.setMode(FailView.MODE_REFRESH);
+                promptDialog.showLoading("正在登录");
+            }
+        });
+        findViewById(R.id.main_success).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                promptDialog.showSuccess("登陆成功");
+            }
+        });
+        findViewById(R.id.main_fail).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                promptDialog.showError("登录失败");
+            }
+        });
+        final PromptButton confirm = new PromptButton("确定", new PromptButtonListener() {
+            @Override
+            public void onClick(PromptButton button) {
+                ToastUtils.showShort(MainActivity.this, button.getText());
+            }
+        });
+        confirm.setTextColor(Color.parseColor("#DAA520"));
+        confirm.setFocusBacColor(Color.parseColor("#FAFAD2"));
+        findViewById(R.id.main_warn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                promptDialog.showWarnAlert("你确定要退出登录？", new PromptButton("取消", new PromptButtonListener() {
+                    @Override
+                    public void onClick(PromptButton button) {
+                        ToastUtils.showShort(MainActivity.this, button.getText());
+                    }
+                }), confirm);
+            }
+        });
+        findViewById(R.id.main_info).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                promptDialog.showInfo("成功了美女");
+            }
+        });
+
+        findViewById(R.id.main_system).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(MainActivity.this).setTitle("标题").setCancelable(true).show();
+            }
+        });
+        findViewById(R.id.main_customer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                promptDialog.showCustom(R.mipmap.ic_launcher, "自定义图标的");
             }
         });
 //        main_xlistview.set
@@ -200,13 +259,25 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        SwipeBackHelper.onPostCreate(this);
+//        SwipeBackHelper.onPostCreate(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        SwipeBackHelper.onDestroy(this);
+//        SwipeBackHelper.onDestroy(this);
         //ViewServer.get(this).removeWindow(this);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (promptDialog.onBackPressed())
+            super.onBackPressed();
     }
 }

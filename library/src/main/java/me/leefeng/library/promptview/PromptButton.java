@@ -2,7 +2,6 @@ package me.leefeng.library.promptview;
 
 import android.graphics.Color;
 import android.graphics.RectF;
-import android.view.View;
 
 /**
  * Created by FengTing on 2017/5/8.
