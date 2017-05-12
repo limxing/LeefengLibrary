@@ -18,9 +18,6 @@ import me.leefeng.library.IOSLoading.LoadView;
 import me.leefeng.library.NoTitleBar.StatusBarCompat;
 
 import me.leefeng.library.Permission.EasyPermissions;
-import me.leefeng.library.promptview.PromptButton;
-import me.leefeng.library.promptview.PromptButtonListener;
-import me.leefeng.library.promptview.PromptDialog;
 import me.leefeng.library.utils.EncryptUtil;
 import me.leefeng.library.utils.LogUtils;
 import me.leefeng.library.utils.PhoneInfo;
@@ -40,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     private LoadView maon_loadview;
     private FailView main_failview;
     private View main_start;
-    private PromptDialog promptDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,54 +72,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 main_pass.start();
             }
         });
-        promptDialog = new PromptDialog(this);
-        promptDialog.getDefaultBuilder().touchAble(true).round(3);
-
-
-        findViewById(R.id.main_loading).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                main_failview.setMode(FailView.MODE_REFRESH);
-                promptDialog.showLoading("正在登录");
-            }
-        });
-        findViewById(R.id.main_success).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                promptDialog.showSuccess("登陆成功");
-            }
-        });
-        findViewById(R.id.main_fail).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                promptDialog.showError("登录失败");
-            }
-        });
-        final PromptButton confirm = new PromptButton("确定", new PromptButtonListener() {
-            @Override
-            public void onClick(PromptButton button) {
-                ToastUtils.showShort(MainActivity.this, button.getText());
-            }
-        });
-        confirm.setTextColor(Color.parseColor("#DAA520"));
-        confirm.setFocusBacColor(Color.parseColor("#FAFAD2"));
-        findViewById(R.id.main_warn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                promptDialog.showWarnAlert("你确定要退出登录？", new PromptButton("取消", new PromptButtonListener() {
-                    @Override
-                    public void onClick(PromptButton button) {
-                        ToastUtils.showShort(MainActivity.this, button.getText());
-                    }
-                }), confirm);
-            }
-        });
-        findViewById(R.id.main_info).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                promptDialog.showInfo("成功了美女");
-            }
-        });
 
         findViewById(R.id.main_system).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,12 +79,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 new AlertDialog.Builder(MainActivity.this).setTitle("标题").setCancelable(true).show();
             }
         });
-        findViewById(R.id.main_customer).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                promptDialog.showCustom(R.mipmap.ic_launcher, "自定义图标的");
-            }
-        });
+
 //        main_xlistview.set
 //        MyThreadPool.excuteCachedTask(new Runnable() {
 //            @Override
@@ -273,11 +216,5 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (promptDialog.onBackPressed())
-            super.onBackPressed();
     }
 }
