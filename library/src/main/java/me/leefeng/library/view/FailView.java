@@ -34,12 +34,12 @@ public class FailView extends View {
     public static final int MODE_RESULT = 1005;
     public static final int MODE_SUCCESS = 1006;
     public static final int MODE_REFRESH = 1001;
+    public static final int MODE_EMPTY = 1007;
     private static final String TEXT_FAIL = "获取失败，请点击重试";
     private static final String TEXT_CRY = "";
     private static final String TEXT_RESULT = "没有结果";
     private static final String TAG = "FailView";
     private static final int DURATION_CIRCLE = 1500;
-    private static final int MODE_EMPTY = 1007;
     private static final String TEXT_EMPTY = "没有数据";
     private int failCircleRadius;
     private int failCircleDuration;
