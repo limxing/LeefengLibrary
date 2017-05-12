@@ -39,6 +39,8 @@ public class FailView extends View {
     private static final String TEXT_RESULT = "没有结果";
     private static final String TAG = "FailView";
     private static final int DURATION_CIRCLE = 1500;
+    private static final int MODE_EMPTY = 1007;
+    private static final String TEXT_EMPTY = "没有数据";
     private int failCircleRadius;
     private int failCircleDuration;
     private int failCircleColor;
@@ -245,6 +247,10 @@ public class FailView extends View {
                 text = TEXT_RESULT;
                 bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_failview_noresult);
                 break;
+            case MODE_EMPTY:
+                text = TEXT_EMPTY;
+                bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_failview_empty);
+                break;
         }
 
     }
@@ -255,6 +261,7 @@ public class FailView extends View {
         int y = (int) event.getY();
         if (touchRect.contains(x, y)) {
             switch (currentMode) {
+                case MODE_EMPTY:
                 case MODE_REFRESH:
                     break;
                 case MODE_FAIL:
