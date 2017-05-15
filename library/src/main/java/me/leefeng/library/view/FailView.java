@@ -20,6 +20,8 @@ import android.view.animation.LinearInterpolator;
 
 import me.leefeng.library.R;
 
+import static me.leefeng.library.view.FailView.Style.*;
+
 /**
  * Created by FengTing on 2017/5/4.
  */
@@ -28,13 +30,17 @@ public class FailView extends View {
 
     private static final String CLICKFRESH = "糟糕，网络遇到问题，点击刷新";
     private static final String REFRESHING = "正在加载...";
-    public static final int MODE_NONET = 1002;
-    public static final int MODE_FAIL = 1003;
-    public static final int MODE_CRY = 1004;
-    public static final int MODE_RESULT = 1005;
-    public static final int MODE_SUCCESS = 1006;
-    public static final int MODE_REFRESH = 1001;
-    public static final int MODE_EMPTY = 1007;
+
+    public enum Style {
+        MODE_NONET,
+        MODE_FAIL,
+        MODE_CRY,
+        MODE_RESULT,
+        MODE_SUCCESS,
+        MODE_REFRESH,
+        MODE_EMPTY
+    }
+
     private static final String TEXT_FAIL = "获取失败，请点击重试";
     private static final String TEXT_CRY = "";
     private static final String TEXT_RESULT = "没有结果";
@@ -55,7 +61,7 @@ public class FailView extends View {
     private Rect textR;
     private float density;
 
-    private int currentMode = MODE_NONET;
+    private Style currentMode = MODE_NONET;
     private float degrees = 90;
 
     private FailViewListener listener;
@@ -99,6 +105,7 @@ public class FailView extends View {
         radius = typedArray.getDimension(R.styleable.FailView_failRadius, density * 30);
         typedArray.recycle();
         setBackgroundColor(bacColor);
+        setVisibility(GONE);
     }
 
     @Override
@@ -108,7 +115,6 @@ public class FailView extends View {
         textR = new Rect();
         touchRect = new Rect();
 
-        setVisibility(View.GONE);
     }
 
     @Override
@@ -180,7 +186,7 @@ public class FailView extends View {
         //touchRect
         if (currentMode != MODE_REFRESH) {
             touchRect.top = top;
-            touchRect.bottom = (int) (textTop + 10 * density+textR.height());
+            touchRect.bottom = (int) (textTop + 10 * density + textR.height());
             touchRect.left = Math.max(width / 2 - bitmap.getWidth() / 2, width / 2 - textR.width() / 2);
             touchRect.right = Math.max(width / 2 + bitmap.getWidth() / 2, width / 2 + textR.width() / 2);
         }
@@ -192,15 +198,25 @@ public class FailView extends View {
      *
      * @param currentMode
      */
-    public void setMode(int currentMode) {
+    public void setMode(Style currentMode) {
         if (currentMode == MODE_SUCCESS) {
             setVisibility(View.GONE);
         } else {
             setVisibility(View.VISIBLE);
         }
         this.currentMode = currentMode;
+        if (currentMode != MODE_REFRESH) {
+            if (animator != null && animator.isRunning()) {
+                animator.end();
+            }
+        }
+
         switch (currentMode) {
+            case MODE_SUCCESS:
+                bitmap = null;
+                break;
             case MODE_REFRESH:
+                text = REFRESHING;
                 if (animator == null) {
                     animator = ValueAnimator.ofInt(-90, 270);
                     animator.setDuration(failCircleDuration);
@@ -215,21 +231,6 @@ public class FailView extends View {
                     });
                 }
                 animator.start();
-                break;
-            default:
-                if (animator != null && animator.isRunning()) {
-                    animator.end();
-                }
-                invalidate();
-                break;
-        }
-
-        switch (currentMode) {
-            case MODE_SUCCESS:
-                bitmap = null;
-                break;
-            case MODE_REFRESH:
-                text = REFRESHING;
                 break;
             case MODE_NONET:
                 text = CLICKFRESH;
@@ -252,7 +253,7 @@ public class FailView extends View {
                 bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_failview_empty);
                 break;
         }
-
+        invalidate();
     }
 
     @Override
@@ -277,7 +278,7 @@ public class FailView extends View {
                                 @Override
                                 public void run() {
                                     if (listener != null) {
-                                        setMode(MODE_REFRESH);
+//                                        setMode(MODE_REFRESH);
                                         listener.onClick();
                                     }
                                 }
@@ -290,10 +291,14 @@ public class FailView extends View {
         }
         return true;
     }
+    public void setImage(int resource){
+        bitmap = BitmapFactory.decodeResource(getResources(), resource);
+        invalidate();
+    }
 
     public void setText(String text) {
         this.text = text;
-        postInvalidate();
+        invalidate();
     }
 
     public void setListener(FailViewListener listener) {
