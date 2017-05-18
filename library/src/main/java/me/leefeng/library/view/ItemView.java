@@ -81,8 +81,8 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
         mHeight = (int) typedArray.getDimension(R.styleable.ItemView_cellHeight, 50 * density);
         leftDrawablePad = (int) typedArray.getDimension(R.styleable.ItemView_drawablePad, 5 * density);
         padingLeft = (int) typedArray.getDimension(R.styleable.ItemView_padingLeft, 20 * density);
-        titleTextSize = typedArray.getDimension(R.styleable.ItemView_titleTextSize, 18);
-        valueTextSize = typedArray.getDimension(R.styleable.ItemView_valueTextSize, 16);
+        titleTextSize = typedArray.getDimension(R.styleable.ItemView_titleTextSize, 18*density);
+        valueTextSize = typedArray.getDimension(R.styleable.ItemView_valueTextSize, 16*density);
 
         showRightPic = typedArray.getBoolean(R.styleable.ItemView_showRightPic, true);
         clickAble = typedArray.getBoolean(R.styleable.ItemView_clickAble, false);
@@ -127,7 +127,7 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
         textView.setText(mTitle);
 
         textView.setTextColor(getResources().getColor(R.color.cellview_color));
-        textView.setTextSize(titleTextSize);
+        textView.setTextSize(titleTextSize/density);
         if (leftDrawable != null) {
             leftDrawable.setBounds(0, 0, leftDrawable.getMinimumWidth(), leftDrawable.getMinimumHeight());
             textView.setCompoundDrawables(leftDrawable, null, null, null);
@@ -139,7 +139,7 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
             valueTextView.setVisibility(View.VISIBLE);
             valueTextView.setText(mHint);
             valueTextView.setTextColor(titleColor);
-            valueTextView.setTextSize(valueTextSize);
+            valueTextView.setTextSize(valueTextSize/density);
             valueTextView.setPadding(0, 0, padingLeft, 0);
             if (clickAble) {
                 valueTextView.setOnClickListener(this);
@@ -159,7 +159,7 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
             editText.setHint(mHint);
             editText.setHintTextColor(valueHintColor);
             editText.setTextColor(valueColor);
-            editText.setTextSize(valueTextSize);
+            editText.setTextSize(valueTextSize/density);
             editText.setPadding(0, 0, padingLeft, 0);
             if (editeLength > 0) {
                 editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(editeLength)});
