@@ -42,7 +42,9 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StatusBarCompat.translucentStatusBar(this);
-
+        setContentView(R.layout.activity_main);
+        maon_loadview = (LoadView) findViewById(R.id.maon_loadview);
+        main_failview = (FailView) findViewById(R.id.main_failview);
 
 //        SwipeBackHelper.onCreate(this);
 //        SwipeBackHelper.getCurrentPage(this)
@@ -50,33 +52,40 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 //                .setSwipeSensitivity(0.5f)
 //                .setSwipeRelateEnable(true)
 //                .setSwipeRelateOffset(300);
-        setContentView(R.layout.activity_main);
-        main_pass = (WelcomePassView) findViewById(R.id.main_pass);
-        main_pass.setTime(5000);
 
+        main_pass = (WelcomePassView) findViewById(R.id.main_pass);
+        main_pass.setTime(2000);
+        main_pass.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        },500);
+        main_failview.setMode(FailView.Style.MODE_NONET);
+        main_failview.setImage(R.mipmap.ic_launcher);
+        main_failview.setText("没有网络,asddasda");
         main_pass.setmAction(new WelcomePassView.Action() {
             @Override
             public void onAction() {
 //                        finish();
                 Log.i(TAG, "onAction: ");
-                main_failview.setMode(FailView.MODE_NONET);
+                main_failview.setMode(FailView.Style.MODE_REFRESH);
                 main_failview.setText("没有网络怎么办");
             }
         });
-        maon_loadview = (LoadView) findViewById(R.id.maon_loadview);
-        main_failview = (FailView) findViewById(R.id.main_failview);
+
         main_failview.setListener(new FailView.FailViewListener() {
             @Override
             public void onClick() {
 
-                main_pass.start();
+//                main_pass.start();
             }
         });
 
         findViewById(R.id.main_system).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(MainActivity.this).setTitle("标题").setCancelable(true).show();
+                main_failview.setMode(FailView.Style.MODE_CRY);
             }
         });
 
