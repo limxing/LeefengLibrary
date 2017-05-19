@@ -60,6 +60,8 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
     private boolean metalDialog;
     private String cancleText;
     private SwitchView switchView;
+    private int rightDrawablePad;
+    private int padingRight;
 
     public ItemView(Context context) {
         super(context);
@@ -81,7 +83,9 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
 
         mHeight = (int) typedArray.getDimension(R.styleable.ItemView_cellHeight, 50 * density);
         leftDrawablePad = (int) typedArray.getDimension(R.styleable.ItemView_drawablePad, 5 * density);
+        rightDrawablePad = (int) typedArray.getDimension(R.styleable.ItemView_rightDrawablePad, 5 * density);
         padingLeft = (int) typedArray.getDimension(R.styleable.ItemView_padingLeft, 20 * density);
+        padingRight = (int) typedArray.getDimension(R.styleable.ItemView_padingRight, 20 * density);
         titleTextSize = typedArray.getDimension(R.styleable.ItemView_titleTextSize, 18 * density);
         valueTextSize = typedArray.getDimension(R.styleable.ItemView_valueTextSize, 16 * density);
 
@@ -99,7 +103,7 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
         cancleText = typedArray.getString(R.styleable.ItemView_cancleText);
         metalDialog = typedArray.getBoolean(R.styleable.ItemView_metalDialog, false);
         String select = typedArray.getString(R.styleable.ItemView_mSelect);
-        titleColor = typedArray.getColor(R.styleable.ItemView_titleColor, getResources().getColor(R.color.cellview_edite_textcolor));
+        titleColor = typedArray.getColor(R.styleable.ItemView_titleColor, getResources().getColor(R.color.cellview_color));
         valueColor = typedArray.getColor(R.styleable.ItemView_valueColor, getResources().getColor(R.color.cellview_edite_textcolor));
         valueHintColor = typedArray.getColor(R.styleable.ItemView_valueHintColor, getResources().getColor(R.color.cellview_edite_texthintcolor));
         lineColor = typedArray.getColor(R.styleable.ItemView_lineColor, getResources().getColor(R.color.cell_line_color));
@@ -127,7 +131,7 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
         TextView textView = (TextView) view.findViewById(R.id.itemview_title);
         textView.setText(mTitle);
 
-        textView.setTextColor(getResources().getColor(R.color.cellview_color));
+        textView.setTextColor(titleColor);
         textView.setTextSize(titleTextSize / density);
         if (leftDrawable != null) {
             leftDrawable.setBounds(0, 0, leftDrawable.getMinimumWidth(), leftDrawable.getMinimumHeight());
@@ -139,9 +143,9 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
             valueTextView = (TextView) view.findViewById(R.id.itemview_value_tv);
             valueTextView.setVisibility(View.VISIBLE);
             valueTextView.setText(mHint);
-            valueTextView.setTextColor(titleColor);
+            valueTextView.setTextColor(valueColor);
             valueTextView.setTextSize(valueTextSize / density);
-            valueTextView.setPadding(0, 0, padingLeft, 0);
+            valueTextView.setPadding(0, 0, padingRight, 0);
             if (clickAble) {
                 valueTextView.setOnClickListener(this);
             }
@@ -151,6 +155,7 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
                 }
                 rightDrawable.setBounds(0, 0, rightDrawable.getMinimumWidth(), rightDrawable.getMinimumHeight());
                 valueTextView.setCompoundDrawables(null, null, rightDrawable, null);
+                valueTextView.setCompoundDrawablePadding(rightDrawablePad);
             }
         }
         if (tileStyle == 1) {
@@ -321,5 +326,9 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
      */
     public void setSwitchChangeListener(SwitchView.OnStateChangedListener listener) {
         switchView.setOnStateChangedListener(listener);
+    }
+
+    public SwitchView getSwitchView() {
+        return switchView;
     }
 }

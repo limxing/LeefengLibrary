@@ -128,7 +128,9 @@
         <attr name="inputType" format="integer"></attr>
         <attr name="cellHeight" format="dimension"></attr>
         <attr name="drawablePad" format="dimension"></attr>
+        <attr name="rightDrawablePad" format="dimension"></attr>
         <attr name="padingLeft" format="dimension"></attr>
+        <attr name="padingRight" format="dimension"></attr>
         <attr name="titleTextSize" format="dimension"></attr>
         <attr name="valueTextSize" format="dimension"></attr>
         <attr name="hintText" format="string"></attr>
