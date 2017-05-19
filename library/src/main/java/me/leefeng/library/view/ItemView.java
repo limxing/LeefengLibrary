@@ -52,13 +52,14 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
     private TextView valueTextView;
     private EditText editText;
     private int valueHintColor;
-    private String result="";
+    private String result = "";
     private int lineColor;
     private boolean topLineBrim;
     private boolean bottomLineBrim;
     private int itemBacColor;
     private boolean metalDialog;
     private String cancleText;
+    private SwitchView switchView;
 
     public ItemView(Context context) {
         super(context);
@@ -81,8 +82,8 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
         mHeight = (int) typedArray.getDimension(R.styleable.ItemView_cellHeight, 50 * density);
         leftDrawablePad = (int) typedArray.getDimension(R.styleable.ItemView_drawablePad, 5 * density);
         padingLeft = (int) typedArray.getDimension(R.styleable.ItemView_padingLeft, 20 * density);
-        titleTextSize = typedArray.getDimension(R.styleable.ItemView_titleTextSize, 18*density);
-        valueTextSize = typedArray.getDimension(R.styleable.ItemView_valueTextSize, 16*density);
+        titleTextSize = typedArray.getDimension(R.styleable.ItemView_titleTextSize, 18 * density);
+        valueTextSize = typedArray.getDimension(R.styleable.ItemView_valueTextSize, 16 * density);
 
         showRightPic = typedArray.getBoolean(R.styleable.ItemView_showRightPic, true);
         clickAble = typedArray.getBoolean(R.styleable.ItemView_clickAble, false);
@@ -114,7 +115,7 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
     private void init(Context context) {
 
         setFocusable(true);
-        setClickable(true);
+        setClickable(clickAble);
         setBackgroundResource(itemBacColor);
         View view = View.inflate(context, R.layout.itemview, null);
         addView(view);
@@ -127,7 +128,7 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
         textView.setText(mTitle);
 
         textView.setTextColor(getResources().getColor(R.color.cellview_color));
-        textView.setTextSize(titleTextSize/density);
+        textView.setTextSize(titleTextSize / density);
         if (leftDrawable != null) {
             leftDrawable.setBounds(0, 0, leftDrawable.getMinimumWidth(), leftDrawable.getMinimumHeight());
             textView.setCompoundDrawables(leftDrawable, null, null, null);
@@ -139,7 +140,7 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
             valueTextView.setVisibility(View.VISIBLE);
             valueTextView.setText(mHint);
             valueTextView.setTextColor(titleColor);
-            valueTextView.setTextSize(valueTextSize/density);
+            valueTextView.setTextSize(valueTextSize / density);
             valueTextView.setPadding(0, 0, padingLeft, 0);
             if (clickAble) {
                 valueTextView.setOnClickListener(this);
@@ -159,7 +160,7 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
             editText.setHint(mHint);
             editText.setHintTextColor(valueHintColor);
             editText.setTextColor(valueColor);
-            editText.setTextSize(valueTextSize/density);
+            editText.setTextSize(valueTextSize / density);
             editText.setPadding(0, 0, padingLeft, 0);
             if (editeLength > 0) {
                 editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(editeLength)});
@@ -183,6 +184,10 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
                 });
             }
             editText.addTextChangedListener(this);
+        }
+        if (tileStyle == 3) {
+            switchView = (SwitchView) view.findViewById(R.id.itemview_value_sw);
+            switchView.setVisibility(View.VISIBLE);
         }
         View topLineView = view.findViewById(R.id.item_topline);
         View bottomLineView = view.findViewById(R.id.item_bottomline);
@@ -210,7 +215,7 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
 
     @Override
     public void onClick(View view) {
-        if (!clickAble){
+        if (!clickAble) {
             return;
         }
         if (selects == null)
@@ -302,11 +307,19 @@ public class ItemView extends RelativeLayout implements View.OnClickListener, Te
     }
 
 
-    public void setEnable(boolean b){
+    public void setEnable(boolean b) {
         this.clickAble = b;
-        if (editText!=null){
+        if (editText != null) {
             editText.setEnabled(b);
         }
 
+    }
+
+    /**
+     * 设置开关的监听
+     * @param listener
+     */
+    public void setSwitchChangeListener(SwitchView.OnStateChangedListener listener) {
+        switchView.setOnStateChangedListener(listener);
     }
 }
