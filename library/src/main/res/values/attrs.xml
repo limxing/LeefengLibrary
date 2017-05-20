@@ -165,21 +165,39 @@
     </declare-styleable>
 
     <declare-styleable name="SwitchView">
-        <attr name="hasShadow" format="boolean"/>
-        <attr name="primaryColor" format="color"/>
-        <attr name="primaryColorDark" format="color"/>
-        <attr name="isOpened" format="boolean"/>
+        <attr name="hasShadow" format="boolean" />
+        <attr name="primaryColor" format="color" />
+        <attr name="primaryColorDark" format="color" />
+        <attr name="isOpened" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="FailView">
-        <attr name="backgroundColor" format="color"/>
-        <attr name="textNomorColor" format="color"/>
-        <attr name="textFocusColor" format="color"/>
-        <attr name="failTextSize" format="dimension"/>
-        <attr name="failRadius" format="dimension"/>
-        <attr name="failCircleBacColor" format="color"/>
-        <attr name="failCircleColor" format="color"/>
-        <attr name="failCircleDuration" format="integer"/>
-        <attr name="failCircleRadius" format="integer"/>
+        <attr name="backgroundColor" format="color" />
+        <attr name="textNomorColor" format="color" />
+        <attr name="textFocusColor" format="color" />
+        <attr name="failTextSize" format="dimension" />
+        <attr name="failRadius" format="dimension" />
+        <attr name="failCircleBacColor" format="color" />
+        <attr name="failCircleColor" format="color" />
+        <attr name="failCircleDuration" format="integer" />
+        <attr name="failCircleRadius" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="SetView">
+        <attr name="setTitleColor" format="color" />
+        <attr name="setTitleSize" format="dimension" />
+        <attr name="setTitleText" format="string" />
+
+        <attr name="setShowTopLine" format="boolean" />
+        <attr name="setShowBottomLine" format="boolean" />
+        <attr name="setTopDividerLeft" format="dimension" />
+        <attr name="setTopDividerRight" format="dimension" />
+        <attr name="setBottomDividerLeft" format="dimension" />
+        <attr name="setBottomDividerRight" format="dimension" />
+
+        <attr name="setDividerColor" format="color" />
+        <attr name="setDividerWidth" format="dimension" />
+        <attr name="setRightPic" format="reference" />
+
     </declare-styleable>
 </resources>
