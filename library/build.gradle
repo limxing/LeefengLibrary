@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'//添加
+//apply plugin: 'com.novoda.bintray-release'//添加
 
 android {
     compileSdkVersion 23
@@ -35,6 +35,9 @@ dependencies {
 //    compile 'com.bigkoo:alertview:1.0.2'//防iOS对话框https://github.com/saiwu-bigkoo/Android-AlertView
 //    compile 'com.github.orhanobut:logger:1.12'//打印日志的
     compile 'com.android.support:support-annotations:24.2.0'
+
+    compile 'com.github.zcweng:switch-button:0.0.3@aar' //开关
+
 }
 //def makeJar(String target,String classDir){
 //    exec{
@@ -50,12 +53,12 @@ dependencies {
 //    makeJar("limxing.jar","build/intermediates/classes/release")
 //}
 //添加jcenter
-publish {
-    userOrg = 'limxing'//bintray.com用户名
-    groupId = 'me.leefeng'//jcenter上的路径
-    artifactId = 'library'//项目名称
-    publishVersion = '3.0.2'//版本号
-    desc = 'my personal library'//描述，不重要
-    website = 'https://github.com/limxing/LeefengLibrary'//网站，不重要
-}
+//publish {
+//    userOrg = 'limxing'//bintray.com用户名
+//    groupId = 'me.leefeng'//jcenter上的路径
+//    artifactId = 'library'//项目名称
+//    publishVersion = '3.0.2'//版本号
+//    desc = 'my personal library'//描述，不重要
+//    website = 'https://github.com/limxing/LeefengLibrary'//网站，不重要
+//}
 //./gradlew clean build bintrayUpload -PbintrayUser=limxing -PbintrayKey=50fddf0aeababc65b71d85c15c2230136e82cf0c -PdryRun=false
