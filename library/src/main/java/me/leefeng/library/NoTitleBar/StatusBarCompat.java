@@ -202,7 +202,7 @@ public class StatusBarCompat {
      * @param view titleLayout a View which height is 0dp
      */
     public static void statusBarWithTitleSetHeight(View view) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             int statusHeight = -1;
             try {
                 Class<?> clazz = Class.forName("com.android.internal.R$dimen");
